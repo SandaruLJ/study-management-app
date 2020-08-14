@@ -43,12 +43,12 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/studyDateTime"
+                android:id="@+id/studyTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/study_datetime"/>
+                android:text="@string/study_time"/>
         </LinearLayout>
 
         <TextView
