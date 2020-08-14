@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!--    <stroke-->
+    <!--        android:width="1dp"-->
+    <!--        android:color="@color/blue"/>-->
+    <gradient
+        android:startColor="@color/lightBlue1"
+        android:endColor="@color/lite_blue"
+        android:angle="180"/>
+
+<!--    <solid android:color="@color/lightBlue1" />-->
+<!--    <gradient-->
+<!--        android:endColor="#88DEF1"-->
+<!--        android:startColor="@color/lightBlue2"-->
+<!--        android:angle="135"/>-->
+    <padding
+        android:left="1dp"
+        android:right="1dp"
+        android:bottom="1dp"
+        android:top="1dp" />
+
+    <corners
+        android:radius="5dp"
+
+        />
+</shape>
