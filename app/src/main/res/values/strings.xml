@@ -16,6 +16,9 @@
     <string name="study_title">Homework</string>
     <string name="study_time">10.30 am</string>
     <string name="study_notes">Read fragments lecture\nDo lab sheet</string>
+    <string name="study_day">Monday</string>
+    <string name="time_before_reminder">5 minutes</string>
+    <string name="start_timer_label">Start timer</string>
     <string name="study_title_hint">Study title</string>
     <string name="subject_label">Subject</string>
     <string name="day_label">Day</string>
