@@ -14,7 +14,8 @@
 
     <!-- Studies -->
     <string name="study_title">Homework</string>
-    <string name="study_datetime">Fri, 14 Aug, 10.30 am</string>
+    <string name="study_datetime">Fri 10.30 am</string>
+    <string name="study_notes">Read fragments lecture\nDo lab sheet</string>
     <string name="study_title_hint">Study title</string>
     <string name="subject_label">Subject</string>
     <string name="day_label">Day</string>
