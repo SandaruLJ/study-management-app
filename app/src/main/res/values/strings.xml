@@ -13,7 +13,35 @@
     <string name="save_subject_button_label">Save Subject</string>
 
     <!-- Studies -->
-    <string name="save_study_button_label">Save Study</string>
     <string name="study_title">Homework</string>
     <string name="study_datetime">Fri, 14 Aug, 10.30 am</string>
+    <string name="study_title_hint">Study title</string>
+    <string name="subject_label">Subject</string>
+    <string name="day_label">Day</string>
+    <string name="time_label">Time</string>
+    <string name="notes_label">Notes</string>
+    <string name="reminder_label">Reminder</string>
+    <string name="time_before_reminder_label">Time before reminder</string>
+    <string name="save_study_button_label">Save Study</string>
+    <string-array name="subjects">
+        <item>Mobile Application Development</item>
+        <item>Professional Skills</item>
+        <item>Introduction to Programming</item>
+    </string-array>
+    <string-array name="days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+    <string-array name="times">
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+    </string-array>
 </resources>
