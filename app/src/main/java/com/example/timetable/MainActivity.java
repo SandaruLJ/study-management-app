@@ -15,7 +15,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
                     switch (item.getItemId()){
                         case R.id.nav_dashboard :
                             selectedFragment = new DashboardFragment();
+                            break;
+                        case R.id.nav_class :
+                            selectedFragment = new ClassFragment();
+                            break;
+
+                        case R.id.nav_menu :
+                            selectedFragment = new ViewClassFragment();
                             break;
                     }
 
