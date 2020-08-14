@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Timetable</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="homework_title">Title</string>
+    <string name="homework_subject">Subject</string>
+    <string name="homework_due_date">Due Date</string>
+    <string name="homeworktime">Time</string>
+    <string name="homeworktime_now">8.30 P.M</string>
+    <string name="homework_color">Color</string>
+    <string name="homework_reminder">Reminder</string>
+    <string name="homework_remindertime">10 minutes before</string>
+    <string name="homework_note">Note</string>
+    <string name="exam_start_time">Start Time</string>
+    <string name="exam_end_time">End Time</string>
+    <string name="exam_end_time_now">11.30P.M</string>
+    <string name="exam_remindertime">1 day before</string>
+    <string name="exam_location">Location</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

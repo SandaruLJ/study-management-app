@@ -9,5 +9,6 @@
     <color name="col1">#21C3BF</color>
     <color name="col2">#5CDBAA</color>
     <color name="col3">#A6EE8A</color>
+    <color name="lightgrey">#E9E9E9</color>
 
 </resources>
