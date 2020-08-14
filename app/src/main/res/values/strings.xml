@@ -6,8 +6,8 @@
     <string name="teacher_name">Richard Hendricks</string>
     <string name="subject_description">Module for learning Android app development</string>
     <string name="subject_name_hint">Subject name</string>
-    <string name="teacher_name_hint">Teacher\'s name (optional)</string>
-    <string name="subject_description_hint">Description (optional)</string>
-    <string name="subject_colour_label">Subject Colour</string>
+    <string name="teacher_name_hint">Teacher\'s name</string>
+    <string name="subject_description_hint">Description</string>
+    <string name="subject_colour_label">Colour</string>
     <string name="subject_colour_hint">Choose a colour for this subject</string>
 </resources>
