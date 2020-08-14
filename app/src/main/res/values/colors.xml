@@ -10,4 +10,6 @@
     <color name="col2">#5CDBAA</color>
     <color name="col3">#A6EE8A</color>
 
+    <!-- Subjects -->
+    <color name="subject_colour">#4CAF50</color>
 </resources>

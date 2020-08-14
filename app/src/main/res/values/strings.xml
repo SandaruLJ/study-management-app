@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Timetable</string>
+
+    <!-- Subjects -->
+    <string name="subject_name">Mobile Application Development</string>
+    <string name="teacher_name">Richard Hendricks</string>
 </resources>
