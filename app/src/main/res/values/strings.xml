@@ -10,4 +10,8 @@
     <string name="subject_description_hint">Description</string>
     <string name="subject_colour_label">Colour</string>
     <string name="subject_colour_hint">Choose a colour for this subject</string>
+
+    <!-- Studies -->
+    <string name="study_title">Homework</string>
+    <string name="study_datetime">Fri, 14 Aug, 10.30 am</string>
 </resources>
