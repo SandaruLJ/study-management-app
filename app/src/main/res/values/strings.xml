@@ -2,4 +2,22 @@
     <string name="app_name">Timetable</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="createTarget">Create Target</string>
+    <string name="target">Target</string>
+    <string name="description">Description</string>
+    <string name="timeline">Timeline</string>
+    <string name="createButton">CREATE</string>
+    <string name="deleteButton">DELETE</string>
+    <string name="doneButton">DONE</string>
+    <string name="event1">"  Android Learning  "</string>
+    <string name="event1des">"  Android OS and components  "</string>
+    <string name="event1timeline">"  23/08/2020  "</string>
+    <string name="event2">"  Professional Skills"</string>
+    <string name="event2des">"  Journal Writing about Teams  "</string>
+    <string name="event2timeline">"  12/08/2020  "</string>
+    <string name="event3">"  ITP  "</string>
+    <string name="event3des">"  Proposal Document  "</string>
+    <string name="event3timeline">"  10/07/2020  "</string>
+
+
 </resources>

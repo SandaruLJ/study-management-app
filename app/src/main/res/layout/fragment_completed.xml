@@ -55,92 +55,6 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="311dp"
-        android:background="@drawable/goals"
-        android:fontFamily="sans-serif"
-        android:freezesText="false"
-        android:padding="20dp"
-        android:paddingLeft="12dp"
-        android:text="Android Learning\nAndroid OS and components\n01/01/2020"
-        android:textAlignment="viewStart"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textDirection="firstStrongRtl"
-        android:textSize="18sp"
-        android:textStyle="normal" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="430dp"
-        android:background="@drawable/goals"
-        android:padding="20dp"
-        android:paddingLeft="12dp"
-        android:text="Android Learning\nAndroid OS and components\n01/01/2020"
-        android:textAlignment="viewStart"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textDirection="firstStrongRtl"
-        android:textSize="18sp"
-        android:textStyle="normal" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="195dp"
-        android:layout_marginEnd="1dp"
-        android:background="@drawable/goals"
-        android:padding="20dp"
-        android:paddingLeft="12dp"
-        android:text="Android Learning\nAndroid OS and components\n01/01/2020"
-        android:textAlignment="viewStart"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textDirection="firstStrongRtl"
-        android:textSize="18sp"
-        android:textStyle="normal" />
-
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="1dp"
-        android:background="@drawable/goals"
-        android:padding="20dp"
-        android:paddingLeft="12dp"
-        android:text="Android Learning\nAndroid OS and components\n01/01/2020"
-        android:textAlignment="viewStart"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textDirection="firstStrongRtl"
-        android:textSize="18sp"
-        android:textStyle="normal" />
-
-
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="wrap_content"
@@ -149,7 +63,7 @@
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="COMPLETED"
+        android:text="UPCOMING"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="normal|bold" />
@@ -164,16 +78,163 @@
         android:layout_marginTop="182dp"
         android:text="TextView" />
 
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="16dp"
-        android:checked="true"
-        android:textColorLink="#FFFFFF" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="154dp"
+        android:layout_marginEnd="1dp"
+        android:background="#D5EAF4"
+        android:text="@string/event1des"
+        android:textAlignment="gravity" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="188dp"
+        android:layout_marginEnd="1dp"
+        android:background="#D5EAF4"
+        android:text="@string/event1timeline" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="270dp"
+        android:layout_marginEnd="1dp"
+        android:background="@color/event"
+        android:text="@string/event2" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="303dp"
+        android:layout_marginEnd="-1dp"
+        android:background="@color/event"
+        android:text="@string/event2des" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="318dp"
+        android:background="@color/event"
+        android:text="@string/event2timeline" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginBottom="247dp"
+        android:background="@color/event"
+        android:text="@string/event3" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginBottom="213dp"
+        android:background="@color/event"
+        android:text="@string/event3des" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginBottom="180dp"
+        android:background="@color/event"
+        android:text="@string/event3timeline" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="222dp"
+        android:background="@color/blue" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginBottom="310dp"
+        android:background="@color/blue" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="-2dp"
+        android:layout_marginBottom="170dp"
+        android:background="@color/blue" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="121dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/event"
+        android:text="@string/event1" />
+
 
     <CheckBox
         android:id="@+id/checkBox3"
@@ -181,8 +242,8 @@
         android:layout_height="45dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="201dp"
-        android:layout_marginEnd="17dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginEnd="16dp"
         android:checked="true" />
 
     <CheckBox
@@ -192,8 +253,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="318dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="372dp"
         android:checked="true" />
 
     <CheckBox
@@ -202,8 +263,8 @@
         android:layout_height="45dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="17dp"
-        android:layout_marginBottom="203dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="234dp"
         android:checked="true" />
 
     <Button
@@ -212,8 +273,8 @@
         android:layout_height="38dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginTop="173dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/btndeletegoals"
         android:text="DELETE"
         android:textIsSelectable="true" />
@@ -224,8 +285,9 @@
         android:layout_height="38dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="247dp"
-        android:layout_marginEnd="12dp"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="327dp"
+        android:layout_marginEnd="14dp"
         android:background="@drawable/btndeletegoals"
         android:text="DELETE"
         android:textIsSelectable="true" />
@@ -236,20 +298,8 @@
         android:layout_height="38dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="283dp"
-        android:background="@drawable/btndeletegoals"
-        android:text="DELETE"
-        android:textIsSelectable="true" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="60dp"
-        android:layout_height="38dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="164dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="184dp"
         android:background="@drawable/btndeletegoals"
         android:text="DELETE"
         android:textIsSelectable="true" />
