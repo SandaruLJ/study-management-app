@@ -87,7 +87,7 @@ class ClassList extends FragmentStatePagerAdapter {
             fragment = new ClassFragment();
         }
         if (position == 1) {
-            fragment = new AllFragment();
+            fragment = new ClassListFragment();
         }
         if (position == 2) {
             fragment = new ClassCalendarFragment();

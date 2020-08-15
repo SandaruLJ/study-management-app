@@ -90,69 +90,69 @@ public class addClass extends Fragment  {
 //            }
 //        });
 
-        Spinner spinner = (Spinner) view.findViewById(R.id.subject_spinner);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(),R.array.subjects_array,android.R.layout.simple_spinner_item);
-        String[] plants = new String[]{
-                "Subject",
-                "California sycamore",
-                "Mountain mahogany",
-                "Butterfly weed",
-                "Carrot weed"
-        };
+//        Spinner spinner = (Spinner) view.findViewById(R.id.subject_spinner);
+////        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(),R.array.subjects_array,android.R.layout.simple_spinner_item);
+//        String[] plants = new String[]{
+//                "Subject",
+//                "California sycamore",
+//                "Mountain mahogany",
+//                "Butterfly weed",
+//                "Carrot weed"
+//        };
+//
+//        final List<String> plantsList = new ArrayList<>(Arrays.asList(plants));
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.spinner_item,plantsList){
+//            @Override
+//            public boolean isEnabled(int position){
+//                if(position == 0)
+//                {
+//                    // Disable the first item from Spinner
+//                    // First item will be use for hint
+//                    return false;
+//                }
+//                else
+//                {
+//                    return true;
+//                }
+//            }
+//            @Override
+//            public View getDropDownView(int position, View convertView,
+//                                        ViewGroup parent) {
+//                View view = super.getDropDownView(position, convertView, parent);
+//                TextView tv = (TextView) view;
+//                if(position == 0){
+//                    // Set the hint text color gray
+//                    tv.setTextColor(Color.parseColor("#CD5C5C"));
+//                }
+//                else {
+//                    tv.setTextColor(Color.BLACK);
+//                }
+//                return view;
+//            }
+//
+//        };
 
-        final List<String> plantsList = new ArrayList<>(Arrays.asList(plants));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.spinner_item,plantsList){
-            @Override
-            public boolean isEnabled(int position){
-                if(position == 0)
-                {
-                    // Disable the first item from Spinner
-                    // First item will be use for hint
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0){
-                    // Set the hint text color gray
-                    tv.setTextColor(Color.parseColor("#CD5C5C"));
-                }
-                else {
-                    tv.setTextColor(Color.BLACK);
-                }
-                return view;
-            }
 
-        };
-
-
-        adapter.setDropDownViewResource(R.layout.spinner_item);
-        spinner.setAdapter(adapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItemText = (String) parent.getItemAtPosition(position);
-                // If user change the default selection
-                // First item is disable and it is used for hint
-                if(position > 0){
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        spinner.setAdapter(adapter);
+//        adapter.setDropDownViewResource(R.layout.spinner_item);
+//        spinner.setAdapter(adapter);
+//
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String selectedItemText = (String) parent.getItemAtPosition(position);
+//                // If user change the default selection
+//                // First item is disable and it is used for hint
+//                if(position > 0){
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+//        spinner.setAdapter(adapter);
 
         final TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabLayoutClass);
         tabLayout.addTab(tabLayout.newTab().setText("Weekly"));
@@ -286,10 +286,10 @@ class PgAdapter extends FragmentStatePagerAdapter {
 
 
         if (position == 0) {
-            fragment = new ClassDateFragment();
+            fragment = new ClassWeekFragment();
         }
         if (position == 1) {
-            fragment = new AllFragment();
+            fragment = new ClassDateFragment();
         }
 
         return fragment;

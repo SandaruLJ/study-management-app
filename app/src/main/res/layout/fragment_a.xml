@@ -175,7 +175,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/col3"
+            android:background="#C56B8E"
 
             >
             <TextView
@@ -322,7 +322,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/col2"
+            android:background="#7E72AC"
 
             >
             <TextView

@@ -71,12 +71,12 @@
 </com.google.android.material.textfield.TextInputLayout>
 
       </LinearLayout>
-<!--      <View-->
-<!--          android:layout_width="match_parent"-->
-<!--          android:layout_height="2dp"-->
-<!--          android:background="@color/lightgrey"-->
-<!--          android:layout_marginRight="10dp"-->
-<!--          android:layout_marginLeft="10dp"/>-->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2dp"
+          android:background="@color/lightgrey"
+          android:layout_marginRight="10dp"
+          android:layout_marginLeft="10dp"/>
 <!--      <LinearLayout-->
 <!--          android:layout_width="match_parent"-->
 <!--          android:layout_height="match_parent"-->
@@ -159,50 +159,112 @@
 <!--          android:layout_marginLeft="10dp"/>-->
       <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
+          android:layout_height="wrap_content"
           android:orientation="horizontal"
+          android:minHeight="60dp"
           android:paddingTop="15dp"
           android:paddingLeft="20dp"
           android:paddingRight="20dp"
           android:paddingBottom="0dp">
           <ImageView
-              android:id="@+id/imageView2"
+              android:id="@+id/subjectimg"
               android:layout_width="wrap_content"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="5dp"
               android:layout_marginRight="20dp"
-              android:src="@drawable/subject"
+              android:src="@drawable/course"
+
               android:alpha="0.8"
               android:tint="@color/lite_blue" />
 
+          <TextView
+              android:id="@+id/subjectNameInput"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textSize="20dp"
 
-<!--          <com.google.android.material.textfield.TextInputLayout-->
-<!--              android:layout_width="match_parent"-->
-<!--              android:layout_height="50dp"-->
-<!--              android:hint="Select a Subject"-->
-<!--              app:hintTextAppearance="@style/floatinglabel"-->
-<!--              >-->
+              android:paddingRight="20dp"
+              android:layout_marginTop="2dp"
+              android:hint="Course"
+              app:hintTextAppearance="@style/floatinglabel"/>
+
+
+
+          <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
               <Spinner
-                  android:id="@+id/subject_spinner"
+                  android:id="@+id/subjectInput"
                   android:layout_width="wrap_content"
-                  android:layout_height="50dp" />
+                  android:layout_height="wrap_content"
 
-<!--              <com.google.android.material.textfield.TextInputEditText-->
-<!--                  android:layout_width="match_parent"-->
-<!--                  android:layout_height="wrap_content"-->
-<!--                  android:background="@null"-->
-<!--                  android:textSize="20sp"-->
+                  android:layout_alignParentEnd="true"
+                  android:layout_marginTop="3dp"
 
-<!--                  />-->
-
-<!--          </com.google.android.material.textfield.TextInputLayout>-->
-
+                  android:entries="@array/courses"
+                  android:spinnerMode="dialog"/>
+          </RelativeLayout>
       </LinearLayout>
-<!--      <View-->
-<!--          android:layout_width="match_parent"-->
-<!--          android:layout_height="2dp"-->
-<!--          android:background="@color/lightgrey"-->
-<!--          android:layout_marginRight="10dp"-->
-<!--          android:layout_marginLeft="10dp"/>-->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2dp"
+          android:background="@color/lightgrey"
+          android:layout_marginRight="10dp"
+          android:layout_marginLeft="10dp"/>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:minHeight="60dp"
+          android:paddingTop="15dp"
+          android:paddingLeft="20dp"
+          android:paddingRight="20dp"
+          android:paddingBottom="0dp">
+          <ImageView
+              android:id="@+id/subjectimg"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="5dp"
+              android:layout_marginRight="20dp"
+              android:src="@drawable/subject"
+
+              android:alpha="0.8"
+              android:tint="@color/lite_blue" />
+
+          <TextView
+              android:id="@+id/subjectNameInput"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textSize="20dp"
+
+              android:paddingRight="20dp"
+              android:layout_marginTop="2dp"
+              android:hint="@string/subject_label"
+              app:hintTextAppearance="@style/floatinglabel"/>
+
+
+
+          <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+              <Spinner
+                  android:id="@+id/subjectInput"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+
+                  android:layout_alignParentEnd="true"
+                  android:layout_marginTop="3dp"
+
+                  android:entries="@array/subjects"
+                  android:spinnerMode="dialog"/>
+          </RelativeLayout>
+      </LinearLayout>
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2dp"
+          android:background="@color/lightgrey"
+          android:layout_marginRight="10dp"
+          android:layout_marginLeft="10dp"/>
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
@@ -239,12 +301,12 @@
           </com.google.android.material.textfield.TextInputLayout>
 
       </LinearLayout>
-<!--      <View-->
-<!--          android:layout_width="match_parent"-->
-<!--          android:layout_height="2dp"-->
-<!--          android:background="@color/lightgrey"-->
-<!--          android:layout_marginRight="10dp"-->
-<!--          android:layout_marginLeft="10dp"/>-->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2dp"
+          android:background="@color/lightgrey"
+          android:layout_marginRight="10dp"
+          android:layout_marginLeft="10dp"/>
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
@@ -281,12 +343,12 @@
           </com.google.android.material.textfield.TextInputLayout>
 
       </LinearLayout>
-<!--      <View-->
-<!--          android:layout_width="match_parent"-->
-<!--          android:layout_height="2dp"-->
-<!--          android:background="@color/lightgrey"-->
-<!--          android:layout_marginRight="10dp"-->
-<!--          android:layout_marginLeft="10dp"/>-->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2dp"
+          android:background="@color/lightgrey"
+          android:layout_marginRight="10dp"
+          android:layout_marginLeft="10dp"/>
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
@@ -323,12 +385,12 @@
           </com.google.android.material.textfield.TextInputLayout>
 
       </LinearLayout>
-<!--      <View-->
-<!--          android:layout_width="match_parent"-->
-<!--          android:layout_height="2dp"-->
-<!--          android:background="@color/lightgrey"-->
-<!--          android:layout_marginRight="10dp"-->
-<!--          android:layout_marginLeft="10dp"/>-->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2dp"
+          android:background="@color/lightgrey"
+          android:layout_marginRight="10dp"
+          android:layout_marginLeft="10dp"/>
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -383,12 +445,13 @@
           </com.google.android.material.textfield.TextInputLayout>
           </LinearLayout>
       </LinearLayout>
-<!--      <View-->
-<!--          android:layout_width="match_parent"-->
-<!--          android:layout_height="2dp"-->
-<!--          android:background="@color/lightgrey"-->
-<!--          android:layout_marginRight="10dp"-->
-<!--          android:layout_marginLeft="10dp"/>-->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2dp"
+          android:layout_marginTop="10dp"
+          android:background="@color/lightgrey"
+          android:layout_marginRight="10dp"
+          android:layout_marginLeft="10dp"/>
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
@@ -453,15 +516,6 @@
 
 
 
-
-      <LinearLayout
-          android:id="@+id/Soft_Scroll"
-          android:layout_width="match_parent"
-          android:layout_height="350dp"
-          android:orientation="vertical"
-
-
-          >
           <RelativeLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -484,14 +538,15 @@
                 app:tabTextAppearance="@style/addClassTab"
                 />
           </RelativeLayout>
+
             <androidx.viewpager.widget.ViewPager
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="400dp"
 
                 android:id="@+id/add_class_pager">
             </androidx.viewpager.widget.ViewPager>
 
-                </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"

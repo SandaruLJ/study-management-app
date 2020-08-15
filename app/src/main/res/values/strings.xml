@@ -52,6 +52,13 @@
         <item>Professional Skills</item>
         <item>Introduction to Programming</item>
     </string-array>
+    <string-array name="courses">
+
+        <!--        <item>Select a Subject</item>-->
+        <item>IT</item>
+        <item>Diploma</item>
+
+    </string-array>
     <string-array name="days">
         <item>Monday</item>
         <item>Tuesday</item>
@@ -79,7 +86,8 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="createTarget">Create Target</string>
-    <string name="target">Target</string>
+    <string name="goals">Goals</string>
+    <string name="target">Goal</string>
     <string name="description">Description</string>
     <string name="timeline">Timeline</string>
     <string name="createButton">CREATE</string>
@@ -94,5 +102,12 @@
     <string name="event3">"  ITP  "</string>
     <string name="event3des">"  Proposal Document  "</string>
     <string name="event3timeline">"  10/07/2020  "</string>
+    <string name="scheduleReminder">"Schedule Reminder"</string>
+    <string-array name="goal_reminders">
+        <item>Daily</item>>
+        <item>Hourly</item>>
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </string-array>
 
 </resources>

@@ -5,14 +5,14 @@
     android:layout_height="wrap_content">
     <!--    android:background="@drawable/bottom_nav_bg">-->
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:id="@+id/topbar"
+        android:orientation="horizontal"
         android:background="@drawable/bottom_nav_bg"
         android:layout_gravity="center_vertical">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Student Planner"
             android:layout_marginLeft="20dp"
@@ -20,12 +20,35 @@
             android:textColor="@color/white"
             android:textSize="24dp"
             android:textStyle="bold"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/add"
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/addIcon"
+                android:layout_alignParentEnd="true"
+                android:tint="@color/white"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/today"
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+
+                android:tint="@color/white"
+               android:layout_toLeftOf="@id/addIcon" />
+        </RelativeLayout>
     </LinearLayout>
     <FrameLayout
         android:id="@+id/today_frame"
         android:layout_width="match_parent"
-        android:layout_height="163dp"
-        android:layout_below="@id/topbar">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topbar"
+        android:layout_marginBottom="20dp">
 
 
     <RelativeLayout
@@ -39,7 +62,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="27dp"
-        app:srcCompat="@drawable/today" />
+        app:srcCompat="@drawable/calendar_color" />
     </RelativeLayout>
     <TextView
         android:id="@+id/textView"
@@ -52,15 +75,15 @@
         android:text="Wednesday, 5th August 2020"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="127dp"
-        android:text="Now and Upcoming" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginStart="26dp"-->
+<!--        android:layout_marginTop="127dp"-->
+<!--        android:text="Now and Upcoming" />-->
 
     <TextView
         android:layout_width="wrap_content"
@@ -73,12 +96,262 @@
         android:textSize="30sp" />
     </FrameLayout>
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/today_frame"
+        android:id="@+id/dashboard_stats"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="?android:attr/listDivider"
+            android:alpha="0.6"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="-16dp"
+            android:layout_marginRight="-16dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Statistics"
+            android:textStyle="bold"
+            android:paddingLeft="8dp"
+            android:paddingBottom="10dp"
+            android:textSize="20dp"
+            android:textColor="@color/blue"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="90dp"
+                android:background="#64b3f4">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Classes"
+                    android:id="@+id/dash_homework"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="00dp"
+                    android:paddingRight="0dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="05"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+
+                    android:textSize="30dp"
+                    android:layout_below="@id/dash_homework"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="195dp"
+                android:layout_height="90dp"
+
+                android:background="#c2e59c">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Home works"
+                    android:id="@+id/dash_homework"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="05"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+
+                    android:textSize="30dp"
+                    android:layout_below="@id/dash_homework"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="90dp"
+                android:background="
+#64b3f4">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Exams"
+                    android:id="@+id/dash_homework"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="0dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="05"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+
+                    android:textSize="30dp"
+                    android:layout_below="@id/dash_homework"/>
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="15dp"
+            android:alpha="0.6"
+            android:layout_marginLeft="-16dp"
+            android:layout_marginRight="-16dp" />
+
+    </LinearLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/today_frame"-->
+<!--        android:id="@+id/dashboard_stats"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:orientation="horizontal">-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Class"-->
+<!--            android:textColor="@color/magenta"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="20dp"-->
+<!--            android:paddingTop="20dp"-->
+<!--            android:paddingLeft="20dp"-->
+<!--            android:paddingRight="20dp"-->
+<!--            android:paddingBottom="10dp"/>-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="04"-->
+<!--            android:textColor="@color/magenta"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="22dp"-->
+
+<!--            android:layout_gravity="center"-->
+<!--            android:paddingBottom="10dp"/>-->
+<!--        </LinearLayout>-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Homework"-->
+<!--                android:textColor="@color/magenta"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="20dp"-->
+<!--                android:paddingTop="20dp"-->
+<!--                android:paddingLeft="10dp"-->
+<!--                android:paddingRight="10dp"-->
+<!--                android:paddingBottom="10dp"/>-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="04"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:textColor="@color/magenta"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="22dp"-->
+<!--                android:paddingBottom="10dp"/>-->
+<!--        </LinearLayout>-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Exam"-->
+<!--                android:textColor="@color/magenta"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="20dp"-->
+<!--                android:paddingTop="20dp"-->
+<!--                android:paddingLeft="20dp"-->
+<!--                android:paddingRight="10dp"-->
+<!--                android:paddingBottom="10dp"/>-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="01"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:textColor="@color/magenta"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="22dp"-->
+<!--                android:paddingBottom="10dp"/>-->
+<!--        </LinearLayout>-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Study"-->
+<!--                android:textColor="@color/magenta"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="20dp"-->
+<!--                android:paddingTop="20dp"-->
+<!--                android:paddingLeft="15dp"-->
+<!--                android:paddingRight="10dp"-->
+<!--                android:paddingBottom="10dp"/>-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="02"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:textColor="@color/magenta"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="22dp"-->
+<!--                android:paddingBottom="10dp"/>-->
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
+    <LinearLayout
         android:id="@+id/Soft_Scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@id/today_frame">
-
+        android:layout_below="@id/dashboard_stats">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Now and Upcoming"
+    android:textStyle="bold"
+    android:paddingLeft="8dp"
+    android:textSize="20dp"
+    android:textColor="@color/blue"/>
 
             <com.google.android.material.tabs.TabLayout
                 android:layout_width="match_parent"
@@ -104,6 +377,40 @@
         </androidx.viewpager.widget.ViewPager>
 
     </LinearLayout>
+<!--<RelativeLayout-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:paddingBottom="5dp">-->
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/floatingAddBtn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:clickable="true"-->
+<!--            android:tint="@color/white"-->
+<!--            app:backgroundTint="?android:attr/colorSecondary"-->
+<!--            app:maxImageSize="30dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            app:srcCompat="@drawable/add"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:layout_marginRight="20dp"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_above="@id/bottom_navigation"-->
+<!--            android:layout_alignParentRight="true"-->
 
-
+<!--       />-->
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/floatingCalendarBtn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:clickable="true"-->
+<!--            android:tint="@color/white"-->
+<!--            app:backgroundTint="?android:attr/colorSecondary"-->
+<!--            app:maxImageSize="30dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_above="@id/bottom_navigation"-->
+<!--            app:srcCompat="@drawable/today" />-->
+<!--</RelativeLayout>-->
 </RelativeLayout>

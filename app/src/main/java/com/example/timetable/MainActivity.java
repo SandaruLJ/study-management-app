@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity  {
                             selectedFragment = new ClassCalendarFragment();
                             break;
                         case R.id.nav_menu :
-                            selectedFragment = new StudyTimerFragment();
+                            selectedFragment = new NavMenuFragment();
                             break;
                     }
 
