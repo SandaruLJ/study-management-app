@@ -37,12 +37,19 @@ public class MainActivity extends AppCompatActivity  {
                             selectedFragment = new DashboardFragment();
                             break;
                         case R.id.nav_class :
-                            selectedFragment = new ClassFragment();
+                            selectedFragment = new addClass();
                             break;
 
                         case R.id.nav_menu :
                             selectedFragment = new ViewClassFragment();
                             break;
+                        case R.id.nav_test :
+                            selectedFragment = new displayExams();
+                            break;
+                        case R.id.nav_homework :
+                            selectedFragment = new AddHomeworkFragment();
+                            break;
+
                     }
 
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

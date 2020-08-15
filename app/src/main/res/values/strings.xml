@@ -13,9 +13,16 @@
     <string name="homework_note">Note</string>
     <string name="exam_start_time">Start Time</string>
     <string name="exam_end_time">End Time</string>
+    <string name="exam_start_time_now">8.30P.M</string>
     <string name="exam_end_time_now">11.30P.M</string>
     <string name="exam_remindertime">1 day before</string>
     <string name="exam_location">Location</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="exam_title">MAD ONLINE</string>
+    <string name="exam_subject">Mobile Application Development</string>
+    <string name="exam_lecture_hall">N3C</string>
+    <string name="homework_display_title">Complete Exercise 5 </string>
+    <string name="display_homework_subject">MAD</string>
+    <string name="display_homework_date">14th September</string>
+    <!-- TODO: Remove or change this placeholdert text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
