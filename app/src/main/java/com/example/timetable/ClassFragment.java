@@ -1,5 +1,7 @@
 package com.example.timetable;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,6 +12,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -33,6 +37,7 @@ public class ClassFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_class,null);
+
         final TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("Monday"));
         tabLayout.addTab(tabLayout.newTab().setText("Tuesday"));
@@ -48,15 +53,47 @@ public class ClassFragment extends Fragment{
         PagerAdapter adapter = new PagerAdapter(getChildFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            if (tab != null) {
+
+                TextView tabTextView = new TextView(getActivity().getApplicationContext());
+                tab.setCustomView(tabTextView);
+
+                tabTextView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                tabTextView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                tabTextView.setTypeface(null, Typeface.BOLD);
+                tabTextView.setTextColor(Color.parseColor("#BFBCBC"));
+                tabTextView.setText(tab.getText());
+                tabTextView.setTextSize(18);
+                if (i == 0) {
+                    tabTextView.setTextSize(20);
+                    tabTextView.setTextColor(Color.parseColor("#000000"));
+                    tabTextView.setTypeface(null, Typeface.BOLD);
+                }
+
+            }
+
+        }
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+
+                TextView text = (TextView) tab.getCustomView();
+                text.setTextSize(20);
+         text.setTextColor(Color.parseColor("#000000"));
+                text.setTypeface(null, Typeface.BOLD);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                TextView text = (TextView) tab.getCustomView();
+                text.setTextSize(18);
+                text.setTextColor(Color.parseColor("#BFBCBC"));
+                text.setTypeface(null, Typeface.NORMAL);
             }
 
             @Override
@@ -64,6 +101,7 @@ public class ClassFragment extends Fragment{
 
             }
         });
+
 
 
         return view;

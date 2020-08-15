@@ -22,22 +22,30 @@
             android:layout_marginLeft="20dp"
             android:layout_gravity="center_vertical"
             android:textColor="@color/white"
-            android:textSize="22dp"
+            android:textSize="24dp"
             android:textStyle="bold"/>
     </LinearLayout>
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@drawable/week_tab">
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tabLayout"
-        android:background="@color/lightBlue2"
+        android:id="@+id/tabLayoutWeek"
+        app:tabTextAppearance="@style/weekTab"
+        android:background="@drawable/week_tab"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:minHeight="?attr/actionBarSize"
-        app:tabTextColor="@color/white"/>
+        app:tabTextColor="@color/white"
+        app:tabIndicatorColor="@color/white"/>
+</RelativeLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/class_pager">
+        android:id="@+id/class_pager_week">
 
 
 

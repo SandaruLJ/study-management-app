@@ -4,14 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <!--    android:background="@drawable/bottom_nav_bg">-->
+    <LinearLayout
 
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/topbar"
+        android:background="@drawable/bottom_nav_bg"
+        android:layout_gravity="center_vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Student Planner"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
     <FrameLayout
         android:id="@+id/today_frame"
         android:layout_width="match_parent"
-        android:layout_height="163dp">
+        android:layout_height="163dp"
+        android:layout_below="@id/topbar">
 
-    </FrameLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="69dp"
@@ -21,7 +40,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="27dp"
         app:srcCompat="@drawable/today" />
-
+    </RelativeLayout>
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -52,29 +71,39 @@
         android:layout_marginTop="31dp"
         android:text="TODAY"
         android:textSize="30sp" />
-
-    <FrameLayout
+    </FrameLayout>
+    <LinearLayout
         android:id="@+id/Soft_Scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_below="@id/today_frame">
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <androidx.viewpager.widget.PagerTitleStrip
-                android:id="@+id/title"
+            <com.google.android.material.tabs.TabLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:background="@color/blue"
-                android:paddingTop="10dp"
-                style="@style/viewPagerTitleStrip"
-                android:paddingBottom="10dp"></androidx.viewpager.widget.PagerTitleStrip>
+                android:id="@+id/tabDashboard"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                app:tabTextAppearance="@style/dashboardTab"
+                android:background="@color/lightBlue1"
+
+                android:minHeight="?attr/actionBarSize"
+                app:tabTextColor="@color/white"
+                app:tabIndicatorColor="@color/white"/>
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tabDashboard"
+            android:id="@+id/dashboard_pager">
+
+
 
         </androidx.viewpager.widget.ViewPager>
-    </FrameLayout>
+
+    </LinearLayout>
+
 
 </RelativeLayout>

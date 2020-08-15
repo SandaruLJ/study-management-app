@@ -21,6 +21,14 @@
         <item name="android:textStyle">bold</item>
         <item name="android:paddingBottom">0dp</item>
     </style>
+    <style name="weekTab" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="dashboardTab" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16dp</item>
+
+    </style>
 
 
 </resources>

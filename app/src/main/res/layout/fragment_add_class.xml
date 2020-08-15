@@ -460,15 +460,18 @@
           android:layout_height="350dp"
           android:orientation="vertical"
 
+
           >
+          <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/add_class_tab"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp">
             <com.google.android.material.tabs.TabLayout
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
                 android:id="@+id/tabLayoutClass"
-
-
-
                 android:paddingBottom="12dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -480,13 +483,14 @@
                 app:tabMinWidth="100dp"
                 app:tabTextAppearance="@style/addClassTab"
                 />
-
+          </RelativeLayout>
             <androidx.viewpager.widget.ViewPager
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 android:id="@+id/add_class_pager">
             </androidx.viewpager.widget.ViewPager>
+
                 </LinearLayout>
 
     <LinearLayout

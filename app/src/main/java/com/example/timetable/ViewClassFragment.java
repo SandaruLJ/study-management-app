@@ -34,22 +34,22 @@ public class ViewClassFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_class,null);
-        final TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Week"));
-        tabLayout.addTab(tabLayout.newTab().setText("List"));
-        tabLayout.addTab(tabLayout.newTab().setText("Calendar"));
+        final TabLayout tabLayout1 = (TabLayout) view.findViewById(R.id.tabLayoutWeek);
+        tabLayout1.addTab(tabLayout1.newTab().setText("Week"));
+        tabLayout1.addTab(tabLayout1.newTab().setText("List"));
+        tabLayout1.addTab(tabLayout1.newTab().setText("Calendar"));
 
-        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout1.setTabGravity(TabLayout.GRAVITY_CENTER);
+        tabLayout1.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager) view.findViewById(R.id.class_pager);
-        ClassList adapter = new ClassList(getChildFragmentManager(),tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        final ViewPager viewPager1 = (ViewPager) view.findViewById(R.id.class_pager_week);
+        ClassList adapter = new ClassList(getChildFragmentManager(),tabLayout1.getTabCount());
+        viewPager1.setAdapter(adapter);
+        viewPager1.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout1));
+        tabLayout1.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
+                viewPager1.setCurrentItem(tab.getPosition());
             }
 
             @Override

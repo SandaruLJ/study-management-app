@@ -159,7 +159,7 @@ public class addClass extends Fragment  {
         tabLayout.addTab(tabLayout.newTab().setText("Date"));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
-//        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) view.findViewById(R.id.add_class_pager);
         PgAdapter pgadapter = new PgAdapter(getChildFragmentManager(),tabLayout.getTabCount());

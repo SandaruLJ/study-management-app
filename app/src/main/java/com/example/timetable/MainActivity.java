@@ -39,7 +39,12 @@ public class MainActivity extends AppCompatActivity  {
                         case R.id.nav_class :
                             selectedFragment = new ClassFragment();
                             break;
-
+                        case R.id.nav_homework :
+                            selectedFragment = new addClass();
+                            break;
+                        case R.id.nav_test :
+                            selectedFragment = new ClassCalendarFragment();
+                            break;
                         case R.id.nav_menu :
                             selectedFragment = new ViewClassFragment();
                             break;
