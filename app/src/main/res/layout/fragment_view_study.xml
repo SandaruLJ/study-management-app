@@ -146,7 +146,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/study_time"
+                android:text="@string/study_start_time"
                 android:textSize="24sp"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="4dp" />

@@ -17,16 +17,21 @@
     <string name="subject_name">Mobile Application Development</string>
     <string name="teacher_name">Richard Hendricks</string>
     <string name="subject_description">Module for learning Android app development</string>
+    <string name="subject_add_title">Add Subject</string>
+    <string name="subject_all_title">All Subject</string>
     <string name="subject_name_hint">Subject name</string>
     <string name="teacher_name_hint">Teacher\'s name</string>
     <string name="subject_description_hint">Description</string>
     <string name="subject_colour_label">Colour</string>
     <string name="subject_colour_hint">Choose a colour for this subject</string>
-    <string name="save_subject_button_label">Save Subject</string>
+    <string name="save_subject_button_label">Save</string>
 
     <!-- Studies -->
-    <string name="study_title">Homework</string>
-    <string name="study_time">10.30 am</string>
+    <string name="study_add_title">Add Study</string>
+    <string name="study_all_title">All Study</string>
+    <string name="study_title">Study Lesson 5</string>
+    <string name="study_start_time">10.30 am</string>
+    <string name="study_end_time">11.30 am</string>
     <string name="study_notes">Read fragments lecture\nDo lab sheet</string>
     <string name="study_day">Monday</string>
     <string name="time_before_reminder">5 minutes</string>
@@ -37,9 +42,12 @@
     <string name="time_label">Time</string>
     <string name="notes_label">Notes</string>
     <string name="reminder_label">Reminder</string>
-    <string name="time_before_reminder_label">Time before reminder</string>
+    <string name="time_before_reminder_label">Reminder Time</string>
     <string name="save_study_button_label">Save Study</string>
+    <string name="study_timer">Study Timer</string>
     <string-array name="subjects">
+
+<!--        <item>Select a Subject</item>-->
         <item>Mobile Application Development</item>
         <item>Professional Skills</item>
         <item>Introduction to Programming</item>
@@ -52,6 +60,11 @@
         <item>Friday</item>
         <item>Saturday</item>
         <item>Sunday</item>
+    </string-array>
+    <string-array name="repeat">
+        <item>No repeat</item>
+        <item>Daily</item>
+        <item>Weekly</item>
     </string-array>
     <string-array name="times">
         <item>5 minutes</item>

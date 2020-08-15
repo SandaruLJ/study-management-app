@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity  {
                             selectedFragment = new DashboardFragment();
                             break;
                         case R.id.nav_class :
-                            selectedFragment = new ClassFragment();
+                            selectedFragment = new ViewClassFragment();
                             break;
                         case R.id.nav_homework :
                             selectedFragment = new addClass();
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity  {
                             selectedFragment = new ClassCalendarFragment();
                             break;
                         case R.id.nav_menu :
-                            selectedFragment = new ViewClassFragment();
+                            selectedFragment = new StudyTimerFragment();
                             break;
                     }
 
