@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".displayExams">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+
+        android:layout_margin="5dp"
+
+        android:layout_marginTop="20dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight=".70"
+                android:background="@drawable/radius"
+
+
+
+                >
+
+                <TextView
+                    android:id="@+id/startTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="15dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@string/exam_start_time_now"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/too"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+
+                    android:layout_below="@id/startTime"
+                    android:text="to"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+
+                    />
+                <TextView
+                    android:id="@+id/endTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="15dp"
+                    android:layout_below="@id/too"
+                    android:text="@string/exam_end_time_now"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+
+                    android:textStyle="bold" />
+
+
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".30"
+                android:background="@drawable/rounded_corner"
+                android:layout_marginLeft="1dp"
+
+                >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:id="@+id/subject"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="-1dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="2dp"
+                            android:src="@drawable/test"
+                            android:tint="@color/grey"
+                            android:alpha="0.5"
+
+
+                            />
+
+                        <TextView
+                            android:id="@+id/className"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="45dp"
+
+                            android:text="@string/exam_title"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lecturer"
+                    android:layout_below="@+id/subject"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="2dp"
+                            android:src="@drawable/subject"
+                            android:tint="@color/grey"
+                            android:alpha="0.5"
+
+
+                            />
+
+                        <TextView
+                            android:id="@+id/className"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="45dp"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/exam_subject"
+                            android:textColor="@color/black"
+                            android:textSize="14dp"
+                            />
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/lecturer"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="2dp"
+                            android:src="@drawable/classroom"
+                            android:alpha="0.5"
+
+
+                            android:tint="@color/grey" />
+
+                        <TextView
+                            android:id="@+id/className"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="45dp"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/exam_lecture_hall"
+                            android:textColor="@color/black"
+                            android:textSize="14dp"
+                            />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>
