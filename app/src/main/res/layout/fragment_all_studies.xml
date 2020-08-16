@@ -13,20 +13,43 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <LinearLayout
-            android:id="@+id/pg-header"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:id="@+id/topbar"
+            android:orientation="horizontal"
             android:background="@drawable/bottom_nav_bg"
             android:layout_gravity="center_vertical">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/study_all_title"
+                android:text="Study"
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/white"
-                android:textSize="22dp"
+                android:textSize="24dp"
                 android:textStyle="bold"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/add"
+                    android:padding="10dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/addIcon"
+                    android:layout_alignParentEnd="true"
+                    android:tint="@color/white"/>
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/today"
+                    android:padding="10dp"
+                    android:layout_marginTop="5dp"
+
+                    android:tint="@color/white"
+                    android:layout_toLeftOf="@id/addIcon" />
+            </RelativeLayout>
         </LinearLayout>
     <androidx.cardview.widget.CardView
         android:id="@+id/studyCard"
@@ -38,11 +61,18 @@
         android:clickable="true"
         android:focusable="true"
         app:cardCornerRadius="4dp">
+        <TextView
+            android:id="@+id/subjectColour"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/col2" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="35dp">
 
             <TextView
                 android:id="@+id/studyTitle"
@@ -101,14 +131,21 @@
                     android:layout_marginBottom="8dp"
                     android:text="@string/study_end_time"/>
             </LinearLayout>
-        </LinearLayout>
 
-        <TextView
-            android:id="@+id/subjectColour"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:background="@color/col2" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/timer"
+                android:tint="@color/darkblue"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"/>
+        </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
     </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton

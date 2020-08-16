@@ -126,7 +126,10 @@
     <string name="exam_remindertime">1 day before</string>
     <string name="exam_location">Location</string>
     <string name="exam_title">MAD ONLINE</string>
-    <string name="exam_subject">Mobile Application Development</string>
+    <string name="exam_title_2">DSA ONLINE</string>
+    <string name="exam_subject">MAD</string>
+    <string name="exam_subject_2">DSA</string>
+    <string name="August30">August 30</string>
     <string name="exam_lecture_hall">N3C</string>
     <string name="homework_display_title">Complete Exercise 5 </string>
     <string name="display_homework_subject">MAD</string>

@@ -76,7 +76,7 @@ class GoalsAdapter extends FragmentStatePagerAdapter {
             fragment = new upcoming_goals_fragment();
         }
         if (position == 1) {
-            fragment = new AllFragment();
+            fragment = new GoalsCompletedFragment();
         }
 
 
