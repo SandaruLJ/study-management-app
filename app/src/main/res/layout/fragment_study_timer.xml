@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="@string/study_title"
             android:textSize="24sp"
-            android:textColor="@color/black_de"
+            android:textColor="?android:attr/textColorPrimary"
             android:layout_gravity="center_horizontal" />
 
         <TextView
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:text="@string/timer_time"
             android:textSize="64sp"
-            android:textColor="@color/black_de"
+            android:textColor="?android:attr/textColorPrimary"
             android:layout_gravity="center"/>
 
         <Button
