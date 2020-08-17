@@ -71,24 +71,7 @@ public class addClass extends Fragment  {
             }
         });
 
-//       LinearLayout classStartTimebtn = (LinearLayout) view.findViewById(R.id.classStartTimebtn);
-//        classStartTimebtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DialogFragment newFragment = new SelectTimeFragement();
-//                newFragment.show(getFragmentManager(), "TimePicker");
-//
-//            }
-//        });
-//        LinearLayout classEndTimebtn = (LinearLayout) view.findViewById(R.id.classEndTimebtn);
-//        classEndTimebtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DialogFragment newFragment = new SelectTimeFragement();
-//                newFragment.show(getFragmentManager(), "TimePicker");
-//
-//            }
-//        });
+
 
 //        Spinner spinner = (Spinner) view.findViewById(R.id.subject_spinner);
 ////        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(),R.array.subjects_array,android.R.layout.simple_spinner_item);

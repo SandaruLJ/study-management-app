@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity  {
                             selectedFragment = new displayExams();
                             break;
                         case R.id.nav_menu :
-                            selectedFragment = new AllGoalsFragment();
+                            selectedFragment = new addClass();
                             break;
                     }
 

@@ -1,12 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".addClass"
+    android:orientation="vertical"
     android:background="@color/white">
 
+
+            <LinearLayout
+                android:id="@+id/topbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bottom_nav_bg"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/study_add_title"
+                    android:textColor="@color/white"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/addIcon"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="5dp"
+                        android:padding="10dp"
+                        android:src="@drawable/add"
+                        android:tint="@color/white" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toLeftOf="@id/addIcon"
+                        android:padding="10dp"
+                        android:src="@drawable/today"
+                        android:tint="@color/white" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,24 +63,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/bottom_nav_bg"
-        android:layout_gravity="center_vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/study_add_title"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/white"
-            android:textSize="22dp"
-            android:textStyle="bold"/>
-    </LinearLayout>
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -418,7 +447,7 @@
 
                     android:paddingRight="20dp"
                     android:layout_marginTop="2dp"
-                    android:hint="Repeat"
+                    android:hint="@string/repeat"
                     app:hintTextAppearance="@style/floatinglabel"/>
 
 
@@ -638,4 +667,4 @@
 
     </ScrollView>
 
-</FrameLayout>
+</LinearLayout>

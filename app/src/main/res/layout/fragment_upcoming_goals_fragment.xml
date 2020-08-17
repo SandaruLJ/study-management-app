@@ -35,7 +35,7 @@
                 android:paddingTop="15dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="Aug 16"
+                android:text="@string/aug_16"
                 android:textColor="@color/white"
                 android:textSize="18dp"
 
@@ -47,7 +47,7 @@
                 android:gravity="center_horizontal"
 
                 android:layout_below="@id/startTime"
-                android:text="Monday"
+                android:text="@string/monday"
                 android:textColor="@color/white"
                 android:textSize="18dp"
 
@@ -59,7 +59,7 @@
                 android:gravity="center_horizontal"
                 android:paddingBottom="15dp"
                 android:layout_below="@id/too"
-                android:text="2020"
+                android:text="@string/_2020"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:textColor="@color/white"
@@ -116,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="45dp"
 
-                        android:text="Learn  Python"
+                        android:text="@string/learn_python"
                         android:textColor="@color/black"
                         android:textSize="20dp"
                         android:textStyle="bold" />
@@ -142,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
 
-                        android:text="Watch necessary tutorials, read\nbooks and build a mini project\nin python"
+                        android:text="@string/lear_python_desc"
                         android:textColor="@color/grey"
                         android:textSize="14dp"
                         />
@@ -154,7 +154,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="02"
+                android:text="@string/_02"
                 android:layout_alignParentEnd="true"
                android:layout_marginTop="25dp"
                 android:padding="10dp"
@@ -162,12 +162,12 @@
                 android:id="@+id/days"
                 android:background="@drawable/day_circle"
                 android:textColor="@color/white"
-                android:layout_marginEnd="20dp"></TextView>
+                android:layout_marginEnd="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/days"
-                android:text="Days more"
+                android:text="@string/days_more"
                 android:layout_alignParentEnd="true"
                 android:textSize="10dp"
                 android:padding="3dp"

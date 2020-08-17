@@ -10,20 +10,46 @@
     android:clipToPadding="false">
 
     <LinearLayout
-
+        android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="center_vertical"
         android:background="@drawable/bottom_nav_bg"
-        android:layout_gravity="center_vertical">
+        android:orientation="horizontal">
+
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/subject_add_title"
-            android:layout_marginLeft="20dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:text="@string/subject_add_title"
             android:textColor="@color/white"
-            android:textSize="22dp"
-            android:textStyle="bold"/>
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/addIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:src="@drawable/add"
+                android:tint="@color/white" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_toLeftOf="@id/addIcon"
+                android:padding="10dp"
+                android:src="@drawable/today"
+                android:tint="@color/white" />
+        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -202,9 +228,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="15dp"
-
                 android:background="@drawable/choosecolor"
-                android:gravity="right"></Button>
+                android:gravity="right"/>
         </RelativeLayout>
 
     </LinearLayout>
@@ -233,7 +258,7 @@
             android:textSize="16dp"
             android:textColor="@color/white"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"></Button>
+            android:paddingRight="20dp"/>
     </LinearLayout>
 
 

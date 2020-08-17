@@ -7,22 +7,48 @@
     android:layout_height="match_parent"
     tools:context=".NavMenuFragment">
 
-        <LinearLayout
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/bottom_nav_bg"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:text="@string/Menu"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/bottom_nav_bg"
-            android:layout_gravity="center_vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Menu"
-                android:layout_marginLeft="20dp"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/white"
-                android:textSize="22dp"
-                android:textStyle="bold"/>
-        </LinearLayout>
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/addIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:src="@drawable/add"
+                android:tint="@color/white" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_toLeftOf="@id/addIcon"
+                android:padding="10dp"
+                android:src="@drawable/today"
+                android:tint="@color/white" />
+        </RelativeLayout>
+    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,7 +78,7 @@
                     android:paddingTop="5dp"
                     android:textStyle="bold"
 
-                    android:text="Course "/>
+                    android:text="@string/course"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -72,7 +98,7 @@
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"
 
-                    android:text="Subject "/>
+                    android:text="@string/subject_label"/>
             </LinearLayout>
 
             <LinearLayout
@@ -96,7 +122,7 @@
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"
 
-                    android:text="Class "/>
+                    android:text="@string/class_label"/>
             </LinearLayout>
 
 
@@ -129,7 +155,7 @@
                     android:paddingTop="5dp"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:text="Homework"/>
+                    android:text="@string/Homework"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -148,7 +174,7 @@
                     android:paddingTop="5dp"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:text="Exam"/>
+                    android:text="@string/Exam"/>
             </LinearLayout>
 
             <LinearLayout
@@ -171,7 +197,7 @@
                     android:paddingTop="5dp"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:text="Study"/>
+                    android:text="@string/study_all_title"/>
             </LinearLayout>
 
 
@@ -204,7 +230,7 @@
                     android:paddingTop="5dp"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:text="Goals"/>
+                    android:text="@string/goals"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -223,7 +249,7 @@
                     android:paddingTop="5dp"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:text="Calendar"/>
+                    android:text="@string/calendar"/>
             </LinearLayout>
 
             <LinearLayout
@@ -246,43 +272,12 @@
                     android:paddingTop="5dp"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:text="Timer"/>
+                    android:text="@string/timer"/>
             </LinearLayout>
 
 
 
         </LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingAddBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:tint="@color/white"
-            app:backgroundTint="?android:attr/colorSecondary"
-            app:maxImageSize="30dp"
-            android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/add"
-            android:layout_marginBottom="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
 
-       />
-<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/floatingCalendarBtn"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:clickable="true"-->
-<!--            android:tint="@color/white"-->
-<!--            app:backgroundTint="?android:attr/colorSecondary"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            app:maxImageSize="30dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_marginBottom="20dp"-->
-<!--            android:layout_marginStart="20dp"-->
-<!--            app:srcCompat="@drawable/today" />-->
-    </RelativeLayout>
+
 </LinearLayout>

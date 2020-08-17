@@ -15,6 +15,11 @@
     <color name="lightBlue1">#7ECBDC</color>
     <color name="lightBlue2">#9EEBFC</color>
     <color name="magenta">#994F91</color>
+    <color name="violet">#C56B8E</color>
+    <color name="cal_subject_text_color">#A6000000</color>
+    <color name="dash_box_blue">#64b3f4</color>
+    <color name="dash_box_green">#c2e59c</color>
+    <color name="ex5_color">#F34387</color>
     <!-- Subjects -->
     <color name="subject_colour">#4CAF50</color>
     <color name="event">#D5EAF4</color>

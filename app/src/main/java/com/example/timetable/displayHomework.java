@@ -78,10 +78,10 @@ class HomeworkList extends FragmentStatePagerAdapter {
             fragment = new HomeworkWeekFragment();
         }
         if (position == 1) {
-            fragment = new ClassListFragment();
+            fragment = new HomeworkListFragment();
         }
         if (position == 2) {
-            fragment = new ClassCalendarFragment();
+            fragment = new Homework_Calendar_Fragment();
         }
 
         return fragment;

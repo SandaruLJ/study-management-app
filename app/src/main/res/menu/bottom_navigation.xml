@@ -5,24 +5,24 @@
     <item
         android:id="@+id/nav_dashboard"
         android:icon="@drawable/dashboard"
-        android:title="Dashboard" />
+        android:title="@string/Dashboard" />
     <item
         android:id="@+id/nav_class"
         android:icon="@drawable/classroom"
-        android:title="Class" />
+        android:title="@string/class_label" />
     <item
         android:id="@+id/nav_homework"
         android:icon="@drawable/homework"
-        android:title="Homework" />
+        android:title="@string/Homework" />
     <item
         android:id="@+id/nav_test"
         android:icon="@drawable/test"
-        android:title="Exams" />
+        android:title="@string/Exams" />
 
     <item
         android:id="@+id/nav_menu"
         android:icon="@drawable/menu"
-        android:title="Menu" />
+        android:title="@string/Menu" />
 
 
 </menu>

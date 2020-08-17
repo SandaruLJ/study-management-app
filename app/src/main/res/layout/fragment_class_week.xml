@@ -40,7 +40,7 @@
                     android:paddingTop="5dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"
-                    android:hint="Day"
+                    android:hint="@string/day_label"
                     android:textSize="20dp"
                     />
                 <RelativeLayout
@@ -93,7 +93,7 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Start Time"
+                    android:hint="@string/start_time"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
                     android:paddingRight="20dp"
@@ -109,7 +109,7 @@
                     android:paddingTop="5dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"
-                    android:text="10:30 A.M"
+                    android:text="@string/start_time_val"
                     android:textFontWeight="600"
                     android:textSize="20dp"
 
@@ -154,23 +154,23 @@
                     android:paddingTop="5dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"
-                    android:hint="End Time"
+                    android:hint="@string/end_time"
                     android:textSize="20dp"
                     />
-                <TextView
+<!--                <TextView-->
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="20dp"
-                    android:text="11:30 A.M"
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:paddingLeft="10dp"-->
+<!--                    android:paddingTop="5dp"-->
+<!--                    android:paddingRight="20dp"-->
+<!--                    android:paddingBottom="20dp"-->
+<!--                    android:text="11:30 A.M"-->
 
-                    android:layout_alignParentEnd="true"
-                    android:textFontWeight="600"
-                    android:textSize="20dp"
-                    />
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:textFontWeight="600"-->
+<!--                    android:textSize="20dp"-->
+<!--                    />-->
             </RelativeLayout>
         </LinearLayout>
         <!--      <View-->
@@ -212,7 +212,7 @@
                     android:paddingTop="5dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"
-                    android:hint="Start Date"
+                    android:hint="@string/start_date"
                     android:textSize="20dp"
                     />
                 <TextView
@@ -223,7 +223,7 @@
                     android:paddingTop="5dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"
-                    android:text="13/8/2020"
+                    android:text="@string/_13_8_2020"
                     android:textFontWeight="600"
                     android:layout_alignParentEnd="true"
 
@@ -267,23 +267,23 @@
                     android:paddingTop="5dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"
-                    android:hint="End Date"
+                    android:hint="@string/end_date"
                     android:textSize="20dp"
                     />
-                <TextView
+<!--                <TextView-->
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="20dp"
-                    android:text="13/12/2020"
-                    android:textFontWeight="600"
-                    android:layout_alignParentEnd="true"
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:paddingLeft="10dp"-->
+<!--                    android:paddingTop="5dp"-->
+<!--                    android:paddingRight="20dp"-->
+<!--                    android:paddingBottom="20dp"-->
+<!--                    android:text="13/12/2020"-->
+<!--                    android:textFontWeight="600"-->
+<!--                    android:layout_alignParentEnd="true"-->
 
-                    android:textSize="20dp"
-                    />
+<!--                    android:textSize="20dp"-->
+<!--                    />-->
             </RelativeLayout>
 
 
@@ -329,7 +329,7 @@
                     android:paddingTop="5dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"
-                    android:hint="Reminder"
+                    android:hint="@string/reminder"
                     android:textSize="20dp"
                     />
                 <RelativeLayout

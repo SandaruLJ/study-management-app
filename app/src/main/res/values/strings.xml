@@ -1,24 +1,46 @@
 <resources>
-    <string name="app_name">Timetable</string>
+    <string name="app_name">Student Planner</string>
+    <!--    Botttom Nav-->
+    <string name="Dashboard">Dashboard</string>
+    <string name="class_label">Class</string>
+    <string name="Homework">Homework</string>
+    <string name="Exams">Exams</string>
+    <string name="Menu">Menu</string>
+    <string name="MADonline">MAD Online</string>
+    <string name="A102">A102</string>
+    <string name="Exam">Exam</string>
+    <string name="rem_time">30</string>
+    <string name="minstogo">mins to go</string>
+    <string name="physics">Physics</string>
+    <string name="einstein">Sir Einstein</string>
+    <string name="stime">09:30 A.M</string>
+    <string name="etime">10:30 A.M</string>
+    <string name="className">Class Name</string>
+    <string name="addClass">Add Class</string>
+    <string name="course">Course</string>
+    <string name="type">Type</string>
+    <string name="teacher">Teacher</string>
+    <string name="classroom">Class Room</string>
+    <string name="note">Note</string>
+    <string name="colour">Colour</string>
+    <string name="save">Save</string>
+    <string name="addCourse">Add Course</string>
+    <string name="courseName">Course Name</string>
+    <string name="institute">Institute</string>
+    <string name="colourHint">Choose a colour for this course</string>
+    <string name="termPeriod">Term Period</string>
+    <string name="reminder">Reminder</string>
+    <string name="to">to</string>
+    <string name="mad">MAD</string>
 
-    <string-array name="subjects_array">
-        <item>Select a Subject</item>
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
+
 
     <!-- Subjects -->
     <string name="subject_name">Mobile Application Development</string>
     <string name="teacher_name">Richard Hendricks</string>
     <string name="subject_description">Module for learning Android app development</string>
     <string name="subject_add_title">Add Subject</string>
-    <string name="subject_all_title">All Subject</string>
+    <string name="subject_all_title">Subject</string>
     <string name="subject_name_hint">Subject name</string>
     <string name="teacher_name_hint">Teacher\'s name</string>
     <string name="subject_description_hint">Description</string>
@@ -28,7 +50,7 @@
 
     <!-- Studies -->
     <string name="study_add_title">Add Study</string>
-    <string name="study_all_title">All Study</string>
+    <string name="study_all_title">Study</string>
     <string name="study_title">Study Lesson 5</string>
     <string name="study_start_time">10.30 am</string>
     <string name="study_end_time">11.30 am</string>
@@ -46,18 +68,13 @@
     <string name="save_study_button_label">Save Study</string>
     <string name="study_timer">Study Timer</string>
     <string-array name="subjects">
-
-        <!--        <item>Select a Subject</item>-->
         <item>Mobile Application Development</item>
         <item>Professional Skills</item>
         <item>Introduction to Programming</item>
     </string-array>
     <string-array name="courses">
-
-        <!--        <item>Select a Subject</item>-->
         <item>IT</item>
         <item>Diploma</item>
-
     </string-array>
     <string-array name="days">
         <item>Monday</item>
@@ -88,8 +105,7 @@
     <string name="subject_name_dsa">Data Structures &amp; Algorithms</string>
     <string name="total_study_time_dsa">04:00</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="createTarget">Create Target</string>
+    <string name="createTarget">Add Goal</string>
     <string name="goals">Goals</string>
     <string name="target">Goal</string>
     <string name="description">Description</string>
@@ -114,19 +130,20 @@
         <item>Monthly</item>
     </string-array>
 
-    <string name="homework_title">Title</string>
+    <string name="homework_add_title">Add Homework</string>
+    <string name="title">Title</string>
     <string name="homework_subject">Subject</string>
-    <string name="homework_due_date">Due Date</string>
+    <string name="due_date">Due Date</string>
     <string name="homeworktime">Time</string>
     <string name="homeworktime_now">8.30 P.M</string>
-    <string name="homework_color">Color</string>
+    <string name="homework_color">Colour</string>
     <string name="homework_reminder">Reminder</string>
     <string name="homework_remindertime">10 minutes before</string>
     <string name="homework_note">Note</string>
-    <string name="exam_start_time">Start Time</string>
-    <string name="exam_end_time">End Time</string>
-    <string name="exam_start_time_now">8.30P.M</string>
-    <string name="exam_end_time_now">11.30P.M</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="start_time_val">8.30 A.M</string>
+    <string name="end_time_val">11.30 A.M</string>
     <string name="exam_remindertime">1 day before</string>
     <string name="exam_location">Location</string>
     <string name="exam_title">MAD ONLINE</string>
@@ -138,6 +155,88 @@
     <string name="homework_display_title">Complete Exercise 5 </string>
     <string name="display_homework_subject">MAD</string>
     <string name="display_homework_date">14th September</string>
+    <string name="start_date">Start Date</string>
+    <string name="_13_8_2020">13/8/2020</string>
+    <string name="end_date">End Date</string>
+    <string name="_10_12_2020">10/12/2020</string>
+    <string name="august_23">August 23</string>
+    <string name="select_a_date">Select a Date</string>
+    <string name="mon">Mon</string>
+    <string name="_06_07">06/07</string>
+    <string name="tue">Tue</string>
+    <string name="_07_07">07/07</string>
+    <string name="wed">Wed</string>
+    <string name="_08_07">08/07</string>
+    <string name="thu">Thu</string>
+    <string name="_09_07">09/07</string>
+    <string name="fri">Fri</string>
+    <string name="_10_07">10/07</string>
+    <string name="sat">Sat</string>
+    <string name="_11_07">11/07</string>
+    <string name="sun">Sun</string>
+    <string name="_12_07">12/07</string>
+    <string name="_00">00</string>
+    <string name="_01">01</string>
+    <string name="_02">02</string>
+    <string name="_03">03</string>
+    <string name="_04">04</string>
+    <string name="_05">05</string>
+    <string name="_06">06</string>
+    <string name="_07">07</string>
+    <string name="_08">08</string>
+    <string name="_09">09</string>
+    <string name="_10">10</string>
+    <string name="_11">11</string>
+    <string name="_12">12</string>
+    <string name="_13">13</string>
+    <string name="_14">14</string>
+    <string name="_15">15</string>
+    <string name="_16">16</string>
+    <string name="_17">17</string>
+    <string name="_18">18</string>
+    <string name="_19">19</string>
+    <string name="_20">20</string>
+    <string name="_21">21</string>
+    <string name="_22">22</string>
+    <string name="_23">23</string>
+    <string name="today">TODAY</string>
+    <string name="today_date">Wednesday, 5th August 2020</string>
+    <string name="it">Information Technology</string>
+    <string name="change">Change</string>
+    <string name="statistics">Statistics</string>
+    <string name="classes">Classes</string>
+    <string name="home_works">Home works</string>
+    <string name="exams">Exams</string>
+    <string name="now_and_upcoming">Now and Upcoming</string>
+    <string name="course_name">Bsc Information Technology</string>
+    <string name="sliit">SLIIT</string>
+    <string name="add_exam">Add Exam</string>
+    <string name="sept_16">Sept 16</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="_2020">2020</string>
+    <string name="ex_time">12:30 - 2:30</string>
+    <string name="_30">30</string>
+    <string name="days_more">Days more</string>
+    <string name="aug_15">Aug 15</string>
+    <string name="sunday">Sunday</string>
+
+    <string name="watch_5_movies">Watch 5 movies</string>
+    <string name="target_completed_desc">Watch all 5 of my favourite \nmovies in one day</string>
+    <string name="done">Done</string>
+    <string name="calendar">Calendar</string>
+    <string name="timer">Timer</string>
+    <string name="aug_16">Aug 16</string>
+    <string name="monday">Monday</string>
+    <string name="learn_python">Learn Python</string>
+    <string name="lear_python_desc">Watch necessary tutorials, read\nbooks and build a mini project\nin python</string>
+    <string name="prof_kohliya_pulasingha">Prof. Kohliya Pulasingha</string>
+
+    <string name="write_a_reflect_journal">Write a reflective journal</string>
+    <string name="ps">PS</string>
+    <string name="ex5">Ex5</string>
+    <string name="repeat">Repeat</string>
+    <string name="reset">Reset</string>
+    <string name="pause">Pause</string>
 
 
 </resources>

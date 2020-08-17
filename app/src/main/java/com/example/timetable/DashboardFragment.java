@@ -53,10 +53,11 @@ public class DashboardFragment extends Fragment {
                 tabTextView.setTextColor(Color.parseColor("#FFFFFF"));
                 tabTextView.setText(tab.getText());
                 tabTextView.setTextSize(18);
+                tabTextView.setTypeface(null, Typeface.BOLD);
                 if (i == 0) {
-                    tabTextView.setTextSize(20);
+                    tabTextView.setTextSize(22);
 
-                    tabTextView.setTypeface(null, Typeface.BOLD);
+
                 }
 
             }
@@ -68,14 +69,14 @@ public class DashboardFragment extends Fragment {
                 viewPager1.setCurrentItem(tab.getPosition());
                 TextView text = (TextView) tab.getCustomView();
 
-                text.setTypeface(null, Typeface.BOLD);
+                text.setTextSize(22);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 TextView text = (TextView) tab.getCustomView();
+                text.setTextSize(18);
 
-                text.setTypeface(null, Typeface.NORMAL);
             }
 
             @Override

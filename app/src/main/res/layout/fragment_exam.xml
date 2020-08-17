@@ -1,13 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".exam">
 
     <!-- TODO: Update blank fragment layout -->
 
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/bottom_nav_bg"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:text="@string/add_exam"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/addIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:src="@drawable/add"
+                android:tint="@color/white" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_toLeftOf="@id/addIcon"
+                android:padding="10dp"
+                android:src="@drawable/today"
+                android:tint="@color/white" />
+        </RelativeLayout>
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,13 +78,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/homework"
-                android:tint="@color/blue"
+                android:tint="@color/lite_blue"
                 android:layout_marginRight="20dp"
-                android:alpha="0.5"/>
+                android:alpha="0.8"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="@string/homework_title">
+                android:hint="@string/title">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -42,47 +93,72 @@
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
-        <!--   <View-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="2dp"-->
-        <!--        android:layout_marginRight="2dp"-->
-        <!--        android:layout_marginLeft="2dp"-->
-        <!--       android:background="@color/lightgrey"/>-->
+           <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+               android:background="@color/lightgrey"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="15dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:paddingTop="8dp"
             android:paddingBottom="0dp">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/subject"
-                android:tint="@color/blue"
-                android:layout_marginRight="20dp"
-                android:alpha="0.5"/>
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="@string/homework_subject">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:textSize="20sp"/>
+                android:layout_height="wrap_content"
+                android:minHeight="60dp"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingTop="15dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="0dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                    android:id="@+id/subjectimg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="20dp"
+                    android:alpha="0.8"
+                    android:src="@drawable/subject"
+                    android:tint="@color/lite_blue" />
+
+                <TextView
+                    android:id="@+id/subjectNameInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:hint="@string/subject_label"
+                    android:paddingRight="20dp"
+                    android:textSize="20dp"
+                    app:hintTextAppearance="@style/floatinglabel" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/subjectInput"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="3dp"
+                        android:entries="@array/subjects"
+                        android:spinnerMode="dialog" />
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
-        <!--    <View-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="2dp"-->
-        <!--        android:layout_marginRight="2dp"-->
-        <!--        android:layout_marginLeft="2dp"-->
-        <!--        android:background="@color/lightgrey"/>-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:background="@color/lightgrey"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,9 +173,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/classroom"
-                android:tint="@color/blue"
+                android:tint="@color/lite_blue"
                 android:layout_marginRight="20dp"
-                android:alpha="0.5"/>
+                android:alpha="0.8"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -112,40 +188,71 @@
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="@color/lightgrey"/>
         <LinearLayout
+            android:id="@+id/dateSelector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:orientation="horizontal"
-            android:paddingTop="15dp"
             android:paddingLeft="20dp"
+            android:paddingTop="15dp"
             android:paddingRight="20dp"
             android:paddingBottom="0dp">
 
             <ImageView
+                android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/callender"
-                android:tint="@color/blue"
                 android:layout_marginRight="20dp"
-                android:alpha="0.5"/>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="@string/homework_due_date">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:textSize="20sp"/>
+                android:alpha="0.8"
+                android:paddingBottom="15dp"
+                android:src="@drawable/today"
+                android:tint="@color/lite_blue" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/due_date"
+
+                    android:paddingTop="5dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:textSize="20dp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:text="@string/_13_8_2020"
+                    android:textFontWeight="600"
+
+                    android:textSize="20dp" />
+            </RelativeLayout>
+
+
         </LinearLayout>
-        <!--    <View-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="2dp"-->
-        <!--        android:layout_marginRight="2dp"-->
-        <!--        android:layout_marginLeft="2dp"-->
-        <!--        android:background="@color/lightgrey"/>-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:background="@color/lightgrey"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -159,14 +266,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/alarm"
-                android:tint="@color/blue"
+                android:tint="@color/lite_blue"
                 android:layout_marginRight="20dp"
-                android:alpha="0.5"/>
+                android:alpha="0.8"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:hint="@string/exam_start_time"
+                android:hint="@string/start_time"
                 android:paddingTop="20dp"
                 android:paddingLeft="0dp"
                 android:paddingRight="20dp"
@@ -184,10 +291,16 @@
                     android:paddingLeft="0dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"
-                    android:textStyle="bold"/>
+                  />
             </RelativeLayout>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="@color/lightgrey"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -201,35 +314,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/alarm"
-                android:tint="@color/blue"
+                android:tint="@color/lite_blue"
                 android:layout_marginRight="20dp"
-                android:alpha="0.5"/>
+                android:alpha="0.8"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:hint="@string/exam_end_time"
+                android:hint="@string/end_time"
                 android:paddingTop="20dp"
                 android:paddingLeft="0dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="20dp"/>
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="@string/exam_end_time_now"
-                    android:layout_alignParentEnd="true"
-                    android:paddingTop="20dp"
-                    android:paddingLeft="0dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="20dp"
-                    android:textStyle="bold"/>
-            </RelativeLayout>
+<!--            <RelativeLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent">-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textSize="20dp"-->
+<!--                    android:text="@string/exam_end_time_now"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:paddingTop="20dp"-->
+<!--                    android:paddingLeft="0dp"-->
+<!--                    android:paddingRight="20dp"-->
+<!--                    android:paddingBottom="20dp"-->
+<!--                    android:textStyle="bold"/>-->
+<!--            </RelativeLayout>-->
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="@color/lightgrey"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -243,9 +363,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/reminder"
-                android:tint="@color/blue"
+                android:tint="@color/lite_blue"
                 android:layout_marginRight="20dp"
-                android:alpha="0.5"/>
+                android:alpha="0.8"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -256,28 +376,27 @@
                 android:paddingRight="20dp"
                 android:paddingBottom="20dp"/>
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
-                <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Spinner
+                    android:id="@+id/subjectInput"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="@string/exam_remindertime"
+
                     android:layout_alignParentEnd="true"
-                    android:paddingTop="20dp"
-                    android:paddingLeft="0dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="20dp"
-                    android:textStyle="bold"/>
+
+
+                    android:entries="@array/times"
+                    android:spinnerMode="dialog"/>
             </RelativeLayout>
 
         </LinearLayout>
-        <!--    <View-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="2dp"-->
-        <!--        android:layout_marginRight="2dp"-->
-        <!--        android:layout_marginLeft="2dp"-->
-        <!--        android:background="@color/lightgrey"/>-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="@color/lightgrey"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -291,9 +410,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/color"
-                android:tint="@color/col3"
+                android:tint="@color/lite_blue"
                 android:layout_marginRight="20dp"
-                android:alpha="0.9"/>
+                android:alpha="0.8"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -315,53 +434,92 @@
 
             </RelativeLayout>
         </LinearLayout>
-        <!--    <View-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="2dp"-->
-        <!--        android:layout_marginRight="2dp"-->
-        <!--        android:layout_marginLeft="2dp"-->
-        <!--        android:background="@color/lightgrey"/>-->
-
-
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/lightgrey" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="15dp"
             android:paddingLeft="20dp"
+            android:paddingTop="15dp"
             android:paddingRight="20dp"
-            android:paddingBottom="0dp">
+            android:paddingBottom="15dp">
 
             <ImageView
+                android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/note"
-                android:tint="@color/blue"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:alpha="0.5"/>
-            <com.google.android.material.textfield.TextInputLayout
+                android:alpha="0.8"
+                android:paddingTop="10dp"
+                android:src="@drawable/ic_baseline_note_add_24"
+                android:tint="@color/lite_blue" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="200dp"
-                android:hint="@string/homework_note"
-                android:background="@drawable/note_border">
-                <com.google.android.material.textfield.TextInputEditText
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:textSize="20sp"/>
+                    android:hint="@string/note"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="20dp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/note_border"
+                    android:minHeight="150dp"
+                    app:hintTextAppearance="@style/floatinglabel"
+
+                    >
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textSize="20sp"
+
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
         </LinearLayout>
-        <!--    <View-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="2dp"-->
-        <!--        android:layout_marginRight="2dp"-->
-        <!--        android:layout_marginLeft="2dp"-->
-        <!--        android:background="@color/lightgrey"/>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="15dp">
 
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/save_btn"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
 
     </LinearLayout>
-</FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
