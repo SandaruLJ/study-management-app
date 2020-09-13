@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".Exam.DisplayCompletedExams">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:orientation="vertical"
+
+    android:layout_margin="5dp"
+
+    android:layout_marginTop="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="2dp"
+
+        android:layout_marginTop="2dp"
+        android:background="@color/violet">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            android:layout_marginRight="10dp"
+            >
+            <TextView
+                android:id="@+id/eventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:paddingTop="5dp"
+                android:paddingLeft="15dp"
+                android:paddingBottom="15dp"
+                android:paddingRight="15dp"
+                android:text="@string/MADonline"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="6dp">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="32dp"
+                    android:src="@drawable/subject"
+                    android:tint="@color/white"
+
+
+
+                    />
+                <TextView
+                    android:id="@+id/sirName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:paddingTop="30dp"
+                    android:paddingLeft="28dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@string/display_homework_subject"
+                    android:textColor="@color/white"
+
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:id="@+id/classIcon"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_toRightOf="@id/sirName"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="33dp"
+                    android:src="@drawable/callender"
+                    android:tint="@color/white"
+                    />
+                <TextView
+                    android:id="@+id/eventName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/classIcon"
+                    android:gravity="start"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/display_homework_date"
+                    android:textColor="@color/white"
+
+                    android:textSize="13dp" />
+
+            </RelativeLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:src="@drawable/tick"
+                android:tint="@color/colorPickerDialog_red"
+                android:id="@+id/days"
+                android:background="@drawable/homework_day_circle"
+                android:textColor="#E33872"
+                android:layout_marginEnd="10dp"></ImageView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>
+
+
+</FrameLayout>
