@@ -20,6 +20,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/Course',
+                            'src/main/res/layouts/Class',
+                            'src/main/res/layouts/Exam',
+                            'src/main/res/layouts/Homework',
+                            'src/main/res/layouts/Goals',
+                            'src/main/res/layouts/Subject',
+                            'src/main/res/layouts/Study',
+                            'src/main/res/layouts',
+                            'src/main/res'
+                    ]
+        }
+    }
+
     allprojects {
         repositories {
 
@@ -40,9 +57,11 @@ dependencies {
     implementation 'com.jaredrummler:colorpicker:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
 
 
 }

@@ -34,7 +34,6 @@
     <string name="mad">MAD</string>
 
 
-
     <!-- Subjects -->
     <string name="subject_name">Mobile Application Development</string>
     <string name="teacher_name">Richard Hendricks</string>
@@ -237,6 +236,10 @@
     <string name="repeat">Repeat</string>
     <string name="reset">Reset</string>
     <string name="pause">Pause</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="editCourse">Edit Course</string>
+    <string name="update">Update</string>
 
 
 </resources>

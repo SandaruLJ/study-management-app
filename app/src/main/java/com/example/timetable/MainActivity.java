@@ -1,19 +1,17 @@
 package com.example.timetable;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.timetable.Class.ViewClassFragment;
+import com.example.timetable.Class.addClass;
+import com.example.timetable.Course.DisplayCourseFragment;
+import com.example.timetable.Exam.displayExams;
+import com.example.timetable.Homework.displayHomework;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity  {
@@ -22,7 +20,9 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Fragment selectedFragment = new DashboardFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                selectedFragment).commit();
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
     }
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity  {
                             selectedFragment = new DashboardFragment();
                             break;
                         case R.id.nav_class :
+//                            selectedFragment = new ViewClassFragment();
                             selectedFragment = new ViewClassFragment();
                             break;
                         case R.id.nav_homework :
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity  {
                             selectedFragment = new displayExams();
                             break;
                         case R.id.nav_menu :
-                            selectedFragment = new addClass();
+                            selectedFragment = new NavMenuFragment();
                             break;
                     }
 
