@@ -2,15 +2,10 @@ package com.example.timetable.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import androidx.annotation.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "StudentPlanner.db";
@@ -45,6 +40,14 @@ public class DBHandler extends SQLiteOpenHelper {
                     ClassMaster.Classes.COLUMN_NAME_END_DATE + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_REMINDER + " INTEGER )" ;
 
+    private static final String SQL_CREATE_SUBJECT_ENTRIES =
+            "CREATE TABLE " + SubjectMaster.Subjects.TABLE_NAME + "("+
+                    SubjectMaster.Subjects._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    SubjectMaster.Subjects.COLUMN_NAME_SUBJECT_NAME + " TEXT," +
+                    SubjectMaster.Subjects.COLUMN_NAME_TEACHER_NAME + " TEXT," +
+                    SubjectMaster.Subjects.COLUMN_NAME_DESCRIPTION + " TEXT," +
+                    SubjectMaster.Subjects.COLUMN_NAME_COLOUR + " INTEGER )";
+
     public DBHandler(@Nullable Context context) {
 
         super(context, DATABASE_NAME, null, 3);
@@ -55,12 +58,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
                 db.execSQL(SQL_CREATE_COURSE_ENTRIES);
                 db.execSQL(SQL_CREATE_CLASS_ENTRIES);
+                db.execSQL(SQL_CREATE_SUBJECT_ENTRIES);
 //        db.execSQL("DROP TABLE IF EXISTS "+ CourseMaster.Courses.TABLE_NAME);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + CourseMaster.Courses.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + ClassMaster.Classes.TABLE_NAME_CLASS);
+        db.execSQL("DROP TABLE IF EXISTS " + SubjectMaster.Subjects.TABLE_NAME);
         onCreate(db);
     }
     public void create(){
@@ -142,5 +147,51 @@ public class DBHandler extends SQLiteOpenHelper {
             return false;
         else
             return true;
+    }
+
+    // CRUD operations for Subject
+
+    public boolean addSubject(String subjectName, String teacherName, String subjectDesc, Integer colour) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(SubjectMaster.Subjects.COLUMN_NAME_SUBJECT_NAME, subjectName);
+        values.put(SubjectMaster.Subjects.COLUMN_NAME_TEACHER_NAME, teacherName);
+        values.put(SubjectMaster.Subjects.COLUMN_NAME_DESCRIPTION, subjectDesc);
+        values.put(SubjectMaster.Subjects.COLUMN_NAME_COLOUR, colour);
+
+        long result = db.insert(SubjectMaster.Subjects.TABLE_NAME,null,values);
+
+        return result != -1;
+    }
+
+    public boolean updateSubject(String id, String subjectName, String teacherName, String subjectDesc, Integer colour) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(SubjectMaster.Subjects.COLUMN_NAME_SUBJECT_NAME, subjectName);
+        values.put(SubjectMaster.Subjects.COLUMN_NAME_TEACHER_NAME, teacherName);
+        values.put(SubjectMaster.Subjects.COLUMN_NAME_DESCRIPTION, subjectDesc);
+        values.put(SubjectMaster.Subjects.COLUMN_NAME_COLOUR, colour);
+
+        db.update(SubjectMaster.Subjects.TABLE_NAME, values, "_id = ?", new String[]{id});
+
+        return true;
+    }
+
+    public Cursor getAllSubjects(){
+        SQLiteDatabase db = getReadableDatabase();
+        return db.rawQuery("SELECT * FROM "+ SubjectMaster.Subjects.TABLE_NAME,null);
+    }
+
+    public Cursor getSingleSubject(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + SubjectMaster.Subjects.TABLE_NAME + " WHERE "+ SubjectMaster.Subjects._ID + " = " + id, null);
+    }
+
+    public Integer deleteSubject(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(SubjectMaster.Subjects.TABLE_NAME, " _id = ? ", new String[]{id});
     }
 }
