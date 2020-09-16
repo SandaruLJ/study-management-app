@@ -32,7 +32,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/addIcon"
+                android:id="@+id/add_subject_btn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
@@ -42,10 +42,11 @@
                 android:tint="@color/white" />
 
             <ImageView
+                android:id="@+id/all_subjects_btn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5dp"
-                android:layout_toLeftOf="@id/addIcon"
+                android:layout_toStartOf="@id/add_subject_btn"
                 android:padding="10dp"
                 android:src="@drawable/today"
                 android:tint="@color/white" />
@@ -80,6 +81,7 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/subject_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -123,6 +125,7 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/teacher_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -167,6 +170,7 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/subject_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -260,6 +264,7 @@
         android:gravity="center">
 
         <Button
+            android:id="@+id/add_subject"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/save_subject_button_label"
