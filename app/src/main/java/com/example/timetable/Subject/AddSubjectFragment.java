@@ -82,16 +82,22 @@ public class AddSubjectFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Validate inputs before inserting to the database
+                if (subjectName.getText().toString().equals("")) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please enter a subject name", Toast.LENGTH_LONG).show();
+                } else if (teacherName.getText().toString().equals("")) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please enter a teacher's name", Toast.LENGTH_LONG).show();
+                } else {
+                    boolean isInserted = db.addSubject(subjectName.getText().toString(), teacherName.getText().toString(), subjectDesc.getText().toString(), ((ColorDrawable) bgBtn.getBackground()).getColor());
 
-                boolean isInserted = db.addSubject(subjectName.getText().toString(), teacherName.getText().toString(), subjectDesc.getText().toString(), ((ColorDrawable) bgBtn.getBackground()).getColor());
-
-                if (isInserted) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Subject Added Successfully", Toast.LENGTH_LONG).show();
-                    AllSubjectsFragment fragment = new AllSubjectsFragment();
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-                } else
-                    Toast.makeText(getActivity().getApplicationContext(), "Insert failed, Try again", Toast.LENGTH_LONG).show();
+                    if (isInserted) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Subject Added Successfully", Toast.LENGTH_LONG).show();
+                        AllSubjectsFragment fragment = new AllSubjectsFragment();
+                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                    } else
+                        Toast.makeText(getActivity().getApplicationContext(), "Insert failed, try again", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

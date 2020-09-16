@@ -106,17 +106,23 @@ public class EditSubjectFragment extends Fragment {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    boolean isInserted = db.updateSubject(String.valueOf(finalId), subjectName.getText().toString(), teacherName.getText().toString(), subjectDesc.getText().toString(), ((ColorDrawable) bgBtn.getBackground()).getColor());
+                    // Validate inputs before updating the database
+                    if (subjectName.getText().toString().equals("")) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Please enter a subject name", Toast.LENGTH_LONG).show();
+                    } else if (teacherName.getText().toString().equals("")) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Please enter a teacher's name", Toast.LENGTH_LONG).show();
+                    } else {
+                        boolean isInserted = db.updateSubject(String.valueOf(finalId), subjectName.getText().toString(), teacherName.getText().toString(), subjectDesc.getText().toString(), ((ColorDrawable) bgBtn.getBackground()).getColor());
 
-                    if(isInserted) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Updated Successfully", Toast.LENGTH_LONG).show();
-                        AllSubjectsFragment fragment = new AllSubjectsFragment();
-                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                        if (isInserted) {
+                            Toast.makeText(getActivity().getApplicationContext(), "Updated Successfully", Toast.LENGTH_LONG).show();
+                            AllSubjectsFragment fragment = new AllSubjectsFragment();
+                            AppCompatActivity activity = (AppCompatActivity) view.getContext();
 
-                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                        } else
+                            Toast.makeText(getActivity().getApplicationContext(), "Update Failed, Please Try again", Toast.LENGTH_LONG).show();
                     }
-                    else
-                        Toast.makeText(getActivity().getApplicationContext(),"Update Failed, Please Try again",Toast.LENGTH_LONG).show();
                 }
             });
 
