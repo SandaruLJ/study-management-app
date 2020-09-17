@@ -11,21 +11,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.timetable.ColorPicker;
-import com.example.timetable.Course.DisplayCourseFragment;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
-import com.example.timetable.SelectDateFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,33 +45,33 @@ public class EditSubjectFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_subject, container, false);
         Button btn = view.findViewById(R.id.update_subject);
-        int id  = 0;
+        int subjectId  = 0;
         Bundle bundle = this.getArguments();
-        final Button colorbtn = view.findViewById(R.id.colorbtn);
+        final Button colourBtn = view.findViewById(R.id.colorbtn);
         final Button bgBtn = view.findViewById(R.id.testbtn);
-        colorbtn.setOnClickListener(new View.OnClickListener() {
+        colourBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 ColorPicker cp = new ColorPicker() ;
-                cp.openColorPicker(getChildFragmentManager(),colorbtn, bgBtn);
+                cp.openColorPicker(getChildFragmentManager(),colourBtn, bgBtn);
 
             }
 
         });
 
-        if (bundle!=null) {
-            id = Integer.parseInt(bundle.get("id").toString());
+        if (bundle != null) {
+            subjectId = Integer.parseInt(bundle.get("id").toString());
         }
 
-        if (id != 0) {
-            String subName = null, teachName = null, subDesc = null;
-            Cursor c = db.getSingleSubject(id);
+        if (subjectId != 0) {
+            String subjectNameTemp = null, teacherNameTemp = null, subjectDescTemp = null;
+            Cursor c = db.getSingleSubject(subjectId);
 
             while (c.moveToNext()){
-                subName = c.getString(1);
-                teachName = c.getString(2);
-                subDesc = c.getString(3);
+                subjectNameTemp = c.getString(1);
+                teacherNameTemp = c.getString(2);
+                subjectDescTemp = c.getString(3);
                 colour = c.getInt(4);
             }
 
@@ -84,15 +79,15 @@ public class EditSubjectFragment extends Fragment {
             teacherName = view.findViewById(R.id.teacher_name);
             subjectDesc = view.findViewById(R.id.subject_desc);
 
-            subjectName.setText(subName);
-            teacherName.setText(teachName);
-            subjectDesc.setText(subDesc);
-            colorbtn.setBackgroundTintList(ColorStateList.valueOf(colour));
+            subjectName.setText(subjectNameTemp);
+            teacherName.setText(teacherNameTemp);
+            subjectDesc.setText(subjectDescTemp);
+            colourBtn.setBackgroundTintList(ColorStateList.valueOf(colour));
             bgBtn.setBackgroundColor(colour);
 
-            ImageView allBtn = view.findViewById(R.id.all_subjects_btn);
+            ImageView allSubBtn = view.findViewById(R.id.all_subjects_btn);
 
-            allBtn.setOnClickListener(new View.OnClickListener() {
+            allSubBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     AllSubjectsFragment fragment = new AllSubjectsFragment();
@@ -101,7 +96,7 @@ public class EditSubjectFragment extends Fragment {
                 }
             });
 
-            final int finalId = id;
+            final int finalId = subjectId;
 
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -125,7 +120,6 @@ public class EditSubjectFragment extends Fragment {
                     }
                 }
             });
-
         }
 
         return view;

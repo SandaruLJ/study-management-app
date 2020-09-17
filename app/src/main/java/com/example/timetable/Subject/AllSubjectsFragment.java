@@ -18,8 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.timetable.Course.DisplayCourseFragment;
-import com.example.timetable.Subject.SubjectRecyclerViewAdapter;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
 
@@ -120,7 +118,7 @@ public class AllSubjectsFragment extends Fragment {
 
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                // view the background view
+                // Show the background view
                 final View foregroundView = ((SubjectRecyclerViewAdapter.ViewHolder) viewHolder).subjectCard;
                 getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY,
                         actionState, isCurrentlyActive);
@@ -132,7 +130,7 @@ public class AllSubjectsFragment extends Fragment {
             }
         };
 
-        // attaching the touch helper to recycler view
+        // Attach touch helper to recycler view
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
     }
 }

@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,21 +15,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.timetable.Course.editCourse;
 import com.example.timetable.R;
 
 import java.util.ArrayList;
 
-import javax.microedition.khronos.egl.EGLDisplay;
-import javax.security.auth.Subject;
-
 public class SubjectRecyclerViewAdapter extends RecyclerView.Adapter<SubjectRecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "Subject Recycler View";
-    private ArrayList<Integer> subjectIds = new ArrayList<>();
-    private ArrayList<String> subjectNames = new ArrayList<>();
-    private  ArrayList<String> teacherNames = new ArrayList<>();
-    private  ArrayList<Integer> colours = new ArrayList<>();
+    private ArrayList<Integer> subjectIds;
+    private ArrayList<String> subjectNames;
+    private  ArrayList<String> teacherNames;
+    private  ArrayList<Integer> colours;
     private Context mContext;
 
     public SubjectRecyclerViewAdapter(ArrayList<Integer> subjectIds, ArrayList<String> subjectNames, ArrayList<String> teacherNames, ArrayList<Integer> colours, Context mContext) {
@@ -79,9 +73,9 @@ public class SubjectRecyclerViewAdapter extends RecyclerView.Adapter<SubjectRecy
         holder.subjectCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int id = subjectIds.get(position);
+                int subjectId = subjectIds.get(position);
                 Bundle bundle = new Bundle();
-                bundle.putInt("id", id);
+                bundle.putInt("id", subjectId);
 
                 EditSubjectFragment editSubject = new EditSubjectFragment();
                 editSubject.setArguments(bundle);
@@ -102,9 +96,6 @@ public class SubjectRecyclerViewAdapter extends RecyclerView.Adapter<SubjectRecy
         subjectNames.remove(position);
         teacherNames.remove(position);
         colours.remove(position);
-        // notify the item removed by position
-        // to perform recycler view delete animations
-        // NOTE: don't call notifyDataSetChanged()
         notifyItemRemoved(position);
     }
 
