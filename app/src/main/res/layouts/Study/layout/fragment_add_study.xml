@@ -8,101 +8,96 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-
-            <LinearLayout
-                android:id="@+id/topbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/bottom_nav_bg"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:text="@string/study_add_title"
-                    android:textColor="@color/white"
-                    android:textSize="24dp"
-                    android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/addIcon"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="5dp"
-                        android:padding="10dp"
-                        android:src="@drawable/add"
-                        android:tint="@color/white" />
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_toLeftOf="@id/addIcon"
-                        android:padding="10dp"
-                        android:src="@drawable/today"
-                        android:tint="@color/white" />
-                </RelativeLayout>
-            </LinearLayout>
-
+    <LinearLayout
+        android:id="@+id/topbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/bottom_nav_bg"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:text="@string/study_add_title"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/add_study_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:src="@drawable/add"
+                android:tint="@color/white" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_toStartOf="@id/add_study_btn"
+                android:padding="10dp"
+                android:src="@drawable/today"
+                android:tint="@color/white" />
+        </RelativeLayout>
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <!-- TODO: Update blank fragment layout -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="15dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="0dp">
-        <ImageView
-            android:id="@+id/subjectimg"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/study"
-            android:alpha="0.8"
-            android:tint="@color/lite_blue" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/subjectNameInput"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/study_title_hint"
-            app:hintTextAppearance="@style/floatinglabel">
-
-
-            <com.google.android.material.textfield.TextInputEditText
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@null"
-                android:textSize="20sp" />
+                android:orientation="horizontal"
+                android:paddingTop="15dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="0dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/study"
+                    android:alpha="0.8"
+                    android:tint="@color/lite_blue" />
 
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/lightgrey"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="@string/study_title_hint"
+                    app:hintTextAppearance="@style/floatinglabel">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/study_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textSize="20sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/lightgrey"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
 
 <!--    <LinearLayout-->
 <!--        android:layout_width="match_parent"-->
@@ -135,6 +130,7 @@
 <!--            android:spinnerMode="dialog"/>-->
 
 <!--    </LinearLayout>-->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,14 +140,444 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="0dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/subject"
+                    android:alpha="0.8"
+                    android:tint="@color/lite_blue" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:paddingEnd="20dp"
+                    android:layout_marginTop="2dp"
+                    android:hint="@string/subject_label"
+                    app:hintTextAppearance="@style/floatinglabel"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/subject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="3dp"
+                        android:entries="@array/subjects"
+                        android:spinnerMode="dialog"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/lightgrey"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/color"
+                    android:alpha="0.8"
+                    android:tint="@color/lite_blue"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="20dp"
+                        android:hint="Color"
+                        android:textSize="20sp"/>
+
+                    <Button
+                        android:id="@+id/colorbtn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/choosecolor"
+                        android:backgroundTint="@color/col2"
+                        android:gravity="right"/>
+
+                    <Button
+                        android:id="@+id/testbtn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@color/col2"
+                        android:visibility="invisible"
+                        android:gravity="right"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/lightgrey"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="15dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="0dp"
+                android:id="@+id/study_date"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="20dp"
+                    android:paddingBottom="15dp"
+                    android:src="@drawable/today"
+                    android:alpha="0.8"
+                    android:tint="@color/lite_blue"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="20dp"
+                    android:hint="Select a Date"
+                    android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="20dp"
+                        android:text="13/8/2020"
+                        android:textFontWeight="600"
+                        android:layout_alignParentEnd="true"
+                        android:textSize="20sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/lightgrey"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="15dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="0dp"
+                android:id="@+id/study_start"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="20dp"
+                    android:paddingBottom="15dp"
+                    android:src="@drawable/alarm"
+                    android:alpha="0.8"
+                    android:tint="@color/lite_blue"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Start Time"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="20dp"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:paddingStart="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="20dp"
+                        android:text="10:30 A.M"
+                        android:textFontWeight="600"
+                        android:textSize="20sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/lightgrey"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="15dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="0dp"
+                android:id="@+id/classStartTimebtn"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="20dp"
+                    android:paddingBottom="15dp"
+                    android:src="@drawable/alarm"
+                    android:alpha="0.8"
+                    android:tint="@color/lite_blue"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="End Time"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="20dp"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:paddingStart="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="20dp"
+                        android:text="10:30 A.M"
+                        android:textFontWeight="600"
+                        android:textSize="20sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/lightgrey"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:minHeight="60dp"
+                android:paddingTop="15dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="0dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_baseline_repeat_24"
+                    android:alpha="0.8"
+                    android:tint="@color/lite_blue" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:paddingEnd="20dp"
+                    android:layout_marginTop="2dp"
+                    android:hint="@string/repeat"
+                    app:hintTextAppearance="@style/floatinglabel"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/repeat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="3dp"
+                        android:entries="@array/repeat"
+                        android:spinnerMode="dialog" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/lightgrey"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="15dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:paddingTop="10dp"
+                    android:src="@drawable/ic_baseline_note_add_24"
+                    android:alpha="0.8"
+                    android:tint="@color/lite_blue"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:hint="Note"
+                        android:textSize="20sp"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="150dp"
+                        android:background="@drawable/note_border"
+                        app:hintTextAppearance="@style/floatinglabel" >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/study_note"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:background="?android:attr/listDivider"
+                android:layout_marginVertical="24dp"
+                android:layout_marginLeft="-16dp"
+                android:layout_marginRight="-16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="15dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="0dp"
+                android:id="@+id/dateSelector"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="20dp"
+                    android:paddingBottom="15dp"
+                    android:src="@drawable/reminder"
+                    android:alpha="0.8"
+                    android:tint="@color/lite_blue"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:paddingTop="5dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="20dp"
+                        android:hint="Reminder"
+                        android:textSize="20sp" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/reminder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:paddingStart="10dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="2dp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:minHeight="60dp"
+                android:paddingTop="15dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="0dp">
+
                 <ImageView
                     android:id="@+id/subjectimg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:layout_marginRight="20dp"
-                    android:src="@drawable/subject"
-
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/reminder_time"
                     android:alpha="0.8"
                     android:tint="@color/lite_blue" />
 
@@ -159,522 +585,50 @@
                     android:id="@+id/subjectNameInput"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-
-                    android:paddingRight="20dp"
+                    android:textSize="20sp"
+                    android:paddingEnd="20dp"
                     android:layout_marginTop="2dp"
-                    android:hint="@string/subject_label"
+                    android:hint="@string/time_before_reminder_label"
                     app:hintTextAppearance="@style/floatinglabel"/>
-
-
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <Spinner
-                        android:id="@+id/subjectInput"
+                        android:id="@+id/reminder_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="3dp"
-
-                        android:entries="@array/subjects"
+                        android:entries="@array/times"
                         android:spinnerMode="dialog"/>
                 </RelativeLayout>
             </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/lightgrey"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="0dp"
-        android:paddingBottom="0dp"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp">
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-
-            android:src="@drawable/color"
-            android:alpha="0.8"
-            android:tint="@color/lite_blue"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:paddingTop="20dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="20dp"
-                android:hint="Color"
-                android:textSize="20dp"/>
-            <Button
-                android:id="@+id/colorbtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/choosecolor"
-                android:backgroundTint="@color/col2"
-                android:gravity="right"/>
-            <Button
-                android:id="@+id/testbtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/col2"
-                android:visibility="invisible"
-                android:gravity="right"/>
-        </RelativeLayout>
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/lightgrey"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="15dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="0dp"
-        android:id="@+id/dateSelector"
-        android:clickable="true">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:paddingBottom="15dp"
-            android:src="@drawable/today"
-            android:alpha="0.8"
-            android:tint="@color/lite_blue"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:paddingTop="5dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="20dp"
-                android:hint="Select a Date"
-                android:textSize="20dp"
-                />
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="20dp"
-                android:text="13/8/2020"
-                android:textFontWeight="600"
-                android:layout_alignParentEnd="true"
-
-                android:textSize="20dp"
-                />
-        </RelativeLayout>
-
-
-
-
-    </LinearLayout>
-          <View
-              android:layout_width="match_parent"
-              android:layout_height="2dp"
-              android:background="@color/lightgrey"
-              android:layout_marginRight="10dp"
-              android:layout_marginLeft="10dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="15dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="0dp"
-        android:id="@+id/classStartTimebtn"
-        android:clickable="true">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:paddingBottom="15dp"
-            android:src="@drawable/alarm"
-            android:alpha="0.8"
-            android:tint="@color/lite_blue"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Start Time"
-
-                android:paddingTop="5dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="20dp"
-                android:textSize="20dp" />
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="20dp"
-                android:text="10:30 A.M"
-                android:textFontWeight="600"
-                android:textSize="20dp"
-
-                />
-        </RelativeLayout>
-    </LinearLayout>
-          <View
-              android:layout_width="match_parent"
-              android:layout_height="2dp"
-              android:background="@color/lightgrey"
-              android:layout_marginRight="10dp"
-              android:layout_marginLeft="10dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="15dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="0dp"
-        android:id="@+id/classStartTimebtn"
-        android:clickable="true">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:paddingBottom="15dp"
-            android:src="@drawable/alarm"
-            android:alpha="0.8"
-            android:tint="@color/lite_blue"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="End Time"
-
-                android:paddingTop="5dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="20dp"
-                android:textSize="20dp" />
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="20dp"
-                android:text="10:30 A.M"
-                android:textFontWeight="600"
-                android:textSize="20dp"
-
-                />
-        </RelativeLayout>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/lightgrey"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:minHeight="60dp"
-        android:paddingTop="15dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="0dp">
-        <ImageView
-            android:id="@+id/subjectimg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/ic_baseline_repeat_24"
-
-            android:alpha="0.8"
-            android:tint="@color/lite_blue" />
-
-                <TextView
-                    android:id="@+id/subjectNameInput"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-
-                    android:paddingRight="20dp"
-                    android:layout_marginTop="2dp"
-                    android:hint="@string/repeat"
-                    app:hintTextAppearance="@style/floatinglabel"/>
-
-
-
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-        <Spinner
-            android:id="@+id/subjectInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="3dp"
-
-            android:entries="@array/repeat"
-            android:spinnerMode="dialog"/>
-</RelativeLayout>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/lightgrey"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="15dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="15dp">
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:paddingTop="10dp"
-            android:src="@drawable/ic_baseline_note_add_24"
-            android:alpha="0.8"
-            android:tint="@color/lite_blue"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/textView3"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:hint="Note"
-                android:textSize="20dp"/>
+                android:orientation="horizontal"
+                android:paddingTop="30dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="15dp"
+                android:gravity="center">
 
-
-            <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/notesInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="150dp"
-                android:background="@drawable/note_border"
-
-                app:hintTextAppearance="@style/floatinglabel"
-
-                >
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/add_study"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:textSize="20sp"
-
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="@string/save_subject_button_label"
+                    android:layout_gravity="center"
+                    android:background="@drawable/save_btn"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-
-
-
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginVertical="24dp"
-        android:layout_marginLeft="-16dp"
-        android:layout_marginRight="-16dp" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="15dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="0dp"
-        android:id="@+id/dateSelector"
-        android:clickable="true">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:paddingBottom="15dp"
-            android:src="@drawable/reminder"
-            android:alpha="0.8"
-            android:tint="@color/lite_blue"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:paddingTop="5dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="20dp"
-                android:hint="Reminder"
-                android:textSize="20dp"
-                />
-            <androidx.appcompat.widget.SwitchCompat
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:paddingLeft="10dp"
-                android:paddingTop="12dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="2dp"/>
-
-        </RelativeLayout>
-
-
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:minHeight="60dp"
-        android:paddingTop="15dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="0dp">
-        <ImageView
-            android:id="@+id/subjectimg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/reminder_time"
-
-            android:alpha="0.8"
-            android:tint="@color/lite_blue" />
-
-        <TextView
-            android:id="@+id/subjectNameInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-
-            android:paddingRight="20dp"
-            android:layout_marginTop="2dp"
-            android:hint="@string/time_before_reminder_label"
-            app:hintTextAppearance="@style/floatinglabel"/>
-
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Spinner
-                android:id="@+id/subjectInput"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="3dp"
-
-                android:entries="@array/times"
-                android:spinnerMode="dialog"/>
-        </RelativeLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="30dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="15dp"
-        android:gravity="center">
-
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="@string/save_subject_button_label"
-            android:layout_gravity="center"
-            android:background="@drawable/save_btn"
-            android:textStyle="bold"
-            android:textSize="16dp"
-            android:textColor="@color/white"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"></Button>
-    </LinearLayout>
-    </LinearLayout>
-
     </ScrollView>
-
 </LinearLayout>

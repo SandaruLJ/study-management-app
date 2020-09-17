@@ -8,7 +8,7 @@
     tools:context=".Study.StudyCardFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/studyCard"
+        android:id="@+id/study_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
