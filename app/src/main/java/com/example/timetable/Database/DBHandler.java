@@ -48,6 +48,23 @@ public class DBHandler extends SQLiteOpenHelper {
                     SubjectMaster.Subjects.COLUMN_NAME_DESCRIPTION + " TEXT," +
                     SubjectMaster.Subjects.COLUMN_NAME_COLOUR + " INTEGER )";
 
+    private static final String SQL_CREATE_STUDY_ENTRIES =
+            "CREATE TABLE " + StudyMaster.Studies.TABLE_NAME + "("+
+                    StudyMaster.Studies._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    StudyMaster.Studies.COLUMN_NAME_STUDY_TITLE + " TEXT," +
+                    StudyMaster.Studies.COLUMN_NAME_SUBJECT + " INTEGER," +
+                    StudyMaster.Studies.COLUMN_NAME_COLOUR + " INTEGER," +
+                    StudyMaster.Studies.COLUMN_NAME_DATE + " TEXT," +
+                    StudyMaster.Studies.COLUMN_NAME_START + " TEXT," +
+                    StudyMaster.Studies.COLUMN_NAME_END + " TEXT," +
+                    StudyMaster.Studies.COLUMN_NAME_REPEAT + " TEXT," +
+                    StudyMaster.Studies.COLUMN_NAME_NOTE + " TEXT," +
+                    StudyMaster.Studies.COLUMN_NAME_REMINDER + " INTEGER," +
+                    StudyMaster.Studies.COLUMN_NAME_REMINDER_TIME + " TEXT," +
+                    "FOREIGN KEY(" + StudyMaster.Studies.COLUMN_NAME_SUBJECT + ") " +
+                    "REFERENCES " + SubjectMaster.Subjects.TABLE_NAME + "(" + SubjectMaster.Subjects._ID + ") " +
+                    "ON DELETE CASCADE)";
+
     public DBHandler(@Nullable Context context) {
 
         super(context, DATABASE_NAME, null, 3);
@@ -59,13 +76,14 @@ public class DBHandler extends SQLiteOpenHelper {
                 db.execSQL(SQL_CREATE_COURSE_ENTRIES);
                 db.execSQL(SQL_CREATE_CLASS_ENTRIES);
                 db.execSQL(SQL_CREATE_SUBJECT_ENTRIES);
-//        db.execSQL("DROP TABLE IF EXISTS "+ CourseMaster.Courses.TABLE_NAME);
+                db.execSQL(SQL_CREATE_STUDY_ENTRIES);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + CourseMaster.Courses.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + ClassMaster.Classes.TABLE_NAME_CLASS);
         db.execSQL("DROP TABLE IF EXISTS " + SubjectMaster.Subjects.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + StudyMaster.Studies.TABLE_NAME);
         onCreate(db);
     }
     public void create(){
@@ -152,7 +170,6 @@ public class DBHandler extends SQLiteOpenHelper {
     // CRUD operations for Subject
 
     public boolean addSubject(String subjectName, String teacherName, String subjectDesc, Integer colour) {
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -161,12 +178,12 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(SubjectMaster.Subjects.COLUMN_NAME_DESCRIPTION, subjectDesc);
         values.put(SubjectMaster.Subjects.COLUMN_NAME_COLOUR, colour);
 
-        long result = db.insert(SubjectMaster.Subjects.TABLE_NAME,null,values);
+        long result = db.insert(SubjectMaster.Subjects.TABLE_NAME, null, values);
 
         return result != -1;
     }
 
-    public boolean updateSubject(String id, String subjectName, String teacherName, String subjectDesc, Integer colour) {
+    public boolean updateSubject(String subjectId, String subjectName, String teacherName, String subjectDesc, Integer colour) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -175,23 +192,91 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(SubjectMaster.Subjects.COLUMN_NAME_DESCRIPTION, subjectDesc);
         values.put(SubjectMaster.Subjects.COLUMN_NAME_COLOUR, colour);
 
-        db.update(SubjectMaster.Subjects.TABLE_NAME, values, "_id = ?", new String[]{id});
+        db.update(SubjectMaster.Subjects.TABLE_NAME, values, "_id = ?", new String[]{subjectId});
 
         return true;
     }
 
-    public Cursor getAllSubjects(){
+    public Cursor getAllSubjects() {
         SQLiteDatabase db = getReadableDatabase();
-        return db.rawQuery("SELECT * FROM "+ SubjectMaster.Subjects.TABLE_NAME,null);
+        return db.rawQuery("SELECT * FROM "+ SubjectMaster.Subjects.TABLE_NAME, null);
     }
 
-    public Cursor getSingleSubject(int id) {
+    public Cursor getSingleSubject(int subjectId) {
         SQLiteDatabase db = getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + SubjectMaster.Subjects.TABLE_NAME + " WHERE "+ SubjectMaster.Subjects._ID + " = " + id, null);
+        return db.rawQuery("SELECT * FROM " + SubjectMaster.Subjects.TABLE_NAME + " WHERE "+
+                SubjectMaster.Subjects._ID + " = " + subjectId, null);
     }
 
-    public Integer deleteSubject(String id){
+    public Integer deleteSubject(String subjectId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(SubjectMaster.Subjects.TABLE_NAME, " _id = ? ", new String[]{id});
+        return db.delete(SubjectMaster.Subjects.TABLE_NAME, " _id = ? ", new String[]{subjectId});
+    }
+
+    // CRUD operations for Study
+
+    public boolean addStudy(String studyTitle, Integer subject, Integer colour, String date, String startTime,
+                            String endTime, String repeat, String note, Boolean reminderBool, String reminderTime) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        int reminder = reminderBool ? 1 : 0;  // Convert reminder toggle value from boolean to integer
+        reminderTime = reminderBool ? reminderTime : null;  // Set reminder time to null if reminder is not enabled
+
+        values.put(StudyMaster.Studies.COLUMN_NAME_STUDY_TITLE, studyTitle);
+        values.put(StudyMaster.Studies.COLUMN_NAME_SUBJECT, subject);
+        values.put(StudyMaster.Studies.COLUMN_NAME_COLOUR, colour);
+        values.put(StudyMaster.Studies.COLUMN_NAME_DATE, date);
+        values.put(StudyMaster.Studies.COLUMN_NAME_START, startTime);
+        values.put(StudyMaster.Studies.COLUMN_NAME_END, endTime);
+        values.put(StudyMaster.Studies.COLUMN_NAME_REPEAT, repeat);
+        values.put(StudyMaster.Studies.COLUMN_NAME_NOTE, note);
+        values.put(StudyMaster.Studies.COLUMN_NAME_REMINDER, reminder);
+        values.put(StudyMaster.Studies.COLUMN_NAME_REMINDER_TIME, reminderTime);
+
+        long result = db.insert(StudyMaster.Studies.TABLE_NAME, null, values);
+
+        return result != -1;
+    }
+
+    public boolean updateStudy(String studyId, String studyTitle, Integer subject, Integer colour, String date,
+                               String startTime, String endTime, String repeat, String note, Boolean reminderBool,
+                               String reminderTime) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        int reminder = reminderBool ? 1 : 0;  // Convert reminder toggle value from boolean to integer
+        reminderTime = reminderBool ? reminderTime : null;  // Set reminder time to null if reminder is not enabled
+
+        values.put(StudyMaster.Studies.COLUMN_NAME_STUDY_TITLE, studyTitle);
+        values.put(StudyMaster.Studies.COLUMN_NAME_SUBJECT, subject);
+        values.put(StudyMaster.Studies.COLUMN_NAME_COLOUR, colour);
+        values.put(StudyMaster.Studies.COLUMN_NAME_DATE, date);
+        values.put(StudyMaster.Studies.COLUMN_NAME_START, startTime);
+        values.put(StudyMaster.Studies.COLUMN_NAME_END, endTime);
+        values.put(StudyMaster.Studies.COLUMN_NAME_REPEAT, repeat);
+        values.put(StudyMaster.Studies.COLUMN_NAME_NOTE, note);
+        values.put(StudyMaster.Studies.COLUMN_NAME_REMINDER, reminder);
+        values.put(StudyMaster.Studies.COLUMN_NAME_REMINDER_TIME, reminderTime);
+
+        db.update(StudyMaster.Studies.TABLE_NAME, values, "_id = ?", new String[]{studyId});
+
+        return true;
+    }
+
+    public Cursor getAllStudies() {
+        SQLiteDatabase db = getReadableDatabase();
+        return db.rawQuery("SELECT * FROM "+ StudyMaster.Studies.TABLE_NAME, null);
+    }
+
+    public Cursor getSingleStudy(int studyId) {
+        SQLiteDatabase db = getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + StudyMaster.Studies.TABLE_NAME + " WHERE "+
+                StudyMaster.Studies._ID + " = " + studyId, null);
+    }
+
+    public Integer deleteStudy(String studyId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(SubjectMaster.Subjects.TABLE_NAME, " _id = ? ", new String[]{studyId});
     }
 }
