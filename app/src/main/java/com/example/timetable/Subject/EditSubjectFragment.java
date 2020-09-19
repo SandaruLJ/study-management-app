@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -31,12 +32,13 @@ public class EditSubjectFragment extends Fragment {
 
     DBHandler db;
     EditText subjectName, teacherName , subjectDesc;
+    Button subjectColour;
     int colour;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db = new DBHandler(getActivity().getApplicationContext());
+        db = new DBHandler(getActivity());
     }
     
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -44,26 +46,16 @@ public class EditSubjectFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_subject, container, false);
-        Button btn = view.findViewById(R.id.update_subject);
+
         int subjectId  = 0;
         Bundle bundle = this.getArguments();
-        final Button colourBtn = view.findViewById(R.id.colorbtn);
-        final Button bgBtn = view.findViewById(R.id.testbtn);
-        colourBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                ColorPicker cp = new ColorPicker() ;
-                cp.openColorPicker(getChildFragmentManager(),colourBtn, bgBtn);
-
-            }
-
-        });
 
         if (bundle != null) {
             subjectId = Integer.parseInt(bundle.get("id").toString());
         }
 
+
+        // Pre-fill form inputs with existing database values
         if (subjectId != 0) {
             String subjectNameTemp = null, teacherNameTemp = null, subjectDescTemp = null;
             Cursor c = db.getSingleSubject(subjectId);
@@ -78,13 +70,19 @@ public class EditSubjectFragment extends Fragment {
             subjectName = view.findViewById(R.id.subject_name);
             teacherName = view.findViewById(R.id.teacher_name);
             subjectDesc = view.findViewById(R.id.subject_desc);
+            subjectColour = view.findViewById(R.id.subject_colour);
 
             subjectName.setText(subjectNameTemp);
             teacherName.setText(teacherNameTemp);
             subjectDesc.setText(subjectDescTemp);
-            colourBtn.setBackgroundTintList(ColorStateList.valueOf(colour));
-            bgBtn.setBackgroundColor(colour);
+            subjectColour.setBackgroundColor(colour);
 
+            // Set Colour Button background tint
+            final Button colourBtn = view.findViewById(R.id.colorbtn);
+            colourBtn.setBackgroundTintList(ColorStateList.valueOf(colour));
+
+
+            // All Subjects Button
             ImageView allSubBtn = view.findViewById(R.id.all_subjects_btn);
 
             allSubBtn.setOnClickListener(new View.OnClickListener() {
@@ -92,31 +90,62 @@ public class EditSubjectFragment extends Fragment {
                 public void onClick(View view) {
                     AllSubjectsFragment fragment = new AllSubjectsFragment();
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                    activity.getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, fragment)
+                            .addToBackStack(null).commit();
                 }
             });
 
             final int finalId = subjectId;
 
-            btn.setOnClickListener(new View.OnClickListener() {
+
+            // Colour Button
+            colourBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ColorPicker cp = new ColorPicker() ;
+                    cp.openColorPicker(getChildFragmentManager(),colourBtn, subjectColour);
+                }
+            });
+
+            // Open colour picker if clicked anywhere on the surrounding layout
+            LinearLayout colourWrapper = (LinearLayout) view.findViewById(R.id.colour_wrapper);
+            colourWrapper.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    colourBtn.performClick();
+                }
+            });
+
+
+            // Submit Button
+            Button updateSubject = view.findViewById(R.id.update_subject);
+
+            updateSubject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // Validate inputs before updating the database
                     if (subjectName.getText().toString().equals("")) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Please enter a subject name", Toast.LENGTH_LONG).show();
-                    } else if (teacherName.getText().toString().equals("")) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Please enter a teacher's name", Toast.LENGTH_LONG).show();
-                    } else {
-                        boolean isInserted = db.updateSubject(String.valueOf(finalId), subjectName.getText().toString(), teacherName.getText().toString(), subjectDesc.getText().toString(), ((ColorDrawable) bgBtn.getBackground()).getColor());
+                        Toast.makeText(getActivity(), "Please enter a subject name", Toast.LENGTH_LONG).show();
+                    }
+                    else if (teacherName.getText().toString().equals("")) {
+                        Toast.makeText(getActivity(), "Please enter a teacher's name", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        boolean isInserted = db.updateSubject(String.valueOf(finalId), subjectName.getText().toString(),
+                                teacherName.getText().toString(), subjectDesc.getText().toString(),
+                                ((ColorDrawable) subjectColour.getBackground()).getColor());
 
                         if (isInserted) {
-                            Toast.makeText(getActivity().getApplicationContext(), "Updated Successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Updated Successfully", Toast.LENGTH_LONG).show();
                             AllSubjectsFragment fragment = new AllSubjectsFragment();
                             AppCompatActivity activity = (AppCompatActivity) view.getContext();
 
-                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                            activity.getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.fragment_container, fragment)
+                                    .addToBackStack(null).commit();
                         } else
-                            Toast.makeText(getActivity().getApplicationContext(), "Update Failed, Please Try again", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Update Failed, Please Try again", Toast.LENGTH_LONG).show();
                     }
                 }
             });

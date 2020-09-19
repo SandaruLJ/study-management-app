@@ -24,16 +24,18 @@ public class SubjectRecyclerViewAdapter extends RecyclerView.Adapter<SubjectRecy
     private static final String TAG = "Subject Recycler View";
     private ArrayList<Integer> subjectIds;
     private ArrayList<String> subjectNames;
-    private  ArrayList<String> teacherNames;
-    private  ArrayList<Integer> colours;
-    private Context mContext;
+    private ArrayList<String> teacherNames;
+    private ArrayList<Integer> subjectColours;
+    private Context context;
 
-    public SubjectRecyclerViewAdapter(ArrayList<Integer> subjectIds, ArrayList<String> subjectNames, ArrayList<String> teacherNames, ArrayList<Integer> colours, Context mContext) {
+    public SubjectRecyclerViewAdapter(ArrayList<Integer> subjectIds, ArrayList<String> subjectNames,
+                                      ArrayList<String> teacherNames, ArrayList<Integer> subjectColours,
+                                      Context context) {
         this.subjectIds = subjectIds;
         this.subjectNames = subjectNames;
         this.teacherNames = teacherNames;
-        this.colours = colours;
-        this.mContext = mContext;
+        this.subjectColours = subjectColours;
+        this.context = context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -56,8 +58,7 @@ public class SubjectRecyclerViewAdapter extends RecyclerView.Adapter<SubjectRecy
     @NonNull
     @Override
     public SubjectRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view =
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.subject_list, parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.subject_list, parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;
@@ -68,7 +69,7 @@ public class SubjectRecyclerViewAdapter extends RecyclerView.Adapter<SubjectRecy
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.subjectName.setText(subjectNames.get(position));
         holder.teacherName.setText(teacherNames.get(position));
-        holder.subjectColour.setBackgroundColor(colours.get(position));
+        holder.subjectColour.setBackgroundColor(subjectColours.get(position));
 
         holder.subjectCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +82,9 @@ public class SubjectRecyclerViewAdapter extends RecyclerView.Adapter<SubjectRecy
                 editSubject.setArguments(bundle);
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
 
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, editSubject).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, editSubject)
+                        .addToBackStack(null).commit();
             }
         });
     }
@@ -95,7 +98,8 @@ public class SubjectRecyclerViewAdapter extends RecyclerView.Adapter<SubjectRecy
         subjectIds.remove(position);
         subjectNames.remove(position);
         teacherNames.remove(position);
-        colours.remove(position);
+        subjectColours.remove(position);
+
         notifyItemRemoved(position);
     }
 

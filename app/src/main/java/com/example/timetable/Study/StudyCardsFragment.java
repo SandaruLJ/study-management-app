@@ -47,9 +47,11 @@ public class StudyCardsFragment extends Fragment {
         final Cursor c = db.getAllStudies();
 
         while (c.moveToNext()){
+            String subjectName = null;
+
             Cursor subject = db.getSingleSubject(c.getInt(2));  // Get corresponding subject
-            subject.moveToFirst();
-            String subjectName = subject.getString(1);  // Get subject name
+            if (subject.moveToFirst())
+                subjectName = subject.getString(1);  // Get subject name
 
             studyIds.add(c.getInt(0));
             studyTitles.add(c.getString(1));

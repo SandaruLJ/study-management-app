@@ -53,7 +53,7 @@ public class AddStudyFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db = new DBHandler(getActivity().getApplicationContext());
+        db = new DBHandler(getActivity());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -82,7 +82,9 @@ public class AddStudyFragment extends Fragment {
             public void onClick(View view) {
                 AllStudiesFragment fragment = new AllStudiesFragment();
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null).commit();
             }
         });
 
@@ -234,7 +236,7 @@ public class AddStudyFragment extends Fragment {
             public void onClick(View view) {
                 // Validate inputs before inserting to the database
                 if (studyTitle.getText().toString().equals("")) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Please enter a study title", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Please enter a study title", Toast.LENGTH_LONG).show();
                 }
                 else {
                     boolean isInserted = db.addStudy(studyTitle.getText().toString(), (int) subject.getSelectedItemId(),
@@ -243,12 +245,14 @@ public class AddStudyFragment extends Fragment {
                             studyNote.getText().toString(), reminder.isChecked(), reminderTime.getSelectedItem().toString());
 
                     if (isInserted) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Study added successfully", Toast.LENGTH_LONG).show();
-//                        AllSubjectsFragment fragment = new AllSubjectsFragment();
-//                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
-//                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                        Toast.makeText(getActivity(), "Study added successfully", Toast.LENGTH_LONG).show();
+                        AllStudiesFragment allStudiesFragment = new AllStudiesFragment();
+                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                        activity.getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, allStudiesFragment)
+                                .addToBackStack(null).commit();
                     } else
-                        Toast.makeText(getActivity().getApplicationContext(), "Insert failed, try again", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Insert failed, try again", Toast.LENGTH_LONG).show();
                 }
             }
         });

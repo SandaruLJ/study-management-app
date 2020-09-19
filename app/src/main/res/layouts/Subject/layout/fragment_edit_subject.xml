@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Subject.AddSubjectFragment"
     android:orientation="vertical"
-
     android:clipToPadding="false">
 
     <LinearLayout
@@ -21,10 +20,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:text="@string/subject_edit_title"
             android:textColor="@color/white"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <RelativeLayout
@@ -60,25 +59,21 @@
         android:paddingTop="15dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingBottom="0dp"
+        android:paddingBottom="0dp">
 
-        >
         <ImageView
-            android:id="@+id/subjectimg"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:src="@drawable/subject"
             android:alpha="0.8"
             android:tint="@color/lite_blue" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/subjectNameInput"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/subject_name_hint"
             app:hintTextAppearance="@style/floatinglabel">
-
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/subject_name"
@@ -86,16 +81,15 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:textSize="20sp" />
-
         </com.google.android.material.textfield.TextInputLayout>
-
     </LinearLayout>
-          <View
-              android:layout_width="match_parent"
-              android:layout_height="2dp"
-              android:background="@color/lightgrey"
-              android:layout_marginRight="10dp"
-              android:layout_marginLeft="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/lightgrey"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -104,25 +98,21 @@
         android:paddingTop="15dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingBottom="0dp"
+        android:paddingBottom="0dp">
 
-        >
         <ImageView
-            android:id="@+id/teacherimg"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:src="@drawable/teacher"
             android:alpha="0.8"
             android:tint="@color/lite_blue" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/teacherNameInput"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/teacher_name_hint"
             app:hintTextAppearance="@style/floatinglabel">
-
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/teacher_name"
@@ -130,16 +120,15 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:textSize="20sp" />
-
         </com.google.android.material.textfield.TextInputLayout>
-
     </LinearLayout>
-          <View
-              android:layout_width="match_parent"
-              android:layout_height="2dp"
-              android:background="@color/lightgrey"
-              android:layout_marginRight="10dp"
-              android:layout_marginLeft="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/lightgrey"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -148,14 +137,12 @@
         android:paddingTop="15dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingBottom="0dp"
+        android:paddingBottom="0dp">
 
-        >
         <ImageView
-            android:id="@+id/descriptionimg"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:src="@drawable/ic_baseline_note_add_24"
             android:alpha="0.8"
             android:tint="@color/lite_blue" />
@@ -168,7 +155,6 @@
             android:hint="@string/subject_description_hint"
             app:hintTextAppearance="@style/floatinglabel">
 
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/subject_desc"
                 android:layout_width="match_parent"
@@ -176,18 +162,18 @@
                 android:background="@null"
                 android:inputType="textMultiLine"
                 android:textSize="20sp" />
-
         </com.google.android.material.textfield.TextInputLayout>
-
     </LinearLayout>
-          <View
-              android:layout_width="match_parent"
-              android:layout_height="2dp"
-              android:background="@color/lightgrey"
-              android:layout_marginRight="10dp"
-              android:layout_marginLeft="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/lightgrey"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp" />
 
     <LinearLayout
+        android:id="@+id/colour_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -195,23 +181,23 @@
         android:paddingBottom="0dp"
         android:paddingRight="20dp"
         android:paddingLeft="20dp">
+
         <ImageView
-            android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="18dp"
-
             android:src="@drawable/color"
             android:alpha="0.8"
             android:tint="@color/lite_blue"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginVertical="8dp"
                 android:text="@string/subject_colour_label"
                 android:textColor="#A8A7A7"
@@ -223,35 +209,31 @@
                 android:layout_height="wrap_content"
                 android:text="@string/subject_colour_hint"
                 android:gravity="bottom"
-                android:layout_marginVertical="30dp"
-               />
+                android:layout_marginVertical="30dp" />
+
             <Button
                 android:id="@+id/colorbtn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/choosecolor"
                 android:backgroundTint="@color/col2"
-                android:gravity="right"/>
+                android:gravity="end"/>
+
             <Button
-                android:id="@+id/testbtn"
+                android:id="@+id/subject_colour"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@color/col2"
                 android:visibility="invisible"
-                android:gravity="right"/>
+                android:gravity="end"/>
         </RelativeLayout>
-
     </LinearLayout>
-
-
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -271,12 +253,9 @@
             android:layout_gravity="center"
             android:background="@drawable/save_btn"
             android:textStyle="bold"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textColor="@color/white"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"/>
+            android:paddingRight="20dp" />
     </LinearLayout>
-
-
-
 </LinearLayout>

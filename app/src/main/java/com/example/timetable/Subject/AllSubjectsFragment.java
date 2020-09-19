@@ -1,6 +1,5 @@
 package com.example.timetable.Subject;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -33,23 +32,18 @@ public class AllSubjectsFragment extends Fragment {
     DBHandler db;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        db = new DBHandler(getActivity());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_subjects, container, false);
 
-        final ArrayList<Integer> subjectIds = new ArrayList<>();
-        final ArrayList<String> subjectNames = new ArrayList<>();
-        final ArrayList<String> teacherNames = new ArrayList<>();
-        final ArrayList<Integer> colours = new ArrayList<>();
-        final Cursor c = db.getAllSubjects();
 
-        while (c.moveToNext()){
-            subjectIds.add(c.getInt(0));
-            subjectNames.add(c.getString(1));
-            teacherNames.add(c.getString(2));
-            colours.add(c.getInt(4));
-        }
-
+        // Add Subject Button
         ImageView addSubjectBtn = view.findViewById(R.id.add_subject_btn);
 
         addSubjectBtn.setOnClickListener(new View.OnClickListener() {
@@ -57,37 +51,51 @@ public class AllSubjectsFragment extends Fragment {
             public void onClick(View view) {
                 AddSubjectFragment fragment = new AddSubjectFragment();
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                activity.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null).commit();
             }
         });
 
-        RecyclerView recyclerView = view.findViewById(R.id.subject_recycler_view);
-        final SubjectRecyclerViewAdapter adapter = new SubjectRecyclerViewAdapter(subjectIds, subjectNames, teacherNames, colours, getActivity());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        itemTouchHelper(adapter, subjectIds, recyclerView, getActivity().getApplicationContext());
+
+        // Subject List
+        final ArrayList<Integer> subjectIds = new ArrayList<>();
+        final ArrayList<String> subjectNames = new ArrayList<>();
+        final ArrayList<String> teacherNames = new ArrayList<>();
+        final ArrayList<Integer> subjectColours = new ArrayList<>();
+        final Cursor c = db.getAllSubjects();
+
+        while (c.moveToNext()){
+            subjectIds.add(c.getInt(0));
+            subjectNames.add(c.getString(1));
+            teacherNames.add(c.getString(2));
+            subjectColours.add(c.getInt(4));
+        }
+
+        RecyclerView subjectRecyclerView = view.findViewById(R.id.subject_recycler_view);
+        final SubjectRecyclerViewAdapter subjectAdapter = new SubjectRecyclerViewAdapter(subjectIds,
+                subjectNames, teacherNames, subjectColours, getActivity());
+        subjectRecyclerView.setAdapter(subjectAdapter);
+        subjectRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        itemTouchHelper(subjectAdapter, subjectIds, subjectRecyclerView);
 
         return view;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        db = new DBHandler(getActivity().getApplicationContext());
-    }
-    
-    public void itemTouchHelper(final SubjectRecyclerViewAdapter adapter, final ArrayList<Integer> subjectIds, final RecyclerView recyclerView, final Context context){
-
-        final ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+    public void itemTouchHelper(final SubjectRecyclerViewAdapter adapter, final ArrayList<Integer> subjectIds,
+                                final RecyclerView recyclerView){
+        final ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper
+                .SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                                  RecyclerView.ViewHolder target) {
                 return true;
             }
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                // Row is swiped from recycler view
-                // remove it from adapter
+                // When the row is swiped, remove the item from adapter
                 db.deleteSubject(String.valueOf(subjectIds.get(viewHolder.getAdapterPosition())));
                 adapter.removeItem(viewHolder.getAdapterPosition());
             }
@@ -109,15 +117,19 @@ public class AllSubjectsFragment extends Fragment {
             }
 
             @Override
-            public void onChildDrawOver(@NonNull Canvas c, @NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            public void onChildDrawOver(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
+                                        RecyclerView.ViewHolder viewHolder, float dX, float dY,
+                                        int actionState, boolean isCurrentlyActive) {
                 super.onChildDrawOver(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
                 final View foregroundView = ((SubjectRecyclerViewAdapter.ViewHolder) viewHolder).subjectCard;
+
                 getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY,
                         actionState, isCurrentlyActive);
             }
 
             @Override
-            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                                    float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 // Show the background view
                 final View foregroundView = ((SubjectRecyclerViewAdapter.ViewHolder) viewHolder).subjectCard;
                 getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY,
