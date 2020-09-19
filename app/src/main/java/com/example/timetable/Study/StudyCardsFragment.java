@@ -1,9 +1,13 @@
 package com.example.timetable.Study;
 
 import android.database.Cursor;
+import android.graphics.Canvas;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +18,7 @@ import android.view.ViewGroup;
 
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
+import com.example.timetable.Subject.SubjectRecyclerViewAdapter;
 
 import java.util.ArrayList;
 
@@ -68,6 +73,71 @@ public class StudyCardsFragment extends Fragment {
         studyRecyclerView.setAdapter(studyAdapter);
         studyRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        itemTouchHelper(studyAdapter, studyIds, studyRecyclerView);
+
         return view;
+    }
+
+    public void itemTouchHelper(final StudyRecyclerViewAdapter adapter, final ArrayList<Integer> studyIds,
+                                final RecyclerView recyclerView){
+        final ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper
+                .SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                                  RecyclerView.ViewHolder target) {
+                return true;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                // When the row is swiped, remove the item from adapter
+                db.deleteStudy(String.valueOf(studyIds.get(viewHolder.getAdapterPosition())));
+                adapter.removeItem(viewHolder.getAdapterPosition());
+            }
+
+            @Override
+            public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
+                super.onSelectedChanged(viewHolder, actionState);
+                if (viewHolder != null) {
+                    final View foregroundView = ((StudyRecyclerViewAdapter.ViewHolder) viewHolder).studyCard;
+                    getDefaultUIUtil().onSelected(foregroundView);
+                }
+            }
+
+            @Override
+            public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+                super.clearView(recyclerView, viewHolder);
+                final View foregroundView = ((StudyRecyclerViewAdapter.ViewHolder) viewHolder).studyCard;
+                getDefaultUIUtil().clearView(foregroundView);
+            }
+
+            @Override
+            public void onChildDrawOver(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
+                                        RecyclerView.ViewHolder viewHolder, float dX, float dY,
+                                        int actionState, boolean isCurrentlyActive) {
+                super.onChildDrawOver(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                final View foregroundView = ((StudyRecyclerViewAdapter.ViewHolder) viewHolder).studyCard;
+
+                getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY,
+                        actionState, isCurrentlyActive);
+            }
+
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                                    float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                // Show the background view
+                final View foregroundView = ((StudyRecyclerViewAdapter.ViewHolder) viewHolder).studyCard;
+                getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY,
+                        actionState, isCurrentlyActive);
+            }
+
+            @Override
+            public int convertToAbsoluteDirection(int flags, int layoutDirection) {
+                return super.convertToAbsoluteDirection(flags, layoutDirection);
+            }
+        };
+
+        // Attach touch helper to recycler view
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
     }
 }
