@@ -1,6 +1,7 @@
 package com.example.timetable.Study;
 
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -72,6 +73,8 @@ public class AddStudyFragment extends Fragment {
         reminder = (SwitchCompat) view.findViewById(R.id.reminder);
         reminderTime = (Spinner) view.findViewById(R.id.reminder_time);
 
+
+        // All Studies Button
         ImageView allStudiesBtn = view.findViewById(R.id.all_studies_btn);
 
         allStudiesBtn.setOnClickListener(new View.OnClickListener() {
@@ -233,20 +236,20 @@ public class AddStudyFragment extends Fragment {
                 if (studyTitle.getText().toString().equals("")) {
                     Toast.makeText(getActivity().getApplicationContext(), "Please enter a study title", Toast.LENGTH_LONG).show();
                 }
-//                else {
-//                    boolean isInserted = db.addStudy(studyTitle.getText().toString(), (int) subject.getSelectedItemId(),
-//                            ((ColorDrawable) studyColour.getBackground()).getColor(), studyDate.getText().toString(),
-//                            studyStart.getText().toString(), studyEnd.getText().toString(), repeat.getSelectedItem().toString(),
-//                            studyNote.getText().toString(), reminder.isChecked(), reminderTime.getSelectedItem().toString());
-//
-//                    if (isInserted) {
-//                        Toast.makeText(getActivity().getApplicationContext(), "Study added successfully", Toast.LENGTH_LONG).show();
-////                        AllSubjectsFragment fragment = new AllSubjectsFragment();
-////                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
-////                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-//                    } else
-//                        Toast.makeText(getActivity().getApplicationContext(), "Insert failed, try again", Toast.LENGTH_LONG).show();
-//                }
+                else {
+                    boolean isInserted = db.addStudy(studyTitle.getText().toString(), (int) subject.getSelectedItemId(),
+                            ((ColorDrawable) studyColour.getBackground()).getColor(), studyDate.getText().toString(),
+                            studyStart.getText().toString(), studyEnd.getText().toString(), repeat.getSelectedItem().toString(),
+                            studyNote.getText().toString(), reminder.isChecked(), reminderTime.getSelectedItem().toString());
+
+                    if (isInserted) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Study added successfully", Toast.LENGTH_LONG).show();
+//                        AllSubjectsFragment fragment = new AllSubjectsFragment();
+//                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                    } else
+                        Toast.makeText(getActivity().getApplicationContext(), "Insert failed, try again", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
