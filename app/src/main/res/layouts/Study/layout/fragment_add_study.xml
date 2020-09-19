@@ -98,39 +98,7 @@
                 android:layout_height="2dp"
                 android:background="@color/lightgrey"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:minHeight="60dp"-->
-<!--        android:paddingTop="15dp"-->
-<!--        android:paddingLeft="20dp"-->
-<!--        android:paddingRight="20dp"-->
-<!--        android:paddingBottom="0dp">-->
-<!--        <ImageView-->
-<!--            android:id="@+id/subjectimg"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:layout_marginRight="20dp"-->
-<!--            android:src="@drawable/subject"-->
-
-<!--            android:alpha="0.8"-->
-<!--            android:tint="@color/lite_blue" />-->
-
-
-
-<!--        <Spinner-->
-<!--            android:id="@+id/subjectInput"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:entries="@array/subjects"-->
-<!--            android:spinnerMode="dialog"/>-->
-
-<!--    </LinearLayout>-->
+                android:layout_marginLeft="10dp" />
 
             <LinearLayout
                 android:id="@+id/subject_wrapper"
@@ -159,7 +127,7 @@
                     android:paddingEnd="20dp"
                     android:layout_marginTop="2dp"
                     android:hint="@string/subject_label"
-                    app:hintTextAppearance="@style/floatinglabel"/>
+                    app:hintTextAppearance="@style/floatinglabel" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -172,7 +140,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="3dp"
                         android:entries="@array/subjects"
-                        android:spinnerMode="dialog"/>
+                        android:spinnerMode="dialog" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -181,7 +149,7 @@
                 android:layout_height="2dp"
                 android:background="@color/lightgrey"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp" />
 
             <LinearLayout
                 android:id="@+id/colour_wrapper"
@@ -201,7 +169,7 @@
                     android:layout_marginEnd="20dp"
                     android:src="@drawable/color"
                     android:alpha="0.8"
-                    android:tint="@color/lite_blue"/>
+                    android:tint="@color/lite_blue" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -214,7 +182,7 @@
                         android:paddingEnd="20dp"
                         android:paddingBottom="20dp"
                         android:hint="Color"
-                        android:textSize="20sp"/>
+                        android:textSize="20sp" />
 
                     <Button
                         android:id="@+id/colorbtn"
@@ -225,7 +193,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/choosecolor"
                         android:backgroundTint="@color/col2"
-                        android:gravity="right"/>
+                        android:gravity="end" />
 
                     <Button
                         android:id="@+id/study_colour"
@@ -236,7 +204,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@color/col2"
                         android:visibility="invisible"
-                        android:gravity="right"/>
+                        android:gravity="end" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -245,7 +213,7 @@
                 android:layout_height="2dp"
                 android:background="@color/lightgrey"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp" />
 
             <LinearLayout
                 android:id="@+id/study_date_picker"
@@ -266,7 +234,7 @@
                     android:paddingBottom="15dp"
                     android:src="@drawable/today"
                     android:alpha="0.8"
-                    android:tint="@color/lite_blue"/>
+                    android:tint="@color/lite_blue" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -289,7 +257,7 @@
                         android:paddingTop="5dp"
                         android:paddingEnd="20dp"
                         android:paddingBottom="20dp"
-                        android:text="1/1/2000"
+                        android:text="@string/_13_8_2020"
                         android:textFontWeight="600"
                         android:layout_alignParentEnd="true"
                         android:textSize="20sp" />
@@ -301,7 +269,7 @@
                 android:layout_height="2dp"
                 android:background="@color/lightgrey"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -322,7 +290,7 @@
                     android:paddingBottom="15dp"
                     android:src="@drawable/alarm"
                     android:alpha="0.8"
-                    android:tint="@color/lite_blue"/>
+                    android:tint="@color/lite_blue" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -357,7 +325,7 @@
                 android:layout_height="2dp"
                 android:background="@color/lightgrey"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp" />
 
             <LinearLayout
                 android:id="@+id/study_end_time_picker"
@@ -378,7 +346,7 @@
                     android:paddingBottom="15dp"
                     android:src="@drawable/alarm"
                     android:alpha="0.8"
-                    android:tint="@color/lite_blue"/>
+                    android:tint="@color/lite_blue" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -413,7 +381,7 @@
                 android:layout_height="2dp"
                 android:background="@color/lightgrey"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp" />
 
             <LinearLayout
                 android:id="@+id/repeat_wrapper"
@@ -442,7 +410,7 @@
                     android:paddingEnd="20dp"
                     android:layout_marginTop="2dp"
                     android:hint="@string/repeat"
-                    app:hintTextAppearance="@style/floatinglabel"/>
+                    app:hintTextAppearance="@style/floatinglabel" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -482,7 +450,7 @@
                     android:paddingTop="10dp"
                     android:src="@drawable/ic_baseline_note_add_24"
                     android:alpha="0.8"
-                    android:tint="@color/lite_blue"/>
+                    android:tint="@color/lite_blue" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -495,7 +463,7 @@
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp"
                         android:hint="Note"
-                        android:textSize="20sp"/>
+                        android:textSize="20sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -541,7 +509,7 @@
                     android:paddingBottom="15dp"
                     android:src="@drawable/reminder"
                     android:alpha="0.8"
-                    android:tint="@color/lite_blue"/>
+                    android:tint="@color/lite_blue" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -595,7 +563,7 @@
                     android:paddingEnd="20dp"
                     android:layout_marginTop="2dp"
                     android:hint="@string/time_before_reminder_label"
-                    app:hintTextAppearance="@style/floatinglabel"/>
+                    app:hintTextAppearance="@style/floatinglabel" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -608,8 +576,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="3dp"
                         android:entries="@array/times"
-                        android:spinnerMode="dialog"
-                        />
+                        android:spinnerMode="dialog" />
                 </RelativeLayout>
             </LinearLayout>
 

@@ -31,9 +31,9 @@ import com.example.timetable.R;
 public class EditSubjectFragment extends Fragment {
 
     DBHandler db;
+    Integer subjectId;
     EditText subjectName, teacherName , subjectDesc;
     Button subjectColour;
-    int colour;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,24 +47,24 @@ public class EditSubjectFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_subject, container, false);
 
-        int subjectId  = 0;
+        subjectId  = 0;
         Bundle bundle = this.getArguments();
 
         if (bundle != null) {
             subjectId = Integer.parseInt(bundle.get("id").toString());
         }
 
-
-        // Pre-fill form inputs with existing database values
         if (subjectId != 0) {
             String subjectNameTemp = null, teacherNameTemp = null, subjectDescTemp = null;
+            int subjectColourTemp = 0;
+
             Cursor c = db.getSingleSubject(subjectId);
 
             while (c.moveToNext()){
                 subjectNameTemp = c.getString(1);
                 teacherNameTemp = c.getString(2);
                 subjectDescTemp = c.getString(3);
-                colour = c.getInt(4);
+                subjectColourTemp = c.getInt(4);
             }
 
             subjectName = view.findViewById(R.id.subject_name);
@@ -72,14 +72,16 @@ public class EditSubjectFragment extends Fragment {
             subjectDesc = view.findViewById(R.id.subject_desc);
             subjectColour = view.findViewById(R.id.subject_colour);
 
+
+            // Pre-fill form inputs with existing database values
             subjectName.setText(subjectNameTemp);
             teacherName.setText(teacherNameTemp);
             subjectDesc.setText(subjectDescTemp);
-            subjectColour.setBackgroundColor(colour);
+            subjectColour.setBackgroundColor(subjectColourTemp);
 
             // Set Colour Button background tint
             final Button colourBtn = view.findViewById(R.id.colorbtn);
-            colourBtn.setBackgroundTintList(ColorStateList.valueOf(colour));
+            colourBtn.setBackgroundTintList(ColorStateList.valueOf(subjectColourTemp));
 
 
             // All Subjects Button
@@ -95,8 +97,6 @@ public class EditSubjectFragment extends Fragment {
                             .addToBackStack(null).commit();
                 }
             });
-
-            final int finalId = subjectId;
 
 
             // Colour Button
@@ -132,7 +132,7 @@ public class EditSubjectFragment extends Fragment {
                         Toast.makeText(getActivity(), "Please enter a teacher's name", Toast.LENGTH_LONG).show();
                     }
                     else {
-                        boolean isInserted = db.updateSubject(String.valueOf(finalId), subjectName.getText().toString(),
+                        boolean isInserted = db.updateSubject(String.valueOf(subjectId), subjectName.getText().toString(),
                                 teacherName.getText().toString(), subjectDesc.getText().toString(),
                                 ((ColorDrawable) subjectColour.getBackground()).getColor());
 
