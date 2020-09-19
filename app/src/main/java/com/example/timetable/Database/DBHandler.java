@@ -277,6 +277,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public Integer deleteStudy(String studyId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(SubjectMaster.Subjects.TABLE_NAME, " _id = ? ", new String[]{studyId});
+        return db.delete(StudyMaster.Studies.TABLE_NAME, " _id = ? ", new String[]{studyId});
     }
 }
