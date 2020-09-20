@@ -241,12 +241,13 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/study_date_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:hint="@string/select_a_date"
                         android:paddingTop="5dp"
                         android:paddingEnd="20dp"
                         android:paddingBottom="20dp"
-                        android:hint="Select a Date"
                         android:textSize="20sp" />
 
                     <TextView
@@ -261,6 +262,16 @@
                         android:textFontWeight="600"
                         android:layout_alignParentEnd="true"
                         android:textSize="20sp" />
+
+                    <Spinner
+                        android:id="@+id/study_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="8dp"
+                        android:entries="@array/days"
+                        android:spinnerMode="dialog"
+                        android:visibility="gone" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -470,7 +481,7 @@
                         android:layout_height="wrap_content"
                         android:minHeight="150dp"
                         android:background="@drawable/note_border"
-                        app:hintTextAppearance="@style/floatinglabel" >
+                        app:hintTextAppearance="@style/floatinglabel">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/study_note"

@@ -3,12 +3,14 @@ package com.example.timetable.Study;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -50,7 +52,7 @@ public class EditStudyFragment extends Fragment {
     EditText studyTitle, studyNote;
     Button studyColour;
     TextView studyDate, studyStart, studyEnd;
-    Spinner subject, repeat, reminderTime;
+    Spinner subject, studyDay, repeat, reminderTime;
     SwitchCompat reminder;
     Context context;
 
@@ -98,6 +100,7 @@ public class EditStudyFragment extends Fragment {
             subject = (Spinner) view.findViewById(R.id.subject);
             studyColour = view.findViewById(R.id.study_colour);
             studyDate = (TextView) view.findViewById(R.id.study_date);
+            studyDay = (Spinner) view.findViewById(R.id.study_day);
             studyStart = (TextView) view.findViewById(R.id.study_start);
             studyEnd = (TextView) view.findViewById(R.id.study_end);
             repeat = (Spinner) view.findViewById(R.id.repeat);
@@ -195,16 +198,30 @@ public class EditStudyFragment extends Fragment {
 
 
             // Date Picker
-            LinearLayout studyDatePicker = (LinearLayout) view.findViewById(R.id.study_date_picker);
+            final LinearLayout studyDatePicker = (LinearLayout) view.findViewById(R.id.study_date_picker);
 
             studyDatePicker.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Pass the TextView in order to set the value for the text
-                    DialogFragment selectDateFragment = new SelectDateFragment(studyDate);
-                    selectDateFragment.show(getFragmentManager(), "DatePicker");
+                    if (studyDay.getVisibility() == View.VISIBLE)
+                        studyDay.performClick();
+                    else {
+                        // Pass the TextView in order to set the value for the text
+                        DialogFragment selectDateFragment = new SelectDateFragment(studyDate);
+                        selectDateFragment.show(getFragmentManager(), "DatePicker");
+                    }
                 }
             });
+
+            // Set selected day if study is repeated weekly
+            if (repeatTemp.equalsIgnoreCase("weekly")) {
+                ArrayAdapter<CharSequence> dayAdapter = ArrayAdapter
+                        .createFromResource(context, R.array.days, android.R.layout.simple_spinner_item);
+                dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                studyDay.setAdapter(dayAdapter);
+                studyDay.setSelection(dayAdapter.getPosition(studyDateTemp));
+            }
 
 
             // Start Time Picker
@@ -238,6 +255,49 @@ public class EditStudyFragment extends Fragment {
 
             repeat.setAdapter(repeatAdapter);
             repeat.setSelection(repeatAdapter.getPosition(repeatTemp));
+
+            final TextView studyDateLabel = (TextView) view.findViewById(R.id.study_date_label);
+
+            repeat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    String selectedOption = repeat.getSelectedItem().toString();
+                    String studyDateText = studyDate.getText().toString();
+
+                    if (selectedOption.equalsIgnoreCase("daily")) {
+                        studyDateLabel.setHint(R.string.select_a_day);
+                        studyDay.setVisibility(View.GONE);
+                        studyDate.setVisibility(View.VISIBLE);
+                        studyDate.setText(R.string.everyday);
+                        studyDate.setTextColor(Color.LTGRAY);
+                        studyDatePicker.setClickable(false);
+                        studyDatePicker.setFocusable(false);
+                    }
+                    else if (selectedOption.equalsIgnoreCase("weekly")) {
+                        studyDateLabel.setHint(R.string.select_a_day);
+                        studyDate.setVisibility(View.GONE);
+                        studyDay.setVisibility(View.VISIBLE);
+                        studyDatePicker.setClickable(true);
+                        studyDatePicker.setFocusable(true);
+                    }
+                    else {
+                        studyDateLabel.setHint(R.string.select_a_date);
+                        studyDay.setVisibility(View.GONE);
+                        studyDate.setVisibility(View.VISIBLE);
+                        if (!studyDateText.contains("/"))
+                            studyDate.setText(new SimpleDateFormat("d/M/yyyy", Locale.US)
+                                    .format(Calendar.getInstance().getTime()));
+                        studyDate.setTextColor(Color.GRAY);
+                        studyDatePicker.setClickable(true);
+                        studyDatePicker.setFocusable(true);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
 
             // Open repeat options selector if clicked anywhere on the surrounding layout
             LinearLayout repeatWrapper = (LinearLayout) view.findViewById(R.id.repeat_wrapper);
@@ -318,8 +378,15 @@ public class EditStudyFragment extends Fragment {
                         Toast.makeText(getActivity(), "Please enter a study title", Toast.LENGTH_LONG).show();
                     }
                     else {
+                        // Determine whether study day or date to be inserted
+                        String studyDayDate = null;
+                        if (repeat.getSelectedItem().toString().equalsIgnoreCase("weekly"))
+                            studyDayDate = studyDay.getSelectedItem().toString();
+                        else
+                            studyDayDate = studyDate.getText().toString();
+
                         boolean isInserted = db.updateStudy(String.valueOf(studyId), studyTitle.getText().toString(), (int) subject.getSelectedItemId(),
-                                ((ColorDrawable) studyColour.getBackground()).getColor(), studyDate.getText().toString(),
+                                ((ColorDrawable) studyColour.getBackground()).getColor(), studyDayDate,
                                 studyStart.getText().toString(), studyEnd.getText().toString(), repeat.getSelectedItem().toString(),
                                 studyNote.getText().toString(), reminder.isChecked(), reminderTime.getSelectedItem().toString());
 
