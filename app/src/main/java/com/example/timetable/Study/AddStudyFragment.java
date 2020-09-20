@@ -64,17 +64,17 @@ public class AddStudyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_study, container, false);
 
-        studyTitle = (EditText) view.findViewById(R.id.study_title);
-        subject = (Spinner) view.findViewById(R.id.subject);
+        studyTitle = view.findViewById(R.id.study_title);
+        subject = view.findViewById(R.id.subject);
         studyColour = view.findViewById(R.id.study_colour);
-        studyDate = (TextView) view.findViewById(R.id.study_date);
-        studyDay = (Spinner) view.findViewById(R.id.study_day);
-        studyStart = (TextView) view.findViewById(R.id.study_start);
-        studyEnd = (TextView) view.findViewById(R.id.study_end);
-        repeat = (Spinner) view.findViewById(R.id.repeat);
-        studyNote = (EditText) view.findViewById(R.id.study_note);
-        reminder = (SwitchCompat) view.findViewById(R.id.reminder);
-        reminderTime = (Spinner) view.findViewById(R.id.reminder_time);
+        studyDate = view.findViewById(R.id.study_date);
+        studyDay = view.findViewById(R.id.study_day);
+        studyStart = view.findViewById(R.id.study_start);
+        studyEnd = view.findViewById(R.id.study_end);
+        repeat = view.findViewById(R.id.repeat);
+        studyNote = view.findViewById(R.id.study_note);
+        reminder = view.findViewById(R.id.reminder);
+        reminderTime = view.findViewById(R.id.reminder_time);
 
 
         // All Studies Button
@@ -105,7 +105,7 @@ public class AddStudyFragment extends Fragment {
         subject.setAdapter(cursorAdapter);
 
         // Open subject selector if clicked anywhere on the surrounding layout
-        LinearLayout subjectWrapper = (LinearLayout) view.findViewById(R.id.subject_wrapper);
+        LinearLayout subjectWrapper = view.findViewById(R.id.subject_wrapper);
         subjectWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +125,7 @@ public class AddStudyFragment extends Fragment {
         });
 
         // Open colour picker if clicked anywhere on the surrounding layout
-        LinearLayout colourWrapper = (LinearLayout) view.findViewById(R.id.colour_wrapper);
+        LinearLayout colourWrapper = view.findViewById(R.id.colour_wrapper);
         colourWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,7 +135,7 @@ public class AddStudyFragment extends Fragment {
 
 
         // Date Picker
-        final LinearLayout studyDatePicker = (LinearLayout) view.findViewById(R.id.study_date_picker);
+        final LinearLayout studyDatePicker = view.findViewById(R.id.study_date_picker);
 
         // Set current date as default
         final String today = new SimpleDateFormat("d/M/yyyy", Locale.US)
@@ -157,7 +157,7 @@ public class AddStudyFragment extends Fragment {
 
 
         // Start Time Picker
-        LinearLayout studyStartTimePicker = (LinearLayout) view.findViewById(R.id.study_start_time_picker);
+        LinearLayout studyStartTimePicker = view.findViewById(R.id.study_start_time_picker);
 
         studyStartTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,7 +169,7 @@ public class AddStudyFragment extends Fragment {
 
 
         // End Time Picker
-        LinearLayout studyEndTimePicker = (LinearLayout) view.findViewById(R.id.study_end_time_picker);
+        LinearLayout studyEndTimePicker = view.findViewById(R.id.study_end_time_picker);
 
         studyEndTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,7 +181,7 @@ public class AddStudyFragment extends Fragment {
 
 
         // Repeat Options Selector
-        final TextView studyDateLabel = (TextView) view.findViewById(R.id.study_date_label);
+        final TextView studyDateLabel = view.findViewById(R.id.study_date_label);
 
         repeat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -222,7 +222,7 @@ public class AddStudyFragment extends Fragment {
         });
 
         // Open repeat options selector if clicked anywhere on the surrounding layout
-        LinearLayout repeatWrapper = (LinearLayout) view.findViewById(R.id.repeat_wrapper);
+        LinearLayout repeatWrapper = view.findViewById(R.id.repeat_wrapper);
         repeatWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -235,7 +235,7 @@ public class AddStudyFragment extends Fragment {
         reminderTime.setEnabled(false);  // Set initial state of reminder time selector as disabled
 
         // Open reminder time selector if clicked anywhere on the surrounding layout
-        final LinearLayout reminderTimeWrapper = (LinearLayout) view.findViewById(R.id.reminder_time_wrapper);
+        final LinearLayout reminderTimeWrapper = view.findViewById(R.id.reminder_time_wrapper);
 
         reminderTimeWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -269,7 +269,7 @@ public class AddStudyFragment extends Fragment {
         });
 
         // Toggle reminder if clicked anywhere on the surrounding layout
-        LinearLayout reminderWrapper = (LinearLayout) view.findViewById(R.id.reminder_wrapper);
+        LinearLayout reminderWrapper = view.findViewById(R.id.reminder_wrapper);
         reminderWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -284,33 +284,33 @@ public class AddStudyFragment extends Fragment {
         addStudyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Validate inputs before inserting to the database
-                if (studyTitle.getText().toString().equals("")) {
-                    Toast.makeText(getActivity(), "Please enter a study title", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    // Determine whether study day or date to be inserted
-                    String studyDayDate = null;
-                    if (repeat.getSelectedItem().toString().equalsIgnoreCase("weekly"))
-                        studyDayDate = studyDay.getSelectedItem().toString();
-                    else
-                        studyDayDate = studyDate.getText().toString();
+            // Validate inputs before inserting to the database
+            if (studyTitle.getText().toString().equals("")) {
+                Toast.makeText(getActivity(), "Please enter a study title", Toast.LENGTH_LONG).show();
+            }
+            else {
+                // Determine whether study day or date to be inserted
+                String studyDayDate;
+                if (repeat.getSelectedItem().toString().equalsIgnoreCase("weekly"))
+                    studyDayDate = studyDay.getSelectedItem().toString();
+                else
+                    studyDayDate = studyDate.getText().toString();
 
-                    boolean isInserted = db.addStudy(studyTitle.getText().toString(), (int) subject.getSelectedItemId(),
-                            ((ColorDrawable) studyColour.getBackground()).getColor(), studyDayDate,
-                            studyStart.getText().toString(), studyEnd.getText().toString(), repeat.getSelectedItem().toString(),
-                            studyNote.getText().toString(), reminder.isChecked(), reminderTime.getSelectedItem().toString());
+                boolean isInserted = db.addStudy(studyTitle.getText().toString(), (int) subject.getSelectedItemId(),
+                        ((ColorDrawable) studyColour.getBackground()).getColor(), studyDayDate,
+                        studyStart.getText().toString(), studyEnd.getText().toString(), repeat.getSelectedItem().toString(),
+                        studyNote.getText().toString(), reminder.isChecked(), reminderTime.getSelectedItem().toString());
 
-                    if (isInserted) {
-                        Toast.makeText(getActivity(), "Study added successfully", Toast.LENGTH_LONG).show();
-                        AllStudiesFragment allStudiesFragment = new AllStudiesFragment();
-                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                        activity.getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragment_container, allStudiesFragment)
-                                .addToBackStack(null).commit();
-                    } else
-                        Toast.makeText(getActivity(), "Insert failed, try again", Toast.LENGTH_LONG).show();
-                }
+                if (isInserted) {
+                    Toast.makeText(getActivity(), "Study added successfully", Toast.LENGTH_LONG).show();
+                    AllStudiesFragment allStudiesFragment = new AllStudiesFragment();
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, allStudiesFragment)
+                            .addToBackStack(null).commit();
+                } else
+                    Toast.makeText(getActivity(), "Insert failed, try again", Toast.LENGTH_LONG).show();
+            }
             }
         });
 

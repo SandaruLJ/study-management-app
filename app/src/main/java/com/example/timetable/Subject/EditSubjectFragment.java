@@ -124,7 +124,7 @@ public class EditSubjectFragment extends Fragment {
             });
 
             // Open colour picker if clicked anywhere on the surrounding layout
-            LinearLayout colourWrapper = (LinearLayout) view.findViewById(R.id.colour_wrapper);
+            LinearLayout colourWrapper = view.findViewById(R.id.colour_wrapper);
             colourWrapper.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -139,29 +139,29 @@ public class EditSubjectFragment extends Fragment {
             updateSubjectBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Validate inputs before updating the database
-                    if (subjectName.getText().toString().equals("")) {
-                        Toast.makeText(getActivity(), "Please enter a subject name", Toast.LENGTH_LONG).show();
-                    }
-                    else if (teacherName.getText().toString().equals("")) {
-                        Toast.makeText(getActivity(), "Please enter a teacher's name", Toast.LENGTH_LONG).show();
-                    }
-                    else {
-                        boolean isInserted = db.updateSubject(String.valueOf(subjectId), subjectName.getText().toString(),
-                                teacherName.getText().toString(), subjectDesc.getText().toString(),
-                                ((ColorDrawable) subjectColour.getBackground()).getColor());
+                // Validate inputs before updating the database
+                if (subjectName.getText().toString().equals("")) {
+                    Toast.makeText(getActivity(), "Please enter a subject name", Toast.LENGTH_LONG).show();
+                }
+                else if (teacherName.getText().toString().equals("")) {
+                    Toast.makeText(getActivity(), "Please enter a teacher's name", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    boolean isInserted = db.updateSubject(String.valueOf(subjectId), subjectName.getText().toString(),
+                            teacherName.getText().toString(), subjectDesc.getText().toString(),
+                            ((ColorDrawable) subjectColour.getBackground()).getColor());
 
-                        if (isInserted) {
-                            Toast.makeText(getActivity(), "Updated Successfully", Toast.LENGTH_LONG).show();
-                            AllSubjectsFragment fragment = new AllSubjectsFragment();
-                            AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    if (isInserted) {
+                        Toast.makeText(getActivity(), "Updated Successfully", Toast.LENGTH_LONG).show();
+                        AllSubjectsFragment fragment = new AllSubjectsFragment();
+                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
 
-                            activity.getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.fragment_container, fragment)
-                                    .addToBackStack(null).commit();
-                        } else
-                            Toast.makeText(getActivity(), "Update Failed, Please Try again", Toast.LENGTH_LONG).show();
-                    }
+                        activity.getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, fragment)
+                                .addToBackStack(null).commit();
+                    } else
+                        Toast.makeText(getActivity(), "Update Failed, Please Try again", Toast.LENGTH_LONG).show();
+                }
                 }
             });
         }

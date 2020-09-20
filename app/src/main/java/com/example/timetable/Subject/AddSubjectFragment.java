@@ -79,7 +79,7 @@ public class AddSubjectFragment extends Fragment {
         });
 
         // Open colour picker if clicked anywhere on the surrounding layout
-        LinearLayout colourWrapper = (LinearLayout) view.findViewById(R.id.colour_wrapper);
+        LinearLayout colourWrapper = view.findViewById(R.id.colour_wrapper);
         colourWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,28 +94,28 @@ public class AddSubjectFragment extends Fragment {
         addSubjectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Validate inputs before inserting to the database
-                if (subjectName.getText().toString().equals("")) {
-                    Toast.makeText(getActivity(), "Please enter a subject name", Toast.LENGTH_LONG).show();
-                }
-                else if (teacherName.getText().toString().equals("")) {
-                    Toast.makeText(getActivity(), "Please enter a teacher's name", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    boolean isInserted = db.addSubject(subjectName.getText().toString(), teacherName.getText().toString(),
-                            subjectDesc.getText().toString(), ((ColorDrawable) subjectColour.getBackground()).getColor());
+            // Validate inputs before inserting to the database
+            if (subjectName.getText().toString().equals("")) {
+                Toast.makeText(getActivity(), "Please enter a subject name", Toast.LENGTH_LONG).show();
+            }
+            else if (teacherName.getText().toString().equals("")) {
+                Toast.makeText(getActivity(), "Please enter a teacher's name", Toast.LENGTH_LONG).show();
+            }
+            else {
+                boolean isInserted = db.addSubject(subjectName.getText().toString(), teacherName.getText().toString(),
+                        subjectDesc.getText().toString(), ((ColorDrawable) subjectColour.getBackground()).getColor());
 
-                    if (isInserted) {
-                        Toast.makeText(getActivity(), "Subject Added Successfully", Toast.LENGTH_LONG).show();
-                        AllSubjectsFragment allSubFragment = new AllSubjectsFragment();
-                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                        activity.getSupportFragmentManager().beginTransaction().
-                                replace(R.id.fragment_container, allSubFragment).
-                                addToBackStack(null).commit();
-                    }
-                    else
-                        Toast.makeText(getActivity(), "Insert failed, try again", Toast.LENGTH_LONG).show();
+                if (isInserted) {
+                    Toast.makeText(getActivity(), "Subject Added Successfully", Toast.LENGTH_LONG).show();
+                    AllSubjectsFragment allSubFragment = new AllSubjectsFragment();
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().
+                            replace(R.id.fragment_container, allSubFragment).
+                            addToBackStack(null).commit();
                 }
+                else
+                    Toast.makeText(getActivity(), "Insert failed, try again", Toast.LENGTH_LONG).show();
+            }
             }
         });
 
