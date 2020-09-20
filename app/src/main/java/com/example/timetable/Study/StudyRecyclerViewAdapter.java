@@ -27,19 +27,22 @@ public class StudyRecyclerViewAdapter extends RecyclerView.Adapter<StudyRecycler
     private ArrayList<String> subjectNames;
     private ArrayList<Integer> studyColours;
     private ArrayList<String> studyDates;
+    private ArrayList<String> studyDays;
     private ArrayList<String> studyStartTimes;
     private ArrayList<String> studyEndTimes;
     private Context context;
 
     public StudyRecyclerViewAdapter(ArrayList<Integer> studyIds, ArrayList<String> studyTitles,
                                     ArrayList<String> subjectNames, ArrayList<Integer> studyColours,
-                                    ArrayList<String> studyDates, ArrayList<String> studyStartTimes,
-                                    ArrayList<String> studyEndTimes, Context context) {
+                                    ArrayList<String> studyDates, ArrayList<String> studyDays,
+                                    ArrayList<String> studyStartTimes, ArrayList<String> studyEndTimes,
+                                    Context context) {
         this.studyIds = studyIds;
         this.studyTitles = studyTitles;
         this.subjectNames = subjectNames;
         this.studyColours = studyColours;
         this.studyDates = studyDates;
+        this.studyDays = studyDays;
         this.studyStartTimes = studyStartTimes;
         this.studyEndTimes = studyEndTimes;
         this.context = context;
@@ -76,9 +79,15 @@ public class StudyRecyclerViewAdapter extends RecyclerView.Adapter<StudyRecycler
         holder.studyTitle.setText(studyTitles.get(position));
         holder.subjectName.setText(subjectNames.get(position));
         holder.studyColour.setBackgroundColor(studyColours.get(position));
-        holder.studyDate.setText(studyDates.get(position));
         holder.studyStartTime.setText(studyStartTimes.get(position));
         holder.studyEndTime.setText(studyEndTimes.get(position));
+
+        // If study day is null, set text as study date
+        if (studyDays.get(position) == null) {
+            holder.studyDate.setText(studyDates.get(position));
+        } else {
+            holder.studyDate.setText(studyDays.get(position));
+        }
 
         holder.studyCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +117,7 @@ public class StudyRecyclerViewAdapter extends RecyclerView.Adapter<StudyRecycler
         subjectNames.remove(position);
         studyColours.remove(position);
         studyDates.remove(position);
+        studyDays.remove(position);
         studyStartTimes.remove(position);
         studyEndTimes.remove(position);
 

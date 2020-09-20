@@ -68,7 +68,7 @@
     <string name="save_study_button_label">Save Study</string>
     <string name="study_timer">Study Timer</string>
     <string name="everyday">Everyday</string>
-    <string name="select_a_day">Select a Day</string>
+    <string name="repeat_on_every">Repeat on every</string>
     <string-array name="subjects">
         <item>Mobile Application Development</item>
         <item>Professional Skills</item>

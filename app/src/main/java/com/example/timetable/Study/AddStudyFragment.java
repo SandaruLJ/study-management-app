@@ -145,13 +145,9 @@ public class AddStudyFragment extends Fragment {
         studyDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (studyDay.getVisibility() == View.VISIBLE)
-                    studyDay.performClick();
-                else {
-                    // Pass the TextView in order to set the value for the text
-                    DialogFragment selectDateFragment = new SelectDateFragment(studyDate);
-                    selectDateFragment.show(getFragmentManager(), "DatePicker");
-                }
+                // Pass the TextView in order to set the value for the text
+                DialogFragment selectDateFragment = new SelectDateFragment(studyDate);
+                selectDateFragment.show(getFragmentManager(), "DatePicker");
             }
         });
 
@@ -180,8 +176,20 @@ public class AddStudyFragment extends Fragment {
         });
 
 
+        // Study Day Selector
+        // Open study day selector if clicked anywhere on the surrounding layout
+        final LinearLayout studyDaySelector = view.findViewById(R.id.study_day_selector);
+        studyDaySelector.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                studyDay.performClick();
+            }
+        });
+
+
         // Repeat Options Selector
         final TextView studyDateLabel = view.findViewById(R.id.study_date_label);
+        final View studyDaySeparator = view.findViewById(R.id.study_day_separator);
 
         repeat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -189,29 +197,19 @@ public class AddStudyFragment extends Fragment {
                 String selectedOption = repeat.getSelectedItem().toString();
 
                 if (selectedOption.equalsIgnoreCase("daily")) {
-                    studyDateLabel.setHint(R.string.select_a_day);
-                    studyDay.setVisibility(View.GONE);
-                    studyDate.setVisibility(View.VISIBLE);
-                    studyDate.setText(R.string.everyday);
-                    studyDate.setTextColor(Color.LTGRAY);
-                    studyDatePicker.setClickable(false);
-                    studyDatePicker.setFocusable(false);
+                    studyDateLabel.setHint(R.string.start_date);
+                    studyDaySelector.setVisibility(View.GONE);
+                    studyDaySeparator.setVisibility(View.GONE);
                 }
                 else if (selectedOption.equalsIgnoreCase("weekly")) {
-                    studyDateLabel.setHint(R.string.select_a_day);
-                    studyDate.setVisibility(View.GONE);
-                    studyDay.setVisibility(View.VISIBLE);
-                    studyDatePicker.setClickable(true);
-                    studyDatePicker.setFocusable(true);
+                    studyDateLabel.setHint(R.string.start_date);
+                    studyDaySelector.setVisibility(View.VISIBLE);
+                    studyDaySeparator.setVisibility(View.VISIBLE);
                 }
                 else {
                     studyDateLabel.setHint(R.string.select_a_date);
-                    studyDay.setVisibility(View.GONE);
-                    studyDate.setVisibility(View.VISIBLE);
-                    studyDate.setText(today);
-                    studyDate.setTextColor(Color.GRAY);
-                    studyDatePicker.setClickable(true);
-                    studyDatePicker.setFocusable(true);
+                    studyDaySelector.setVisibility(View.GONE);
+                    studyDaySeparator.setVisibility(View.GONE);
                 }
             }
 
@@ -222,7 +220,7 @@ public class AddStudyFragment extends Fragment {
         });
 
         // Open repeat options selector if clicked anywhere on the surrounding layout
-        LinearLayout repeatWrapper = view.findViewById(R.id.repeat_wrapper);
+        final LinearLayout repeatWrapper = view.findViewById(R.id.repeat_wrapper);
         repeatWrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -289,17 +287,21 @@ public class AddStudyFragment extends Fragment {
                 Toast.makeText(getActivity(), "Please enter a study title", Toast.LENGTH_LONG).show();
             }
             else {
+                String studyDayString;
+
                 // Determine whether study day or date to be inserted
-                String studyDayDate;
                 if (repeat.getSelectedItem().toString().equalsIgnoreCase("weekly"))
-                    studyDayDate = studyDay.getSelectedItem().toString();
+                    studyDayString = studyDay.getSelectedItem().toString();
+                else if (repeat.getSelectedItem().toString().equalsIgnoreCase("daily"))
+                    studyDayString = "Everyday";
                 else
-                    studyDayDate = studyDate.getText().toString();
+                    studyDayString = null;
 
                 boolean isInserted = db.addStudy(studyTitle.getText().toString(), (int) subject.getSelectedItemId(),
-                        ((ColorDrawable) studyColour.getBackground()).getColor(), studyDayDate,
+                        ((ColorDrawable) studyColour.getBackground()).getColor(), studyDate.getText().toString(),
                         studyStart.getText().toString(), studyEnd.getText().toString(), repeat.getSelectedItem().toString(),
-                        studyNote.getText().toString(), reminder.isChecked(), reminderTime.getSelectedItem().toString());
+                        studyDayString, studyNote.getText().toString(), reminder.isChecked(),
+                        reminderTime.getSelectedItem().toString());
 
                 if (isInserted) {
                     Toast.makeText(getActivity(), "Study added successfully", Toast.LENGTH_LONG).show();

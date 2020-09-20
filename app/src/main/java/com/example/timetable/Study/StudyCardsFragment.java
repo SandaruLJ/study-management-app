@@ -47,6 +47,7 @@ public class StudyCardsFragment extends Fragment {
         final ArrayList<String> subjectNames = new ArrayList<>();
         final ArrayList<Integer> studyColours = new ArrayList<>();
         final ArrayList<String> studyDates = new ArrayList<>();
+        final ArrayList<String> studyDays = new ArrayList<>();
         final ArrayList<String> studyStartTimes = new ArrayList<>();
         final ArrayList<String> studyEndTimes = new ArrayList<>();
         final Cursor c = db.getAllStudies();
@@ -65,11 +66,12 @@ public class StudyCardsFragment extends Fragment {
             studyDates.add(c.getString(4));
             studyStartTimes.add(c.getString(5));
             studyEndTimes.add(c.getString(6));
+            studyDays.add(c.getString(8));
         }
 
         RecyclerView studyRecyclerView = view.findViewById(R.id.study_recycler_view);
         final StudyRecyclerViewAdapter studyAdapter = new StudyRecyclerViewAdapter(studyIds, studyTitles,
-                subjectNames, studyColours, studyDates, studyStartTimes, studyEndTimes, getActivity());
+                subjectNames, studyColours, studyDates, studyDays, studyStartTimes, studyEndTimes, getActivity());
         studyRecyclerView.setAdapter(studyAdapter);
         studyRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

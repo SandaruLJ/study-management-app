@@ -13,6 +13,7 @@ public class StudyMaster {
         public static final String COLUMN_NAME_START = "start_time";
         public static final String COLUMN_NAME_END = "end_time";
         public static final String COLUMN_NAME_REPEAT = "repeat";
+        public static final String COLUMN_NAME_DAY = "day";
         public static final String COLUMN_NAME_NOTE = "note";
         public static final String COLUMN_NAME_REMINDER = "reminder";
         public static final String COLUMN_NAME_REMINDER_TIME = "reminder_time";

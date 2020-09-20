@@ -58,6 +58,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     StudyMaster.Studies.COLUMN_NAME_START + " TEXT," +
                     StudyMaster.Studies.COLUMN_NAME_END + " TEXT," +
                     StudyMaster.Studies.COLUMN_NAME_REPEAT + " TEXT," +
+                    StudyMaster.Studies.COLUMN_NAME_DAY + " TEXT," +
                     StudyMaster.Studies.COLUMN_NAME_NOTE + " TEXT," +
                     StudyMaster.Studies.COLUMN_NAME_REMINDER + " INTEGER," +
                     StudyMaster.Studies.COLUMN_NAME_REMINDER_TIME + " TEXT," +
@@ -216,7 +217,8 @@ public class DBHandler extends SQLiteOpenHelper {
     // CRUD operations for Study
 
     public boolean addStudy(String studyTitle, Integer subject, Integer colour, String date, String startTime,
-                            String endTime, String repeat, String note, Boolean reminderBool, String reminderTime) {
+                            String endTime, String repeat, String day, String note, Boolean reminderBool,
+                            String reminderTime) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -230,6 +232,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(StudyMaster.Studies.COLUMN_NAME_START, startTime);
         values.put(StudyMaster.Studies.COLUMN_NAME_END, endTime);
         values.put(StudyMaster.Studies.COLUMN_NAME_REPEAT, repeat);
+        values.put(StudyMaster.Studies.COLUMN_NAME_DAY, day);
         values.put(StudyMaster.Studies.COLUMN_NAME_NOTE, note);
         values.put(StudyMaster.Studies.COLUMN_NAME_REMINDER, reminder);
         values.put(StudyMaster.Studies.COLUMN_NAME_REMINDER_TIME, reminderTime);
@@ -240,8 +243,8 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public boolean updateStudy(String studyId, String studyTitle, Integer subject, Integer colour, String date,
-                               String startTime, String endTime, String repeat, String note, Boolean reminderBool,
-                               String reminderTime) {
+                               String startTime, String endTime, String repeat, String day, String note,
+                               Boolean reminderBool, String reminderTime) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -255,6 +258,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(StudyMaster.Studies.COLUMN_NAME_START, startTime);
         values.put(StudyMaster.Studies.COLUMN_NAME_END, endTime);
         values.put(StudyMaster.Studies.COLUMN_NAME_REPEAT, repeat);
+        values.put(StudyMaster.Studies.COLUMN_NAME_DAY, day);
         values.put(StudyMaster.Studies.COLUMN_NAME_NOTE, note);
         values.put(StudyMaster.Studies.COLUMN_NAME_REMINDER, reminder);
         values.put(StudyMaster.Studies.COLUMN_NAME_REMINDER_TIME, reminderTime);
