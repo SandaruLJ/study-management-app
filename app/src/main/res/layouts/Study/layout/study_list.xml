@@ -127,15 +127,6 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="12dp">
 
-                    <ImageView
-                        android:layout_width="13dp"
-                        android:layout_height="13dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="3.75dp"
-                        android:src="@drawable/callender"
-                        android:alpha="0.8"
-                        android:tint="@color/lite_blue"/>
-
                     <TextView
                         android:id="@+id/study_date"
                         android:layout_width="wrap_content"
@@ -143,6 +134,15 @@
                         android:layout_marginStart="2dp"
                         android:layout_marginBottom="8dp"
                         android:text="@string/_13_8_2020"/>
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="3.5dp"
+                        android:src="@drawable/callender"
+                        android:alpha="0.8"
+                        android:tint="@color/lite_blue"/>
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
