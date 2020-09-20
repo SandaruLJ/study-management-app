@@ -2,6 +2,7 @@ package com.example.timetable.Study;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -78,21 +80,21 @@ public class StudyRecyclerViewAdapter extends RecyclerView.Adapter<StudyRecycler
         holder.studyStartTime.setText(studyStartTimes.get(position));
         holder.studyEndTime.setText(studyEndTimes.get(position));
 
-//        holder.studyCard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                int studyId = studyIds.get(position);
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("id", studyId);
-//
-//                EditStudyFragment editStudyFragment = new EditStudyFragment();
-//                editStudyFragment.setArguments(bundle);
-//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-//
-//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                        editStudyFragment).addToBackStack(null).commit();
-//            }
-//        });
+        holder.studyCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int studyId = studyIds.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", studyId);
+
+                EditStudyFragment editStudyFragment = new EditStudyFragment();
+                editStudyFragment.setArguments(bundle);
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        editStudyFragment).addToBackStack(null).commit();
+            }
+        });
     }
 
     @Override

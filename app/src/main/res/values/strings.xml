@@ -49,6 +49,7 @@
 
     <!-- Studies -->
     <string name="study_add_title">Add Study</string>
+    <string name="study_edit_title">Edit Study</string>
     <string name="study_all_title">Study</string>
     <string name="study_title">Study Lesson 5</string>
     <string name="study_start_time">10.30 am</string>
