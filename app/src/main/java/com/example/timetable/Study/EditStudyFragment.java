@@ -65,7 +65,7 @@ public class EditStudyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_study, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_study, container, false);
 
         studyId  = 0;
         Bundle bundle = this.getArguments();
@@ -130,6 +130,19 @@ public class EditStudyFragment extends Fragment {
                     activity.getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, fragment)
                             .addToBackStack(null).commit();
+                }
+            });
+
+
+            // Add Studies Button
+            ImageView addStudiesBtn = view.findViewById(R.id.add_study_btn);
+
+            addStudiesBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AddStudyFragment fragment = new AddStudyFragment();
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                 }
             });
 
@@ -295,9 +308,9 @@ public class EditStudyFragment extends Fragment {
 
 
             // Submit Button
-            Button addStudiesBtn = view.findViewById(R.id.add_study);
+            Button updateStudyBtn = view.findViewById(R.id.update_study);
 
-            addStudiesBtn.setOnClickListener(new View.OnClickListener() {
+            updateStudyBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // Validate inputs before inserting to the database

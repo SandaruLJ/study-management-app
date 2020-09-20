@@ -89,9 +89,9 @@ public class AddSubjectFragment extends Fragment {
 
 
         // Submit Button
-        Button addSubBtn = view.findViewById(R.id.add_subject);
+        Button addSubjectBtn = view.findViewById(R.id.add_subject);
 
-        addSubBtn.setOnClickListener(new View.OnClickListener() {
+        addSubjectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Validate inputs before inserting to the database

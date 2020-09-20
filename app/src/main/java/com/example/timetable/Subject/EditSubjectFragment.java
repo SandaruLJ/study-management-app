@@ -99,6 +99,21 @@ public class EditSubjectFragment extends Fragment {
             });
 
 
+            // Add Subjects Button
+            ImageView addSubjectsBtn = view.findViewById(R.id.add_subject_btn);
+
+            addSubjectsBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AddSubjectFragment fragment = new AddSubjectFragment();
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, fragment)
+                            .addToBackStack(null).commit();
+                }
+            });
+
+
             // Colour Button
             colourBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -119,9 +134,9 @@ public class EditSubjectFragment extends Fragment {
 
 
             // Submit Button
-            Button updateSubject = view.findViewById(R.id.update_subject);
+            Button updateSubjectBtn = view.findViewById(R.id.update_subject);
 
-            updateSubject.setOnClickListener(new View.OnClickListener() {
+            updateSubjectBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // Validate inputs before updating the database
