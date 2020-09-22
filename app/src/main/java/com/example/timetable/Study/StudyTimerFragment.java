@@ -1,5 +1,6 @@
 package com.example.timetable.Study;
 
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -14,8 +15,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -27,24 +36,23 @@ import java.util.concurrent.TimeUnit;
 public class StudyTimerFragment extends Fragment {
 
     private Long time;
-    private String hh, mm, ss, studyTitleString, subjectNameString;
+    private String hh, mm, ss;
     private CountDownTimer timer;
     private TextView countdownText, studyTitle, subjectName;
+    private Integer studyId;
+    private DBHandler db;
 
     public StudyTimerFragment() {
         // Required empty public constructor
     }
 
-    public StudyTimerFragment(String studyTitleString, String subjectNameString) {
-        this.studyTitleString = studyTitleString;
-        this.subjectNameString = subjectNameString;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = new DBHandler(getActivity());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,13 +69,10 @@ public class StudyTimerFragment extends Fragment {
         final Button pauseBtn = view.findViewById(R.id.pause);
         final Button resetBtn = view.findViewById(R.id.reset);
 
-        // Set Study Title and Subject Name
-        studyTitle.setText(studyTitleString);
-        subjectName.setText(subjectNameString);
 
-        // Time Set Button
-        final Button setTimeBtn = view.findViewById(R.id.set_time);
+        // Set Time Button
         final EditText timeInput = view.findViewById(R.id.time);
+        final Button setTimeBtn = view.findViewById(R.id.set_time);
 
         setTimeBtn.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -91,6 +96,47 @@ public class StudyTimerFragment extends Fragment {
                 }
             }
         });
+
+
+        // Set study related values
+        studyId = 0;
+        Bundle bundle = this.getArguments();
+
+        if (bundle != null) {
+            studyId = Integer.parseInt(bundle.get("studyId").toString());
+        }
+
+        if (studyId != 0) {  // Set study values only if study id is set
+            Cursor study = db.getSingleStudy(studyId);
+
+            while(study.moveToNext()) {
+                String subjectNameString = null;
+
+                Cursor subject = db.getSingleSubject(study.getInt(2));
+                if (subject.moveToNext())
+                    subjectNameString = subject.getString(1);
+
+                studyTitle.setText(study.getString(1));
+                subjectName.setText(subjectNameString);
+
+                // Get time of study for timer
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                LocalTime startTime = LocalTime.parse(study.getString(5), formatter);
+                LocalTime endTime = LocalTime.parse(study.getString(6), formatter);
+
+                time = Duration.between(startTime, endTime).toMinutes();  // Calculate study time in minutes
+
+                if (time < 0)  // If duration is negative, adjust for a time overlapping two days
+                    time += 1440L;
+
+                timeInput.setText(String.format(Locale.US, "%d", time));  // Set calculated study time
+                setTimeBtn.performClick();  // Emulate Set Time button click to set timer text
+            }
+        }
+        else {
+            studyTitle.setText("");
+            subjectName.setText("");
+        }
 
 
         // Start Timer Button
@@ -148,12 +194,12 @@ public class StudyTimerFragment extends Fragment {
 
 
         // Reset Timer Button
-        resetBtn.setEnabled(false);
-
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timer.cancel();  // Cancel timer
+                if (timer != null)
+                    timer.cancel();  // Cancel timer
+
                 time = 0L;  // Reset time
                 countdownText.setText(R.string.timer_time);  // Reset timer text
                 setTimeBtn.setEnabled(true);  // Enable Set Time Button

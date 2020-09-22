@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,7 @@ public class StudyRecyclerViewAdapter extends RecyclerView.Adapter<StudyRecycler
         TextView studyTitle, subjectName, studyColour, studyDate, studyStartTime, studyEndTime;
         FrameLayout studyLayout;
         CardView studyCard;
+        ImageButton studyTimer;
 
         public ViewHolder(View itemView){
             super(itemView);
@@ -61,6 +63,7 @@ public class StudyRecyclerViewAdapter extends RecyclerView.Adapter<StudyRecycler
             studyDate = itemView.findViewById(R.id.study_date);
             studyStartTime = itemView.findViewById(R.id.study_start);
             studyEndTime = itemView.findViewById(R.id.study_end);
+            studyTimer = itemView.findViewById(R.id.study_timer);
             studyLayout = itemView.findViewById(R.id.study_layout);
             studyCard = itemView.findViewById(R.id.study_card);
         }
@@ -76,6 +79,7 @@ public class StudyRecyclerViewAdapter extends RecyclerView.Adapter<StudyRecycler
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        // Set values
         holder.studyTitle.setText(studyTitles.get(position));
         holder.subjectName.setText(subjectNames.get(position));
         holder.studyColour.setBackgroundColor(studyColours.get(position));
@@ -102,6 +106,24 @@ public class StudyRecyclerViewAdapter extends RecyclerView.Adapter<StudyRecycler
 
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         editStudyFragment).addToBackStack(null).commit();
+            }
+        });
+
+
+        // Study Timer Button
+        holder.studyTimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int studyId = studyIds.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putInt("studyId", studyId);
+
+                StudyTimerFragment studyTimerFragment = new StudyTimerFragment();
+                studyTimerFragment.setArguments(bundle);
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        studyTimerFragment).addToBackStack(null).commit();
             }
         });
     }
