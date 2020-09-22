@@ -1,14 +1,9 @@
 package com.example.timetable.Study;
 
-import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -16,13 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
-import com.example.timetable.Subject.AddSubjectFragment;
-import com.example.timetable.Subject.SubjectRecyclerViewAdapter;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.

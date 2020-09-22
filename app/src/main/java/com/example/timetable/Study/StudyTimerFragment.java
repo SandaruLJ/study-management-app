@@ -21,13 +21,9 @@ import android.widget.TextView;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -146,7 +142,8 @@ public class StudyTimerFragment extends Fragment {
 
 
         // Start Timer Button
-        startBtn.setEnabled(false);
+        if (studyId == 0)
+            startBtn.setEnabled(false);
 
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,7 +3,6 @@ package com.example.timetable.Study;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,10 +34,6 @@ import com.example.timetable.Database.SubjectMaster;
 import com.example.timetable.R;
 import com.example.timetable.SelectDateFragment;
 import com.example.timetable.SelectTimeFragement;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,7 +68,7 @@ public class EditStudyFragment extends Fragment {
         Bundle bundle = this.getArguments();
 
         if (bundle != null) {
-            studyId = Integer.parseInt(bundle.get("id").toString());
+            studyId = Integer.parseInt(bundle.get("studyId").toString());
         }
 
         if (studyId != 0) {

@@ -98,7 +98,7 @@ public class StudyRecyclerViewAdapter extends RecyclerView.Adapter<StudyRecycler
             public void onClick(View view) {
                 int studyId = studyIds.get(position);
                 Bundle bundle = new Bundle();
-                bundle.putInt("id", studyId);
+                bundle.putInt("studyId", studyId);
 
                 EditStudyFragment editStudyFragment = new EditStudyFragment();
                 editStudyFragment.setArguments(bundle);
