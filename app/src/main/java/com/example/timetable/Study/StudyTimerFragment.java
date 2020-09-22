@@ -1,6 +1,7 @@
 package com.example.timetable.Study;
 
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -11,6 +12,8 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -93,6 +96,9 @@ public class StudyTimerFragment extends Fragment {
                         startBtn.setEnabled(true);
                     else
                         startBtn.setEnabled(false);
+
+                    countdownText.setTextColor(Color.BLACK);  // Set timer text colour to black
+                    countdownText.clearAnimation();  // Stop blinking animation (when the timer has run out)
                 }
             }
         });
@@ -160,6 +166,15 @@ public class StudyTimerFragment extends Fragment {
 
                     @Override
                     public void onFinish() {
+                        countdownText.setTextColor(Color.RED);  // Set timer text color to red
+
+                        // Create and start blinking animation
+                        Animation blink = new AlphaAnimation(0.0f, 1.0f);
+                        blink.setDuration(500);
+                        blink.setRepeatMode(Animation.REVERSE);
+                        blink.setRepeatCount(Animation.INFINITE);
+                        countdownText.startAnimation(blink);
+
                         pauseBtn.setEnabled(false);
                         setTimeBtn.setEnabled(true);
                     }
@@ -206,6 +221,8 @@ public class StudyTimerFragment extends Fragment {
                 pauseBtn.setText(R.string.pause);  // Reset Pause Timer Button text
                 pauseBtn.setEnabled(false);  // Disable Pause Timer Button
                 startBtn.setEnabled(false);  // Disable Start Timer Button
+                countdownText.setTextColor(Color.BLACK);  // Set timer text colour to black
+                countdownText.clearAnimation();  // Stop blinking animation (when the timer has run out)
             }
         });
 
