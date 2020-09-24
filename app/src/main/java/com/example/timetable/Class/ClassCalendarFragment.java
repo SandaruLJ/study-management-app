@@ -1,14 +1,30 @@
 package com.example.timetable.Class;
 
+import android.database.Cursor;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import org.threeten.bp.LocalDate;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,50 +33,51 @@ import com.example.timetable.R;
  */
 public class ClassCalendarFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ClassCalendarFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ClassCalendarFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ClassCalendarFragment newInstance(String param1, String param2) {
-        ClassCalendarFragment fragment = new ClassCalendarFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    DBHandler db;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+        db = new DBHandler(getActivity().getApplicationContext());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_class_calendar, container, false);
+        View view =  inflater.inflate(R.layout.fragment_class_calendar, container, false);
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        MaterialCalendarView calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
+        Calendar cal = Calendar.getInstance();
+
+
+        Date d1 = null;
+
+        final Cursor c = db.getAllClass();
+
+        while (c.moveToNext()) {
+
+            try {
+                d1 = dateFormat.parse(c.getString(13));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            //Convert the date to Calendar object
+            cal.setTime(d1);
+            //Convert the date to local object
+            LocalDate ld = LocalDate.of(cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH) + 1,
+                    cal.get(Calendar.DAY_OF_MONTH));
+
+            //Set the selcted dates
+            calendarView.setDateSelected(CalendarDay.from(ld),true);
+            EventDecorator eventDecorator = new EventDecorator(c.getInt(8),CalendarDay.from(ld) );
+            calendarView.addDecorator(eventDecorator);
+        }
+
+
+        return view;
     }
 }

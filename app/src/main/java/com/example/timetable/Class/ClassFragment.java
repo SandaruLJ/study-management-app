@@ -24,6 +24,7 @@ import com.google.android.material.tabs.TabLayout;
  */
 public class ClassFragment extends Fragment{
 
+    public static int selectedTab;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,11 +82,12 @@ public class ClassFragment extends Fragment{
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-
+                selectedTab = tab.getPosition();
                 TextView text = (TextView) tab.getCustomView();
                 text.setTextSize(20);
          text.setTextColor(Color.parseColor("#000000"));
                 text.setTypeface(null, Typeface.BOLD);
+
             }
 
             @Override

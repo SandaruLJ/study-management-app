@@ -32,7 +32,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     ClassMaster.Classes.COLUMN_NAME_CLASS_NAME + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_COURSE + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_SUBJECT + " TEXT," +
-                    ClassMaster.Classes.COLUMN_NAME_CLASS_TYPE + " INTEGER," +
+                    ClassMaster.Classes.COLUMN_NAME_CLASS_TYPE + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_CLASS_TEACHER + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_CLASS_ROOM + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_NOTE + " TEXT," +
@@ -43,11 +43,12 @@ public class DBHandler extends SQLiteOpenHelper {
                     ClassMaster.Classes.COLUMN_NAME_END_TIME + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_START_DATE + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_END_DATE + " TEXT," +
-                    ClassMaster.Classes.COLUMN_NAME_REMINDER + " INTEGER )" ;
+                    ClassMaster.Classes.COLUMN_NAME_REMINDER + " TEXT )" ;
+
 
     public DBHandler(@Nullable Context context) {
 
-        super(context, DATABASE_NAME, null, 3);
+        super(context, DATABASE_NAME, null, 5);
         SQLiteDatabase db = getWritableDatabase();
     }
 
@@ -55,6 +56,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
                 db.execSQL(SQL_CREATE_COURSE_ENTRIES);
                 db.execSQL(SQL_CREATE_CLASS_ENTRIES);
+
 //        db.execSQL("DROP TABLE IF EXISTS "+ CourseMaster.Courses.TABLE_NAME);
     }
     @Override
@@ -117,7 +119,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     //CRUD Operations for CLass
-    public boolean addClass(String name, String course, String subject, String classType, String teacher, String classroom,String note, Integer colour,String freq, String day, String startTime,String endTime, String sDate,String eDate,Integer reminder ){
+    public boolean addClass(String name, String course, String subject, String classType, String teacher, String classroom,String note, Integer colour,String freq, String day, String startTime,String endTime, String sDate,String eDate,String reminder ){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -137,10 +139,60 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(ClassMaster.Classes.COLUMN_NAME_END_DATE,eDate);
         values.put(ClassMaster.Classes.COLUMN_NAME_REMINDER,reminder);
 
+
         long result = db.insert(ClassMaster.Classes.TABLE_NAME_CLASS,null,values);
         if(result == -1)
             return false;
         else
             return true;
+    }
+
+    public Cursor getAllClass(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from "+ ClassMaster.Classes.TABLE_NAME_CLASS,null);
+        return res;
+    }
+    public Integer deleteClass(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(ClassMaster.Classes.TABLE_NAME_CLASS, " _id = ? ",new String[]{id});
+    }
+
+    public Cursor getSingleClass(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from " + ClassMaster.Classes.TABLE_NAME_CLASS + " WHERE "+ ClassMaster.Classes._ID + " = " + id, null);
+        return res;
+    }
+
+    public boolean updateClass(int id,String name, String course, String subject, String classType, String teacher, String classroom,String note, Integer colour,String freq, String day, String startTime,String endTime, String sDate,String eDate,String reminder ){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ClassMaster.Classes.COLUMN_NAME_CLASS_NAME,name);
+        values.put(ClassMaster.Classes.COLUMN_NAME_COURSE,course);
+        values.put(ClassMaster.Classes.COLUMN_NAME_SUBJECT,subject);
+        values.put(ClassMaster.Classes.COLUMN_NAME_CLASS_TYPE,classType);
+        values.put(ClassMaster.Classes.COLUMN_NAME_CLASS_TEACHER,teacher);
+        values.put(ClassMaster.Classes.COLUMN_NAME_CLASS_ROOM,classroom);
+        values.put(ClassMaster.Classes.COLUMN_NAME_NOTE,note);
+        values.put(ClassMaster.Classes.COLUMN_NAME_COLOR,colour);
+        values.put(ClassMaster.Classes.COLUMN_NAME_FREQUENCY,freq);
+        values.put(ClassMaster.Classes.COLUMN_NAME_DAY,day);
+        values.put(ClassMaster.Classes.COLUMN_NAME_START_TIME,startTime);
+        values.put(ClassMaster.Classes.COLUMN_NAME_END_TIME,endTime);
+        values.put(ClassMaster.Classes.COLUMN_NAME_START_DATE,sDate);
+        values.put(ClassMaster.Classes.COLUMN_NAME_END_DATE,eDate);
+        values.put(ClassMaster.Classes.COLUMN_NAME_REMINDER,reminder);
+
+        db.update(ClassMaster.Classes.TABLE_NAME_CLASS,values,"_id = ?",new String[]{String.valueOf(id)});
+        return true;
+    }
+    public int getLastClassIndex(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("Select MAX(_id) from "+ ClassMaster.Classes.TABLE_NAME_CLASS,null);
+        int id = 0;
+        while(res.moveToNext()){
+            id = res.getInt(0);
+        }
+        return id;
     }
 }

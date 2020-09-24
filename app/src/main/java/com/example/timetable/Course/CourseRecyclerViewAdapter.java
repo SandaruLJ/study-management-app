@@ -55,6 +55,7 @@ public class CourseRecyclerViewAdapter extends RecyclerView.Adapter<CourseRecycl
     public CourseRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view =
                 LayoutInflater.from(parent.getContext()).inflate(R.layout.course_list,parent,false);
+
         ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;
@@ -75,11 +76,9 @@ public class CourseRecyclerViewAdapter extends RecyclerView.Adapter<CourseRecycl
                 int id = CourseId.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putInt("id",  id);
-
                 editCourse cFragment = new editCourse();
                 cFragment.setArguments(bundle);
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, cFragment).addToBackStack(null).commit();
             }
         });

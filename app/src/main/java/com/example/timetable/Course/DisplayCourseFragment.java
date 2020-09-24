@@ -98,6 +98,7 @@ public class DisplayCourseFragment extends Fragment {
                 // remove it from adapter
                 db.deleteCourse(String.valueOf(ids.get(viewHolder.getAdapterPosition())));
                 adapter.removeItem(viewHolder.getAdapterPosition());
+                Toast.makeText(getActivity().getApplicationContext(), "Course Deleted Successfully", Toast.LENGTH_LONG).show();
             }
 
             @Override
