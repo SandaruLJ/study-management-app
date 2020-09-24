@@ -406,7 +406,7 @@ public class EditStudyFragment extends Fragment {
                         subjectName = subjectCursor.getString(1);
 
                     ReminderScheduler reminderScheduler = new ReminderScheduler(getContext(),
-                            studyTitle.getText().toString(), subjectName,
+                            studyId, studyTitle.getText().toString(), subjectName,
                             studyDate.getText().toString(), studyStart.getText().toString(),
                             reminderTime.getSelectedItem().toString());
 

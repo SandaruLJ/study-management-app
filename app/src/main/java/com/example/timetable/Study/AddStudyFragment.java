@@ -320,13 +320,15 @@ public class AddStudyFragment extends Fragment {
 
 
                 // Set reminder
+                int studyId = db.getLatestStudyId();
+
                 String subjectName = null;
                 Cursor subjectCursor = db.getSingleSubject((int) subject.getSelectedItemId());
                 if (subjectCursor.moveToFirst())
                     subjectName = subjectCursor.getString(1);
 
                 ReminderScheduler reminderScheduler = new ReminderScheduler(getContext(),
-                        studyTitle.getText().toString(), subjectName,
+                        studyId, studyTitle.getText().toString(), subjectName,
                         studyDate.getText().toString(), studyStart.getText().toString(),
                         reminderTime.getSelectedItem().toString());
 

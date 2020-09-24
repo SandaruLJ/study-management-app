@@ -275,8 +275,23 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public Cursor getSingleStudy(int studyId) {
         SQLiteDatabase db = getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + StudyMaster.Studies.TABLE_NAME + " WHERE "+
+        return db.rawQuery("SELECT * FROM " + StudyMaster.Studies.TABLE_NAME + " WHERE " +
                 StudyMaster.Studies._ID + " = " + studyId, null);
+    }
+
+    public int getLatestStudyId() {
+        int latestStudyId = 0;
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor latestStudy = db.rawQuery("SELECT * FROM " + StudyMaster.Studies.TABLE_NAME + " ORDER BY " +
+                StudyMaster.Studies._ID + " DESC LIMIT 1", null);
+
+        if (latestStudy.moveToFirst()) {
+            latestStudyId = latestStudy.getInt(0);
+            latestStudy.close();
+        }
+
+        return latestStudyId;
     }
 
     public Integer deleteStudy(String studyId) {

@@ -17,6 +17,7 @@ import java.util.Locale;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ReminderScheduler {
 
+    public static final String EXTRA_STUDY_ID = "com.example.timetable.STUDY_ID";
     public static final String EXTRA_STUDY_TITLE = "com.example.timetable.STUDY_TITLE";
     public static final String EXTRA_SUBJECT_NAME = "com.example.timetable.SUBJECT_NAME";
     private static final long INTERVAL_WEEK = 604800000L;
@@ -27,7 +28,7 @@ public class ReminderScheduler {
     private Long dateTimeInMillis;
     private AlarmManager alarmManager;
 
-    public ReminderScheduler(Context context, String studyTitle, String subjectName,
+    public ReminderScheduler(Context context, int studyId, String studyTitle, String subjectName,
                              String studyDate, String startTime, String reminderTime) {
         this.context = context;
         calendar = Calendar.getInstance();
@@ -35,6 +36,7 @@ public class ReminderScheduler {
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         intent = new Intent(this.context, ReminderBroadcastReceiver.class);
+        intent.putExtra(EXTRA_STUDY_ID, studyId);
         intent.putExtra(EXTRA_STUDY_TITLE, studyTitle);
         intent.putExtra(EXTRA_SUBJECT_NAME, subjectName);
 

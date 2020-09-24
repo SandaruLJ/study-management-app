@@ -12,6 +12,8 @@ import com.example.timetable.Class.addClass;
 import com.example.timetable.Course.DisplayCourseFragment;
 import com.example.timetable.Exam.displayExams;
 import com.example.timetable.Homework.displayHomework;
+import com.example.timetable.Study.ReminderBroadcastReceiver;
+import com.example.timetable.Study.StudyTimerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity  {
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity  {
                 selectedFragment).commit();
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
+        studyReminderClickAction();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -59,5 +62,18 @@ public class MainActivity extends AppCompatActivity  {
                 }
             };
 
+    private void studyReminderClickAction() {
+        int studyId = getIntent().getIntExtra(ReminderBroadcastReceiver.EXTRA_STUDY_ID, 0);
 
+        if (studyId != 0) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("studyId", studyId);
+
+            StudyTimerFragment studyTimerFragment = new StudyTimerFragment();
+            studyTimerFragment.setArguments(bundle);
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    studyTimerFragment).commit();
+        }
+    }
 }

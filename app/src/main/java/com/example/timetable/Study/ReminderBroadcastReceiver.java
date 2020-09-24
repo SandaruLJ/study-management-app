@@ -16,11 +16,17 @@ import com.example.timetable.R;
 
 public class ReminderBroadcastReceiver extends BroadcastReceiver {
 
+    public static final String EXTRA_STUDY_ID = "com.example.timetable.STUDY_ID";
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onReceive(Context context, Intent intent) {
+        // Get studyId extra
+        int studyId = intent.getIntExtra(ReminderScheduler.EXTRA_STUDY_ID, 0);
+
         // Set activity to open when notification is clicked
         Intent mainIntent = new Intent(context, MainActivity.class);
+        mainIntent.putExtra(EXTRA_STUDY_ID, studyId);  // Put studyId extra to pass to study timer fragment
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addNextIntentWithParentStack(mainIntent);
         PendingIntent mainPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
