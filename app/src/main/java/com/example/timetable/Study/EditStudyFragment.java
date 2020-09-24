@@ -362,6 +362,7 @@ public class EditStudyFragment extends Fragment {
             Button updateStudyBtn = view.findViewById(R.id.update_study);
 
             updateStudyBtn.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onClick(View view) {
                 // Validate inputs before inserting to the database
@@ -379,6 +380,8 @@ public class EditStudyFragment extends Fragment {
                     else
                         studyDayString = null;
 
+
+                    // Update data
                     boolean isInserted = db.updateStudy(String.valueOf(studyId), studyTitle.getText().toString(),
                             (int) subject.getSelectedItemId(), ((ColorDrawable) studyColour.getBackground()).getColor(),
                             studyDate.getText().toString(), studyStart.getText().toString(), studyEnd.getText().toString(),
@@ -394,6 +397,21 @@ public class EditStudyFragment extends Fragment {
                                 .addToBackStack(null).commit();
                     } else
                         Toast.makeText(getActivity(), "Update failed, try again", Toast.LENGTH_LONG).show();
+
+
+                    // Set reminder
+                    String subjectName = null;
+                    Cursor subjectCursor = db.getSingleSubject((int) subject.getSelectedItemId());
+                    if (subjectCursor.moveToFirst())
+                        subjectName = subjectCursor.getString(1);
+
+                    ReminderScheduler reminderScheduler = new ReminderScheduler(getContext(),
+                            studyTitle.getText().toString(), subjectName,
+                            studyDate.getText().toString(), studyStart.getText().toString(),
+                            reminderTime.getSelectedItem().toString());
+
+                    if (reminder.isChecked())
+                        reminderScheduler.scheduleReminder(repeat.getSelectedItem().toString());
                 }
                 }
             });

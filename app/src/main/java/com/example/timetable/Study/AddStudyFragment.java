@@ -1,5 +1,7 @@
 package com.example.timetable.Study;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -55,6 +57,7 @@ public class AddStudyFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new DBHandler(getActivity());
+        createNotificationChannel();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -279,6 +282,7 @@ public class AddStudyFragment extends Fragment {
         Button addStudyBtn = view.findViewById(R.id.add_study);
 
         addStudyBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
             // Validate inputs before inserting to the database
@@ -296,6 +300,8 @@ public class AddStudyFragment extends Fragment {
                 else
                     studyDayString = null;
 
+
+                // Insert data
                 boolean isInserted = db.addStudy(studyTitle.getText().toString(), (int) subject.getSelectedItemId(),
                         ((ColorDrawable) studyColour.getBackground()).getColor(), studyDate.getText().toString(),
                         studyStart.getText().toString(), studyEnd.getText().toString(), repeat.getSelectedItem().toString(),
@@ -311,10 +317,40 @@ public class AddStudyFragment extends Fragment {
                             .addToBackStack(null).commit();
                 } else
                     Toast.makeText(getActivity(), "Insert failed, try again", Toast.LENGTH_LONG).show();
+
+
+                // Set reminder
+                String subjectName = null;
+                Cursor subjectCursor = db.getSingleSubject((int) subject.getSelectedItemId());
+                if (subjectCursor.moveToFirst())
+                    subjectName = subjectCursor.getString(1);
+
+                ReminderScheduler reminderScheduler = new ReminderScheduler(getContext(),
+                        studyTitle.getText().toString(), subjectName,
+                        studyDate.getText().toString(), studyStart.getText().toString(),
+                        reminderTime.getSelectedItem().toString());
+
+                if (reminder.isChecked())
+                    reminderScheduler.scheduleReminder(repeat.getSelectedItem().toString());
             }
             }
         });
 
         return view;
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence channelName = "StudyPlannerNotificationChannel";
+            String description = "Notification channel for Study Planner";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+
+            NotificationChannel notificationChannel = new NotificationChannel("notifyStudyPlanner",
+                    channelName, importance);
+            notificationChannel.setDescription(description);
+
+            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
     }
 }
