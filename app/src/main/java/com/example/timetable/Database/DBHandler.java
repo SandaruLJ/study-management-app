@@ -45,9 +45,19 @@ public class DBHandler extends SQLiteOpenHelper {
                     ClassMaster.Classes.COLUMN_NAME_END_DATE + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_REMINDER + " INTEGER )" ;
 
+    private static final String SQL_CREATE_GOAL_ENTRIES =
+            "CREATE TABLE " + GoalMaster.Goals.TABLE_NAME + "("+
+                    GoalMaster.Goals._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    GoalMaster.Goals.COLUMN_NAME_GOAL_NAME + " TEXT," +
+                    GoalMaster.Goals.COLUMN_NAME_COLOUR + " INTEGER," +
+                    GoalMaster.Goals.COLUMN_NAME_DUE + " TEXT," +
+                    GoalMaster.Goals.COLUMN_NAME_DESCRIPTION + " TEXT," +
+                    GoalMaster.Goals.COLUMN_NAME_REMINDER + " INTEGER," +
+                    GoalMaster.Goals.COLUMN_NAME_SCHEDULED + " TEXT)" ;
+
     public DBHandler(@Nullable Context context) {
 
-        super(context, DATABASE_NAME, null, 3);
+        super(context, DATABASE_NAME, null, 4);
         SQLiteDatabase db = getWritableDatabase();
     }
 
@@ -55,12 +65,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
                 db.execSQL(SQL_CREATE_COURSE_ENTRIES);
                 db.execSQL(SQL_CREATE_CLASS_ENTRIES);
+                db.execSQL(SQL_CREATE_GOAL_ENTRIES);
 //        db.execSQL("DROP TABLE IF EXISTS "+ CourseMaster.Courses.TABLE_NAME);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + CourseMaster.Courses.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + ClassMaster.Classes.TABLE_NAME_CLASS);
+        db.execSQL("DROP TABLE IF EXISTS " + GoalMaster.Goals.TABLE_NAME);
         onCreate(db);
     }
     public void create(){
@@ -115,6 +127,63 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(CourseMaster.Courses.TABLE_NAME, " _id = ? ",new String[]{id});
     }
+
+    //    CRUD operations for Goals
+
+    public boolean  addGoals(String name, Integer colour, String due, String description, boolean reminder, String scheduled ){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(GoalMaster.Goals.COLUMN_NAME_GOAL_NAME,name);
+        values.put(GoalMaster.Goals.COLUMN_NAME_COLOUR,colour);
+        values.put(GoalMaster.Goals.COLUMN_NAME_DUE,due);
+        values.put(GoalMaster.Goals.COLUMN_NAME_DESCRIPTION,description);
+        values.put(GoalMaster.Goals.COLUMN_NAME_REMINDER,reminder);
+        values.put(GoalMaster.Goals.COLUMN_NAME_SCHEDULED,scheduled);
+        long result = db.insert(GoalMaster.Goals.TABLE_NAME,null,values);
+        if(result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public Cursor getAllGoals(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from "+ GoalMaster.Goals.TABLE_NAME,null);
+        return res;
+    }
+
+    public boolean  updateGoal(String id,String name, Integer colour, String due, String description, String reminder, String scheduled ){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(GoalMaster.Goals.COLUMN_NAME_GOAL_NAME,name);
+        values.put(GoalMaster.Goals.COLUMN_NAME_COLOUR,colour);
+        values.put(GoalMaster.Goals.COLUMN_NAME_DUE,due);
+        values.put(GoalMaster.Goals.COLUMN_NAME_DESCRIPTION,description);
+        values.put(GoalMaster.Goals.COLUMN_NAME_REMINDER,reminder);
+        values.put(GoalMaster.Goals.COLUMN_NAME_SCHEDULED,scheduled);
+        db.update(GoalMaster.Goals.TABLE_NAME,values,"_id = ?",new String[]{id});
+        return true;
+    }
+
+    public Cursor getAllGoal(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from "+ GoalMaster.Goals.TABLE_NAME,null);
+        return res;
+    }
+    public Cursor getSingleGoal(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from " + GoalMaster.Goals.TABLE_NAME + " WHERE "+ GoalMaster.Goals._ID + " = " + id, null);
+        return res;
+    }
+    public Integer deleteGoal(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(GoalMaster.Goals.TABLE_NAME, " _id = ? ",new String[]{id});
+    }
+
+
 
     //CRUD Operations for CLass
     public boolean addClass(String name, String course, String subject, String classType, String teacher, String classroom,String note, Integer colour,String freq, String day, String startTime,String endTime, String sDate,String eDate,Integer reminder ){

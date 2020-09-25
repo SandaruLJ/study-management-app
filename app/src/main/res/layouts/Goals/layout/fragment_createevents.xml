@@ -84,6 +84,7 @@
 
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/goalid"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -167,7 +168,7 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="0dp"
-                android:id="@+id/dateSelector"
+                android:id="@+id/dateSelectorEnd"
                 android:clickable="true">
 
                 <ImageView
@@ -193,20 +194,21 @@
                         android:hint="@string/due_date"
                         android:textSize="20dp"
                         />
+
                     <TextView
 
+                        android:id="@+id/endDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
                         android:paddingLeft="10dp"
                         android:paddingTop="5dp"
                         android:paddingRight="20dp"
                         android:paddingBottom="20dp"
                         android:text="@string/_13_8_2020"
-                        android:textFontWeight="600"
-                        android:layout_alignParentEnd="true"
 
-                        android:textSize="20dp"
-                        />
+                        android:textFontWeight="600"
+                        android:textSize="20dp" />
                 </RelativeLayout>
 
 
@@ -296,12 +298,12 @@
 
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/descriptionId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:textSize="20sp"
 
-                            />
+                            android:textSize="20sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -360,6 +362,7 @@
                         android:paddingLeft="10dp"
                         android:paddingTop="12dp"
                         android:paddingRight="20dp"
+                        android:id="@+id/reminder"
                         android:paddingBottom="2dp"/>
 
                 </RelativeLayout>
@@ -434,16 +437,17 @@
                 android:gravity="center">
 
                 <Button
+                    android:id="@+id/btnSave"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/save_subject_button_label"
                     android:layout_gravity="center"
                     android:background="@drawable/save_btn"
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:textColor="@color/white"
                     android:paddingLeft="20dp"
-                    android:paddingRight="20dp"></Button>
+                    android:paddingRight="20dp"
+                    android:text="@string/save_subject_button_label"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold"></Button>
             </LinearLayout>
         </LinearLayout>
 
