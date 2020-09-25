@@ -49,8 +49,8 @@ public class DBHandler extends SQLiteOpenHelper {
                     SubjectMaster.Subjects.COLUMN_NAME_COLOUR + " INTEGER )";
 
     private static final String SQL_CREATE_STUDY_ENTRIES =
-            "CREATE TABLE " + StudyMaster.Studies.TABLE_NAME + "("+
-                    StudyMaster.Studies._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+            "CREATE TABLE " + StudyMaster.Studies.TABLE_NAME + "(" +
+                    StudyMaster.Studies._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     StudyMaster.Studies.COLUMN_NAME_STUDY_TITLE + " TEXT," +
                     StudyMaster.Studies.COLUMN_NAME_SUBJECT + " INTEGER," +
                     StudyMaster.Studies.COLUMN_NAME_COLOUR + " INTEGER," +
@@ -66,6 +66,16 @@ public class DBHandler extends SQLiteOpenHelper {
                     "REFERENCES " + SubjectMaster.Subjects.TABLE_NAME + "(" + SubjectMaster.Subjects._ID + ") " +
                     "ON DELETE CASCADE)";
 
+    private static final String SQL_CREATE_STUDY_TIME_ENTRIES =
+            "CREATE TABLE " + SubjectMaster.StudyTimes.TABLE_NAME + "(" +
+                    SubjectMaster.StudyTimes._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    SubjectMaster.StudyTimes.COLUMN_NAME_SUBJECT + " INTEGER," +
+                    SubjectMaster.StudyTimes.COLUMN_NAME_DATE + " TEXT," +
+                    SubjectMaster.StudyTimes.COLUMN_NAME_STUDY_TIME + " INTEGER," +
+                    "FOREIGN KEY(" + SubjectMaster.StudyTimes.COLUMN_NAME_SUBJECT + ") " +
+                    "REFERENCES " + SubjectMaster.StudyTimes.TABLE_NAME + "(" + SubjectMaster.Subjects._ID + ") " +
+                    "ON DELETE CASCADE)";
+
     public DBHandler(@Nullable Context context) {
 
         super(context, DATABASE_NAME, null, 3);
@@ -78,6 +88,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 db.execSQL(SQL_CREATE_CLASS_ENTRIES);
                 db.execSQL(SQL_CREATE_SUBJECT_ENTRIES);
                 db.execSQL(SQL_CREATE_STUDY_ENTRIES);
+                db.execSQL(SQL_CREATE_STUDY_TIME_ENTRIES);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
@@ -85,6 +96,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + ClassMaster.Classes.TABLE_NAME_CLASS);
         db.execSQL("DROP TABLE IF EXISTS " + SubjectMaster.Subjects.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + StudyMaster.Studies.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + SubjectMaster.StudyTimes.TABLE_NAME);
         onCreate(db);
     }
     public void create(){
@@ -168,6 +180,7 @@ public class DBHandler extends SQLiteOpenHelper {
             return true;
     }
 
+
     // CRUD operations for Subject
 
     public boolean addSubject(String subjectName, String teacherName, String subjectDesc, Integer colour) {
@@ -213,6 +226,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(SubjectMaster.Subjects.TABLE_NAME, " _id = ? ", new String[]{subjectId});
     }
+
 
     // CRUD operations for Study
 
@@ -297,5 +311,41 @@ public class DBHandler extends SQLiteOpenHelper {
     public Integer deleteStudy(String studyId) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(StudyMaster.Studies.TABLE_NAME, " _id = ? ", new String[]{studyId});
+    }
+
+
+    // DB Operations for saving study times
+
+    public boolean addStudyTime(Integer subject, String date, String studyTime) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(StudyMaster.Studies.COLUMN_NAME_SUBJECT, subject);
+        values.put(StudyMaster.Studies.COLUMN_NAME_DATE, date);
+        values.put(StudyMaster.Studies.COLUMN_NAME_REMINDER_TIME, studyTime);
+
+        long result = db.insert(SubjectMaster.StudyTimes.TABLE_NAME, null, values);
+
+        return result != -1;
+    }
+
+    public boolean updateStudyTime(String studyTimeId, Integer subject, String date, String studyTime) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(StudyMaster.Studies.COLUMN_NAME_SUBJECT, subject);
+        values.put(StudyMaster.Studies.COLUMN_NAME_DATE, date);
+        values.put(StudyMaster.Studies.COLUMN_NAME_REMINDER_TIME, studyTime);
+
+        db.update(SubjectMaster.StudyTimes.TABLE_NAME, values, "_id = ?", new String[]{studyTimeId});
+
+        return true;
+    }
+
+    public Cursor getRelevantStudyTimes(String[] dateQueryArray) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        return db.query(SubjectMaster.StudyTimes.TABLE_NAME, null,
+                "date IN (?, ?, ?, ?, ?, ?, ?)", dateQueryArray, null, null, null);
     }
 }
