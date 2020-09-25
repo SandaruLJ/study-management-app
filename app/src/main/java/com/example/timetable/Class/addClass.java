@@ -126,6 +126,8 @@ public class addClass extends Fragment  {
                 Date sdate = null;
                 String stime;
                 String rtype;
+                String day = null;
+                int dayValue = 0;
                 Calendar cald = Calendar.getInstance();
                 Calendar calt = Calendar.getInstance();
                 if(selectedTab == 0) {
@@ -133,6 +135,7 @@ public class addClass extends Fragment  {
                     intent.putExtra("time", ClassWeekFragment.stime.getText().toString());
                     stime = ClassWeekFragment.stime.getText().toString();
                     date = ClassWeekFragment.start.getText().toString();
+                    day = ClassWeekFragment.day.getSelectedItem().toString();
                     rtype = ClassWeekFragment.reminder.getSelectedItem().toString();
                 }else{
                     intent.putExtra("date", ClassDateFragment.sdate.getText().toString());
@@ -143,7 +146,24 @@ public class addClass extends Fragment  {
                 }
 
                 int min = 0;
-                int day;
+
+                if(selectedTab==0){
+                    if(day.equals("Monday"))
+                        dayValue = 1;
+                    else if(day.equals("Tuesday"))
+                        dayValue = 2;
+                    else if(day.equals("Wednesday"))
+                        dayValue = 3;
+                    else if(day.equals("Thursday"))
+                        dayValue = 4;
+                    else if(day.equals("Friday"))
+                        dayValue = 5;
+                    else if(day.equals("Saturday"))
+                        dayValue = 6;
+                    else if(day.equals("Sunday"))
+                        dayValue = 7;
+
+                }
 
                 if(rtype.equals("5 minutes")){
                     min = -5;

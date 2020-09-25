@@ -152,6 +152,11 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("Select * from "+ ClassMaster.Classes.TABLE_NAME_CLASS,null);
         return res;
     }
+    public Cursor getSortClass(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from "+ ClassMaster.Classes.TABLE_NAME_CLASS + " ORDER BY " + ClassMaster.Classes.COLUMN_NAME_START_DATE,null);
+        return res;
+    }
     public Integer deleteClass(String id){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(ClassMaster.Classes.TABLE_NAME_CLASS, " _id = ? ",new String[]{id});
@@ -194,5 +199,14 @@ public class DBHandler extends SQLiteOpenHelper {
             id = res.getInt(0);
         }
         return id;
+    }
+    public int getClassCount(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("Select COUNT(_id) from "+ ClassMaster.Classes.TABLE_NAME_CLASS,null);
+        int count = 0;
+        while(res.moveToNext()){
+            count = res.getInt(0);
+        }
+        return count;
     }
 }
