@@ -22,6 +22,7 @@ import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -34,12 +35,13 @@ import java.util.concurrent.TimeUnit;
  */
 public class StudyTimerFragment extends Fragment {
 
-    private Long time;
+    private Long remainingTime;
     private String hh, mm, ss;
     private CountDownTimer timer;
-    private TextView countdownText, studyTitle, subjectName;
-    private Integer studyId;
+    private TextView countdownText;
+    private Integer studyId, totalTime;
     private DBHandler db;
+    private Cursor study, subject;
 
     public StudyTimerFragment() {
         // Required empty public constructor
@@ -60,8 +62,8 @@ public class StudyTimerFragment extends Fragment {
 
         // Initialise dynamic text views
         countdownText = view.findViewById(R.id.countdown_text);
-        studyTitle = view.findViewById(R.id.study_title);
-        subjectName = view.findViewById(R.id.subject_name);
+        TextView studyTitle = view.findViewById(R.id.study_title);
+        TextView subjectName = view.findViewById(R.id.subject_name);
 
         // Initialise interactive buttons
         final Button startBtn = view.findViewById(R.id.start);
@@ -79,16 +81,16 @@ public class StudyTimerFragment extends Fragment {
             public void onClick(View view) {
                 // Check if time input is empty
                 if (!timeInput.getText().toString().equals("")) {
-                    time = TimeUnit.MINUTES.toMillis(Long.parseLong(timeInput.getText().toString()));
+                    remainingTime = TimeUnit.MINUTES.toMillis(Long.parseLong(timeInput.getText().toString()));
 
                     ss = "00";
-                    mm = String.format(Locale.US, "%02d", (time / (1000 * 60)) % 60);
-                    hh = String.format(Locale.US, "%02d", (time / (1000 * 60 * 60)) % 24);
+                    mm = String.format(Locale.US, "%02d", (remainingTime / (1000 * 60)) % 60);
+                    hh = String.format(Locale.US, "%02d", (remainingTime / (1000 * 60 * 60)) % 24);
 
                     countdownText.setText(hh + ":" + mm + ":" + ss);
 
                     // Enable Start Timer Button if set time is greater than 0
-                    if (time > 0)
+                    if (remainingTime > 0)
                         startBtn.setEnabled(true);
                     else
                         startBtn.setEnabled(false);
@@ -109,12 +111,12 @@ public class StudyTimerFragment extends Fragment {
         }
 
         if (studyId != 0) {  // Set study values only if study id is set
-            Cursor study = db.getSingleStudy(studyId);
+            study = db.getSingleStudy(studyId);
 
             while(study.moveToNext()) {
                 String subjectNameString = null;
 
-                Cursor subject = db.getSingleSubject(study.getInt(2));
+                subject = db.getSingleSubject(study.getInt(2));
                 if (subject.moveToNext())
                     subjectNameString = subject.getString(1);
 
@@ -126,12 +128,12 @@ public class StudyTimerFragment extends Fragment {
                 LocalTime startTime = LocalTime.parse(study.getString(5), formatter);
                 LocalTime endTime = LocalTime.parse(study.getString(6), formatter);
 
-                time = Duration.between(startTime, endTime).toMinutes();  // Calculate study time in minutes
+                remainingTime = Duration.between(startTime, endTime).toMinutes();  // Calculate study time in minutes
 
-                if (time < 0)  // If duration is negative, adjust for a time overlapping two days
-                    time += 1440L;
+                if (remainingTime < 0)  // If duration is negative, adjust for a time overlapping two days
+                    remainingTime += 1440L;
 
-                timeInput.setText(String.format(Locale.US, "%d", time));  // Set calculated study time
+                timeInput.setText(String.format(Locale.US, "%d", remainingTime));  // Set calculated study time
                 setTimeBtn.performClick();  // Emulate Set Time button click to set timer text
             }
         }
@@ -141,53 +143,72 @@ public class StudyTimerFragment extends Fragment {
         }
 
 
-        // Start Timer Button
+        // Start Button
         if (studyId == 0)
             startBtn.setEnabled(false);
 
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Start Timer
-                timer = new CountDownTimer(time, 1000) {
-                    @Override
-                    public void onTick(long l) {
-                        time = l;  // Save remaining time
+                if (startBtn.getText().toString().equalsIgnoreCase("start")) {
+                    totalTime = 0;  // Set total time to 0
 
-                        ss = String.format(Locale.US, "%02d", (time / 1000) % 60);
-                        mm = String.format(Locale.US, "%02d", (time / (1000*60)) % 60);
-                        hh = String.format(Locale.US, "%02d", (time / (1000*60*60)) % 24);
+                    // Start Timer
+                    timer = new CountDownTimer(remainingTime, 1000) {
+                        @Override
+                        public void onTick(long l) {
+                            remainingTime = l;  // Save remaining time
+                            totalTime += 1;  // Save elapsed time
 
-                        countdownText.setText(hh + ":" + mm + ":" + ss);
-                    }
+                            ss = String.format(Locale.US, "%02d", (remainingTime / 1000) % 60);
+                            mm = String.format(Locale.US, "%02d", (remainingTime / (1000*60)) % 60);
+                            hh = String.format(Locale.US, "%02d", (remainingTime / (1000*60*60)) % 24);
 
-                    @Override
-                    public void onFinish() {
-                        countdownText.setTextColor(Color.RED);  // Set timer text color to red
+                            countdownText.setText(hh + ":" + mm + ":" + ss);
+                        }
 
-                        // Create and start blinking animation
-                        Animation blink = new AlphaAnimation(0.0f, 1.0f);
-                        blink.setDuration(500);
-                        blink.setRepeatMode(Animation.REVERSE);
-                        blink.setRepeatCount(Animation.INFINITE);
-                        countdownText.startAnimation(blink);
+                        @Override
+                        public void onFinish() {
+                            saveStudyTime();  // Save total study time
+                            countdownText.setTextColor(Color.RED);  // Set timer text color to red
 
-                        pauseBtn.setEnabled(false);
-                        setTimeBtn.setEnabled(true);
-                    }
-                }.start();
+                            // Create and start blinking animation
+                            Animation blink = new AlphaAnimation(0.0f, 1.0f);
+                            blink.setDuration(500);
+                            blink.setRepeatMode(Animation.REVERSE);
+                            blink.setRepeatCount(Animation.INFINITE);
+                            countdownText.startAnimation(blink);
 
-                // Disable Set Time Button and Start Timer Button
-                setTimeBtn.setEnabled(false);
-                startBtn.setEnabled(false);
-                // Enable Pause Timer Button and Reset Timer Button
-                pauseBtn.setEnabled(true);
-                resetBtn.setEnabled(true);
+                            pauseBtn.setEnabled(false);  // Disable Pause Button
+                            setTimeBtn.setEnabled(true);  // Enable Set Time Button
+                            startBtn.setEnabled(false);  // Disable Start Button
+                            startBtn.setText(R.string.start);  // Reset Start Button text
+                        }
+                    }.start();
+
+                    setTimeBtn.setEnabled(false);  // Disable Set Time Button
+                    startBtn.setText(R.string.stop);  // Change Start Button to Stop Button
+
+                    // Enable Pause Button and Reset Button
+                    pauseBtn.setEnabled(true);
+                    resetBtn.setEnabled(true);
+                }
+
+                else {
+                    saveStudyTime();  // Save total study time
+                    timer.cancel();
+                    remainingTime = 0L;  // Reset time
+                    setTimeBtn.setEnabled(true);  // Enable Set Time Button
+                    pauseBtn.setText(R.string.pause);  // Reset Pause Button text
+                    pauseBtn.setEnabled(false);  // Disable Pause Button
+                    startBtn.setEnabled(false);  // Disable Start Button
+                    startBtn.setText(R.string.start);  // Reset Start Button text
+                }
             }
         });
 
 
-        // Pause Timer Button
+        // Pause Button
         pauseBtn.setEnabled(false);
 
         pauseBtn.setOnClickListener(new View.OnClickListener() {
@@ -198,6 +219,7 @@ public class StudyTimerFragment extends Fragment {
                     pauseBtn.setText(R.string.resume);  // Change Pause to Resume
                 }
                 else {
+                    startBtn.setText(R.string.start);  // Set text to "Start" to bypass if statement check
                     startBtn.performClick();  // Emulate start button click to resume the timer
                     pauseBtn.setText(R.string.pause);
                 }
@@ -205,19 +227,20 @@ public class StudyTimerFragment extends Fragment {
         });
 
 
-        // Reset Timer Button
+        // Reset Button
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (timer != null)
                     timer.cancel();  // Cancel timer
 
-                time = 0L;  // Reset time
+                remainingTime = 0L;  // Reset time
                 countdownText.setText(R.string.timer_time);  // Reset timer text
                 setTimeBtn.setEnabled(true);  // Enable Set Time Button
-                pauseBtn.setText(R.string.pause);  // Reset Pause Timer Button text
-                pauseBtn.setEnabled(false);  // Disable Pause Timer Button
-                startBtn.setEnabled(false);  // Disable Start Timer Button
+                pauseBtn.setText(R.string.pause);  // Reset Pause Button text
+                pauseBtn.setEnabled(false);  // Disable Pause Button
+                startBtn.setEnabled(false);  // Disable Start Button
+                startBtn.setText(R.string.start);  // Reset Start Button text
                 countdownText.setTextColor(Color.BLACK);  // Set timer text colour to black
                 countdownText.clearAnimation();  // Stop blinking animation (when the timer has run out)
             }
@@ -225,5 +248,19 @@ public class StudyTimerFragment extends Fragment {
 
 
         return view;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void saveStudyTime() {
+        if (studyId != 0) {
+            int totalTimeInMinutes = (int) TimeUnit.SECONDS.toMinutes(totalTime);
+
+            // Get current date
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String currentDate = formatter.format(LocalDateTime.now());
+
+            if (subject.moveToFirst())
+                db.addStudyTime(subject.getInt(0), currentDate, String.valueOf(totalTimeInMinutes));
+        }
     }
 }

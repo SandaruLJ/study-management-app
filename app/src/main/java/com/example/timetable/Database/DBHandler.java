@@ -320,26 +320,13 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(StudyMaster.Studies.COLUMN_NAME_SUBJECT, subject);
-        values.put(StudyMaster.Studies.COLUMN_NAME_DATE, date);
-        values.put(StudyMaster.Studies.COLUMN_NAME_REMINDER_TIME, studyTime);
+        values.put(SubjectMaster.StudyTimes.COLUMN_NAME_SUBJECT, subject);
+        values.put(SubjectMaster.StudyTimes.COLUMN_NAME_DATE, date);
+        values.put(SubjectMaster.StudyTimes.COLUMN_NAME_STUDY_TIME, studyTime);
 
         long result = db.insert(SubjectMaster.StudyTimes.TABLE_NAME, null, values);
 
         return result != -1;
-    }
-
-    public boolean updateStudyTime(String studyTimeId, Integer subject, String date, String studyTime) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        values.put(StudyMaster.Studies.COLUMN_NAME_SUBJECT, subject);
-        values.put(StudyMaster.Studies.COLUMN_NAME_DATE, date);
-        values.put(StudyMaster.Studies.COLUMN_NAME_REMINDER_TIME, studyTime);
-
-        db.update(SubjectMaster.StudyTimes.TABLE_NAME, values, "_id = ?", new String[]{studyTimeId});
-
-        return true;
     }
 
     public Cursor getRelevantStudyTimes(String[] dateQueryArray) {
