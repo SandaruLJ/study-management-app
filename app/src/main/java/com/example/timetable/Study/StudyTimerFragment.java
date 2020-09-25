@@ -269,6 +269,10 @@ public class StudyTimerFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void saveStudyTime() {
         if (studyId != 0) {
+            // Round up to nearest minute
+            if (totalTime % 60 >= 30)
+                totalTime += 30;
+
             int totalTimeInMinutes = (int) TimeUnit.SECONDS.toMinutes(totalTime);
 
             // Get current date
