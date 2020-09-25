@@ -12,6 +12,7 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
@@ -183,8 +184,14 @@ public class StudyTimerFragment extends Fragment {
                             setTimeBtn.setEnabled(true);  // Enable Set Time Button
                             startBtn.setEnabled(false);  // Disable Start Button
                             startBtn.setText(R.string.start);  // Reset Start Button text
+
+                            // Release wakelock when timer is finished
+                            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                         }
                     }.start();
+
+                    // Keep screen on when timer is running
+                    getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
                     setTimeBtn.setEnabled(false);  // Disable Set Time Button
                     startBtn.setText(R.string.stop);  // Change Start Button to Stop Button
@@ -203,6 +210,9 @@ public class StudyTimerFragment extends Fragment {
                     pauseBtn.setEnabled(false);  // Disable Pause Button
                     startBtn.setEnabled(false);  // Disable Start Button
                     startBtn.setText(R.string.start);  // Reset Start Button text
+
+                    // Release wakelock when timer is stopped
+                    getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 }
             }
         });
@@ -217,6 +227,9 @@ public class StudyTimerFragment extends Fragment {
                 if (pauseBtn.getText().toString().equalsIgnoreCase("pause")) {
                     timer.cancel();  // Pause timer
                     pauseBtn.setText(R.string.resume);  // Change Pause to Resume
+
+                    // Release wakelock when timer is paused
+                    getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 }
                 else {
                     startBtn.setText(R.string.start);  // Set text to "Start" to bypass if statement check
@@ -243,6 +256,9 @@ public class StudyTimerFragment extends Fragment {
                 startBtn.setText(R.string.start);  // Reset Start Button text
                 countdownText.setTextColor(Color.BLACK);  // Set timer text colour to black
                 countdownText.clearAnimation();  // Stop blinking animation (when the timer has run out)
+
+                // Release wakelock when timer is reset
+                getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
         });
 
