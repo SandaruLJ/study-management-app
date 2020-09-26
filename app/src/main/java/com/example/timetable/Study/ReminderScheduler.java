@@ -23,15 +23,16 @@ public class ReminderScheduler {
     private static final long INTERVAL_WEEK = 604800000L;
     private Context context;
     private Intent intent;
-    private Calendar calendar;
-    private SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.ENGLISH);
+    private int studyId;
     private Long dateTimeInMillis;
     private AlarmManager alarmManager;
 
     public ReminderScheduler(Context context, int studyId, String studyTitle, String subjectName,
                              String studyDate, String startTime, String reminderTime) {
         this.context = context;
-        calendar = Calendar.getInstance();
+        this.studyId = studyId;
+
+        Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
@@ -41,6 +42,7 @@ public class ReminderScheduler {
         intent.putExtra(EXTRA_SUBJECT_NAME, subjectName);
 
         try {
+            SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.ENGLISH);
             Date dateTime = dateTimeFormatter.parse(studyDate + " " + startTime);
             assert dateTime != null;
             calendar.setTime(dateTime);
@@ -62,7 +64,7 @@ public class ReminderScheduler {
     }
 
     public void scheduleReminder(String repeat) {
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, studyId, intent, 0);
 
         if (repeat.equalsIgnoreCase("daily"))
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, dateTimeInMillis,
@@ -73,6 +75,4 @@ public class ReminderScheduler {
         else
             alarmManager.set(AlarmManager.RTC_WAKEUP, dateTimeInMillis, pendingIntent);
     }
-
-
 }

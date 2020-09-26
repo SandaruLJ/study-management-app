@@ -40,6 +40,6 @@ public class ReminderBroadcastReceiver extends BroadcastReceiver {
                 .setAutoCancel(true);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.notify(1, notificationBuilder.build());
+        notificationManager.notify(studyId, notificationBuilder.build());
     }
 }
