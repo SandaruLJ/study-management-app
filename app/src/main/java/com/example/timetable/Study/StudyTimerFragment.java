@@ -6,6 +6,8 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.CountDownTimer;
@@ -171,7 +173,9 @@ public class StudyTimerFragment extends Fragment {
                         @Override
                         public void onFinish() {
                             saveStudyTime();  // Save total study time
+
                             countdownText.setTextColor(Color.RED);  // Set timer text color to red
+                            notifyTimerFinished();  // Send timer finished notification
 
                             // Create and start blinking animation
                             Animation blink = new AlphaAnimation(0.0f, 1.0f);
@@ -282,5 +286,17 @@ public class StudyTimerFragment extends Fragment {
             if (subject.moveToFirst())
                 db.addStudyTime(subject.getInt(0), currentDate, String.valueOf(totalTimeInMinutes));
         }
+    }
+
+    private void notifyTimerFinished() {
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getContext(), "notifyStudyPlanner")
+                .setSmallIcon(R.drawable.alarm)
+                .setContentTitle("Time for a break!")
+                .setContentText("The study timer has run out")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
+        notificationManager.notify(1000, notificationBuilder.build());
     }
 }
