@@ -42,8 +42,11 @@ import com.google.android.material.tabs.TabLayout;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -112,6 +115,7 @@ public class addClass extends Fragment  {
 
 
         save.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 boolean isInserted;
@@ -124,17 +128,26 @@ public class addClass extends Fragment  {
                 String date = null;
                 Date startTime = null;
                 Date sdate = null;
+                Date edate = null;
+                Date endTime = null;
                 String stime;
+                String etime = null;
+                String eDate = null;
                 String rtype;
                 String day = null;
                 int dayValue = 0;
                 Calendar cald = Calendar.getInstance();
                 Calendar calt = Calendar.getInstance();
+
+                Calendar caled = Calendar.getInstance();
+                Calendar calet = Calendar.getInstance();
                 if(selectedTab == 0) {
-                    intent.putExtra("date", ClassWeekFragment.start.getText().toString());
+                    intent.putExtra("date", ClassWeekFragment.day.getSelectedItem().toString());
                     intent.putExtra("time", ClassWeekFragment.stime.getText().toString());
                     stime = ClassWeekFragment.stime.getText().toString();
+                    etime = ClassWeekFragment.etime.getText().toString();
                     date = ClassWeekFragment.start.getText().toString();
+                    eDate = ClassWeekFragment.end.getText().toString();
                     day = ClassWeekFragment.day.getSelectedItem().toString();
                     rtype = ClassWeekFragment.reminder.getSelectedItem().toString();
                 }else{
@@ -147,23 +160,7 @@ public class addClass extends Fragment  {
 
                 int min = 0;
 
-                if(selectedTab==0){
-                    if(day.equals("Monday"))
-                        dayValue = 1;
-                    else if(day.equals("Tuesday"))
-                        dayValue = 2;
-                    else if(day.equals("Wednesday"))
-                        dayValue = 3;
-                    else if(day.equals("Thursday"))
-                        dayValue = 4;
-                    else if(day.equals("Friday"))
-                        dayValue = 5;
-                    else if(day.equals("Saturday"))
-                        dayValue = 6;
-                    else if(day.equals("Sunday"))
-                        dayValue = 7;
 
-                }
 
                 if(rtype.equals("5 minutes")){
                     min = -5;
@@ -187,28 +184,96 @@ public class addClass extends Fragment  {
                 try {
                     startTime = timeFormat.parse(stime);
                     sdate = dateFormat.parse(date);
+                    if(selectedTab == 0){
+                        edate = dateFormat.parse(eDate);
+                        endTime = timeFormat.parse(etime);
+                    }
+
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
                 cald.setTime(sdate);
-
                 calt.setTime(startTime);
+
 
                 cald.add(Calendar.HOUR_OF_DAY,calt.get(Calendar.HOUR_OF_DAY));
                 cald.add(Calendar.MINUTE,calt.get(Calendar.MINUTE));
                 cald.add(Calendar.MINUTE,min);
-//                Toast.makeText(getActivity().getApplicationContext(), String.valueOf(db.getLastClassIndex()), Toast.LENGTH_LONG).show();
-                calt.add(Calendar.MINUTE,min);
+
+                if(selectedTab == 0){
+                    caled.setTime(edate);
+                    calet.setTime(endTime);
+
+                    caled.add(Calendar.HOUR_OF_DAY,calet.get(Calendar.HOUR_OF_DAY));
+                    caled.add(Calendar.MINUTE,calet.get(Calendar.MINUTE));
+                    caled.add(Calendar.MINUTE,min);
+                }
+
+
 
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),db.getLastClassIndex()+1,intent,0);
                 AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
                 long timeAtButtonClick = cald.getTimeInMillis();
+//
+//                alarmManager.set(AlarmManager.RTC_WAKEUP,
+//                        timeAtButtonClick ,
+//                        pendingIntent);
+
+
+                if(selectedTab==0){
+                    LocalDate slocalDate = sdate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    if(day.equals("Monday"))
+                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY));
+                    else if(day.equals("Tuesday"))
+                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.TUESDAY));
+                    else if(day.equals("Wednesday"))
+                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.WEDNESDAY));
+                    else if(day.equals("Thursday"))
+                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.THURSDAY));
+                    else if(day.equals("Friday"))
+                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.FRIDAY));
+                    else if(day.equals("Saturday"))
+                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY));
+                    else if(day.equals("Sunday"))
+                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+
+                    calt.set(Calendar.DAY_OF_MONTH,slocalDate.getDayOfMonth());
+                    calt.set(Calendar.MONTH,slocalDate.getMonthValue()-1);
+                    calt.set(Calendar.YEAR,cald.get(Calendar.YEAR));
+                    calt.add(Calendar.MINUTE,min);
+
+//                    Date currentDate = new Date();
+//                    Calendar cl = Calendar.getInstance();
+//                    cl.setTime(currentDate);
+//                    Date test = null;
+//                    try {
+//                        test = dateFormat.parse("26/09/2020");
+//                    } catch (ParseException e) {
+//                        e.printStackTrace();
+//                    }
+//                    String val = "";
+//                    if(currentDate.compareTo(test) == 0){
+//                        val="True";
+//                    }
+//                    Toast.makeText(getActivity().getApplicationContext(), val, Toast.LENGTH_LONG).show();
+
+                    int weekInMillis = 7*24*60*60*1000;
+                    alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calt.getTimeInMillis(),weekInMillis,pendingIntent);
+
+//                    alarmManager.set(AlarmManager.RTC_WAKEUP,
+//                            caled.getTimeInMillis(),
+//                            pendingIntent);
+
+                }else{
+                    alarmManager.set(AlarmManager.RTC_WAKEUP,
+                            timeAtButtonClick ,
+                            pendingIntent);
+                }
+
 //                alarmManager.cancel(pendingIntent);
 //
-                alarmManager.set(AlarmManager.RTC_WAKEUP,
-                        timeAtButtonClick ,
-                        pendingIntent);
+
 
 
                 if(selectedTab == 0) {

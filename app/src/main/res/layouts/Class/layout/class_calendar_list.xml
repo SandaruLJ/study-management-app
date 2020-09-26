@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/classLayout">
+
+    <RelativeLayout
+        android:id="@+id/view_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#ED2424">
+
+        <ImageView
+            android:id="@+id/delete_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:tint="@color/white"
+            android:src="@drawable/delete" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/delete_icon"
+            android:text="DELETE"
+            android:textColor="#fff"
+            android:textSize="13dp" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/classCard"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/classColor"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@color/col2"/>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/className"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="15dp"
+                    android:text="@string/physics"
+                    android:textColor="@color/cal_subject_text_color"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="35dp"
+                        android:alpha="0.5"
+                        android:src="@drawable/teacher"
+
+                        android:tint="@color/grey"
+
+
+                        />
+
+                    <TextView
+                        android:id="@+id/teacher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:paddingLeft="25dp"
+                        android:paddingTop="30dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/einstein"
+                        android:textColor="@color/darkblue"
+
+                        android:textSize="14dp" />
+
+                    <ImageView
+                        android:id="@+id/classIcon"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="33dp"
+                        android:layout_toRightOf="@id/teacher"
+                        android:alpha="0.5"
+                        android:src="@drawable/classroom"
+
+                        android:tint="@color/grey" />
+
+                    <TextView
+                        android:id="@+id/venue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_toRightOf="@id/classIcon"
+                        android:gravity="start"
+                        android:text="@string/A102"
+                        android:textColor="@color/darkblue"
+                        android:textSize="13dp" />
+                    <ImageView
+                        android:id="@+id/dateIcon"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="33dp"
+                        android:layout_toRightOf="@id/venue"
+                        android:alpha="0.5"
+                        android:src="@drawable/today"
+                        android:tint="@color/grey" />
+
+                    <TextView
+                        android:id="@+id/sdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_toRightOf="@id/dateIcon"
+                        android:gravity="start"
+                        android:text="@string/A102"
+                        android:textColor="@color/darkblue"
+                        android:textSize="13dp" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/startTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+
+                    android:gravity="end"
+                    android:paddingTop="7dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="0dp"
+                    android:text="@string/stime"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/endTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/startTime"
+                    android:layout_alignParentRight="true"
+                    android:gravity="end"
+                    android:paddingTop="0dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="0dp"
+
+                    android:text="@string/etime"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</FrameLayout>
