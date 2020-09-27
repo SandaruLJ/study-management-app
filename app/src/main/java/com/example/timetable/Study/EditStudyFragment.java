@@ -413,6 +413,8 @@ public class EditStudyFragment extends Fragment {
 
                     if (reminder.isChecked())
                         reminderScheduler.scheduleReminder();
+                    else
+                        ReminderScheduler.removeReminder(getContext(), studyId);  // Remove existing reminder
                 }
                 }
             });
