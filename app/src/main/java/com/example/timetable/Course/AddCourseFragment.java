@@ -1,5 +1,11 @@
 package com.example.timetable.Course;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -21,9 +27,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.timetable.App;
 import com.example.timetable.ColorPicker;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
+import com.example.timetable.ReminderBroadcast;
 import com.example.timetable.SelectDateFragment;
 
 /**
@@ -41,6 +49,10 @@ public class AddCourseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new DBHandler(getActivity().getApplicationContext());
+
+        createNotificationChannels();
+
+
 //        db.create();
     }
 
@@ -108,7 +120,6 @@ public class AddCourseFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-
                boolean isInserted = db.addCourse(cname.getText().toString(),instituition.getText().toString(),description.getText().toString(), ((ColorDrawable) bgBtn.getBackground()).getColor(),start.getText().toString(),end.getText().toString());
 
                 if(isInserted == true) {
@@ -127,5 +138,18 @@ public class AddCourseFragment extends Fragment {
         return view;
     }
 
+    public void createNotificationChannels(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel1 = new NotificationChannel(
+                    "Channel1",
+                    "Channel 1",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel1.setDescription("This is Channel 1 ");
 
+            NotificationManager manager = getActivity().getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel1);
+
+        }
+    }
 }

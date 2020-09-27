@@ -288,7 +288,7 @@
                 android:textSize="22dp" />
 
             <LinearLayout
-                android:id="@+id/dateSelectorStart"
+                android:id="@+id/dateSelectorEnd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"

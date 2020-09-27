@@ -16,7 +16,7 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingBottom="0dp"
-        android:id="@+id/dateSelector"
+        android:id="@+id/dateSelectorStart"
         android:clickable="true">
 
         <ImageView
@@ -52,7 +52,7 @@
                 android:text="@string/_10_12_2020"
                 android:textFontWeight="600"
                 android:layout_alignParentEnd="true"
-
+                android:id="@+id/startDate"
                 android:textSize="20dp"
                 />
         </RelativeLayout>
@@ -76,7 +76,7 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingBottom="0dp"
-        android:id="@+id/classStartTimebtn"
+        android:id="@+id/timeSelectorStart"
         android:clickable="true">
 
         <ImageView
@@ -116,7 +116,7 @@
                 android:text="@string/start_time_val"
                 android:textFontWeight="600"
                 android:textSize="20dp"
-
+                android:id="@+id/startTime"
                 />
         </RelativeLayout>
     </LinearLayout>
@@ -135,7 +135,7 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingBottom="0dp"
-        android:id="@+id/classEndTimebtn"
+        android:id="@+id/timeSelectorEnd"
         android:clickable="true">
 
         <ImageView
@@ -161,20 +161,20 @@
                 android:hint="@string/end_time"
                 android:textSize="20dp"
                 />
-<!--            <TextView-->
+            <TextView
 
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:paddingLeft="10dp"-->
-<!--                android:paddingTop="5dp"-->
-<!--                android:paddingRight="20dp"-->
-<!--                android:paddingBottom="20dp"-->
-<!--                android:text="11:30 A.M"-->
-
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:textFontWeight="600"-->
-<!--                android:textSize="20dp"-->
-<!--                />-->
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="20dp"
+                android:text="11:30 A.M"
+                android:id="@+id/endTime"
+                android:layout_alignParentEnd="true"
+                android:textFontWeight="600"
+                android:textSize="20dp"
+                />
         </RelativeLayout>
     </LinearLayout>
     <!--      <View-->
@@ -214,11 +214,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Spinner
-                    android:id="@+id/subjectInput"
+                    android:id="@+id/reminderSelect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:entries="@array/times"
+
                     android:spinnerMode="dialog"/>
             </RelativeLayout>
 

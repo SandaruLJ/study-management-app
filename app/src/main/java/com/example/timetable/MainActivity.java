@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity  {
                             selectedFragment = new ViewClassFragment();
                             break;
                         case R.id.nav_homework :
-                            selectedFragment = new displayHomework();
+                            selectedFragment = new addClass();
                             break;
                         case R.id.nav_test :
                             selectedFragment = new displayExams();

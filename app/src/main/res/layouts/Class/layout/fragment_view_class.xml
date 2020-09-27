@@ -32,7 +32,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/addIcon"
+                android:id="@+id/addIcon2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
@@ -45,7 +45,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5dp"
-                android:layout_toLeftOf="@id/addIcon"
+                android:layout_toLeftOf="@id/addIcon2"
                 android:padding="10dp"
                 android:src="@drawable/today"
                 android:tint="@color/white" />

@@ -11,6 +11,7 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -22,6 +23,11 @@ import java.util.Calendar;
  */
 public class SelectTimeFragement extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener  {
+
+    TextView t;
+    public SelectTimeFragement(TextView t1){
+        this.t = t1;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -37,5 +43,6 @@ public class SelectTimeFragement extends DialogFragment
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         // Do something with the time chosen by the user
+        t.setText(hourOfDay+":"+minute);
     }
 }

@@ -15,6 +15,7 @@
     <string name="einstein">Sir Einstein</string>
     <string name="stime">09:30 A.M</string>
     <string name="etime">10:30 A.M</string>
+    <string name="editClass">Edit Class</string>
     <string name="className">Class Name</string>
     <string name="addClass">Add Class</string>
     <string name="course">Course</string>
