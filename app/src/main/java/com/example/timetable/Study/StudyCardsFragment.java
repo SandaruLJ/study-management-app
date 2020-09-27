@@ -93,12 +93,14 @@ public class StudyCardsFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                // Remove reminder notifications if there are any
-                ReminderScheduler.removeReminder(getContext(), studyIds.get(viewHolder.getAdapterPosition()));
+                int studyId = studyIds.get(viewHolder.getAdapterPosition());  // Get study id
 
                 // When the row is swiped, remove the item from adapter and delete it from database
                 adapter.removeItem(viewHolder.getAdapterPosition());
-                db.deleteStudy(String.valueOf(studyIds.get(viewHolder.getAdapterPosition())));
+                db.deleteStudy(String.valueOf(studyId));
+
+                // Remove reminder notifications if there are any
+                ReminderScheduler.removeReminder(getContext(), studyId);
             }
 
             @Override
