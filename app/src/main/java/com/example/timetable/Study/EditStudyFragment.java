@@ -407,11 +407,12 @@ public class EditStudyFragment extends Fragment {
 
                     ReminderScheduler reminderScheduler = new ReminderScheduler(getContext(),
                             studyId, studyTitle.getText().toString(), subjectName,
-                            studyDate.getText().toString(), studyStart.getText().toString(),
+                            studyDate.getText().toString(), studyDay.getSelectedItem().toString(),
+                            studyStart.getText().toString(), repeat.getSelectedItem().toString(),
                             reminderTime.getSelectedItem().toString());
 
                     if (reminder.isChecked())
-                        reminderScheduler.scheduleReminder(repeat.getSelectedItem().toString());
+                        reminderScheduler.scheduleReminder();
                 }
                 }
             });
