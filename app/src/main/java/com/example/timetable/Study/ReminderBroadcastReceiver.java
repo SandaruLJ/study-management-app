@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -32,10 +33,11 @@ public class ReminderBroadcastReceiver extends BroadcastReceiver {
         PendingIntent mainPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, "notifyStudyPlanner")
-                .setSmallIcon(R.drawable.alarm)
+                .setSmallIcon(R.drawable.notification_new)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),R.mipmap.studentplanner))
                 .setContentTitle("Time for " + intent.getStringExtra(ReminderScheduler.EXTRA_STUDY_TITLE))
                 .setContentText(intent.getStringExtra(ReminderScheduler.EXTRA_SUBJECT_NAME))
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setContentIntent(mainPendingIntent)
                 .setAutoCancel(true);
 

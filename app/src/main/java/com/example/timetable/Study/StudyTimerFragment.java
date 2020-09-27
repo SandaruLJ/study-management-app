@@ -1,6 +1,7 @@
 package com.example.timetable.Study;
 
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -290,10 +291,11 @@ public class StudyTimerFragment extends Fragment {
 
     private void notifyTimerFinished() {
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getContext(), "notifyStudyPlanner")
-                .setSmallIcon(R.drawable.alarm)
+                .setSmallIcon(R.drawable.notification_new)
+                .setLargeIcon(BitmapFactory.decodeResource(getContext().getResources(),R.mipmap.studentplanner))
                 .setContentTitle("Time for a break!")
                 .setContentText("The study timer has run out")
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setAutoCancel(true);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
