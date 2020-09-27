@@ -12,6 +12,7 @@ import com.example.timetable.Class.addClass;
 import com.example.timetable.Course.DisplayCourseFragment;
 import com.example.timetable.Exam.displayExams;
 import com.example.timetable.Homework.displayHomework;
+import com.example.timetable.Homework.edithomework;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity  {
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity  {
                             selectedFragment = new ViewClassFragment();
                             break;
                         case R.id.nav_homework :
-                            selectedFragment = new addClass();
+                            selectedFragment = new displayHomework();
                             break;
                         case R.id.nav_test :
                             selectedFragment = new displayExams();

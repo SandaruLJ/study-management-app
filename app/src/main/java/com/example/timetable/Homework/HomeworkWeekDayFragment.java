@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.example.timetable.Class.ClassDayFragment;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
 
@@ -53,11 +54,20 @@ public class HomeworkWeekDayFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
 
     DBHandler db;
+    int stab;
+    public static Fragment newInstance(int tab){
+       HomeworkWeekDayFragment cl = new HomeworkWeekDayFragment();
+        Bundle arguments = new Bundle();
+        arguments.putInt("stab", tab);
+        cl.setArguments(arguments);
+        return cl;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new DBHandler(getActivity().getApplicationContext());
+
     }
 
     @Override

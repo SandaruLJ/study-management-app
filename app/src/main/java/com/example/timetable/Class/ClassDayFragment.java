@@ -112,7 +112,6 @@ public class ClassDayFragment extends Fragment {
             DayOfWeek day = today.getDayOfWeek();
             int dayValue = day.getValue();
 
-//            Toast.makeText(getActivity().getApplicationContext(), String.valueOf(dayValue), Toast.LENGTH_SHORT).show();
 
 
             if(( d1.compareTo(mon)>=0 && d1.compareTo(week) < 0 && dayValue == 1 && stab == 0) || (c.getString(10).equals("Monday") && stab == 0)  ){

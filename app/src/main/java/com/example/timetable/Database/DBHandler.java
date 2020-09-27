@@ -57,10 +57,23 @@ public class DBHandler extends SQLiteOpenHelper {
                     HomeworkMaster.Homework.COLUMN_NAME_NOTE + " TEXT)" ;
 
 
+    private static final String SQL_CREATE_EXAM_ENTRIES =
+            "CREATE TABLE " + ExamMaster.Exam.TABLE_NAME + "("+
+                 ExamMaster.Exam._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    ExamMaster.Exam.COLUMN_NAME_TITLE + " TEXT," +
+                    ExamMaster.Exam.COLUMN_NAME_SUBJECT + " TEXT," +
+                    ExamMaster.Exam.COLUMN_NAME_LOCATION + " TEXT," +
+                    ExamMaster.Exam.COLUMN_NAME_DUE_DATE + " TEXT," +
+                    ExamMaster.Exam.COLUMN_NAME_START_TIME + " TEXT," +
+                    ExamMaster.Exam.COLUMN_NAME_END_TIME + " TEXT," +
+                    ExamMaster.Exam.COLUMN_NAME_REMINDER + " INTEGER," +
+                    ExamMaster.Exam.COLUMN_NAME_COLOUR + " INTEGER," +
+                    ExamMaster.Exam.COLUMN_NAME_NOTE + " TEXT)" ;
+
 
     public DBHandler(@Nullable Context context) {
 
-        super(context, DATABASE_NAME, null, 3);
+        super(context, DATABASE_NAME, null, 4);
         SQLiteDatabase db = getWritableDatabase();
     }
 
@@ -131,7 +144,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     //CRUD Operations for CLass
-    public boolean addClass(String name, String course, String subject, String classType, String teacher, String classroom,String note, Integer colour,String freq, String day, String startTime,String endTime, String sDate,String eDate,Integer reminder ){
+    public boolean addClass(String name, String course, String subject, String classType, String teacher, String classroom,String note, Integer colour,String freq, String day, String startTime,String endTime, String sDate,String eDate,String reminder ){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -251,6 +264,11 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(HomeworkMaster.Homework.TABLE_NAME, " _id = ? ",new String[]{id});
     }
+    public Cursor getSingleHomework(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from " + HomeworkMaster.Homework.TABLE_NAME + " WHERE "+ CourseMaster.Courses._ID + " = " + id, null);
+        return res;
+    }
     public boolean  updateHomework(String id,String title, String subject, String due_date,String time,String reminder, Integer colour, String note ){
 
 
@@ -266,6 +284,44 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(HomeworkMaster.Homework.COLUMN_NAME_NOTE,note);
         db.update(HomeworkMaster.Homework.TABLE_NAME,values,"_id = ?",new String[]{id});
         return true;
+    }
+    //CRUD operations for  EXAM
+
+    public boolean  addExam(String title, String subject, String location,String due_date,String time,String end_time ,String reminder, Integer colour, String note ){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(ExamMaster.Exam.COLUMN_NAME_TITLE,title);
+        values.put(ExamMaster.Exam.COLUMN_NAME_SUBJECT,subject);
+        values.put(ExamMaster.Exam.COLUMN_NAME_DUE_DATE,due_date);
+        values.put(ExamMaster.Exam.COLUMN_NAME_START_TIME,time);
+        values.put(ExamMaster.Exam.COLUMN_NAME_END_TIME,end_time);
+        values.put(ExamMaster.Exam.COLUMN_NAME_LOCATION,location);
+        values.put(ExamMaster.Exam.COLUMN_NAME_REMINDER,reminder);
+        values.put(ExamMaster.Exam.COLUMN_NAME_COLOUR,colour);
+        values.put(ExamMaster.Exam.COLUMN_NAME_NOTE,note);
+
+        long result = db.insert(HomeworkMaster.Homework.TABLE_NAME,null,values);
+        if(result == -1)
+            return false;
+        else
+            return true;
+    }
+    public Cursor getAllExam(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from "+ ExamMaster.Exam.TABLE_NAME,null);
+        return res;
+    }
+
+    public Integer deleteExam(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(ExamMaster.Exam.TABLE_NAME, " _id = ? ",new String[]{id});
+    }
+    public Cursor getSingleExam(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from " + ExamMaster.Exam.TABLE_NAME + " WHERE "+ CourseMaster.Courses._ID + " = " + id, null);
+        return res;
     }
 
 }
