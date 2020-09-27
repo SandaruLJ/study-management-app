@@ -6,6 +6,7 @@ import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.icu.text.CaseMap;
 
 import androidx.annotation.Nullable;
 
@@ -45,9 +46,22 @@ public class DBHandler extends SQLiteOpenHelper {
                     ClassMaster.Classes.COLUMN_NAME_END_DATE + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_REMINDER + " INTEGER )" ;
 
+    private static final String SQL_CREATE_HOMEWORK_ENTRIES =
+            "CREATE TABLE " + HomeworkMaster.Homework.TABLE_NAME + "("+
+                    HomeworkMaster.Homework._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    HomeworkMaster.Homework.COLUMN_NAME_TITLE + " TEXT," +
+                    HomeworkMaster.Homework.COLUMN_NAME_SUBJECT + " TEXT," +
+                    HomeworkMaster.Homework.COLUMN_NAME_DUE_DATE + " TEXT," +
+                    HomeworkMaster.Homework.COLUMN_NAME_TIME + " TEXT," +
+                    HomeworkMaster.Homework.COLUMN_NAME_REMINDER + " INTEGER," +
+                    HomeworkMaster.Homework.COLUMN_NAME_COLOUR + " INTEGER," +
+                    HomeworkMaster.Homework.COLUMN_NAME_NOTE + " TEXT)" ;
+
+
+
     public DBHandler(@Nullable Context context) {
 
-        super(context, DATABASE_NAME, null, 3);
+        super(context, DATABASE_NAME, null, 4);
         SQLiteDatabase db = getWritableDatabase();
     }
 
@@ -55,12 +69,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
                 db.execSQL(SQL_CREATE_COURSE_ENTRIES);
                 db.execSQL(SQL_CREATE_CLASS_ENTRIES);
+                db.execSQL(SQL_CREATE_HOMEWORK_ENTRIES);
 //        db.execSQL("DROP TABLE IF EXISTS "+ CourseMaster.Courses.TABLE_NAME);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + CourseMaster.Courses.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + ClassMaster.Classes.TABLE_NAME_CLASS);
+        db.execSQL("DROP TABLE IF EXISTS " + HomeworkMaster.Homework.TABLE_NAME);
         onCreate(db);
     }
     public void create(){
@@ -143,4 +159,53 @@ public class DBHandler extends SQLiteOpenHelper {
         else
             return true;
     }
+    //CRUD operations for  HOMEWORK
+
+    public boolean  addHomework(String title, String subject, String due_date,String time,String reminder, Integer colour, String note ){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_TITLE,title);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_SUBJECT,subject);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_DUE_DATE,due_date);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_TIME,time);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_REMINDER,reminder);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_COLOUR,colour);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_NOTE,note);
+
+        long result = db.insert(HomeworkMaster.Homework.TABLE_NAME,null,values);
+        if(result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public Cursor getAllHomework(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from "+ HomeworkMaster.Homework.TABLE_NAME,null);
+        return res;
+    }
+
+    public Integer deleteHomework(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(HomeworkMaster.Homework.TABLE_NAME, " _id = ? ",new String[]{id});
+    }
+    public boolean  updateHomework(String id,String title, String subject, String due_date,String time,String reminder, Integer colour, String note ){
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_TITLE,title);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_SUBJECT,subject);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_DUE_DATE,due_date);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_TIME,time);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_REMINDER,reminder);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_COLOUR,colour);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_NOTE,note);
+        db.update(HomeworkMaster.Homework.TABLE_NAME,values,"_id = ?",new String[]{id});
+        return true;
+    }
+
 }
