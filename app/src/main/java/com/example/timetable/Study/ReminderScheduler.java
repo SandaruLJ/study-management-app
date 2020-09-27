@@ -75,4 +75,11 @@ public class ReminderScheduler {
         else
             alarmManager.set(AlarmManager.RTC_WAKEUP, dateTimeInMillis, pendingIntent);
     }
+
+    public static void removeReminder(Context context, int studyId) {
+        Intent intent = new Intent(context, ReminderBroadcastReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, studyId, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
+    }
 }

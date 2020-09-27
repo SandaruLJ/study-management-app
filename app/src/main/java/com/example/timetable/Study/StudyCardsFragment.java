@@ -2,10 +2,12 @@ package com.example.timetable.Study;
 
 import android.database.Cursor;
 import android.graphics.Canvas;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -88,11 +90,15 @@ public class StudyCardsFragment extends Fragment {
                 return true;
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                // When the row is swiped, remove the item from adapter
-                db.deleteStudy(String.valueOf(studyIds.get(viewHolder.getAdapterPosition())));
+                // Remove reminder notifications if there are any
+                ReminderScheduler.removeReminder(getContext(), studyIds.get(viewHolder.getAdapterPosition()));
+
+                // When the row is swiped, remove the item from adapter and delete it from database
                 adapter.removeItem(viewHolder.getAdapterPosition());
+                db.deleteStudy(String.valueOf(studyIds.get(viewHolder.getAdapterPosition())));
             }
 
             @Override
