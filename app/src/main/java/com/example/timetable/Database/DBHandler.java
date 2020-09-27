@@ -43,7 +43,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     ClassMaster.Classes.COLUMN_NAME_END_TIME + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_START_DATE + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_END_DATE + " TEXT," +
-                    ClassMaster.Classes.COLUMN_NAME_REMINDER + " INTEGER )" ;
+                    ClassMaster.Classes.COLUMN_NAME_REMINDER + " TEXT )" ;
 
     private static final String SQL_CREATE_GOAL_ENTRIES =
             "CREATE TABLE " + GoalMaster.Goals.TABLE_NAME + "("+
@@ -186,7 +186,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     //CRUD Operations for CLass
-    public boolean addClass(String name, String course, String subject, String classType, String teacher, String classroom,String note, Integer colour,String freq, String day, String startTime,String endTime, String sDate,String eDate,Integer reminder ){
+    public boolean addClass(String name, String course, String subject, String classType, String teacher, String classroom,String note, Integer colour,String freq, String day, String startTime,String endTime, String sDate,String eDate,String reminder ){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

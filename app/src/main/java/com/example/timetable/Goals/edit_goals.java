@@ -1,10 +1,13 @@
-package com.example.timetable;
+package com.example.timetable.Goals;
 
 import android.content.res.ColorStateList;
+import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.DialogFragment;
@@ -20,8 +23,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.timetable.ColorPicker;
 import com.example.timetable.Database.DBHandler;
-import com.example.timetable.Goals.AllGoalsFragment;
+import com.example.timetable.R;
+import com.example.timetable.SelectDateFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,12 +35,13 @@ import com.example.timetable.Goals.AllGoalsFragment;
  */
 public class edit_goals extends Fragment {
 
-    EditText gname, due, description;
+    EditText gname, due, gdescription;
     Button save;
     Spinner scheduled_reminder;
     SwitchCompat reminder;
     ColorStateList col;
     DBHandler db;
+    int id;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,20 +49,52 @@ public class edit_goals extends Fragment {
         db = new DBHandler(getActivity().getApplicationContext());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.fragment_createevents, container, false);
+            View view = inflater.inflate(R.layout.fragment_edit_goals2, container, false);
 
             Button save = view.findViewById(R.id.btnSave);
             gname = (EditText) view.findViewById(R.id.goalid);
             reminder = (SwitchCompat) view.findViewById(R.id.reminder);
-            scheduled_reminder = (Spinner) view.findViewById(R.id.subjectInput);
-            description = (EditText) view.findViewById(R.id.descriptionId);
-
-            //Colour Picker
+            scheduled_reminder = (Spinner) view.findViewById(R.id.reminderSelect);
+            gdescription = (EditText) view.findViewById(R.id.descriptionId);
             final Button colorbtn = (Button) view.findViewById(R.id.colorbtn);
             final Button bgBtn = (Button) view.findViewById(R.id.testbtn);
+            final TextView end = (TextView) view.findViewById(R.id.endDate);
+            LinearLayout pickDatebtn1 = (LinearLayout) view.findViewById(R.id.dateSelectorEnd);
+
+        id  = 0;
+        Bundle bundle = this.getArguments();
+        if(bundle!=null){
+            id = Integer.parseInt(bundle.get("id").toString());
+
+        }
+
+        if(id != 0) {
+
+            String ename = null, edate = null, subjectd, description = null;
+            int colourd = 0;
+            Cursor c = db.getSingleGoal(id);
+
+            while (c.moveToNext()) {
+
+                ename = c.getString(1);
+                edate = c.getString(3);
+                description = c.getString(4);
+                colourd = c.getInt(2);
+
+            }
+            gname.setText(ename);
+            gdescription.setText(description);
+            end.setText(edate);
+            colorbtn.setBackgroundTintList(ColorStateList.valueOf(colourd));
+            bgBtn.setBackgroundColor(colourd);
+
+        }
+
+            //Colour Picker
             colorbtn.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -68,8 +106,6 @@ public class edit_goals extends Fragment {
             });
 
             //End Date Picker
-            final TextView end = (TextView) view.findViewById(R.id.endDate);
-            LinearLayout pickDatebtn1 = (LinearLayout) view.findViewById(R.id.dateSelectorEnd);
             pickDatebtn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -83,7 +119,7 @@ public class edit_goals extends Fragment {
             save.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    boolean isInserted = db.addGoals(gname.getText().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),end.getText().toString(),description.getText().toString(),reminder.isChecked(),scheduled_reminder.getSelectedItem().toString());
+                    boolean isInserted = db.addGoals(gname.getText().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),end.getText().toString(),gdescription.getText().toString(),reminder.isChecked(),scheduled_reminder.getSelectedItem().toString());
 
                     if(isInserted == true) {
                         Toast.makeText(getActivity().getApplicationContext(), "Goal Added Successfully", Toast.LENGTH_LONG).show();

@@ -55,7 +55,7 @@ public class createevents extends Fragment {
         Button save = view.findViewById(R.id.btnSave);
         gname = (EditText) view.findViewById(R.id.goalid);
         reminder = (SwitchCompat) view.findViewById(R.id.reminder);
-        scheduled_reminder = (Spinner) view.findViewById(R.id.subjectInput);
+        scheduled_reminder = (Spinner) view.findViewById(R.id.reminderSelect);
         description = (EditText) view.findViewById(R.id.descriptionId);
 
         //Colour Picker
@@ -94,7 +94,6 @@ public class createevents extends Fragment {
                     AllGoalsFragment fragment= new AllGoalsFragment();
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-
                 }else
                     Toast.makeText(getActivity().getApplicationContext(),"Insert Failed, Try again",Toast.LENGTH_LONG).show();
             }

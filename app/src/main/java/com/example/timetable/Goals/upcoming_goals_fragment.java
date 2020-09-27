@@ -59,70 +59,70 @@ public class upcoming_goals_fragment extends Fragment {
         }
 
         RecyclerView recyclerView = view.findViewById(R.id.goal_recycler_view);
-        final GoalsRecyclerViewAdapter adapter = new GoalsRecyclerViewAdapter(ids,goals,colours,due,description,getActivity());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        itemTouchHelper(adapter,ids,recyclerView,getActivity().getApplicationContext());
+//        final GoalsRecyclerViewAdapter adapter = new GoalsRecyclerViewAdapter(ids,goals,colours,due,description,getActivity());
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        itemTouchHelper(adapter,ids,recyclerView,getActivity().getApplicationContext());
 
         return view;
 
     }
     public void itemTouchHelper(final GoalsRecyclerViewAdapter adapter, final ArrayList<Integer> ids, final RecyclerView recyclerView, final Context cont) {
 
-        final ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return true;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                // Row is swiped from recycler view
-                // remove it from adapter
-
-                db.deleteCourse(String.valueOf(ids.get(viewHolder.getAdapterPosition())));
-                adapter.removeItem(viewHolder.getAdapterPosition());
-            }
-
-            @Override
-            public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
-                super.onSelectedChanged(viewHolder, actionState);
-                if (viewHolder != null) {
-                    final View foregroundView = ((GoalsRecyclerViewAdapter.ViewHolder) viewHolder).goalLay;
-                    getDefaultUIUtil().onSelected(foregroundView);
-                }
-            }
-
-            @Override
-            public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-                super.clearView(recyclerView, viewHolder);
-                final View foregroundView = ((GoalsRecyclerViewAdapter.ViewHolder) viewHolder).goalLay;
-                getDefaultUIUtil().clearView(foregroundView);
-            }
-
-            @Override
-            public void onChildDrawOver(@NonNull Canvas c, @NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                super.onChildDrawOver(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-                final View foregroundView = ((GoalsRecyclerViewAdapter.ViewHolder) viewHolder).goalLay;
-                getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY,
-                        actionState, isCurrentlyActive);
-            }
-
-            @Override
-            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                // view the background view
-                final View foregroundView = ((GoalsRecyclerViewAdapter.ViewHolder) viewHolder).goalLay;
-                getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY,
-                        actionState, isCurrentlyActive);
-            }
-
-            @Override
-            public int convertToAbsoluteDirection(int flags, int layoutDirection) {
-                return super.convertToAbsoluteDirection(flags, layoutDirection);
-            }
-        };
-
-        // attaching the touch helper to recycler view
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+//        final ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+//            @Override
+//            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+//                return true;
+//            }
+//
+//            @Override
+//            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+//                // Row is swiped from recycler view
+//                // remove it from adapter
+//
+//                db.deleteCourse(String.valueOf(ids.get(viewHolder.getAdapterPosition())));
+//                adapter.removeItem(viewHolder.getAdapterPosition());
+//            }
+//
+//            @Override
+//            public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
+//                super.onSelectedChanged(viewHolder, actionState);
+//                if (viewHolder != null) {
+//                    final View foregroundView = ((GoalsRecyclerViewAdapter.ViewHolder) viewHolder).goalLay;
+//                    getDefaultUIUtil().onSelected(foregroundView);
+//                }
+//            }
+//
+//            @Override
+//            public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+//                super.clearView(recyclerView, viewHolder);
+//                final View foregroundView = ((GoalsRecyclerViewAdapter.ViewHolder) viewHolder).goalLay;
+//                getDefaultUIUtil().clearView(foregroundView);
+//            }
+//
+//            @Override
+//            public void onChildDrawOver(@NonNull Canvas c, @NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+//                super.onChildDrawOver(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+//                final View foregroundView = ((GoalsRecyclerViewAdapter.ViewHolder) viewHolder).goalLay;
+//                getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY,
+//                        actionState, isCurrentlyActive);
+//            }
+//
+//            @Override
+//            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+//                // view the background view
+//                final View foregroundView = ((GoalsRecyclerViewAdapter.ViewHolder) viewHolder).goalLay;
+//                getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY,
+//                        actionState, isCurrentlyActive);
+//            }
+//
+//            @Override
+//            public int convertToAbsoluteDirection(int flags, int layoutDirection) {
+//                return super.convertToAbsoluteDirection(flags, layoutDirection);
+//            }
+//        };
+//
+//        // attaching the touch helper to recycler view
+//        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
     }
 }

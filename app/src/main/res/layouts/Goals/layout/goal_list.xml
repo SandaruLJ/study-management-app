@@ -4,13 +4,21 @@
     android:layout_height="wrap_content"
     android:id="@+id/goalLayout">
 
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/goalName"-->
+<!--        android:text="Hello World"/>-->
+
     <RelativeLayout
         android:id="@+id/view_background"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:orientation="vertical"
-        android:layout_margin="5dp"
-        android:background="#ED2424">
+        android:layout_height="98dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/class_delete_bg">
 
         <ImageView
             android:id="@+id/delete_icon"
@@ -44,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:background="@color/white"
             android:layout_marginTop="10dp">
 
 
@@ -140,7 +149,7 @@
                             />
 
                         <TextView
-                            android:id="@+id/goal"
+                            android:id="@+id/goalName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="45dp"
@@ -183,22 +192,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/_02"
+                    android:text="20"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="25dp"
-                    android:padding="10dp"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="15dp"
                     android:textStyle="bold"
-                    android:id="@+id/days"
+                    android:id="@+id/remdays"
                     android:background="@drawable/day_circle"
                     android:textColor="@color/white"
                     android:layout_marginEnd="20dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/days"
+                    android:layout_below="@id/remdays"
                     android:text="@string/days_more"
                     android:layout_alignParentEnd="true"
                     android:textSize="10dp"
+                    android:id="@+id/daytext"
                     android:padding="3dp"
                     android:textColor="@color/darkblue"
                     android:textStyle="bold"

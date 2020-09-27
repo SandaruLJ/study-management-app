@@ -52,15 +52,15 @@ public class GoalRecyclerView extends RecyclerView.Adapter<GoalRecyclerView.View
 
         public ViewHolder(View itemView){
             super(itemView);
-            goal = itemView.findViewById(R.id.goal);
-            description = itemView.findViewById(R.id.description);
-            day = itemView.findViewById(R.id.day);
-            date = itemView.findViewById(R.id.date);
-            year = itemView.findViewById(R.id.year);
-            goalColour = (RelativeLayout) itemView.findViewById(R.id.goalColour);
-            viewBackground = (RelativeLayout) itemView.findViewById(R.id.view_background);
-            goalLay = (RelativeLayout) itemView.findViewById(R.id.goalCard);
-            goalLayout = (FrameLayout) itemView.findViewById(R.id.goalLayout);
+//            goal = itemView.findViewById(R.id.goal);
+//            description = itemView.findViewById(R.id.description);
+//            day = itemView.findViewById(R.id.day);
+//            date = itemView.findViewById(R.id.date);
+//            year = itemView.findViewById(R.id.year);
+//            goalColour = (RelativeLayout) itemView.findViewById(R.id.goalColour);
+//            viewBackground = (RelativeLayout) itemView.findViewById(R.id.view_background);
+//            goalLay = (RelativeLayout) itemView.findViewById(R.id.goalCard);
+//            goalLayout = (FrameLayout) itemView.findViewById(R.id.goalLayout);
         }
     }
     @NonNull

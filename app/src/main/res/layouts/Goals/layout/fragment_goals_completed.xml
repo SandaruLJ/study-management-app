@@ -3,181 +3,198 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Goals.GoalsCompletedFragment">
+    tools:context=".Goals.upcoming_goals_fragment">
 
 
-    <LinearLayout
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/goal_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_margin="5dp"
-
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-
-            <RelativeLayout
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/radius">
-
-                <TextView
-                    android:id="@+id/startTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:paddingLeft="5dp"
-                    android:paddingTop="15dp"
-                    android:paddingRight="5dp"
-                    android:text="@string/aug_15"
-                    android:textColor="@color/white"
-                    android:textSize="18dp"
-
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/too"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/startTime"
-
-                    android:gravity="center_horizontal"
-                    android:text="@string/sunday"
-                    android:textColor="@color/white"
-                    android:textSize="18dp"
-
-                    />
-
-                <TextView
-                    android:id="@+id/endTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/too"
-                    android:gravity="center_horizontal"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:paddingBottom="15dp"
-                    android:text="@string/_2020"
-                    android:textColor="@color/white"
-                    android:textSize="18dp"
-
-                    android:textStyle="bold" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="400dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="1dp"
-                android:layout_weight=".30"
-                android:background="@drawable/rounded_corner"
-
-                >
-
-
-                <LinearLayout
-                    android:id="@+id/subject"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="-1dp"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/imageView2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="2dp"
-                            android:alpha="0.5"
-                            android:src="@drawable/goal"
-                            android:tint="@color/grey"
-
-
-                            />
-
-                        <TextView
-                            android:id="@+id/className"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="45dp"
-
-                            android:text="@string/watch_5_movies"
-                            android:textColor="@color/black"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lecturer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/subject"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-
-                        <TextView
-                            android:id="@+id/className"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-
-                            android:text="@string/target_completed_desc"
-                            android:textColor="@color/grey"
-                            android:textSize="14dp" />
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-
-                <ImageView
-                    android:id="@+id/days"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/day_circle"
-                    android:padding="10dp"
-                    android:src="@drawable/tick"
-                    android:text="02"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/days"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="22dp"
-                    android:padding="3dp"
-                    android:text="@string/done"
-                    android:textColor="@color/darkblue"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-
-        </LinearLayout>
-    </LinearLayout>
-
+        android:scrollbars="vertical"
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
 </FrameLayout>
+
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".Goals.GoalsCompletedFragment">-->
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="110dp"-->
+<!--        android:layout_margin="5dp"-->
+
+<!--        android:orientation="vertical">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:orientation="horizontal">-->
+
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/radius">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/startTime"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center_horizontal"-->
+<!--                    android:paddingLeft="5dp"-->
+<!--                    android:paddingTop="15dp"-->
+<!--                    android:paddingRight="5dp"-->
+<!--                    android:text="@string/aug_15"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="18dp"-->
+
+<!--                    android:textStyle="bold" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/too"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@id/startTime"-->
+
+<!--                    android:gravity="center_horizontal"-->
+<!--                    android:text="@string/sunday"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="18dp"-->
+
+<!--                    />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/endTime"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@id/too"-->
+<!--                    android:gravity="center_horizontal"-->
+<!--                    android:paddingLeft="5dp"-->
+<!--                    android:paddingRight="5dp"-->
+<!--                    android:paddingBottom="15dp"-->
+<!--                    android:text="@string/_2020"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="18dp"-->
+
+<!--                    android:textStyle="bold" />-->
+
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="400dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginLeft="1dp"-->
+<!--                android:layout_weight=".30"-->
+<!--                android:background="@drawable/rounded_corner"-->
+
+<!--                >-->
+
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/subject"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+
+<!--                    android:layout_alignParentTop="true"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="-1dp"-->
+<!--                    android:layout_marginBottom="5dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content">-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/imageView2"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="10dp"-->
+<!--                            android:layout_marginTop="2dp"-->
+<!--                            android:alpha="0.5"-->
+<!--                            android:src="@drawable/goal"-->
+<!--                            android:tint="@color/grey"-->
+
+
+<!--                            />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/className"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="45dp"-->
+
+<!--                            android:text="@string/watch_5_movies"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="20dp"-->
+<!--                            android:textStyle="bold" />-->
+<!--                    </RelativeLayout>-->
+
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/lecturer"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/subject"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content">-->
+
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/className"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="15dp"-->
+
+<!--                            android:text="@string/target_completed_desc"-->
+<!--                            android:textColor="@color/grey"-->
+<!--                            android:textSize="14dp" />-->
+<!--                    </RelativeLayout>-->
+
+<!--                </LinearLayout>-->
+
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/days"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_marginTop="25dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:background="@drawable/day_circle"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:src="@drawable/tick"-->
+<!--                    android:text="02"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:tint="@color/white" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@id/days"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_marginEnd="22dp"-->
+<!--                    android:padding="3dp"-->
+<!--                    android:text="@string/done"-->
+<!--                    android:textColor="@color/darkblue"-->
+<!--                    android:textSize="10dp"-->
+<!--                    android:textStyle="bold" />-->
+<!--            </RelativeLayout>-->
+
+
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
+
+<!--</FrameLayout>-->
+

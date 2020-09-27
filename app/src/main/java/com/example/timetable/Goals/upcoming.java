@@ -1,12 +1,16 @@
 package com.example.timetable.Goals;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,11 +19,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,11 +48,12 @@ public class upcoming extends Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_upcoming, container, false);
+        View view = inflater.inflate(R.layout.fragment_upcoming, container, false);
 
         final ArrayList<String> goals = new ArrayList<>();
         final ArrayList<String> description = new ArrayList<>();
@@ -49,23 +62,44 @@ public class upcoming extends Fragment {
         final ArrayList<String> due = new ArrayList<>();
         final Cursor c = db.getAllGoals();
 
-        while (c.moveToNext()){
-            ids.add(c.getInt(0));
-            goals.add(c.getString(1));
-            colours.add(c.getInt(2));
-            due.add(c.getString(3));
-            description.add(c.getString(4));
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        Date d1 = null;
+
+
+        Calendar today = Calendar.getInstance();
+
+        while (c.moveToNext()) {
+            try {
+                d1 = dateFormat.parse(c.getString(3));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            cal.setTime(d1);
+            long rem = ChronoUnit.DAYS.between(today.toInstant(), cal.toInstant()) ;
+            if(rem>=0) {
+
+                ids.add(c.getInt(0));
+                goals.add(c.getString(1));
+                colours.add(c.getInt(2));
+                due.add(c.getString(3));
+                description.add(c.getString(4));
+
+            }
+
+
         }
 
         RecyclerView recyclerView = view.findViewById(R.id.goal_recycler_view);
-        final GoalsRecyclerViewAdapter adapter = new GoalsRecyclerViewAdapter(ids,goals,colours,due,description,getActivity());
+        final GoalsRecyclerViewAdapter adapter = new GoalsRecyclerViewAdapter(ids, goals, colours, due, description, getActivity().getApplicationContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        itemTouchHelper(adapter,ids,recyclerView,getActivity().getApplicationContext());
+        itemTouchHelper(adapter, ids, recyclerView, getActivity().getApplicationContext());
 
 
         return view;
     }
+
     public void itemTouchHelper(final GoalsRecyclerViewAdapter adapter, final ArrayList<Integer> ids, final RecyclerView recyclerView, final Context cont) {
 
         final ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -79,7 +113,7 @@ public class upcoming extends Fragment {
                 // Row is swiped from recycler view
                 // remove it from adapter
 
-                db.deleteCourse(String.valueOf(ids.get(viewHolder.getAdapterPosition())));
+                db.deleteGoal(String.valueOf(ids.get(viewHolder.getAdapterPosition())));
                 adapter.removeItem(viewHolder.getAdapterPosition());
             }
 
