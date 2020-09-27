@@ -1,6 +1,7 @@
 package com.example.timetable.Goals;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,8 +16,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.timetable.Course.CourseRecyclerViewAdapter;
-import com.example.timetable.Course.editCourse;
+
 import com.example.timetable.R;
 
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class GoalRecyclerView extends RecyclerView.Adapter<GoalRecyclerView.View
             year = itemView.findViewById(R.id.year);
             goalColour = (RelativeLayout) itemView.findViewById(R.id.goalColour);
             viewBackground = (RelativeLayout) itemView.findViewById(R.id.view_background);
-            goalLay = (RelativeLayout) itemView.findViewById(R.id.goalLay);
+            goalLay = (RelativeLayout) itemView.findViewById(R.id.goalCard);
             goalLayout = (FrameLayout) itemView.findViewById(R.id.goalLayout);
         }
     }
@@ -75,6 +75,10 @@ public class GoalRecyclerView extends RecyclerView.Adapter<GoalRecyclerView.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+//        holder.goal.setText("Hello");
+//        holder.description.setText("ewdwed");
+//        holder.goalColour.setBackgroundColor(Color.RED);
+//        holder.day.setText("Monday");
         holder.goal.setText(goals.get(position));
         holder.description.setText(description.get(position));
         holder.goalColour.setBackgroundColor(colours.get(position));
@@ -85,12 +89,12 @@ public class GoalRecyclerView extends RecyclerView.Adapter<GoalRecyclerView.View
                 int id = ids.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putInt("id",  id);
-
-                editCourse cFragment = new editCourse();
-                cFragment.setArguments(bundle);
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, cFragment).addToBackStack(null).commit();
+//
+//                editCourse cFragment = new editCourse();
+//                cFragment.setArguments(bundle);
+//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, cFragment).addToBackStack(null).commit();
             }
         }));
 

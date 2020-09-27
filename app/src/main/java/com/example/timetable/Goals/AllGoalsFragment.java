@@ -21,7 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.timetable.Course.CourseRecyclerViewAdapter;
+
 import com.example.timetable.Course.DisplayCourseFragment;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
@@ -51,7 +51,7 @@ public class AllGoalsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-            View view = inflater.inflate(R.layout.fragment_all_goals,null);
+        View view = inflater.inflate(R.layout.fragment_all_goals, null);
 
         ImageView addBtn = (ImageView) view.findViewById(R.id.addIcon);
 
@@ -64,114 +64,33 @@ public class AllGoalsFragment extends Fragment {
             }
         });
 
-            final TabLayout tabLayout1 = (TabLayout) view.findViewById(R.id.goalsTab);
-            tabLayout1.addTab(tabLayout1.newTab().setText("Upcoming "));
-            tabLayout1.addTab(tabLayout1.newTab().setText("Completed"));
-            tabLayout1.setTabGravity(TabLayout.GRAVITY_CENTER);
-            tabLayout1.setTabGravity(TabLayout.GRAVITY_FILL);
+        final TabLayout tabLayout1 = (TabLayout) view.findViewById(R.id.goalsTab);
+        tabLayout1.addTab(tabLayout1.newTab().setText("Upcoming "));
+        tabLayout1.addTab(tabLayout1.newTab().setText("Completed"));
+        tabLayout1.setTabGravity(TabLayout.GRAVITY_CENTER);
+        tabLayout1.setTabGravity(TabLayout.GRAVITY_FILL);
 
-            final ViewPager viewPager1 = (ViewPager) view.findViewById(R.id.goals_pager);
-            GoalsAdapter adapter = new GoalsAdapter(getChildFragmentManager(),tabLayout1.getTabCount());
-            viewPager1.setAdapter(adapter);
-            viewPager1.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout1));
-            tabLayout1.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                @Override
-                public void onTabSelected(TabLayout.Tab tab) {
-                    viewPager1.setCurrentItem(tab.getPosition());
-                }
-
-                @Override
-                public void onTabUnselected(TabLayout.Tab tab) {
-
-                }
-
-                @Override
-                public void onTabReselected(TabLayout.Tab tab) {
-
-                }
-            });
-
-        final ArrayList<String> goals = new ArrayList<>();
-        final ArrayList<String> description = new ArrayList<>();
-        final ArrayList<Integer> colours = new ArrayList<>();
-        final ArrayList<Integer> ids = new ArrayList<>();
-        final ArrayList<String> due = new ArrayList<>();
-        final Cursor c = db.getAllGoals();
-
-        while (c.moveToNext()){
-            ids.add(c.getInt(0));
-            goals.add(c.getString(1));
-            colours.add(c.getInt(2));
-            due.add(c.getString(3));
-            description.add(c.getString(4));
-        }
-
-        RecyclerView recyclerView = view.findViewById(R.id.course_recyler_view);
-        final GoalRecyclerView adapter1 = new GoalRecyclerView(ids,goals,colours,due,description,getActivity());
-        recyclerView.setAdapter(adapter1);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        itemTouchHelper(adapter1,ids,recyclerView,getActivity().getApplicationContext());
-
-            return view;
-
-        }
-    public void itemTouchHelper(final CourseRecyclerViewAdapter adapter, final ArrayList<Integer> ids, final RecyclerView recyclerView, final Context cont) {
-
-        final ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        final ViewPager viewPager1 = (ViewPager) view.findViewById(R.id.goals_pager);
+        GoalsAdapter adapter = new GoalsAdapter(getChildFragmentManager(), tabLayout1.getTabCount());
+        viewPager1.setAdapter(adapter);
+        viewPager1.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout1));
+        tabLayout1.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return true;
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager1.setCurrentItem(tab.getPosition());
             }
 
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                // Row is swiped from recycler view
-                // remove it from adapter
+            public void onTabUnselected(TabLayout.Tab tab) {
 
-                db.deleteCourse(String.valueOf(ids.get(viewHolder.getAdapterPosition())));
-                adapter.removeItem(viewHolder.getAdapterPosition());
             }
 
             @Override
-            public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
-                super.onSelectedChanged(viewHolder, actionState);
-                if (viewHolder != null) {
-                    final View foregroundView = ((CourseRecyclerViewAdapter.ViewHolder) viewHolder).courseCard;
-                    getDefaultUIUtil().onSelected(foregroundView);
-                }
-            }
+            public void onTabReselected(TabLayout.Tab tab) {
 
-            @Override
-            public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-                super.clearView(recyclerView, viewHolder);
-                final View foregroundView = ((CourseRecyclerViewAdapter.ViewHolder) viewHolder).courseCard;
-                getDefaultUIUtil().clearView(foregroundView);
             }
-
-            @Override
-            public void onChildDrawOver(@NonNull Canvas c, @NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                super.onChildDrawOver(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-                final View foregroundView = ((CourseRecyclerViewAdapter.ViewHolder) viewHolder).courseCard;
-                getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY,
-                        actionState, isCurrentlyActive);
-            }
-
-            @Override
-            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                // view the background view
-                final View foregroundView = ((CourseRecyclerViewAdapter.ViewHolder) viewHolder).courseCard;
-                getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY,
-                        actionState, isCurrentlyActive);
-            }
-
-            @Override
-            public int convertToAbsoluteDirection(int flags, int layoutDirection) {
-                return super.convertToAbsoluteDirection(flags, layoutDirection);
-            }
-        };
-
-        // attaching the touch helper to recycler view
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+        });
+        return  view;
     }
 }
 class GoalsAdapter extends FragmentStatePagerAdapter {
@@ -190,7 +109,7 @@ class GoalsAdapter extends FragmentStatePagerAdapter {
 
 
         if (position == 0) {
-            fragment = new upcoming_goals_fragment();
+            fragment = new upcoming();
         }
         if (position == 1) {
             fragment = new GoalsCompletedFragment();

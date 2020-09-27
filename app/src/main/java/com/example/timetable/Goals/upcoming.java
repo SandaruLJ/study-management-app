@@ -16,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.timetable.Goals.GoalsRecyclerViewAdapter;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
 
@@ -24,10 +23,10 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link upcoming_goals_fragment#newInstance} factory method to
+ * Use the {@link upcoming#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class upcoming_goals_fragment extends Fragment {
+public class upcoming extends Fragment {
 
     DBHandler db;
 
@@ -41,7 +40,7 @@ public class upcoming_goals_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_upcoming_goals_fragment, container, false);
+        View view =  inflater.inflate(R.layout.fragment_upcoming, container, false);
 
         final ArrayList<String> goals = new ArrayList<>();
         final ArrayList<String> description = new ArrayList<>();
@@ -64,8 +63,8 @@ public class upcoming_goals_fragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         itemTouchHelper(adapter,ids,recyclerView,getActivity().getApplicationContext());
 
-        return view;
 
+        return view;
     }
     public void itemTouchHelper(final GoalsRecyclerViewAdapter adapter, final ArrayList<Integer> ids, final RecyclerView recyclerView, final Context cont) {
 
