@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.timetable.AllFragment;
+import com.example.timetable.Class.ClassDayFragment;
 import com.example.timetable.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -115,25 +116,25 @@ class HomeworkWeekAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
 
         if(position == 0){
-            fragment = new HomeworkWeekDayFragment();
+            fragment = new HomeworkWeekDayFragment().newInstance(0);;
         }
         if(position == 1){
-            fragment = new AllFragment();
+            fragment = new  new HomeworkWeekDayFragment().newInstance(1);;
         }
         if(position == 2){
-            fragment = new AllFragment();
+            fragment = new  new HomeworkWeekDayFragment().newInstance(2);;
         }
         if(position == 3){
-            fragment = new AllFragment();
+            fragment = new  new HomeworkWeekDayFragment().newInstance(3);;
         }
         if(position == 4){
-            fragment = new AllFragment();
+            fragment = new  new HomeworkWeekDayFragment().newInstance(4);;
         }
         if(position == 5){
-            fragment = new AllFragment();
+            fragment = new  new HomeworkWeekDayFragment().newInstance(5);;
         }
         if(position == 6){
-            fragment = new AllFragment();
+            fragment = new  new HomeworkWeekDayFragment().newInstance(6);;
         }
         return fragment;
     }

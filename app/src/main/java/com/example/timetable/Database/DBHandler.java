@@ -32,7 +32,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     ClassMaster.Classes.COLUMN_NAME_CLASS_NAME + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_COURSE + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_SUBJECT + " TEXT," +
-                    ClassMaster.Classes.COLUMN_NAME_CLASS_TYPE + " INTEGER," +
+                    ClassMaster.Classes.COLUMN_NAME_CLASS_TYPE + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_CLASS_TEACHER + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_CLASS_ROOM + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_NOTE + " TEXT," +
@@ -43,7 +43,32 @@ public class DBHandler extends SQLiteOpenHelper {
                     ClassMaster.Classes.COLUMN_NAME_END_TIME + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_START_DATE + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_END_DATE + " TEXT," +
-                    ClassMaster.Classes.COLUMN_NAME_REMINDER + " TEXT )" ;
+                    ClassMaster.Classes.COLUMN_NAME_REMINDER + " INTEGER )" ;
+
+    private static final String SQL_CREATE_HOMEWORK_ENTRIES =
+            "CREATE TABLE " + HomeworkMaster.Homework.TABLE_NAME + "("+
+                    HomeworkMaster.Homework._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    HomeworkMaster.Homework.COLUMN_NAME_TITLE + " TEXT," +
+                    HomeworkMaster.Homework.COLUMN_NAME_SUBJECT + " TEXT," +
+                    HomeworkMaster.Homework.COLUMN_NAME_DUE_DATE + " TEXT," +
+                    HomeworkMaster.Homework.COLUMN_NAME_TIME + " TEXT," +
+                    HomeworkMaster.Homework.COLUMN_NAME_REMINDER + " INTEGER," +
+                    HomeworkMaster.Homework.COLUMN_NAME_COLOUR + " INTEGER," +
+                    HomeworkMaster.Homework.COLUMN_NAME_NOTE + " TEXT)" ;
+
+
+    private static final String SQL_CREATE_EXAM_ENTRIES =
+            "CREATE TABLE " + ExamMaster.Exam.TABLE_NAME + "("+
+                 ExamMaster.Exam._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                    ExamMaster.Exam.COLUMN_NAME_TITLE + " TEXT," +
+                    ExamMaster.Exam.COLUMN_NAME_SUBJECT + " TEXT," +
+                    ExamMaster.Exam.COLUMN_NAME_LOCATION + " TEXT," +
+                    ExamMaster.Exam.COLUMN_NAME_DUE_DATE + " TEXT," +
+                    ExamMaster.Exam.COLUMN_NAME_START_TIME + " TEXT," +
+                    ExamMaster.Exam.COLUMN_NAME_END_TIME + " TEXT," +
+                    ExamMaster.Exam.COLUMN_NAME_REMINDER + " INTEGER," +
+                    ExamMaster.Exam.COLUMN_NAME_COLOUR + " INTEGER," +
+                    ExamMaster.Exam.COLUMN_NAME_NOTE + " TEXT)" ;
 
     private static final String SQL_CREATE_GOAL_ENTRIES =
             "CREATE TABLE " + GoalMaster.Goals.TABLE_NAME + "("+
@@ -73,6 +98,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + CourseMaster.Courses.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + ClassMaster.Classes.TABLE_NAME_CLASS);
         db.execSQL("DROP TABLE IF EXISTS " + GoalMaster.Goals.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + HomeworkMaster.Homework.TABLE_NAME);
         onCreate(db);
     }
     public void create(){
@@ -206,6 +232,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(ClassMaster.Classes.COLUMN_NAME_END_DATE,eDate);
         values.put(ClassMaster.Classes.COLUMN_NAME_REMINDER,reminder);
 
+
         long result = db.insert(ClassMaster.Classes.TABLE_NAME_CLASS,null,values);
         if(result == -1)
             return false;
@@ -275,4 +302,96 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return count;
     }
+    //CRUD operations for  HOMEWORK
+
+    public boolean  addHomework(String title, String subject, String due_date,String time,String reminder, Integer colour, String note ){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_TITLE,title);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_SUBJECT,subject);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_DUE_DATE,due_date);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_TIME,time);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_REMINDER,reminder);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_COLOUR,colour);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_NOTE,note);
+
+        long result = db.insert(HomeworkMaster.Homework.TABLE_NAME,null,values);
+        if(result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public Cursor getAllHomework(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from "+ HomeworkMaster.Homework.TABLE_NAME,null);
+        return res;
+    }
+
+    public Integer deleteHomework(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(HomeworkMaster.Homework.TABLE_NAME, " _id = ? ",new String[]{id});
+    }
+    public Cursor getSingleHomework(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from " + HomeworkMaster.Homework.TABLE_NAME + " WHERE "+ CourseMaster.Courses._ID + " = " + id, null);
+        return res;
+    }
+    public boolean  updateHomework(String id,String title, String subject, String due_date,String time,String reminder, Integer colour, String note ){
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_TITLE,title);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_SUBJECT,subject);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_DUE_DATE,due_date);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_TIME,time);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_REMINDER,reminder);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_COLOUR,colour);
+        values.put(HomeworkMaster.Homework.COLUMN_NAME_NOTE,note);
+        db.update(HomeworkMaster.Homework.TABLE_NAME,values,"_id = ?",new String[]{id});
+        return true;
+    }
+    //CRUD operations for  EXAM
+
+    public boolean  addExam(String title, String subject, String location,String due_date,String time,String end_time ,String reminder, Integer colour, String note ){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(ExamMaster.Exam.COLUMN_NAME_TITLE,title);
+        values.put(ExamMaster.Exam.COLUMN_NAME_SUBJECT,subject);
+        values.put(ExamMaster.Exam.COLUMN_NAME_DUE_DATE,due_date);
+        values.put(ExamMaster.Exam.COLUMN_NAME_START_TIME,time);
+        values.put(ExamMaster.Exam.COLUMN_NAME_END_TIME,end_time);
+        values.put(ExamMaster.Exam.COLUMN_NAME_LOCATION,location);
+        values.put(ExamMaster.Exam.COLUMN_NAME_REMINDER,reminder);
+        values.put(ExamMaster.Exam.COLUMN_NAME_COLOUR,colour);
+        values.put(ExamMaster.Exam.COLUMN_NAME_NOTE,note);
+
+        long result = db.insert(HomeworkMaster.Homework.TABLE_NAME,null,values);
+        if(result == -1)
+            return false;
+        else
+            return true;
+    }
+    public Cursor getAllExam(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from "+ ExamMaster.Exam.TABLE_NAME,null);
+        return res;
+    }
+
+    public Integer deleteExam(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(ExamMaster.Exam.TABLE_NAME, " _id = ? ",new String[]{id});
+    }
+    public Cursor getSingleExam(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from " + ExamMaster.Exam.TABLE_NAME + " WHERE "+ CourseMaster.Courses._ID + " = " + id, null);
+        return res;
+    }
+
 }
