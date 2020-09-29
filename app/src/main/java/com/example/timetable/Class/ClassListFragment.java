@@ -105,9 +105,6 @@ public class ClassListFragment extends Fragment {
         }
 
 
-//        System.out.println(Arrays.toString(days));
-//        Toast.makeText(getActivity().getApplicationContext(),Arrays.toString(days) , Toast.LENGTH_LONG).show();
-
 
         Date sdate = null;
         Date stime = null;

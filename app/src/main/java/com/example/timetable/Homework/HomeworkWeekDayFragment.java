@@ -3,10 +3,12 @@ package com.example.timetable.Homework;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Canvas;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,13 +17,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import com.example.timetable.Class.ClassDayFragment;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,29 +42,6 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class HomeworkWeekDayFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public HomeworkWeekDayFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeworkWeekDayFragment.
-     */
-    // TODO: Rename and change types and number of parameters
 
     DBHandler db;
     int stab;
@@ -67,9 +57,11 @@ public class HomeworkWeekDayFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new DBHandler(getActivity().getApplicationContext());
-
+        Bundle extras = getArguments();
+        stab = extras.getInt("stab");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,14 +75,102 @@ public class HomeworkWeekDayFragment extends Fragment {
         final ArrayList<String> due_dates = new ArrayList<>();
         final ArrayList<Integer> colors = new ArrayList<>();
         final ArrayList<Integer> ids = new ArrayList<>();
+
         final Cursor c = db.getAllHomework();
 
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date currentDate = new Date();
+        Calendar cl = Calendar.getInstance();
+        cl.setTime(currentDate);
+        cl.add(Calendar.DATE, 7);
+        Date week = cl.getTime();
+        Calendar now = Calendar.getInstance();
+        int delta = -now.get(GregorianCalendar.DAY_OF_WEEK) + 1; //add 2 if your week start on monday
+        now.add(Calendar.DAY_OF_MONTH, delta );
+        Date mon = now.getTime();
+        Date d1 = null;
+
         while (c.moveToNext()){
-            ids.add(c.getInt(0));
-            titles.add(c.getString(1));
-            subjects.add(c.getString(2));
-            due_dates.add(c.getString(3));
-            colors.add(c.getInt(6));
+
+            try {
+                d1 = dateFormat.parse(c.getString(3));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            LocalDate today = d1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            DayOfWeek day = today.getDayOfWeek();
+            int dayValue = day.getValue();
+
+
+//            ids.add(c.getInt(0));
+//            titles.add(c.getString(1));
+//            subjects.add(c.getString(2));
+//            due_dates.add(c.getString(3));
+//            colors.add(c.getInt(6));
+//            Toast.makeText(getActivity().getApplicationContext(), String.valueOf(stab ), Toast.LENGTH_LONG).show();
+
+
+            if(( d1.compareTo(mon)>=0 && d1.compareTo(week) < 0 && dayValue == 1 && stab == 0) ){
+
+                ids.add(c.getInt(0));
+                titles.add(c.getString(1));
+                subjects.add(c.getString(2));
+                due_dates.add(c.getString(3));
+                colors.add(c.getInt(6));
+
+
+            }else if(( d1.compareTo(mon)>=0 && d1.compareTo(week) < 0 && dayValue == 2 && stab == 1)  ){
+
+                ids.add(c.getInt(0));
+                titles.add(c.getString(1));
+                subjects.add(c.getString(2));
+                due_dates.add(c.getString(3));
+                colors.add(c.getInt(6));
+
+            }else if(( d1.compareTo(mon)>=0 && d1.compareTo(week) < 0 && dayValue == 3 && stab == 2)){
+
+                ids.add(c.getInt(0));
+                titles.add(c.getString(1));
+                subjects.add(c.getString(2));
+                due_dates.add(c.getString(3));
+                colors.add(c.getInt(6));
+
+            }else if(( d1.compareTo(mon)>=0 && d1.compareTo(week) < 0 && dayValue == 4 && stab == 3)  ){
+
+                ids.add(c.getInt(0));
+                titles.add(c.getString(1));
+                subjects.add(c.getString(2));
+                due_dates.add(c.getString(3));
+                colors.add(c.getInt(6));
+
+            }else if(( d1.compareTo(mon)>=0 && d1.compareTo(week) < 0 && dayValue == 5 && stab == 4) ){
+
+                ids.add(c.getInt(0));
+                titles.add(c.getString(1));
+                subjects.add(c.getString(2));
+                due_dates.add(c.getString(3));
+                colors.add(c.getInt(6));
+
+            }else if(( d1.compareTo(mon)>=0 && d1.compareTo(week) < 0 && dayValue == 6 && stab == 5)){
+
+                ids.add(c.getInt(0));
+                titles.add(c.getString(1));
+                subjects.add(c.getString(2));
+                due_dates.add(c.getString(3));
+                colors.add(c.getInt(6));
+
+            }else if(( d1.compareTo(mon)>=0 && d1.compareTo(week) < 0 && dayValue == 7 && stab == 6)){
+
+                ids.add(c.getInt(0));
+                titles.add(c.getString(1));
+                subjects.add(c.getString(2));
+                due_dates.add(c.getString(3));
+                colors.add(c.getInt(6));
+
+            }
+
 
 
         }

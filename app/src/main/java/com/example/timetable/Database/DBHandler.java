@@ -82,7 +82,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public DBHandler(@Nullable Context context) {
 
-        super(context, DATABASE_NAME, null, 5);
+        super(context, DATABASE_NAME, null, 6);
         SQLiteDatabase db = getWritableDatabase();
     }
 
@@ -90,6 +90,8 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
                 db.execSQL(SQL_CREATE_COURSE_ENTRIES);
                 db.execSQL(SQL_CREATE_CLASS_ENTRIES);
+                db.execSQL(SQL_CREATE_EXAM_ENTRIES);
+                db.execSQL(SQL_CREATE_HOMEWORK_ENTRIES);
                 db.execSQL(SQL_CREATE_GOAL_ENTRIES);
 //        db.execSQL("DROP TABLE IF EXISTS "+ CourseMaster.Courses.TABLE_NAME);
     }
@@ -98,6 +100,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + CourseMaster.Courses.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + ClassMaster.Classes.TABLE_NAME_CLASS);
         db.execSQL("DROP TABLE IF EXISTS " + GoalMaster.Goals.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + ExamMaster.Exam.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + HomeworkMaster.Homework.TABLE_NAME);
         onCreate(db);
     }
@@ -354,6 +357,16 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(HomeworkMaster.Homework.COLUMN_NAME_NOTE,note);
         db.update(HomeworkMaster.Homework.TABLE_NAME,values,"_id = ?",new String[]{id});
         return true;
+    }
+
+    public int getHomeworkCount(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("Select COUNT(_id) from "+ HomeworkMaster.Homework.TABLE_NAME,null);
+        int count = 0;
+        while(res.moveToNext()){
+            count = res.getInt(0);
+        }
+        return count;
     }
     //CRUD operations for  EXAM
 

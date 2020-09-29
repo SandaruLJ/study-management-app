@@ -118,7 +118,6 @@ public class GoalsRecyclerViewAdapter extends RecyclerView.Adapter<GoalsRecycler
             holder.remdays.setPadding(40,40,40,40);
         }else{
             holder.remdays.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ED2424")));
-
         }
         if(rem<=0){
             holder.remdays.setVisibility(View.INVISIBLE);

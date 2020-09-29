@@ -119,22 +119,22 @@ class HomeworkWeekAdapter extends FragmentPagerAdapter {
             fragment = new HomeworkWeekDayFragment().newInstance(0);;
         }
         if(position == 1){
-            fragment = new  new HomeworkWeekDayFragment().newInstance(1);;
+            fragment =  new HomeworkWeekDayFragment().newInstance(1);;
         }
         if(position == 2){
-            fragment = new  new HomeworkWeekDayFragment().newInstance(2);;
+            fragment = new HomeworkWeekDayFragment().newInstance(2);;
         }
         if(position == 3){
-            fragment = new  new HomeworkWeekDayFragment().newInstance(3);;
+            fragment = new HomeworkWeekDayFragment().newInstance(3);;
         }
         if(position == 4){
-            fragment = new  new HomeworkWeekDayFragment().newInstance(4);;
+            fragment = new HomeworkWeekDayFragment().newInstance(4);;
         }
         if(position == 5){
-            fragment = new  new HomeworkWeekDayFragment().newInstance(5);;
+            fragment = new HomeworkWeekDayFragment().newInstance(5);;
         }
         if(position == 6){
-            fragment = new  new HomeworkWeekDayFragment().newInstance(6);;
+            fragment = new HomeworkWeekDayFragment().newInstance(6);;
         }
         return fragment;
     }

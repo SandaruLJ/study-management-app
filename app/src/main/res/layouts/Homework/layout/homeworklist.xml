@@ -9,8 +9,8 @@
         android:id="@+id/view_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="5dp"
         android:background="#ED2424">
 
         <ImageView
@@ -49,14 +49,12 @@
             android:orientation="horizontal"
             android:layout_marginBottom="2dp"
 
-            android:layout_marginTop="2dp"
-            android:background="@color/magenta">
+            android:layout_marginTop="2dp">
 
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-
                 android:layout_marginRight="10dp"
                 >
                 <TextView
@@ -137,16 +135,17 @@
                     android:text="@string/_30"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="5dp"
-                    android:padding="10dp"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="15dp"
                     android:textStyle="bold"
-                    android:id="@+id/days"
+                    android:id="@+id/rem_days"
                     android:background="@drawable/homework_day_circle"
                     android:textColor="#E33872"
                     android:layout_marginEnd="20dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/days"
+                    android:layout_below="@id/rem_days"
                     android:text="@string/days_more"
                     android:layout_alignParentEnd="true"
                     android:textSize="10dp"

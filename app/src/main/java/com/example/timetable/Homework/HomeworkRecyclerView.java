@@ -17,7 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.timetable.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class HomeworkRecyclerView extends RecyclerView.Adapter<HomeworkRecyclerView.ViewHolder>{
 
@@ -27,6 +35,7 @@ public class HomeworkRecyclerView extends RecyclerView.Adapter<HomeworkRecyclerV
     private ArrayList<String> due_date = new ArrayList<>();
     private ArrayList<Integer> color = new ArrayList<>();
     private ArrayList<Integer> ids = new ArrayList<>();
+
     private Context mContext;
 
     public HomeworkRecyclerView(ArrayList<Integer> Id,ArrayList<String> title, ArrayList<String> Sub,ArrayList<Integer>color ,ArrayList<String> due_date, Context mContext) {
@@ -35,12 +44,14 @@ public class HomeworkRecyclerView extends RecyclerView.Adapter<HomeworkRecyclerV
         this.subject = Sub;
         this.color = color;
         this.due_date= due_date;
+
         this.mContext = mContext;
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView title;
         TextView subject;
         TextView date;
+        TextView remHomework;
         FrameLayout homeworkLayout;
         RelativeLayout homeworkCard, viewBackground;
 
@@ -49,6 +60,7 @@ public class HomeworkRecyclerView extends RecyclerView.Adapter<HomeworkRecyclerV
             title = itemView.findViewById(R.id.homeworkName);
             subject = itemView.findViewById(R.id.sub);
             date = itemView.findViewById(R.id.homeworkDate);
+            remHomework = itemView.findViewById(R.id.rem_days);
             homeworkLayout = (FrameLayout)itemView.findViewById(R.id.homeworklayout);
             homeworkCard = (RelativeLayout) itemView.findViewById(R.id.homeworkCard);
             viewBackground = (RelativeLayout) itemView.findViewById(R.id.view_background);
@@ -64,7 +76,7 @@ public class HomeworkRecyclerView extends RecyclerView.Adapter<HomeworkRecyclerV
         return viewHolder;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.title.setText(titles.get(position));
@@ -72,6 +84,33 @@ public class HomeworkRecyclerView extends RecyclerView.Adapter<HomeworkRecyclerV
         holder.subject.setText(subject.get(position));
 //        holder.homeworkCard.setBackgroundTintList(Color.valueOf(colors.get(position)));
         holder.homeworkCard.setBackgroundColor(color.get(position));
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        Date d1 = null;
+        try {
+            d1 = dateFormat.parse(due_date.get(position));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        cal.setTime(d1);
+//        Date d = new Date();
+//
+//
+        Calendar today = Calendar.getInstance();
+        long rem = ChronoUnit.DAYS.between(today.toInstant(), cal.toInstant()) +1;
+//        long diff = d.getTime() - d1.getTime();
+//        long difference_In_Days
+//                = TimeUnit
+//                .MILLISECONDS
+//                .toDays(diff)
+//                % 366;
+        if(rem>10){
+            holder.remHomework.setPadding(40,40,40,40);
+        }
+
+
+        holder.remHomework.setText(String.valueOf(rem));
 //        holder.courseCard.setBackgroundTintList(ColorStateList.valueOf(-395151));
         holder.homeworkLayout.setOnClickListener(new View.OnClickListener() {
             @Override

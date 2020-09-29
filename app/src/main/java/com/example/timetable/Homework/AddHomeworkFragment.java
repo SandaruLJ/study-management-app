@@ -25,6 +25,7 @@ import com.example.timetable.Course.DisplayCourseFragment;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
 import com.example.timetable.SelectDateFragment;
+import com.example.timetable.SelectTimeFragement;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +36,7 @@ public class AddHomeworkFragment extends Fragment {
 
     EditText title,note;
     Button save;
-
+    TextView stime;
     Spinner subject,reminder;
     ColorStateList col;
     DBHandler db;
@@ -88,13 +89,26 @@ public class AddHomeworkFragment extends Fragment {
 
             }
         });
+        //Start Time Picker
+        stime = (TextView) view.findViewById(R.id.time);
+
+        LinearLayout pickDatebtn2 = (LinearLayout) view.findViewById(R.id.timeSelectorEnd);
+        pickDatebtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Pass the textView in order to set the date for the text
+                DialogFragment newFragment = new SelectTimeFragement(stime);
+                newFragment.show(getFragmentManager(), "TimePicker");
+
+            }
+        });
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                boolean isInserted = db.addHomework(title.getText().toString(),subject.getSelectedItem().toString(),end.getText().toString(),"10.30",reminder.getSelectedItem().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),note.getText().toString());
+                boolean isInserted = db.addHomework(title.getText().toString(),subject.getSelectedItem().toString(),end.getText().toString(),stime.getText().toString(),reminder.getSelectedItem().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),note.getText().toString());
 
                 if(isInserted == true) {
                     Toast.makeText(getActivity().getApplicationContext(), "Homework Added Successfully", Toast.LENGTH_LONG).show();
