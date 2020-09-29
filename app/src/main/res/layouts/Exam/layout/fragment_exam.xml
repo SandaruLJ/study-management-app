@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content">
 
                     <Spinner
-                        android:id="@+id/SubjectSelector"
+                        android:id="@+id/subjectSelect"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -233,7 +233,7 @@
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/date"
+                    android:id="@+id/endDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -257,6 +257,7 @@
                 android:background="@color/lightgrey"/>
         <LinearLayout
             android:layout_width="match_parent"
+            android:id="@id/timeSelectorStart"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="0dp"
@@ -272,7 +273,7 @@
                 android:layout_marginRight="20dp"
                 android:alpha="0.8"/>
             <TextView
-                android:id="@+id/startDate"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -285,7 +286,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
                 <TextView
-                    android:id="@+id/start"
+                    android:id="@+id/sTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
@@ -307,6 +308,7 @@
             android:background="@color/lightgrey"/>
         <LinearLayout
             android:layout_width="match_parent"
+            android:id="@+id/timeSelectorEnd"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="0dp"
@@ -322,7 +324,7 @@
                 android:layout_marginRight="20dp"
                 android:alpha="0.8"/>
             <TextView
-                android:id="@+id/end"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -331,21 +333,23 @@
                 android:paddingLeft="0dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="20dp"/>
-<!--            <RelativeLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent">-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:textSize="20dp"-->
-<!--                    android:text="@string/exam_end_time_now"-->
-<!--                    android:layout_alignParentEnd="true"-->
-<!--                    android:paddingTop="20dp"-->
-<!--                    android:paddingLeft="0dp"-->
-<!--                    android:paddingRight="20dp"-->
-<!--                    android:paddingBottom="20dp"-->
-<!--                    android:textStyle="bold"/>-->
-<!--            </RelativeLayout>-->
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/eTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:hint="20:30"
+                    android:layout_alignParentEnd="true"
+                    android:paddingTop="20dp"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
 
         </LinearLayout>
         <View
@@ -372,7 +376,7 @@
                 android:layout_marginRight="20dp"
                 android:alpha="0.8"/>
             <TextView
-                android:id="@+id/reminder"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -386,7 +390,7 @@
                 android:layout_height="wrap_content">
                 <Spinner
 
-                    android:id="@+id/reminderSelect"
+                    android:id="@+id/reminder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -435,11 +439,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/colorbtn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+
+                    android:layout_marginRight="20dp"
                     android:background="@drawable/choosecolor"
-                    android:layout_alignParentEnd="true"></Button>
+                    android:backgroundTint="@color/col2"
+                    android:gravity="right"/>
+                <Button
+                    android:id="@+id/testbtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+
+                    android:layout_marginRight="20dp"
+                    android:background="@color/col2"
+                    android:visibility="invisible"
+                    android:gravity="right"/>
+
 
             </RelativeLayout>
         </LinearLayout>
@@ -499,7 +518,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:textSize="20sp"
-
+                        android:id="@+id/note"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -517,6 +536,7 @@
 
             <Button
                 android:layout_width="150dp"
+                android:id="@+id/save"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/save_btn"

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/Examlayout"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    >
+    <RelativeLayout
+        android:id="@+id/view_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="5dp"
+        android:background="#ED2424">
+
+        <ImageView
+            android:id="@+id/delete_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:tint="@color/white"
+            android:src="@drawable/delete" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/delete_icon"
+            android:text="DELETE"
+            android:textColor="#fff"
+            android:textSize="13dp" />
+
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:id="@+id/examCard"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="2dp"
+
+            android:layout_marginTop="2dp">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                >
+                <TextView
+                    android:id="@+id/examName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingBottom="15dp"
+                    android:paddingRight="15dp"
+
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="20dp" />
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="6dp">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="32dp"
+                        android:src="@drawable/subject"
+                        android:tint="@color/white"
+
+
+
+
+                        />
+                    <TextView
+                        android:id="@+id/sub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:paddingTop="30dp"
+                        android:paddingLeft="28dp"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="5dp"
+                        android:text="@string/display_homework_subject"
+                        android:textColor="@color/white"
+
+                        android:textSize="14dp" />
+
+                    <ImageView
+                        android:id="@+id/classIcon"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_toRightOf="@id/sub"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="33dp"
+                        android:src="@drawable/callender"
+                        android:tint="@color/white"
+                        />
+                    <TextView
+                        android:id="@+id/examDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/classIcon"
+                        android:gravity="start"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/display_homework_date"
+                        android:textColor="@color/white"
+
+                        android:textSize="13dp" />
+
+                </RelativeLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="5dp"
+                    android:padding="10dp"
+                    android:textStyle="bold"
+                    android:src="@drawable/tick"
+                    android:tint="@color/colorPickerDialog_red"
+                    android:id="@+id/days"
+                    android:background="@drawable/homework_day_circle"
+                    android:textColor="#E33872"
+                    android:layout_marginEnd="10dp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</FrameLayout>

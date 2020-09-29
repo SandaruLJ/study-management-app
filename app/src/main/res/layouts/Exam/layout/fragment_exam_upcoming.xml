@@ -5,253 +5,260 @@
     android:layout_height="match_parent"
     tools:context=".Exam.ExamUpcomingFragment">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:orientation="vertical"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/exam_recycler_view"
+        android:layout_width="match_parent"
+        android:scrollbars="vertical"
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
 
-            android:layout_margin="5dp"
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="110dp"-->
+<!--            android:orientation="vertical"-->
 
-            android:layout_marginTop="20dp">
+<!--            android:layout_margin="5dp"-->
 
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".80"
-                    android:background="@drawable/radius"
+<!--            android:layout_marginTop="20dp">-->
 
 
-
-                    >
-
-                    <TextView
-                        android:id="@+id/startTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:paddingTop="15dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="@string/sept_16"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-
-                        android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/too"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-
-                        android:layout_below="@id/startTime"
-                        android:text="@string/tuesday"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-
-                        />
-                    <TextView
-                        android:id="@+id/endTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:paddingBottom="15dp"
-                        android:layout_below="@id/too"
-                        android:text="@string/_2020"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-
-                        android:textStyle="bold" />
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_marginTop="10dp">-->
 
 
 
-
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="400dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".30"
-                    android:background="@drawable/rounded_corner"
-                    android:layout_marginLeft="1dp"
-
-                    >
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight=".80"-->
+<!--                    android:background="@drawable/radius"-->
 
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:id="@+id/subject"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginEnd="-1dp"
-                        android:orientation="vertical">
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+<!--                    >-->
 
-                            <ImageView
-                                android:id="@+id/imageView2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="2dp"
-                                android:src="@drawable/test"
-                                android:tint="@color/grey"
-                                android:alpha="0.5"
+<!--                    <TextView-->
+<!--                        android:id="@+id/startTime"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center_horizontal"-->
+<!--                        android:paddingTop="15dp"-->
+<!--                        android:paddingLeft="5dp"-->
+<!--                        android:paddingRight="5dp"-->
+<!--                        android:text="@string/sept_16"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="18dp"-->
 
+<!--                        android:textStyle="bold" />-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/too"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center_horizontal"-->
 
-                                />
+<!--                        android:layout_below="@id/startTime"-->
+<!--                        android:text="@string/tuesday"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="18dp"-->
 
-                            <TextView
-                                android:id="@+id/className"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="45dp"
+<!--                        />-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/endTime"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center_horizontal"-->
+<!--                        android:paddingBottom="15dp"-->
+<!--                        android:layout_below="@id/too"-->
+<!--                        android:text="@string/_2020"-->
+<!--                        android:paddingLeft="5dp"-->
+<!--                        android:paddingRight="5dp"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="18dp"-->
 
-                                android:text="@string/exam_title"
-                                android:textColor="@color/black"
-                                android:textSize="20dp"
-                                android:textStyle="bold" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/lecturer"
-                        android:layout_below="@+id/subject"
-                        android:orientation="vertical">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:id="@+id/imageView2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="2dp"
-                                android:src="@drawable/subject"
-                                android:tint="@color/grey"
-                                android:alpha="0.5"
+<!--                        android:textStyle="bold" />-->
 
 
-                                />
-
-                            <TextView
-                                android:id="@+id/className"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="45dp"
-                                android:layout_marginTop="4dp"
-                                android:text="@string/mad"
-                                android:textColor="@color/black"
-                                android:textSize="14dp"
-                                />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_below="@+id/lecturer"
-                        android:orientation="vertical">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:id="@+id/imageView2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="2dp"
-                                android:src="@drawable/classroom"
-                                android:alpha="0.5"
 
 
-                                android:tint="@color/grey" />
+<!--                </RelativeLayout>-->
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="400dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight=".30"-->
+<!--                    android:background="@drawable/rounded_corner"-->
+<!--                    android:layout_marginLeft="1dp"-->
 
-                            <TextView
-                                android:id="@+id/className"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="45dp"
-                                android:layout_marginTop="4dp"
-                                android:text="@string/exam_lecture_hall"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                />
-                            <ImageView
-                                android:id="@+id/imageView2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="80dp"
-                                android:layout_marginTop="2dp"
-                                android:src="@drawable/alarm"
-                                android:alpha="0.5"
+<!--                    >-->
 
 
-                                android:tint="#C61010" />
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentTop="true"-->
+<!--                        android:id="@+id/subject"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:layout_marginBottom="5dp"-->
+<!--                        android:layout_marginEnd="-1dp"-->
+<!--                        android:orientation="vertical">-->
 
-                            <TextView
-                                android:id="@+id/className"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="110dp"
-                                android:layout_marginTop="4dp"
-                                android:text="@string/ex_time"
-                                android:textStyle="bold"
-                                android:textColor="#C61010"
-                                android:textSize="14sp"
-                                />
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content">-->
 
-                        </RelativeLayout>
+<!--                            <ImageView-->
+<!--                                android:id="@+id/imageView2"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_marginTop="2dp"-->
+<!--                                android:src="@drawable/test"-->
+<!--                                android:tint="@color/grey"-->
+<!--                                android:alpha="0.5"-->
 
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/_30"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="25dp"
-                        android:padding="10dp"
-                        android:textStyle="bold"
-                        android:id="@+id/days"
-                        android:background="@drawable/day_circle"
-                        android:textColor="@color/white"
-                        android:layout_marginEnd="20dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/days"
-                        android:text="@string/days_more"
-                        android:layout_alignParentEnd="true"
-                        android:textSize="10sp"
-                        android:padding="3dp"
-                        android:textColor="@color/darkblue"
-                        android:textStyle="bold"
-                        android:layout_marginEnd="10dp"/>
 
-                </RelativeLayout>
-            </LinearLayout>
+<!--                                />-->
 
-        </LinearLayout>
+<!--                            <TextView-->
+<!--                                android:id="@+id/className"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginLeft="45dp"-->
+
+<!--                                android:text="@string/exam_title"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textSize="20dp"-->
+<!--                                android:textStyle="bold" />-->
+<!--                        </RelativeLayout>-->
+
+<!--                    </LinearLayout>-->
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:id="@+id/lecturer"-->
+<!--                        android:layout_below="@+id/subject"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content">-->
+
+<!--                            <ImageView-->
+<!--                                android:id="@+id/imageView2"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_marginTop="2dp"-->
+<!--                                android:src="@drawable/subject"-->
+<!--                                android:tint="@color/grey"-->
+<!--                                android:alpha="0.5"-->
+
+
+<!--                                />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/className"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginLeft="45dp"-->
+<!--                                android:layout_marginTop="4dp"-->
+<!--                                android:text="@string/mad"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textSize="14dp"-->
+<!--                                />-->
+<!--                        </RelativeLayout>-->
+
+<!--                    </LinearLayout>-->
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:layout_below="@+id/lecturer"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content">-->
+
+<!--                            <ImageView-->
+<!--                                android:id="@+id/imageView2"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginStart="10dp"-->
+<!--                                android:layout_marginTop="2dp"-->
+<!--                                android:src="@drawable/classroom"-->
+<!--                                android:alpha="0.5"-->
+
+
+<!--                                android:tint="@color/grey" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/className"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginLeft="45dp"-->
+<!--                                android:layout_marginTop="4dp"-->
+<!--                                android:text="@string/exam_lecture_hall"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:textSize="14sp"-->
+<!--                                />-->
+<!--                            <ImageView-->
+<!--                                android:id="@+id/imageView2"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginStart="80dp"-->
+<!--                                android:layout_marginTop="2dp"-->
+<!--                                android:src="@drawable/alarm"-->
+<!--                                android:alpha="0.5"-->
+
+
+<!--                                android:tint="#C61010" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/className"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginLeft="110dp"-->
+<!--                                android:layout_marginTop="4dp"-->
+<!--                                android:text="@string/ex_time"-->
+<!--                                android:textStyle="bold"-->
+<!--                                android:textColor="#C61010"-->
+<!--                                android:textSize="14sp"-->
+<!--                                />-->
+
+<!--                        </RelativeLayout>-->
+
+<!--                    </LinearLayout>-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/_30"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_marginTop="25dp"-->
+<!--                        android:padding="10dp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:id="@+id/days"-->
+<!--                        android:background="@drawable/day_circle"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:layout_marginEnd="20dp"/>-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@id/days"-->
+<!--                        android:text="@string/days_more"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:textSize="10sp"-->
+<!--                        android:padding="3dp"-->
+<!--                        android:textColor="@color/darkblue"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:layout_marginEnd="10dp"/>-->
+
+<!--                </RelativeLayout>-->
+<!--            </LinearLayout>-->
+
+<!--        </LinearLayout>-->
 
 
 </FrameLayout>

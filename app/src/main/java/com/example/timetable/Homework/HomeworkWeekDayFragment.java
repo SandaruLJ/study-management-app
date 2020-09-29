@@ -116,7 +116,12 @@ public class HomeworkWeekDayFragment extends Fragment {
 
                 ids.add(c.getInt(0));
                 titles.add(c.getString(1));
-                subjects.add(c.getString(2));
+                if (c.getString(2).length()> 22){
+                    String sub = c.getString(2);
+                    subjects.add(sub.substring(0,22));
+                }else{
+                    subjects.add(c.getString(2));
+                }
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 
@@ -125,7 +130,12 @@ public class HomeworkWeekDayFragment extends Fragment {
 
                 ids.add(c.getInt(0));
                 titles.add(c.getString(1));
-                subjects.add(c.getString(2));
+                if (c.getString(2).length()> 22){
+                    String sub = c.getString(2);
+                    subjects.add(sub.substring(0,22));
+                }else{
+                    subjects.add(c.getString(2));
+                }
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 
@@ -133,7 +143,12 @@ public class HomeworkWeekDayFragment extends Fragment {
 
                 ids.add(c.getInt(0));
                 titles.add(c.getString(1));
-                subjects.add(c.getString(2));
+                if (c.getString(2).length()> 22){
+                    String sub = c.getString(2);
+                    subjects.add(sub.substring(0,22));
+                }else{
+                    subjects.add(c.getString(2));
+                }
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 
@@ -141,7 +156,12 @@ public class HomeworkWeekDayFragment extends Fragment {
 
                 ids.add(c.getInt(0));
                 titles.add(c.getString(1));
-                subjects.add(c.getString(2));
+                if (c.getString(2).length()> 22){
+                    String sub = c.getString(2);
+                    subjects.add(sub.substring(0,22));
+                }else{
+                    subjects.add(c.getString(2));
+                }
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 
@@ -149,7 +169,12 @@ public class HomeworkWeekDayFragment extends Fragment {
 
                 ids.add(c.getInt(0));
                 titles.add(c.getString(1));
-                subjects.add(c.getString(2));
+                if (c.getString(2).length()> 22){
+                    String sub = c.getString(2);
+                    subjects.add(sub.substring(0,22));
+                }else{
+                    subjects.add(c.getString(2));
+                }
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 
@@ -157,7 +182,12 @@ public class HomeworkWeekDayFragment extends Fragment {
 
                 ids.add(c.getInt(0));
                 titles.add(c.getString(1));
-                subjects.add(c.getString(2));
+                if (c.getString(2).length()> 22){
+                    String sub = c.getString(2);
+                    subjects.add(sub.substring(0,22));
+                }else{
+                    subjects.add(c.getString(2));
+                }
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 
@@ -165,7 +195,12 @@ public class HomeworkWeekDayFragment extends Fragment {
 
                 ids.add(c.getInt(0));
                 titles.add(c.getString(1));
-                subjects.add(c.getString(2));
+                if (c.getString(2).length()> 22){
+                    String sub = c.getString(2);
+                    subjects.add(sub.substring(0,22));
+                }else{
+                    subjects.add(c.getString(2));
+                }
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 

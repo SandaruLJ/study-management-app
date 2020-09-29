@@ -385,7 +385,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(ExamMaster.Exam.COLUMN_NAME_COLOUR,colour);
         values.put(ExamMaster.Exam.COLUMN_NAME_NOTE,note);
 
-        long result = db.insert(HomeworkMaster.Homework.TABLE_NAME,null,values);
+        long result = db.insert(ExamMaster.Exam.TABLE_NAME,null,values);
         if(result == -1)
             return false;
         else
@@ -405,6 +405,15 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor res = db.rawQuery("Select * from " + ExamMaster.Exam.TABLE_NAME + " WHERE "+ CourseMaster.Courses._ID + " = " + id, null);
         return res;
+    }
+    public int getExamCount(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("Select COUNT(_id) from "+ ExamMaster.Exam.TABLE_NAME,null);
+        int count = 0;
+        while(res.moveToNext()){
+            count = res.getInt(0);
+        }
+        return count;
     }
 
 }

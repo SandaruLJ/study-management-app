@@ -11,6 +11,7 @@ import com.example.timetable.Class.ViewClassFragment;
 import com.example.timetable.Class.addClass;
 import com.example.timetable.Course.DisplayCourseFragment;
 import com.example.timetable.Exam.displayExams;
+import com.example.timetable.Exam.exam;
 import com.example.timetable.Goals.upcoming;
 import com.example.timetable.Homework.displayHomework;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

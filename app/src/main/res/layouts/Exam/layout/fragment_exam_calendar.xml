@@ -3,264 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Exam.ExamCalendarFragment">
-
-    <LinearLayout
+    tools:context=".Homework.Homework_Calendar_Fragment">
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/August30"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:background="@drawable/calendar_date"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"/>
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="2dp">
-            <LinearLayout
+            android:orientation="vertical">
+
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/calendarView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="2dp"
-                android:layout_marginTop="2dp">
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/magenta"
-                    android:layout_marginLeft="10dp"></ImageView>
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/white"
-                    android:layout_marginRight="10dp">
-                    <TextView
-                        android:id="@+id/eventName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:paddingTop="5dp"
-                        android:paddingLeft="15dp"
-                        android:paddingBottom="15dp"
-                        android:paddingRight="15dp"
-                        android:text="@string/exam_title"
-                        android:textColor="@color/cal_subject_text_color"
-                        android:textStyle="bold"
-                        android:textSize="20dp" />
+                app:mcv_showOtherDates="decorated_disabled"
+                app:mcv_selectionColor="#2196F3"
+                app:mcv_selectionMode="none"
+                app:mcv_dateTextAppearance="@style/CustomTextAppearance"
+                app:mcv_weekDayTextAppearance="@style/calendarWeek"
+                app:mcv_headerTextAppearance="@style/calendarWeek"
+                />
 
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="6dp">
-                        <ImageView
-                            android:id="@+id/imageView2"
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="35dp"
-                            android:src="@drawable/subject"
-                            android:tint="@color/grey"
-                            android:alpha="0.5" />
-                        <TextView
-                            android:id="@+id/sirName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:paddingTop="30dp"
-                            android:paddingLeft="25dp"
-                            android:paddingBottom="5dp"
-                            android:paddingRight="5dp"
-                            android:text="@string/exam_subject"
-                            android:textColor="@color/darkblue"
-                            android:textSize="14dp" />
-                        <ImageView
-                            android:id="@+id/classIcon"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_toRightOf="@id/sirName"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="33dp"
-                            android:src="@drawable/classroom"
-                            android:tint="@color/grey"
-                            android:alpha="0.5"/>
-                        <TextView
-                            android:id="@+id/eventName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/classIcon"
-                            android:gravity="start"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="30dp"
-                            android:text="@string/exam_lecture_hall"
-                            android:textColor="@color/darkblue"
-                            android:textSize="13dp" />
-                    </RelativeLayout>
-                    <TextView
-                        android:id="@+id/sTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:layout_marginTop="3dp"
-                        android:paddingBottom="0dp"
-                        android:paddingRight="15dp"
-                        android:paddingTop="7dp"
-                        android:text="@string/start_time_val"
-                        android:textColor="@color/black"
-                        android:textSize="14dp" />
-                    <TextView
-                        android:id="@+id/eTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:layout_below="@id/sTime"
-                        android:layout_alignParentRight="true"
-                        android:paddingTop="0dp"
-                        android:paddingRight="15dp"
-                        android:paddingBottom="0dp"
-                        android:text="@string/end_time_val"
-                        android:textColor="@color/black"
-                        android:textSize="14dp" />
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
+            <!--        <TextView-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginLeft="10dp"-->
+            <!--            android:layout_marginRight="10dp"-->
+            <!--            android:background="@drawable/calendar_date"-->
+            <!--            android:paddingLeft="20dp"-->
+            <!--            android:paddingTop="10dp"-->
+            <!--            android:paddingRight="20dp"-->
+            <!--            android:paddingBottom="10dp"-->
+            <!--            android:text="@string/august_23"-->
+            <!--            android:textColor="@color/white"-->
+            <!--            android:textSize="20dp"-->
+            <!--            android:textStyle="bold" />-->
+            <RelativeLayout
+                android:id="@+id/recycler_relative"
+                android:layout_width="wrap_content"
+                android:layout_height="1000px">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/exam_recycler_view"
+                    android:layout_width="match_parent"
+                    android:scrollbars="vertical"
+                    android:layout_height="match_parent">
+                </androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="2dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="2dp"
-                android:layout_marginTop="2dp">
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/col3"
-                    android:layout_marginLeft="10dp"></ImageView>
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/white"
-                    android:layout_marginRight="10dp">
-                    <TextView
-                        android:id="@+id/eventName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:paddingTop="5dp"
-                        android:paddingLeft="15dp"
-                        android:paddingBottom="15dp"
-                        android:paddingRight="15dp"
-                        android:text="@string/exam_title_2"
-                        android:textColor="@color/cal_subject_text_color"
-                        android:textStyle="bold"
-                        android:textSize="20dp" />
+    </ScrollView>
 
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="6dp">
-                        <ImageView
-                            android:id="@+id/imageView2"
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="35dp"
-                            android:src="@drawable/subject"
-                            android:tint="@color/grey"
-                            android:alpha="0.5" />
-                        <TextView
-                            android:id="@+id/sirName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:paddingTop="30dp"
-                            android:paddingLeft="25dp"
-                            android:paddingBottom="5dp"
-                            android:paddingRight="5dp"
-                            android:text="@string/exam_subject_2"
-                            android:textColor="@color/darkblue"
-                            android:textSize="14dp" />
-                        <ImageView
-                            android:id="@+id/classIcon"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_toRightOf="@id/sirName"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="33dp"
-                            android:src="@drawable/classroom"
-                            android:tint="@color/grey"
-                            android:alpha="0.5"/>
-                        <TextView
-                            android:id="@+id/eventName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/classIcon"
-                            android:gravity="start"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="30dp"
-                            android:text="@string/exam_lecture_hall"
-                            android:textColor="@color/darkblue"
-                            android:textSize="13dp" />
-                    </RelativeLayout>
-                    <TextView
-                        android:id="@+id/sTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:layout_marginTop="3dp"
-                        android:paddingBottom="0dp"
-                        android:paddingRight="15dp"
-                        android:paddingTop="7dp"
-                        android:text="@string/start_time_val"
-                        android:textColor="@color/black"
-                        android:textSize="14dp" />
-                    <TextView
-                        android:id="@+id/eTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:layout_below="@id/sTime"
-                        android:layout_alignParentRight="true"
-                        android:paddingTop="0dp"
-                        android:paddingRight="15dp"
-                        android:paddingBottom="0dp"
-                        android:text="@string/end_time_val"
-                        android:textColor="@color/black"
-                        android:textSize="14dp" />
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-    </LinearLayout>
 </FrameLayout>
