@@ -74,7 +74,7 @@ public class edithomework extends Fragment {
                 edate = c.getString(3);
                 ecolour = c.getInt(6);
                 etime = c.getString(4);
-                enote = c.getString(5);
+                enote = c.getString(7);
 //                Toast.makeText(getActivity().getApplicationContext(),cname,Toast.LENGTH_LONG).show();
             }
 
