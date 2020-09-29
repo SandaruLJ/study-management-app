@@ -151,7 +151,7 @@ public class ExamCalendarFragment extends Fragment {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 // Row is swiped from recycler view
                 // remove it from adapter
-                db.deleteHomework(String.valueOf(ids.get(viewHolder.getAdapterPosition())));
+                db.deleteExam(String.valueOf(ids.get(viewHolder.getAdapterPosition())));
                 adapter.removeItem(viewHolder.getAdapterPosition());
             }
 

@@ -104,9 +104,9 @@ public class ExamCalendarRecyclerView extends RecyclerView.Adapter<ExamCalendarR
                 Bundle bundle = new Bundle();
                 bundle.putInt("id",  id);
 ////
-//                editExam cFragment = new editExam();
-//                cFragment.setArguments(bundle);
-//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                editExam cFragment = new editExam();
+                cFragment.setArguments(bundle);
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
 //
 //                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, cFragment).addToBackStack(null).commit();
             }

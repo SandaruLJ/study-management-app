@@ -67,7 +67,9 @@ public class editClass extends Fragment {
             id = Integer.parseInt(bundle.get("id").toString());
 
         }
-        
+
+
+
         if(id != 0) {
 
             String name = null, coursed, subjectd, classTyped = null, teacherd = null, classroomd = null, noted = null;

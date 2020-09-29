@@ -415,5 +415,23 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return count;
     }
+    public boolean  updateExam(int id,String title, String subject, String location,String due_date,String time,String end_time ,String reminder, Integer colour, String note ){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(ExamMaster.Exam.COLUMN_NAME_TITLE,title);
+        values.put(ExamMaster.Exam.COLUMN_NAME_SUBJECT,subject);
+        values.put(ExamMaster.Exam.COLUMN_NAME_DUE_DATE,due_date);
+        values.put(ExamMaster.Exam.COLUMN_NAME_START_TIME,time);
+        values.put(ExamMaster.Exam.COLUMN_NAME_END_TIME,end_time);
+        values.put(ExamMaster.Exam.COLUMN_NAME_LOCATION,location);
+        values.put(ExamMaster.Exam.COLUMN_NAME_REMINDER,reminder);
+        values.put(ExamMaster.Exam.COLUMN_NAME_COLOUR,colour);
+        values.put(ExamMaster.Exam.COLUMN_NAME_NOTE,note);
+
+        db.update(ExamMaster.Exam.TABLE_NAME,values,"_id = ?",new String[]{String.valueOf(id)});
+        return true;
+    }
 
 }

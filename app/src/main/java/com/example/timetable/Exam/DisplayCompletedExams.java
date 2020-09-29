@@ -114,7 +114,7 @@ public class DisplayCompletedExams extends Fragment {
                 // Row is swiped from recycler view
                 // remove it from adapter
 
-                db.deleteGoal(String.valueOf(ids.get(viewHolder.getAdapterPosition())));
+                db.deleteExam(String.valueOf(ids.get(viewHolder.getAdapterPosition())));
                 adapter.removeItem(viewHolder.getAdapterPosition());
             }
 

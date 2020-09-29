@@ -1,10 +1,13 @@
 package com.example.timetable.Exam;
 
 import android.content.res.ColorStateList;
+import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -20,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.timetable.Class.editClass;
 import com.example.timetable.ColorPicker;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.Homework.displayHomework;
@@ -32,7 +36,7 @@ import com.example.timetable.SelectTimeFragement;
  * Use the {@link exam#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class exam extends Fragment {
+public class editExam extends Fragment {
 
     EditText title,note,location;
     Button save;
@@ -40,18 +44,25 @@ public class exam extends Fragment {
     Spinner subject,reminder;
     ColorStateList col;
     DBHandler db;
+    int id;
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new DBHandler(getActivity().getApplicationContext());
 //        db.create();
     }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_exam, container, false);
 
+        id  = 0;
+        Bundle bundle = this.getArguments();
+        if(bundle!=null){
+            id = Integer.parseInt(bundle.get("id").toString());
+        }
 
         Button btn = view.findViewById(R.id.save);
         title = (EditText) view.findViewById(R.id.title);
@@ -59,6 +70,16 @@ public class exam extends Fragment {
         subject = (Spinner) view.findViewById(R.id.subjectSelect);
         reminder = (Spinner) view.findViewById(R.id.reminder);
         note = (EditText) view.findViewById(R.id.note);
+        final TextView end = (TextView) view.findViewById(R.id.endDate);
+        stime = (TextView) view.findViewById(R.id.sTime);
+        etime = (TextView) view.findViewById(R.id.eTime);
+        final Button colorbtn = (Button) view.findViewById(R.id.colorbtn);
+        final Button bgBtn = (Button) view.findViewById(R.id.testbtn);
+
+        String[] reminders= new String[]{"5 minutes","10 minutes","15 minutes","30 minutes","1 hour","2 hours", "6 hours", "12 hours","1 day"};
+        ArrayAdapter reminderAdapter= new ArrayAdapter(getActivity().getApplicationContext(), R.layout.spinner_item, reminders);
+        final Spinner reminderSpinner= (Spinner) view.findViewById(R.id.reminder);
+        reminderSpinner.setAdapter(reminderAdapter);
 
         String[] subjects= new String[]{"MAD","PS","DSA"};
         ArrayAdapter subjectAdapter= new ArrayAdapter(getActivity().getApplicationContext(), R.layout.spinner_item, subjects);
@@ -66,9 +87,39 @@ public class exam extends Fragment {
         subjectSpinner.setAdapter(subjectAdapter);
 
 
+
+        if(id != 0) {
+
+            String etitle = null, elocation = null, esubject = null, ereminder = null, enote = null, date = null,estime = null,eetime = null;
+            int ecolour = 0;
+            Cursor c = db.getSingleExam(id);
+
+            while (c.moveToNext()){
+
+                etitle = c.getString(1);
+                esubject = c.getString(2);
+                elocation = c.getString(3);
+                date = c.getString(4);
+                estime = c.getString(5);
+                eetime = c.getString(6);
+                ereminder = c.getString(7);
+                ecolour = c.getInt(8);
+                enote = c.getString(9);
+
+            }
+            title.setText(etitle);
+            note.setText(enote);
+            end.setText(date);
+            stime.setText(estime);
+            etime.setText(eetime);
+            location.setText(elocation);
+            colorbtn.setBackgroundTintList(ColorStateList.valueOf(ecolour));
+            bgBtn.setBackgroundColor(ecolour);
+            reminder.setSelection(reminderAdapter.getPosition(ereminder));
+            subjectSpinner.setSelection(subjectAdapter.getPosition(esubject));
+        }
+
         //Colour Picker
-        final Button colorbtn = (Button) view.findViewById(R.id.colorbtn);
-        final Button bgBtn = (Button) view.findViewById(R.id.testbtn);
         colorbtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -80,20 +131,17 @@ public class exam extends Fragment {
         });
 
         //End Date Picker
-        final TextView end = (TextView) view.findViewById(R.id.endDate);
         LinearLayout pickDatebtn1 = (LinearLayout) view.findViewById(R.id.dateSelectorEnd);
         pickDatebtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Pass the textView in order to set the date for the text
-
                 DialogFragment newFragment = new SelectDateFragment(end);
                 newFragment.show(getFragmentManager(), "DatePicker");
 
             }
         });
         //Start Time Picker
-        stime = (TextView) view.findViewById(R.id.sTime);
 
         LinearLayout pickTimebtn1 = (LinearLayout) view.findViewById(R.id.timeSelectorStart);
         pickTimebtn1.setOnClickListener(new View.OnClickListener() {
@@ -107,8 +155,6 @@ public class exam extends Fragment {
         });
 
         //End Time Picker
-        etime = (TextView) view.findViewById(R.id.eTime);
-
         LinearLayout pickDatebtn2 = (LinearLayout) view.findViewById(R.id.timeSelectorEnd);
         pickDatebtn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,16 +171,16 @@ public class exam extends Fragment {
             public void onClick(View view) {
 
 
-                boolean isInserted = db.addExam(title.getText().toString(),subject.getSelectedItem().toString(),location.getText().toString(),end.getText().toString(),stime.getText().toString(),etime.getText().toString(),reminder.getSelectedItem().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),note.getText().toString());
+                boolean isUpdated = db.updateExam(id,title.getText().toString(),subject.getSelectedItem().toString(),location.getText().toString(),end.getText().toString(),stime.getText().toString(),etime.getText().toString(),reminder.getSelectedItem().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),note.getText().toString());
 
-                if(isInserted == true) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Exam Added Successfully", Toast.LENGTH_LONG).show();
+                if(isUpdated == true) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Exam Updated Successfully", Toast.LENGTH_LONG).show();
                     displayExams fragment = new displayExams();
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
 
                 }else
-                    Toast.makeText(getActivity().getApplicationContext(),"Insert Failed, Try again",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(),"Update Failed, Try again",Toast.LENGTH_LONG).show();
             }
         });
 
