@@ -78,7 +78,7 @@ public class StudyRecyclerViewAdapter extends RecyclerView.Adapter<StudyRecycler
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         // Set values
         holder.studyTitle.setText(studyTitles.get(position));
         holder.subjectName.setText(subjectNames.get(position));
@@ -96,7 +96,7 @@ public class StudyRecyclerViewAdapter extends RecyclerView.Adapter<StudyRecycler
         holder.studyCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int studyId = studyIds.get(position);
+                int studyId = studyIds.get(holder.getAdapterPosition());
                 Bundle bundle = new Bundle();
                 bundle.putInt("studyId", studyId);
 

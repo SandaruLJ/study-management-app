@@ -66,7 +66,7 @@ public class SubjectRecyclerViewAdapter extends RecyclerView.Adapter<SubjectRecy
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.subjectName.setText(subjectNames.get(position));
         holder.teacherName.setText(teacherNames.get(position));
         holder.subjectColour.setBackgroundColor(subjectColours.get(position));
@@ -74,7 +74,7 @@ public class SubjectRecyclerViewAdapter extends RecyclerView.Adapter<SubjectRecy
         holder.subjectCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int subjectId = subjectIds.get(position);
+                int subjectId = subjectIds.get(holder.getAdapterPosition());
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", subjectId);
 
