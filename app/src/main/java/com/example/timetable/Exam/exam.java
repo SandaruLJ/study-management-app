@@ -211,7 +211,7 @@ public class exam extends Fragment {
                     cald.add(Calendar.MINUTE,calt.get(Calendar.MINUTE));
                     cald.add(Calendar.MINUTE,min);
 
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),100,intent,0);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),db.getLastExamIndex(),intent,0);
                     AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
                     long timeAtButtonClick = cald.getTimeInMillis();
 
