@@ -1,6 +1,9 @@
 package com.example.timetable.Class;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
@@ -18,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.timetable.R;
+import com.example.timetable.ReminderBroadcast;
 
 import java.util.ArrayList;
 

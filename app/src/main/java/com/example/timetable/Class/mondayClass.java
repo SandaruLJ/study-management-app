@@ -1,6 +1,9 @@
 package com.example.timetable.Class;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -19,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
+import com.example.timetable.ReminderBroadcast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -117,6 +121,11 @@ public class mondayClass extends Fragment  {
                 // Row is swiped from recycler view
                 // remove it from adapter
                 db.deleteClass(String.valueOf(ids.get(viewHolder.getAdapterPosition())));
+                Intent intent = new Intent(getActivity().getApplicationContext(), ReminderBroadcast.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),ids.get(viewHolder.getAdapterPosition()),intent,0);
+                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+                alarmManager.cancel(pendingIntent);
+
                 adapter.removeItem(viewHolder.getAdapterPosition());
                 Toast.makeText(getActivity().getApplicationContext(), "Class Deleted Successfully", Toast.LENGTH_LONG).show();
             }

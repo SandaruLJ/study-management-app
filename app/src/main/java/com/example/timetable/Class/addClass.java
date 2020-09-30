@@ -120,9 +120,17 @@ public class addClass extends Fragment  {
             public void onClick(View view) {
                 boolean isInserted;
 
+                if(selectedTab == 0) {
+                    stab = "Weekly";
+                    isInserted = db.addClass(className.getText().toString(),course.getSelectedItem().toString(),subject.getSelectedItem().toString(),type.getText().toString(),teacher.getText().toString(),classRoom.getText().toString(),note.getText().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),stab,ClassWeekFragment.day.getSelectedItem().toString(),ClassWeekFragment.stime.getText().toString(),ClassWeekFragment.etime.getText().toString(),ClassWeekFragment.start.getText().toString(),ClassWeekFragment.end.getText().toString(),ClassWeekFragment.reminder.getSelectedItem().toString());
+                }else {
+                    stab = "Date";
+                    isInserted = db.addClass(className.getText().toString(),course.getSelectedItem().toString(),subject.getSelectedItem().toString(),type.getText().toString(),teacher.getText().toString(),classRoom.getText().toString(),note.getText().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),stab,"",ClassDateFragment.stime.getText().toString(),ClassDateFragment.etime.getText().toString(),ClassDateFragment.sdate.getText().toString(),"",ClassDateFragment.reminder.getSelectedItem().toString());
+                }
+                if(isInserted == true) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), ReminderBroadcast.class);
                 intent.putExtra("reminderType", "Class Reminder");
-                intent.putExtra("title", className.getText().toString());
+
                 DateFormat timeFormat = new SimpleDateFormat("HH:mm");
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 String date = null;
@@ -142,8 +150,7 @@ public class addClass extends Fragment  {
                 Calendar caled = Calendar.getInstance();
                 Calendar calet = Calendar.getInstance();
                 if(selectedTab == 0) {
-                    intent.putExtra("date", ClassWeekFragment.day.getSelectedItem().toString());
-                    intent.putExtra("time", ClassWeekFragment.stime.getText().toString());
+                    intent.putExtra("text", className.getText().toString() + " Class starts at " + ClassWeekFragment.stime.getText().toString() + " on " + ClassWeekFragment.day.getSelectedItem().toString());
                     stime = ClassWeekFragment.stime.getText().toString();
                     etime = ClassWeekFragment.etime.getText().toString();
                     date = ClassWeekFragment.start.getText().toString();
@@ -151,8 +158,7 @@ public class addClass extends Fragment  {
                     day = ClassWeekFragment.day.getSelectedItem().toString();
                     rtype = ClassWeekFragment.reminder.getSelectedItem().toString();
                 }else{
-                    intent.putExtra("date", ClassDateFragment.sdate.getText().toString());
-                    intent.putExtra("time", ClassDateFragment.stime.getText().toString());
+                    intent.putExtra("text", className.getText().toString() + " Class starts at " + ClassDateFragment.stime.getText().toString() + " on " + ClassDateFragment.sdate.getText().toString());
                     stime = ClassDateFragment.stime.getText().toString();
                     date = ClassDateFragment.sdate.getText().toString();
                     rtype = ClassDateFragment.reminder.getSelectedItem().toString();
@@ -212,7 +218,7 @@ public class addClass extends Fragment  {
 
 
 
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),db.getLastClassIndex()+1,intent,0);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),db.getLastClassIndex(),intent,0);
                 AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
                 long timeAtButtonClick = cald.getTimeInMillis();
 //
@@ -274,14 +280,8 @@ public class addClass extends Fragment  {
 //                alarmManager.cancel(pendingIntent);
 //
 
-                if(selectedTab == 0) {
-                    stab = "Weekly";
-                    isInserted = db.addClass(className.getText().toString(),course.getSelectedItem().toString(),subject.getSelectedItem().toString(),type.getText().toString(),teacher.getText().toString(),classRoom.getText().toString(),note.getText().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),stab,ClassWeekFragment.day.getSelectedItem().toString(),ClassWeekFragment.stime.getText().toString(),ClassWeekFragment.etime.getText().toString(),ClassWeekFragment.start.getText().toString(),ClassWeekFragment.end.getText().toString(),ClassWeekFragment.reminder.getSelectedItem().toString());
-                }else {
-                    stab = "Date";
-                    isInserted = db.addClass(className.getText().toString(),course.getSelectedItem().toString(),subject.getSelectedItem().toString(),type.getText().toString(),teacher.getText().toString(),classRoom.getText().toString(),note.getText().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),stab,"",ClassDateFragment.stime.getText().toString(),ClassDateFragment.etime.getText().toString(),ClassDateFragment.sdate.getText().toString(),"",ClassDateFragment.reminder.getSelectedItem().toString());
-                }
-                if(isInserted == true) {
+
+
                     Toast.makeText(getActivity().getApplicationContext(), "Class Added Successfully", Toast.LENGTH_LONG).show();
                 }else
                     Toast.makeText(getActivity().getApplicationContext(),"Insert Failed, Try again",Toast.LENGTH_LONG).show();

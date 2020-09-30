@@ -1,6 +1,9 @@
 package com.example.timetable.Exam;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Canvas;
 import android.os.Build;
@@ -25,6 +28,7 @@ import com.example.timetable.Class.EventDecorator;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.Exam.ExamCalendarRecyclerView;
 import com.example.timetable.R;
+import com.example.timetable.ReminderBroadcast;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
@@ -152,6 +156,10 @@ public class ExamCalendarFragment extends Fragment {
                 // Row is swiped from recycler view
                 // remove it from adapter
                 db.deleteExam(String.valueOf(ids.get(viewHolder.getAdapterPosition())));
+                Intent intent = new Intent(getActivity().getApplicationContext(), ReminderBroadcast.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),ids.get(viewHolder.getAdapterPosition()),intent,0);
+                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+                alarmManager.cancel(pendingIntent);
                 adapter.removeItem(viewHolder.getAdapterPosition());
             }
 

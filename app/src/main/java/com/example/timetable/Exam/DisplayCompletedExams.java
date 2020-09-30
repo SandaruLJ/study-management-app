@@ -1,6 +1,9 @@
 package com.example.timetable.Exam;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Canvas;
 import android.os.Build;
@@ -21,6 +24,7 @@ import android.view.ViewGroup;
 import com.example.timetable.Database.DBHandler;
 
 import com.example.timetable.R;
+import com.example.timetable.ReminderBroadcast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -115,6 +119,10 @@ public class DisplayCompletedExams extends Fragment {
                 // remove it from adapter
 
                 db.deleteExam(String.valueOf(ids.get(viewHolder.getAdapterPosition())));
+                Intent intent = new Intent(getActivity().getApplicationContext(), ReminderBroadcast.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),ids.get(viewHolder.getAdapterPosition()),intent,0);
+                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+                alarmManager.cancel(pendingIntent);
                 adapter.removeItem(viewHolder.getAdapterPosition());
             }
 
