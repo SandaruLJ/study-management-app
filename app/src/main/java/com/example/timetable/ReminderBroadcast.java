@@ -77,6 +77,26 @@ public class ReminderBroadcast extends BroadcastReceiver {
 
             }
         }
+//         Delete Set Repeating Alarm on End date for Goals
+        Cursor c1 = db.getAllGoals();
+        Calendar calg = Calendar.getInstance();
+        while(c1.moveToNext()){
+
+                try {
+                    edate = dateFormat.parse(c1.getString(3));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                calg.setTime(edate);
+                if(currentDate.compareTo(edate) >= 0){
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context,c1.getInt(0),intent,0);
+                    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                    //Used to cancel the previous alarm
+                    alarmManager.cancel(pendingIntent);
+                }
+
+
+        }
 
     }
 }

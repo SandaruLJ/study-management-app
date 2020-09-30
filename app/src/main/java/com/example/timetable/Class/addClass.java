@@ -274,8 +274,6 @@ public class addClass extends Fragment  {
 //                alarmManager.cancel(pendingIntent);
 //
 
-
-
                 if(selectedTab == 0) {
                     stab = "Weekly";
                     isInserted = db.addClass(className.getText().toString(),course.getSelectedItem().toString(),subject.getSelectedItem().toString(),type.getText().toString(),teacher.getText().toString(),classRoom.getText().toString(),note.getText().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),stab,ClassWeekFragment.day.getSelectedItem().toString(),ClassWeekFragment.stime.getText().toString(),ClassWeekFragment.etime.getText().toString(),ClassWeekFragment.start.getText().toString(),ClassWeekFragment.end.getText().toString(),ClassWeekFragment.reminder.getSelectedItem().toString());

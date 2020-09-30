@@ -12,5 +12,6 @@ public class GoalMaster {
         public  static final String COLUMN_NAME_DESCRIPTION = "description";
         public  static final String COLUMN_NAME_REMINDER = "reminder";
         public  static final String COLUMN_NAME_SCHEDULED = "scheduled_reminder";
+        public  static final String COLUMN_NAME_REMINDER_TIME = "reminder_time";
     }
 }

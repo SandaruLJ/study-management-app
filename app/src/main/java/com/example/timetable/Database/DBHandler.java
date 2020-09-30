@@ -78,11 +78,12 @@ public class DBHandler extends SQLiteOpenHelper {
                     GoalMaster.Goals.COLUMN_NAME_DUE + " TEXT," +
                     GoalMaster.Goals.COLUMN_NAME_DESCRIPTION + " TEXT," +
                     GoalMaster.Goals.COLUMN_NAME_REMINDER + " INTEGER," +
-                    GoalMaster.Goals.COLUMN_NAME_SCHEDULED + " TEXT)" ;
+                    GoalMaster.Goals.COLUMN_NAME_SCHEDULED + " TEXT," +
+                     GoalMaster.Goals.COLUMN_NAME_REMINDER_TIME + " TEXT)";
 
     public DBHandler(@Nullable Context context) {
 
-        super(context, DATABASE_NAME, null, 6);
+        super(context, DATABASE_NAME, null, 7);
         SQLiteDatabase db = getWritableDatabase();
     }
 
@@ -93,7 +94,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 db.execSQL(SQL_CREATE_EXAM_ENTRIES);
                 db.execSQL(SQL_CREATE_HOMEWORK_ENTRIES);
                 db.execSQL(SQL_CREATE_GOAL_ENTRIES);
-//        db.execSQL("DROP TABLE IF EXISTS "+ CourseMaster.Courses.TABLE_NAME);
+
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
@@ -159,7 +160,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     //    CRUD operations for Goals
 
-    public boolean  addGoals(String name, Integer colour, String due, String description, boolean reminder, String scheduled ){
+    public boolean  addGoals(String name, Integer colour, String due, String description, boolean reminder, String scheduled, String stime ){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -170,6 +171,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(GoalMaster.Goals.COLUMN_NAME_DESCRIPTION,description);
         values.put(GoalMaster.Goals.COLUMN_NAME_REMINDER,reminder);
         values.put(GoalMaster.Goals.COLUMN_NAME_SCHEDULED,scheduled);
+        values.put(GoalMaster.Goals.COLUMN_NAME_REMINDER_TIME,stime);
         long result = db.insert(GoalMaster.Goals.TABLE_NAME,null,values);
         if(result == -1)
             return false;
@@ -183,7 +185,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean  updateGoal(String id,String name, Integer colour, String due, String description, String reminder, String scheduled ){
+    public boolean  updateGoal(int id,String name, Integer colour, String due, String description, boolean reminder, String scheduled, String stime ){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -193,7 +195,8 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(GoalMaster.Goals.COLUMN_NAME_DESCRIPTION,description);
         values.put(GoalMaster.Goals.COLUMN_NAME_REMINDER,reminder);
         values.put(GoalMaster.Goals.COLUMN_NAME_SCHEDULED,scheduled);
-        db.update(GoalMaster.Goals.TABLE_NAME,values,"_id = ?",new String[]{id});
+        values.put(GoalMaster.Goals.COLUMN_NAME_REMINDER_TIME,stime);
+        db.update(GoalMaster.Goals.TABLE_NAME,values,"_id = ?",new String[]{String.valueOf(id)});
         return true;
     }
 
@@ -212,7 +215,15 @@ public class DBHandler extends SQLiteOpenHelper {
         return db.delete(GoalMaster.Goals.TABLE_NAME, " _id = ? ",new String[]{id});
     }
 
-
+    public int getLastGoalIndex(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("Select MAX(_id) from "+ GoalMaster.Goals.TABLE_NAME,null);
+        int id = 0;
+        while(res.moveToNext()){
+            id = res.getInt(0);
+        }
+        return id;
+    }
 
     //CRUD Operations for CLass
     public boolean addClass(String name, String course, String subject, String classType, String teacher, String classroom,String note, Integer colour,String freq, String day, String startTime,String endTime, String sDate,String eDate,String reminder ){
