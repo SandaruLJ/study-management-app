@@ -1,5 +1,9 @@
 package com.example.timetable.Exam;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -20,12 +24,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.timetable.Class.ClassDateFragment;
 import com.example.timetable.ColorPicker;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.Homework.displayHomework;
 import com.example.timetable.R;
+import com.example.timetable.ReminderBroadcast;
 import com.example.timetable.SelectDateFragment;
 import com.example.timetable.SelectTimeFragement;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,6 +72,11 @@ public class exam extends Fragment {
         reminder = (Spinner) view.findViewById(R.id.reminder);
         note = (EditText) view.findViewById(R.id.note);
 
+        String[] reminders= new String[]{"5 minutes","10 minutes","15 minutes","30 minutes","1 hour","2 hours", "6 hours", "12 hours","1 day"};
+        ArrayAdapter reminderAdapter= new ArrayAdapter(getActivity().getApplicationContext(), R.layout.spinner_item, reminders);
+        final Spinner reminderSpinner= (Spinner) view.findViewById(R.id.reminder);
+        reminderSpinner.setAdapter(reminderAdapter);
+        
         String[] subjects= new String[]{"MAD","PS","DSA"};
         ArrayAdapter subjectAdapter= new ArrayAdapter(getActivity().getApplicationContext(), R.layout.spinner_item, subjects);
         final Spinner subjectSpinner= (Spinner) view.findViewById(R.id.subjectSelect);
@@ -128,6 +145,80 @@ public class exam extends Fragment {
                 boolean isInserted = db.addExam(title.getText().toString(),subject.getSelectedItem().toString(),location.getText().toString(),end.getText().toString(),stime.getText().toString(),etime.getText().toString(),reminder.getSelectedItem().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),note.getText().toString());
 
                 if(isInserted == true) {
+
+                    Intent intent = new Intent(getActivity().getApplicationContext(), ReminderBroadcast.class);
+                    intent.putExtra("reminderType", "Exam Reminder");
+                    intent.putExtra("title", title.getText().toString());
+                    DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    String date = null;
+                    Date startTime = null;
+                    Date sdate = null;
+                    Date edate = null;
+                    Date endTime = null;
+                    String sttime;
+                    String ettime = null;
+                    String eDate = null;
+                    String rtype;
+                    String day = null;
+                    int dayValue = 0;
+                    Calendar cald = Calendar.getInstance();
+                    Calendar calt = Calendar.getInstance();
+
+                    Calendar caled = Calendar.getInstance();
+                    Calendar calet = Calendar.getInstance();
+
+                    intent.putExtra("date", end.getText().toString());
+                    intent.putExtra("time", stime.getText().toString());
+                    sttime = stime.getText().toString();
+                    date = end.getText().toString();
+                    rtype = reminder.getSelectedItem().toString();
+
+                    int min = 0;
+
+                    if(rtype.equals("5 minutes")){
+                        min = -5;
+                    }else  if(rtype.equals("10 minutes")){
+                        min = -10;
+                    } else  if(rtype.equals("15 minutes")){
+                        min = -15;
+                    } else  if(rtype.equals("30 minutes")){
+                        min = -30;
+                    } else  if(rtype.equals("1 hour")){
+                        min = -60;
+                    } else  if(rtype.equals("2 hours")){
+                        min = -120;
+                    } else  if(rtype.equals("6 hours")){
+                        min = -360;
+                    }else  if(rtype.equals("12 hours")){
+                        min = -720;
+                    }else  if(rtype.equals("1 day")){
+                        min = 1440;
+                    }
+
+                    try {
+                        startTime = timeFormat.parse(sttime);
+                        sdate = dateFormat.parse(date);
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    cald.setTime(sdate);
+                    calt.setTime(startTime);
+
+                    cald.add(Calendar.HOUR_OF_DAY,calt.get(Calendar.HOUR_OF_DAY));
+                    cald.add(Calendar.MINUTE,calt.get(Calendar.MINUTE));
+                    cald.add(Calendar.MINUTE,min);
+
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),100,intent,0);
+                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+                    long timeAtButtonClick = cald.getTimeInMillis();
+
+                    alarmManager.set(AlarmManager.RTC_WAKEUP,
+                            timeAtButtonClick ,
+                            pendingIntent);
+
                     Toast.makeText(getActivity().getApplicationContext(), "Exam Added Successfully", Toast.LENGTH_LONG).show();
                     displayExams fragment = new displayExams();
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();

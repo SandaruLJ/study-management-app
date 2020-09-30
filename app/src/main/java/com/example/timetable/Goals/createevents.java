@@ -81,8 +81,7 @@ public class createevents extends Fragment {
                 DialogFragment newFragment = new SelectDateFragment(end);
                 newFragment.show(getFragmentManager(), "DatePicker");
 
-            }
-        });
+
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
