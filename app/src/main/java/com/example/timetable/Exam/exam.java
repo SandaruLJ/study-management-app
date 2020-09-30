@@ -76,7 +76,7 @@ public class exam extends Fragment {
         ArrayAdapter reminderAdapter= new ArrayAdapter(getActivity().getApplicationContext(), R.layout.spinner_item, reminders);
         final Spinner reminderSpinner= (Spinner) view.findViewById(R.id.reminder);
         reminderSpinner.setAdapter(reminderAdapter);
-        
+
         String[] subjects= new String[]{"MAD","PS","DSA"};
         ArrayAdapter subjectAdapter= new ArrayAdapter(getActivity().getApplicationContext(), R.layout.spinner_item, subjects);
         final Spinner subjectSpinner= (Spinner) view.findViewById(R.id.subjectSelect);
