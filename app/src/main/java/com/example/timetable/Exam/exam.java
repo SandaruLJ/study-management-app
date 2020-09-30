@@ -148,28 +148,16 @@ public class exam extends Fragment {
 
                     Intent intent = new Intent(getActivity().getApplicationContext(), ReminderBroadcast.class);
                     intent.putExtra("reminderType", "Exam Reminder");
-                    intent.putExtra("title", title.getText().toString());
+                    intent.putExtra("text", "You have your " + title.getText().toString() + " Exam at " + stime.getText().toString() + " on " + end.getText().toString());
                     DateFormat timeFormat = new SimpleDateFormat("HH:mm");
                     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     String date = null;
                     Date startTime = null;
                     Date sdate = null;
-                    Date edate = null;
-                    Date endTime = null;
                     String sttime;
-                    String ettime = null;
-                    String eDate = null;
                     String rtype;
-                    String day = null;
-                    int dayValue = 0;
                     Calendar cald = Calendar.getInstance();
                     Calendar calt = Calendar.getInstance();
-
-                    Calendar caled = Calendar.getInstance();
-                    Calendar calet = Calendar.getInstance();
-
-                    intent.putExtra("date", end.getText().toString());
-                    intent.putExtra("time", stime.getText().toString());
                     sttime = stime.getText().toString();
                     date = end.getText().toString();
                     rtype = reminder.getSelectedItem().toString();

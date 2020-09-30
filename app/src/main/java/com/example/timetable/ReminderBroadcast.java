@@ -35,16 +35,16 @@ public class ReminderBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        String title = intent.getExtras().getString("title");
-        String date = intent.getExtras().getString("date");
+        String text = intent.getExtras().getString("text");
         String reminderType = intent.getExtras().getString("reminderType");
-        String time = intent.getExtras().getString("time");
+
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"Channel1")
                 .setSmallIcon(R.drawable.notification_new)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),R.mipmap.studentplanner))
                 .setContentTitle(reminderType)
-                .setContentText(title + " starts at "+time + " on "+date)
+//                .setContentText(title + " starts at "+time + " on "+date)
+                .setContentText(text)
                 .setPriority(NotificationCompat.PRIORITY_MAX);
 
         notificationManager = NotificationManagerCompat.from(context);

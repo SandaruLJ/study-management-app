@@ -342,7 +342,7 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("Select * from " + HomeworkMaster.Homework.TABLE_NAME + " WHERE "+ CourseMaster.Courses._ID + " = " + id, null);
         return res;
     }
-    public boolean  updateHomework(String id,String title, String subject, String due_date,String time,String reminder, Integer colour, String note ){
+    public boolean  updateHomework(int id,String title, String subject, String due_date,String time,String reminder, Integer colour, String note ){
 
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -355,7 +355,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(HomeworkMaster.Homework.COLUMN_NAME_REMINDER,reminder);
         values.put(HomeworkMaster.Homework.COLUMN_NAME_COLOUR,colour);
         values.put(HomeworkMaster.Homework.COLUMN_NAME_NOTE,note);
-        db.update(HomeworkMaster.Homework.TABLE_NAME,values,"_id = ?",new String[]{id});
+        db.update(HomeworkMaster.Homework.TABLE_NAME,values,"_id = ?",new String[]{String.valueOf(id)});
         return true;
     }
 
@@ -367,6 +367,15 @@ public class DBHandler extends SQLiteOpenHelper {
             count = res.getInt(0);
         }
         return count;
+    }
+    public int getLastHomeworkIndex(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("Select MAX(_id) from "+ HomeworkMaster.Homework.TABLE_NAME,null);
+        int id = 0;
+        while(res.moveToNext()){
+            id = res.getInt(0);
+        }
+        return id;
     }
     //CRUD operations for  EXAM
 
