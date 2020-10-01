@@ -209,6 +209,7 @@
                     android:text="@string/_13_8_2020"
 
                     android:textFontWeight="600"
+
                     android:textSize="20dp" />
             </RelativeLayout>
 

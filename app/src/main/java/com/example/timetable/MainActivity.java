@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity  {
                             selectedFragment = new DashboardFragment();
                             break;
                         case R.id.nav_class :
-//                            selectedFragment = new ViewClassFragment();
-                            selectedFragment = new AllFragment();
+                            selectedFragment = new ViewClassFragment();
+                           
                             break;
                         case R.id.nav_homework :
                             selectedFragment = new displayHomework();

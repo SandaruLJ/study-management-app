@@ -33,7 +33,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     ClassMaster.Classes.COLUMN_NAME_CLASS_NAME + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_COURSE + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_SUBJECT + " TEXT," +
-                    ClassMaster.Classes.COLUMN_NAME_CLASS_TYPE + " TEXT," +
+                    ClassMaster.Classes.COLUMN_NAME_CLASS_TYPE + " INTEGER," +
                     ClassMaster.Classes.COLUMN_NAME_CLASS_TEACHER + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_CLASS_ROOM + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_NOTE + " TEXT," +
