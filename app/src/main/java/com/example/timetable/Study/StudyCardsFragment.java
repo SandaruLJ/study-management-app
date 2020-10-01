@@ -1,12 +1,13 @@
-package com.example.timetable.Subject;
+package com.example.timetable.Study;
 
 import android.database.Cursor;
 import android.graphics.Canvas;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.R;
@@ -24,15 +24,14 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AllSubjectsFragment#newInstance} factory method to
+ * Use the {@link StudyCardsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AllSubjectsFragment extends Fragment {
-
-    DBHandler db;
+public class StudyCardsFragment extends Fragment {
+    private DBHandler db;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new DBHandler(getActivity());
     }
@@ -40,50 +39,48 @@ public class AllSubjectsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_all_subjects, container, false);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_study_cards, container, false);
 
-
-        // Add Subject Button
-        ImageView addSubjectBtn = view.findViewById(R.id.add_subject_btn);
-
-        addSubjectBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddSubjectFragment fragment = new AddSubjectFragment();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .addToBackStack(null).commit();
-            }
-        });
-
-
-        // Subject List
-        final ArrayList<Integer> subjectIds = new ArrayList<>();
+        final ArrayList<Integer> studyIds = new ArrayList<>();
+        final ArrayList<String> studyTitles = new ArrayList<>();
         final ArrayList<String> subjectNames = new ArrayList<>();
-        final ArrayList<String> teacherNames = new ArrayList<>();
-        final ArrayList<Integer> subjectColours = new ArrayList<>();
-        final Cursor c = db.getAllSubjects();
+        final ArrayList<Integer> studyColours = new ArrayList<>();
+        final ArrayList<String> studyDates = new ArrayList<>();
+        final ArrayList<String> studyDays = new ArrayList<>();
+        final ArrayList<String> studyStartTimes = new ArrayList<>();
+        final ArrayList<String> studyEndTimes = new ArrayList<>();
+        final Cursor c = db.getAllStudies();
 
         while (c.moveToNext()){
-            subjectIds.add(c.getInt(0));
-            subjectNames.add(c.getString(1));
-            teacherNames.add(c.getString(2));
-            subjectColours.add(c.getInt(4));
+            String subjectName = null;
+
+            Cursor subject = db.getSingleSubject(c.getInt(2));  // Get corresponding subject
+            if (subject.moveToFirst())
+                subjectName = subject.getString(1);  // Get subject name
+
+            studyIds.add(c.getInt(0));
+            studyTitles.add(c.getString(1));
+            subjectNames.add(subjectName);
+            studyColours.add(c.getInt(3));
+            studyDates.add(c.getString(4));
+            studyStartTimes.add(c.getString(5));
+            studyEndTimes.add(c.getString(6));
+            studyDays.add(c.getString(8));
         }
 
-        RecyclerView subjectRecyclerView = view.findViewById(R.id.subject_recycler_view);
-        final SubjectRecyclerViewAdapter subjectAdapter = new SubjectRecyclerViewAdapter(subjectIds,
-                subjectNames, teacherNames, subjectColours, getActivity());
-        subjectRecyclerView.setAdapter(subjectAdapter);
-        subjectRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        RecyclerView studyRecyclerView = view.findViewById(R.id.study_recycler_view);
+        final StudyRecyclerViewAdapter studyAdapter = new StudyRecyclerViewAdapter(studyIds, studyTitles,
+                subjectNames, studyColours, studyDates, studyDays, studyStartTimes, studyEndTimes, getActivity());
+        studyRecyclerView.setAdapter(studyAdapter);
+        studyRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        itemTouchHelper(subjectAdapter, subjectIds, subjectRecyclerView);
+        itemTouchHelper(studyAdapter, studyIds, studyRecyclerView);
 
         return view;
     }
 
-    public void itemTouchHelper(final SubjectRecyclerViewAdapter adapter, final ArrayList<Integer> subjectIds,
+    public void itemTouchHelper(final StudyRecyclerViewAdapter adapter, final ArrayList<Integer> studyIds,
                                 final RecyclerView recyclerView){
         final ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper
                 .SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -93,18 +90,24 @@ public class AllSubjectsFragment extends Fragment {
                 return true;
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                // When the row is swiped, remove the item from adapter
-                db.deleteSubject(String.valueOf(subjectIds.get(viewHolder.getAdapterPosition())));
+                int studyId = studyIds.get(viewHolder.getAdapterPosition());  // Get study id
+
+                // When the row is swiped, remove the item from adapter and delete it from database
                 adapter.removeItem(viewHolder.getAdapterPosition());
+                db.deleteStudy(String.valueOf(studyId));
+
+                // Remove reminder notifications if there are any
+                ReminderScheduler.removeReminder(getContext(), studyId);
             }
 
             @Override
             public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
                 super.onSelectedChanged(viewHolder, actionState);
                 if (viewHolder != null) {
-                    final View foregroundView = ((SubjectRecyclerViewAdapter.ViewHolder) viewHolder).subjectCard;
+                    final View foregroundView = ((StudyRecyclerViewAdapter.ViewHolder) viewHolder).studyCard;
                     getDefaultUIUtil().onSelected(foregroundView);
                 }
             }
@@ -112,7 +115,7 @@ public class AllSubjectsFragment extends Fragment {
             @Override
             public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
                 super.clearView(recyclerView, viewHolder);
-                final View foregroundView = ((SubjectRecyclerViewAdapter.ViewHolder) viewHolder).subjectCard;
+                final View foregroundView = ((StudyRecyclerViewAdapter.ViewHolder) viewHolder).studyCard;
                 getDefaultUIUtil().clearView(foregroundView);
             }
 
@@ -121,7 +124,7 @@ public class AllSubjectsFragment extends Fragment {
                                         RecyclerView.ViewHolder viewHolder, float dX, float dY,
                                         int actionState, boolean isCurrentlyActive) {
                 super.onChildDrawOver(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-                final View foregroundView = ((SubjectRecyclerViewAdapter.ViewHolder) viewHolder).subjectCard;
+                final View foregroundView = ((StudyRecyclerViewAdapter.ViewHolder) viewHolder).studyCard;
 
                 getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY,
                         actionState, isCurrentlyActive);
@@ -131,7 +134,7 @@ public class AllSubjectsFragment extends Fragment {
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
                                     float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 // Show the background view
-                final View foregroundView = ((SubjectRecyclerViewAdapter.ViewHolder) viewHolder).subjectCard;
+                final View foregroundView = ((StudyRecyclerViewAdapter.ViewHolder) viewHolder).studyCard;
                 getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY,
                         actionState, isCurrentlyActive);
             }

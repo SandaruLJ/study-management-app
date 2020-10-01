@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
-            android:text="@string/study_add_title"
+            android:text="@string/study_edit_title"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -648,7 +648,7 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/add_study"
+                    android:id="@+id/update_study"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="@string/save_subject_button_label"

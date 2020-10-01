@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Study.StudyStatisticsFragment"
     android:orientation="vertical">
 
@@ -15,28 +16,28 @@
         android:layout_marginTop="24dp">
 
         <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/previous_week_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:background="@color/window_background"
+            android:background="@color/window_background"
             android:src="@drawable/navigation_arrow_left"
-            android:tint="@color/darkblue"
-            />
+            android:tint="@color/darkblue" />
 
         <TextView
+            android:id="@+id/date_range_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/study_statistics_time_range"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
 
         <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/next_week_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/window_background"
             android:src="@drawable/navigation_arrow_left"
             android:scaleX="-1"
-            android:tint="@color/darkblue"
-           />
+            android:tint="@color/darkblue" />
     </LinearLayout>
 
     <com.github.mikephil.charting.charts.BarChart
@@ -53,24 +54,18 @@
         android:layout_marginTop="16dp"
         android:paddingHorizontal="16dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/color_patch"
-            android:scaleType="fitXY"
-            android:tint="@color/subject_colour"
-            android:layout_gravity="center_vertical"/>
-
         <TextView
+            android:id="@+id/total_study_time_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/subject_name"
+            android:text="@string/total_time"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="14sp"
             android:layout_marginStart="8dp"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical" />
 
         <TextView
+            android:id="@+id/total_study_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/total_study_time"
@@ -82,32 +77,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:paddingHorizontal="16dp">
+        android:layout_marginTop="64dp"
+        android:gravity="center_horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/color_patch"
-            android:scaleType="fitXY"
-            android:tint="@color/subject_colour_dsa"
-            android:layout_gravity="center_vertical"/>
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/subject"
+            android:alpha="0.8"
+            android:tint="@color/lite_blue" />
 
-        <TextView
+        <Spinner
+            android:id="@+id/subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/subject_name_dsa"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="14sp"
-            android:layout_marginStart="8dp"
-            android:layout_gravity="center_vertical"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/total_study_time_dsa"
-            android:textColor="?android:attr/textColorSecondary"
-            android:gravity="end"
-            android:layout_gravity="center_vertical" />
+            android:spinnerMode="dialog"
+            android:entries="@array/subjects" />
     </LinearLayout>
 </LinearLayout>

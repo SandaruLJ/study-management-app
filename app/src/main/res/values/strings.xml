@@ -50,6 +50,7 @@
 
     <!-- Studies -->
     <string name="study_add_title">Add Study</string>
+    <string name="study_edit_title">Edit Study</string>
     <string name="study_all_title">Study</string>
     <string name="study_title">Study Lesson 5</string>
     <string name="study_start_time">10.30 am</string>
@@ -67,6 +68,8 @@
     <string name="time_before_reminder_label">Reminder Time</string>
     <string name="save_study_button_label">Save Study</string>
     <string name="study_timer">Study Timer</string>
+    <string name="everyday">Everyday</string>
+    <string name="repeat_on_every">Repeat on every</string>
     <string-array name="subjects">
         <item>Mobile Application Development</item>
         <item>Professional Skills</item>
@@ -98,9 +101,11 @@
         <item>1 hour</item>
     </string-array>
     <string name="timer_set_label">Set</string>
+    <string name="minutes">Minutes</string>
     <string name="timer_time">00:00:00</string>
     <string name="timer_start_label">Start</string>
     <string name="study_statistics_time_range">Aug 8, 2020 - Aug 14, 2020</string>
+    <string name="total_time">Total study time</string>
     <string name="total_study_time">07:00</string>
     <string name="subject_name_dsa">Data Structures &amp; Algorithms</string>
     <string name="total_study_time_dsa">04:00</string>
@@ -236,7 +241,10 @@
     <string name="ex5">Ex5</string>
     <string name="repeat">Repeat</string>
     <string name="reset">Reset</string>
+    <string name="start">Start</string>
     <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="stop">Stop</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="editCourse">Edit Course</string>

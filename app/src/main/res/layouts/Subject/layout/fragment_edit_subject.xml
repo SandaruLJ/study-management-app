@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
-            android:text="@string/subject_add_title"
+            android:text="@string/subject_edit_title"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -70,7 +70,6 @@
             android:tint="@color/lite_blue" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/subjectNameInput"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/subject_name_hint"
@@ -90,7 +89,7 @@
         android:layout_height="2dp"
         android:background="@color/lightgrey"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -149,6 +148,7 @@
             android:tint="@color/lite_blue" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="50dp"
@@ -170,7 +170,7 @@
         android:layout_height="2dp"
         android:background="@color/lightgrey"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp" />
 
     <LinearLayout
         android:id="@+id/colour_wrapper"
@@ -189,7 +189,7 @@
             android:layout_marginTop="18dp"
             android:src="@drawable/color"
             android:alpha="0.8"
-            android:tint="@color/lite_blue" />
+            android:tint="@color/lite_blue"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -202,7 +202,7 @@
                 android:text="@string/subject_colour_label"
                 android:textColor="#A8A7A7"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -246,7 +246,7 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/add_subject"
+            android:id="@+id/update_subject"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/save_subject_button_label"
@@ -256,6 +256,6 @@
             android:textSize="16sp"
             android:textColor="@color/white"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"/>
+            android:paddingRight="20dp" />
     </LinearLayout>
 </LinearLayout>
