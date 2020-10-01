@@ -473,5 +473,14 @@ public class DBHandler extends SQLiteOpenHelper {
         db.update(ExamMaster.Exam.TABLE_NAME,values,"_id = ?",new String[]{String.valueOf(id)});
         return true;
     }
+    public int getLastExamIndex(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("Select MAX(_id) from "+ ExamMaster.Exam.TABLE_NAME,null);
+        int id = 0;
+        while(res.moveToNext()){
+            id = res.getInt(0);
+        }
+        return id;
+    }
 
 }

@@ -96,7 +96,6 @@ public class createevents extends Fragment {
             }
 
         });
-
         //End Date Picker
         final TextView end = (TextView) view.findViewById(R.id.endDate);
         LinearLayout pickDatebtn1 = (LinearLayout) view.findViewById(R.id.dateSelectorEnd);
@@ -106,6 +105,46 @@ public class createevents extends Fragment {
                 //Pass the textView in order to set the date for the text
                 DialogFragment newFragment = new SelectDateFragment(end);
                 newFragment.show(getFragmentManager(), "DatePicker");
+
+            }
+        });
+        //Start Time Picker
+        stime = (TextView) view.findViewById(R.id.sTime);
+
+       timeSelector = (LinearLayout) view.findViewById(R.id.timeSelectorStart);
+        timeSelector.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Pass the textView in order to set the date for the text
+                DialogFragment newFragment = new SelectTimeFragement(stime);
+                newFragment.show(getFragmentManager(), "TimePicker");
+
+            }
+        });
+
+
+        scheduled_reminder.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(scheduled_reminder.getSelectedItem().toString().equals("Weekly") || scheduled_reminder.getSelectedItem().toString().equals("Daily") || scheduled_reminder.getSelectedItem().toString().equals("Monthly")){
+                    timeSelector.setVisibility(View.VISIBLE);
+                    timeSelectorView.setVisibility(View.VISIBLE);
+
+
+                }else{
+                    timeSelector.setVisibility(View.INVISIBLE);
+                    timeSelectorView.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
 
 
 

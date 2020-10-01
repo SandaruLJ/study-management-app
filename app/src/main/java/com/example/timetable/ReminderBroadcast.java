@@ -1,7 +1,10 @@
 package com.example.timetable;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -39,7 +42,7 @@ public class ReminderBroadcast extends BroadcastReceiver {
         String reminderType = intent.getExtras().getString("reminderType");
 
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"Channel1")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"channel1")
                 .setSmallIcon(R.drawable.notification_new)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),R.mipmap.studentplanner))
                 .setContentTitle(reminderType)
@@ -51,7 +54,7 @@ public class ReminderBroadcast extends BroadcastReceiver {
 
         notificationManager.notify(200,builder.build());
 
-        // Delete Set Repeating Alarm on End date
+//         Delete Set Repeating Alarm on End date for Class
         DBHandler db = new DBHandler(context);
         DateFormat timeFormat = new SimpleDateFormat("HH:mm");
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -99,4 +102,5 @@ public class ReminderBroadcast extends BroadcastReceiver {
         }
 
     }
+
 }

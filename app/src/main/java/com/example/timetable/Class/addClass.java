@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.timetable.App;
 import com.example.timetable.ColorPicker;
 import com.example.timetable.Course.AddCourseFragment;
 import com.example.timetable.Course.DisplayCourseFragment;
@@ -166,8 +167,6 @@ public class addClass extends Fragment  {
 
                 int min = 0;
 
-
-
                 if(rtype.equals("5 minutes")){
                     min = -5;
                 }else  if(rtype.equals("10 minutes")){
@@ -221,10 +220,8 @@ public class addClass extends Fragment  {
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),db.getLastClassIndex(),intent,0);
                 AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
                 long timeAtButtonClick = cald.getTimeInMillis();
+
 //
-//                alarmManager.set(AlarmManager.RTC_WAKEUP,
-//                        timeAtButtonClick ,
-//                        pendingIntent);
 
 
                 if(selectedTab==0){
@@ -249,27 +246,11 @@ public class addClass extends Fragment  {
                     calt.set(Calendar.YEAR,cald.get(Calendar.YEAR));
                     calt.add(Calendar.MINUTE,min);
 
-//                    Date currentDate = new Date();
-//                    Calendar cl = Calendar.getInstance();
-//                    cl.setTime(currentDate);
-//                    Date test = null;
-//                    try {
-//                        test = dateFormat.parse("26/09/2020");
-//                    } catch (ParseException e) {
-//                        e.printStackTrace();
-//                    }
-//                    String val = "";
-//                    if(currentDate.compareTo(test) == 0){
-//                        val="True";
-//                    }
-//                    Toast.makeText(getActivity().getApplicationContext(), val, Toast.LENGTH_LONG).show();
+
+
 
                     int weekInMillis = 7*24*60*60*1000;
                     alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calt.getTimeInMillis(),weekInMillis,pendingIntent);
-
-//                    alarmManager.set(AlarmManager.RTC_WAKEUP,
-//                            caled.getTimeInMillis(),
-//                            pendingIntent);
 
                 }else{
                     alarmManager.set(AlarmManager.RTC_WAKEUP,
