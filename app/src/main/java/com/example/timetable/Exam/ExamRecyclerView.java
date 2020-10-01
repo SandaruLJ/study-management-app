@@ -30,7 +30,7 @@ import java.util.Locale;
 
 public class ExamRecyclerView extends RecyclerView.Adapter<ExamRecyclerView.ViewHolder>{
 
-    private static final String TAG = "Course Recycler View";
+    private static final String TAG = "Exam Recycler View";
 
     private ArrayList<String> exam = new ArrayList<>();
     private ArrayList<String> subject = new ArrayList<>();

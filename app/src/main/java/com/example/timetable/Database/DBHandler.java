@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -157,6 +158,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(CourseMaster.Courses.TABLE_NAME, " _id = ? ",new String[]{id});
     }
+
 
     //    CRUD operations for Goals
 
@@ -315,6 +317,24 @@ public class DBHandler extends SQLiteOpenHelper {
             count = res.getInt(0);
         }
         return count;
+    }
+    public Integer getTodayClassCount(){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        final Calendar calendar = Calendar.getInstance();
+        int yy = calendar.get(Calendar.YEAR);
+        int mm = calendar.get(Calendar.MONTH);
+        int dd = calendar.get(Calendar.DAY_OF_MONTH);
+
+        String temp = dd+"/"+(mm+1)+"/"+yy;
+
+        Cursor res = db.rawQuery("Select COUNT(_id) from "+ ClassMaster.Classes.TABLE_NAME_CLASS + " WHERE start_date = 1/10/2020",null);
+        int count = 0;
+        while(res.moveToNext()){
+            count = res.getInt(0);
+        }
+        return count;
+
     }
     //CRUD operations for  HOMEWORK
 

@@ -90,8 +90,6 @@ public class upcoming extends Fragment {
                 description.add(c.getString(4));
 
             }
-
-
         }
 
         RecyclerView recyclerView = view.findViewById(R.id.goal_recycler_view);
