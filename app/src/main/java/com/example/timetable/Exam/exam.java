@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
@@ -20,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ import android.widget.Toast;
 import com.example.timetable.Class.ClassDateFragment;
 import com.example.timetable.ColorPicker;
 import com.example.timetable.Database.DBHandler;
+import com.example.timetable.Database.SubjectMaster;
 import com.example.timetable.Homework.displayHomework;
 import com.example.timetable.R;
 import com.example.timetable.ReminderBroadcast;
@@ -77,11 +80,19 @@ public class exam extends Fragment {
         final Spinner reminderSpinner= (Spinner) view.findViewById(R.id.reminder);
         reminderSpinner.setAdapter(reminderAdapter);
 
-        String[] subjects= new String[]{"MAD","PS","DSA"};
+        // Subject Selector
+        Cursor cs = db.getAllSubjects();
+        int count = db.getSubjectCount();
+        String[] subjects = new String[count];
+        int i = 0;
+        while (cs.moveToNext()){
+            subjects[i] = cs.getString(1);
+            i++;
+        }
+
         ArrayAdapter subjectAdapter= new ArrayAdapter(getActivity().getApplicationContext(), R.layout.spinner_item, subjects);
         final Spinner subjectSpinner= (Spinner) view.findViewById(R.id.subjectSelect);
         subjectSpinner.setAdapter(subjectAdapter);
-
 
         //Colour Picker
         final Button colorbtn = (Button) view.findViewById(R.id.colorbtn);

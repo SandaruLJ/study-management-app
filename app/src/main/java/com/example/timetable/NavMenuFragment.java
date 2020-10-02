@@ -113,6 +113,15 @@ public class NavMenuFragment extends Fragment {
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
             }
         });
+        LinearLayout calendar = (LinearLayout) view.findViewById(R.id.calendarIcon);
+        calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AllEventCalendar fragment = new AllEventCalendar();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+            }
+        });
 
 
 

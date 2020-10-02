@@ -1,39 +1,49 @@
 package com.example.timetable;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.timetable.Class.addClass;
+import com.example.timetable.Course.AddCourseFragment;
+import com.example.timetable.Course.editCourse;
 import com.example.timetable.Database.DBHandler;
 
-import com.example.timetable.R;
+import com.example.timetable.Exam.exam;
+import com.example.timetable.Goals.createevents;
+import com.example.timetable.Homework.AddHomeworkFragment;
+import com.example.timetable.Study.AddStudyFragment;
+import com.example.timetable.Study.StudyTimerFragment;
+import com.example.timetable.Subject.AddSubjectFragment;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class DashboardFragment extends Fragment {
     @Nullable
@@ -43,10 +53,131 @@ public class DashboardFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new DBHandler(getActivity().getApplicationContext());
+
     }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard,null);
+
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        calendaricon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AllEventCalendar fragment = new AllEventCalendar();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                popupWindow.dismiss();
+            }
+        });
+
+
+
+        addIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (popupWindow.isShowing()){
+                    popupWindow.dismiss();
+            } else
+                    popupWindow.showAsDropDown(addIcon, 50, 0);
+            }
+        });
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                    popupWindow.dismiss();
+                }
+                return false;
+            }
+        });
+
+        TextView addCourse = popupView.findViewById(R.id.addCourse);
+        addCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddCourseFragment fragment = new AddCourseFragment();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                popupWindow.dismiss();
+            }
+        });
+
+        TextView addClass = popupView.findViewById(R.id.addClass);
+        addClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addClass fragment = new addClass();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                popupWindow.dismiss();
+            }
+        });
+
+        TextView addExam = popupView.findViewById(R.id.addExam);
+        addExam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exam fragment = new exam();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                popupWindow.dismiss();
+            }
+        });
+
+        TextView addHomework = popupView.findViewById(R.id.addHomework);
+        addHomework.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddHomeworkFragment fragment = new AddHomeworkFragment();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                popupWindow.dismiss();
+            }
+        });
+
+        TextView addSubject = popupView.findViewById(R.id.addSubject);
+        addSubject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddSubjectFragment fragment = new AddSubjectFragment();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                popupWindow.dismiss();
+            }
+        });
+
+        TextView addStudy = popupView.findViewById(R.id.addStudy);
+        addStudy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddStudyFragment fragment = new AddStudyFragment();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                popupWindow.dismiss();
+            }
+        });
+
+        TextView addGoal = popupView.findViewById(R.id.addGoal);
+        addGoal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createevents fragment = new createevents();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                popupWindow.dismiss();
+            }
+        });
+
+
 
 
 

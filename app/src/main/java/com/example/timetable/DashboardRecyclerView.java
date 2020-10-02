@@ -23,6 +23,7 @@ import com.example.timetable.Exam.editExam;
 import com.example.timetable.Goals.edit_goals;
 import com.example.timetable.Homework.edithomework;
 import com.example.timetable.R;
+import com.example.timetable.Study.EditStudyFragment;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -126,9 +127,10 @@ public class DashboardRecyclerView extends RecyclerView.Adapter<DashboardRecycle
             params.setMargins(30,50,10,10);
             params.addRule(RelativeLayout.RIGHT_OF, holder.event.getId());
             holder.type.setLayoutParams(params);
-
+        }else  if(type.get(position).equals("Study")) {
+            holder.location.setVisibility(View.INVISIBLE);
+            holder.classIcon.setVisibility(View.INVISIBLE);
         }
-
 
         holder.eventCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,6 +158,13 @@ public class DashboardRecyclerView extends RecyclerView.Adapter<DashboardRecycle
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, cFragment).addToBackStack(null).commit();
                 }else if(type.get(position).equals("Goals")){
                     edit_goals cFragment = new edit_goals();
+                    cFragment.setArguments(bundle);
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, cFragment).addToBackStack(null).commit();
+
+                }else if(type.get(position).equals("Study")){
+                    EditStudyFragment cFragment = new EditStudyFragment();
+                    bundle.putInt("studyId",  id);
                     cFragment.setArguments(bundle);
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, cFragment).addToBackStack(null).commit();

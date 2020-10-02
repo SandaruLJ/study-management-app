@@ -34,13 +34,14 @@
                 android:id="@+id/addIcon"
                 android:layout_alignParentEnd="true"
                 android:tint="@color/white"/>
+
             <ImageView
+                android:id="@+id/calendarIcon"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/today"
                 android:padding="10dp"
                 android:layout_marginTop="5dp"
-
                 android:tint="@color/white"
                android:layout_toLeftOf="@id/addIcon" />
         </RelativeLayout>

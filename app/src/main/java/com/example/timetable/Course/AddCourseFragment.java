@@ -105,16 +105,7 @@ public class AddCourseFragment extends Fragment {
             }
         });
 
-        ImageView allBtn = (ImageView) view.findViewById(R.id.allIcon);
 
-        allBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DisplayCourseFragment fragment = new DisplayCourseFragment();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-            }
-        });
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

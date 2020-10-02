@@ -84,34 +84,34 @@ public class EditSubjectFragment extends Fragment {
             colourBtn.setBackgroundTintList(ColorStateList.valueOf(subjectColourTemp));
 
 
-            // All Subjects Button
-            ImageView allSubBtn = view.findViewById(R.id.all_subjects_btn);
-
-            allSubBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AllSubjectsFragment fragment = new AllSubjectsFragment();
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, fragment)
-                            .addToBackStack(null).commit();
-                }
-            });
-
-
-            // Add Subjects Button
-            ImageView addSubjectsBtn = view.findViewById(R.id.add_subject_btn);
-
-            addSubjectsBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AddSubjectFragment fragment = new AddSubjectFragment();
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, fragment)
-                            .addToBackStack(null).commit();
-                }
-            });
+//            // All Subjects Button
+//            ImageView allSubBtn = view.findViewById(R.id.all_subjects_btn);
+//
+//            allSubBtn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    AllSubjectsFragment fragment = new AllSubjectsFragment();
+//                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                    activity.getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.fragment_container, fragment)
+//                            .addToBackStack(null).commit();
+//                }
+//            });
+//
+//
+//            // Add Subjects Button
+//            ImageView addSubjectsBtn = view.findViewById(R.id.add_subject_btn);
+//
+//            addSubjectsBtn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    AddSubjectFragment fragment = new AddSubjectFragment();
+//                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                    activity.getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.fragment_container, fragment)
+//                            .addToBackStack(null).commit();
+//                }
+//            });
 
 
             // Colour Button

@@ -44,7 +44,7 @@ public class DBHandler extends SQLiteOpenHelper {
                     ClassMaster.Classes.COLUMN_NAME_END_TIME + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_START_DATE + " TEXT," +
                     ClassMaster.Classes.COLUMN_NAME_END_DATE + " TEXT," +
-                    ClassMaster.Classes.COLUMN_NAME_REMINDER + " INTEGER )" ;
+                    ClassMaster.Classes.COLUMN_NAME_REMINDER + " TEXT )" ;
 
     private static final String SQL_CREATE_HOMEWORK_ENTRIES =
             "CREATE TABLE " + HomeworkMaster.Homework.TABLE_NAME + "("+
@@ -120,7 +120,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public DBHandler(@Nullable Context context) {
 
-        super(context, DATABASE_NAME, null, 7);
+        super(context, DATABASE_NAME, null, 8);
         SQLiteDatabase db = getWritableDatabase();
     }
 
@@ -192,6 +192,12 @@ public class DBHandler extends SQLiteOpenHelper {
         return res;
     }
     public Cursor getSingleCourse(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from " + CourseMaster.Courses.TABLE_NAME + " WHERE "+ CourseMaster.Courses._ID + " = " + id, null);
+        return res;
+    }
+
+    public Cursor getCourseCount(int id) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor res = db.rawQuery("Select * from " + CourseMaster.Courses.TABLE_NAME + " WHERE "+ CourseMaster.Courses._ID + " = " + id, null);
         return res;
@@ -269,8 +275,18 @@ public class DBHandler extends SQLiteOpenHelper {
         return id;
     }
 
+    public int getCourseCount(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("Select COUNT(_id) from "+ CourseMaster.Courses.TABLE_NAME,null);
+        int count = 0;
+        while(res.moveToNext()){
+            count = res.getInt(0);
+        }
+        return count;
+    }
+
     //CRUD Operations for CLass
-    public boolean addClass(String name, String course, String subject, String classType, String teacher, String classroom,String note, Integer colour,String freq, String day, String startTime,String endTime, String sDate,String eDate,Integer reminder ){
+    public boolean addClass(String name, String course, String subject, String classType, String teacher, String classroom,String note, Integer colour,String freq, String day, String startTime,String endTime, String sDate,String eDate,String reminder ){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -570,6 +586,15 @@ public class DBHandler extends SQLiteOpenHelper {
     public Integer deleteSubject(String subjectId) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(SubjectMaster.Subjects.TABLE_NAME, " _id = ? ", new String[]{subjectId});
+    }
+    public int getSubjectCount(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("Select COUNT(_id) from "+ SubjectMaster.Subjects.TABLE_NAME,null);
+        int count = 0;
+        while(res.moveToNext()){
+            count = res.getInt(0);
+        }
+        return count;
     }
 
 

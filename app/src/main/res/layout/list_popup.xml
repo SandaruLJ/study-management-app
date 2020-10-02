@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/white"
+
+    >
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#999999"
+        />
+    <TextView
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:text="Add Course"
+        android:id="@+id/addCourse"
+        android:textSize="18dp"
+        android:textColor= "@color/grey"
+        android:gravity="center"
+        />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#999999"
+        />
+    <TextView
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:text="Add Class"
+        android:id="@+id/addClass"
+        android:textSize="18dp"
+        android:textColor= "@color/grey"
+        android:gravity="center"
+        />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#999999"
+        />
+
+    <TextView
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:text="Add Subject"
+        android:id="@+id/addSubject"
+        android:textSize="18dp"
+        android:textColor= "@color/grey"
+        android:gravity="center"
+        />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#999999"
+        />
+
+    <TextView
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:text="Add Homework"
+        android:id="@+id/addHomework"
+        android:textSize="18dp"
+        android:textColor= "@color/grey"
+        android:gravity="center"
+        />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#999999"
+        />
+    <TextView
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:text="Add Exam"
+        android:id="@+id/addExam"
+        android:textSize="18dp"
+        android:textColor= "@color/grey"
+        android:gravity="center"
+        />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#999999"
+        />
+    <TextView
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:text="Add Study"
+        android:textSize="18dp"
+        android:id="@+id/addStudy"
+        android:textColor= "@color/grey"
+        android:gravity="center"
+        />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#999999"
+        />
+
+    <TextView
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:text="Add Goal"
+        android:id="@+id/addGoal"
+        android:textSize="18dp"
+        android:textColor= "@color/grey"
+        android:gravity="center"
+        />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#999999"
+        />
+
+</LinearLayout>

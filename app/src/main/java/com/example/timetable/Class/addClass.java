@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -89,6 +91,33 @@ public class addClass extends Fragment  {
         day = (Spinner) view.findViewById(R.id.daySelect);
         save = (Button) view.findViewById(R.id.saveClass);
 
+        // Subject Selector
+        Cursor cs = db.getAllSubjects();
+        int count = db.getSubjectCount();
+        String[] subjects = new String[count];
+        int i = 0;
+        while (cs.moveToNext()){
+            subjects[i] = cs.getString(1);
+            i++;
+        }
+
+        ArrayAdapter subjectAdapter= new ArrayAdapter(getActivity().getApplicationContext(), R.layout.spinner_item, subjects);
+        final Spinner subjectSpinner= (Spinner) view.findViewById(R.id.subjectSelect);
+        subjectSpinner.setAdapter(subjectAdapter);
+
+        // Course Selector
+        Cursor cc = db.getAllCourse();
+        int countCourse = db.getCourseCount();
+        String[] courses = new String[countCourse];
+        int j = 0;
+        while (cc.moveToNext()){
+            courses[j] = cc.getString(1);
+            j++;
+        }
+
+        ArrayAdapter courseAdapter= new ArrayAdapter(getActivity().getApplicationContext(), R.layout.spinner_item, courses);
+        final Spinner courseSpinner= (Spinner) view.findViewById(R.id.courseSelect);
+        courseSpinner.setAdapter(courseAdapter);
 
         //Colour Picker
         final Button colorbtn = (Button) view.findViewById(R.id.colorbtn);

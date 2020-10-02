@@ -92,7 +92,15 @@ public class editExam extends Fragment {
         final Spinner reminderSpinner= (Spinner) view.findViewById(R.id.reminder);
         reminderSpinner.setAdapter(reminderAdapter);
 
-        String[] subjects= new String[]{"MAD","PS","DSA"};
+        Cursor cs = db.getAllSubjects();
+        int count = db.getSubjectCount();
+        String[] subjects = new String[count];
+        int i = 0;
+        while (cs.moveToNext()){
+            subjects[i] = cs.getString(1);
+            i++;
+        }
+       
         ArrayAdapter subjectAdapter= new ArrayAdapter(getActivity().getApplicationContext(), R.layout.spinner_item, subjects);
         final Spinner subjectSpinner= (Spinner) view.findViewById(R.id.subjectSelect);
         subjectSpinner.setAdapter(subjectAdapter);

@@ -46,7 +46,7 @@
                     android:src="@drawable/today"
                     android:padding="10dp"
                     android:layout_marginTop="5dp"
-
+                    android:id="@+id/calendarIcon"
                     android:tint="@color/white"
                     android:layout_toLeftOf="@id/addIcon" />
             </RelativeLayout>

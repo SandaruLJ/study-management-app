@@ -53,16 +53,16 @@ public class AllStudiesFragment extends Fragment {
             }
         });
 
-        ImageView addStudyBtn = view.findViewById(R.id.add_study_btn);
-
-        addStudyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddStudyFragment fragment = new AddStudyFragment();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-            }
-        });
+//        ImageView addStudyBtn = view.findViewById(R.id.add_study_btn);
+//
+//        addStudyBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AddStudyFragment fragment = new AddStudyFragment();
+//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+//            }
+//        });
         
         return view;
     }

@@ -138,7 +138,27 @@ public class AllFragment extends Fragment {
 
                 }
             }
+            c = db.getAllStudies();
+            Cursor c1 = db.getAllSubjects();
+            while (c.moveToNext()) {
+                String date = c.getString(4);
+                if (date.equals(currentDate)) {
 
+                    ids.add(c.getInt(0));
+                    event.add(c.getString(1));
+                    while(c1.moveToNext()){
+                        if(c1.getInt(0) == c.getInt(0)){
+                            subject.add(c1.getString(1));
+                        }
+                    }
+                    location.add("");
+                    stime.add(c.getString(5));
+                    etime.add(c.getString(6));
+                    colours.add(c.getInt(3));
+                    type.add("Study");
+
+                }
+            }
 
             c = db.getAllGoals();
             while (c.moveToNext()) {
@@ -235,6 +255,28 @@ public class AllFragment extends Fragment {
                     etime.add("");
                     colours.add(c.getInt(2));
                     type.add("Goals");
+
+                }
+            }
+        }else if(stab == 4){
+            c = db.getAllStudies();
+            Cursor c1 = db.getAllSubjects();
+            while (c.moveToNext()) {
+                String date = c.getString(4);
+                if (date.equals(currentDate)) {
+
+                    ids.add(c.getInt(0));
+                    event.add(c.getString(1));
+                    while(c1.moveToNext()){
+                        if(c1.getInt(0) == c.getInt(0)){
+                            subject.add(c1.getString(1));
+                        }
+                    }
+                    location.add("");
+                    stime.add(c.getString(5));
+                    etime.add(c.getString(6));
+                    colours.add(c.getInt(3));
+                    type.add("Study");
 
                 }
             }

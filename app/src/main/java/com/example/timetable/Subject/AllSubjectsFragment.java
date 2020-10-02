@@ -44,18 +44,18 @@ public class AllSubjectsFragment extends Fragment {
 
 
         // Add Subject Button
-        ImageView addSubjectBtn = view.findViewById(R.id.add_subject_btn);
-
-        addSubjectBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddSubjectFragment fragment = new AddSubjectFragment();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .addToBackStack(null).commit();
-            }
-        });
+//        ImageView addSubjectBtn = view.findViewById(R.id.add_subject_btn);
+//
+//        addSubjectBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AddSubjectFragment fragment = new AddSubjectFragment();
+//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                activity.getSupportFragmentManager().beginTransaction()
+//                        .replace(R.id.fragment_container, fragment)
+//                        .addToBackStack(null).commit();
+//            }
+//        });
 
 
         // Subject List

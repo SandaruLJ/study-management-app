@@ -18,6 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -72,7 +73,7 @@ public class editClass extends Fragment {
 
         if(id != 0) {
 
-            String name = null, coursed, subjectd, classTyped = null, teacherd = null, classroomd = null, noted = null;
+            String name = null, coursed = null, subjectd = null, classTyped = null, teacherd = null, classroomd = null, noted = null;
             int colourd = 0;
             Cursor c = db.getSingleClass(id);
 
@@ -105,7 +106,34 @@ public class editClass extends Fragment {
             day = (Spinner) view.findViewById(R.id.daySelect);
             save = (Button) view.findViewById(R.id.saveClass);
 
+            // Subject Selector
+            Cursor cs = db.getAllSubjects();
+            int count = db.getSubjectCount();
+            String[] subjects = new String[count];
+            int i = 0;
+            while (cs.moveToNext()){
+                subjects[i] = cs.getString(1);
+                i++;
+            }
 
+            ArrayAdapter subjectAdapter= new ArrayAdapter(getActivity().getApplicationContext(), R.layout.spinner_item, subjects);
+            final Spinner subjectSpinner= (Spinner) view.findViewById(R.id.subjectSelect);
+            subjectSpinner.setAdapter(subjectAdapter);
+
+            // Course Selector
+            Cursor cc = db.getAllCourse();
+            int countCourse = db.getCourseCount();
+            String[] courses = new String[countCourse];
+            int j = 0;
+            while (cc.moveToNext()){
+                courses[j] = cc.getString(1);
+                j++;
+            }
+
+            ArrayAdapter courseAdapter= new ArrayAdapter(getActivity().getApplicationContext(), R.layout.spinner_item, courses);
+            final Spinner courseSpinner= (Spinner) view.findViewById(R.id.courseSelect);
+            courseSpinner.setAdapter(courseAdapter);
+        
             
             //Colour Picker
             final Button colorbtn = (Button) view.findViewById(R.id.colorbtn);
@@ -127,7 +155,9 @@ public class editClass extends Fragment {
             note.setText(noted);
             colorbtn.setBackgroundTintList(ColorStateList.valueOf(colourd));
             bgBtn.setBackgroundColor(colourd);
-
+            subjectSpinner.setSelection(subjectAdapter.getPosition(subjectd));
+            courseSpinner.setSelection(courseAdapter.getPosition(coursed));
+            
             ImageView add = (ImageView) view.findViewById(R.id.addIcon);
             add.setOnClickListener(new View.OnClickListener() {
                 @Override

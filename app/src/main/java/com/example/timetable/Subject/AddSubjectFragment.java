@@ -52,18 +52,18 @@ public class AddSubjectFragment extends Fragment {
 
 
         // All Subjects Button
-        ImageView allSubBtn = view.findViewById(R.id.all_subjects_btn);
-
-        allSubBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AllSubjectsFragment fragment = new AllSubjectsFragment();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .addToBackStack(null).commit();
-            }
-        });
+//        ImageView allSubBtn = view.findViewById(R.id.all_subjects_btn);
+//
+//        allSubBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AllSubjectsFragment fragment = new AllSubjectsFragment();
+//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                activity.getSupportFragmentManager().beginTransaction()
+//                        .replace(R.id.fragment_container, fragment)
+//                        .addToBackStack(null).commit();
+//            }
+//        });
 
 
         // Colour Picker

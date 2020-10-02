@@ -16,6 +16,7 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.app.TaskStackBuilder;
 
 import com.example.timetable.Database.DBHandler;
 
@@ -41,6 +42,13 @@ public class ReminderBroadcast extends BroadcastReceiver {
         String text = intent.getExtras().getString("text");
         String reminderType = intent.getExtras().getString("reminderType");
 
+        // Set activity to open when notification is clicked
+        Intent mainIntent = new Intent(context, MainActivity.class);
+        // Put studyId extra to pass to study timer fragment
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addNextIntentWithParentStack(mainIntent);
+        PendingIntent mainPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"channel1")
                 .setSmallIcon(R.drawable.notification_new)
@@ -48,6 +56,7 @@ public class ReminderBroadcast extends BroadcastReceiver {
                 .setContentTitle(reminderType)
 //                .setContentText(title + " starts at "+time + " on "+date)
                 .setContentText(text)
+                .setContentIntent(mainPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_MAX);
 
         notificationManager = NotificationManagerCompat.from(context);

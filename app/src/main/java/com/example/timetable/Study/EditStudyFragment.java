@@ -118,32 +118,32 @@ public class EditStudyFragment extends Fragment {
             colourBtn.setBackgroundTintList(ColorStateList.valueOf(studyColourTemp));
 
 
-            // All Studies Button
-            ImageView allStudiesBtn = view.findViewById(R.id.all_studies_btn);
-
-            allStudiesBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AllStudiesFragment fragment = new AllStudiesFragment();
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, fragment)
-                            .addToBackStack(null).commit();
-                }
-            });
-
-
-            // Add Studies Button
-            ImageView addStudiesBtn = view.findViewById(R.id.add_study_btn);
-
-            addStudiesBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AddStudyFragment fragment = new AddStudyFragment();
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-                }
-            });
+//            // All Studies Button
+//            ImageView allStudiesBtn = view.findViewById(R.id.all_studies_btn);
+//
+//            allStudiesBtn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    AllStudiesFragment fragment = new AllStudiesFragment();
+//                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                    activity.getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.fragment_container, fragment)
+//                            .addToBackStack(null).commit();
+//                }
+//            });
+//
+//
+//            // Add Studies Button
+//            ImageView addStudiesBtn = view.findViewById(R.id.add_study_btn);
+//
+//            addStudiesBtn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    AddStudyFragment fragment = new AddStudyFragment();
+//                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+//                }
+//            });
 
 
             // Subject Selector
