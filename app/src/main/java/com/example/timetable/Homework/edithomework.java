@@ -167,9 +167,7 @@ public class edithomework extends Fragment {
                 }
             });
 
-            final String today = new SimpleDateFormat("d/M/yyyy", Locale.US)
-                    .format(Calendar.getInstance().getTime());
-            end.setText(today);
+
 
             //Start Time Picker
 

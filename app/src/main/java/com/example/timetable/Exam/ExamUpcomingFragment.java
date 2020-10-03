@@ -88,9 +88,8 @@ public class ExamUpcomingFragment extends Fragment {
             cal.set(Calendar.HOUR_OF_DAY,cal2.get(Calendar.HOUR_OF_DAY));
             cal.set(Calendar.MINUTE,cal2.get(Calendar.MINUTE));
 
-            long rem = cal.getTime().getTime() - System.currentTimeMillis();
+            long rem = getRemainingTime(cal.getTime().getTime() , System.currentTimeMillis());
 
-//            Toast.makeText(getActivity().getApplicationContext(), "Exam Added Successfully", Toast.LENGTH_LONG).show();
 
             if(rem>=0) {
                 ids.add(c.getInt(0));
@@ -112,6 +111,8 @@ public class ExamUpcomingFragment extends Fragment {
 
         }
 
+
+
         RecyclerView recyclerView = view.findViewById(R.id.exam_recycler_view);
         final ExamRecyclerView adapter = new ExamRecyclerView(ids, exam, subject, location, colours,date,time, getActivity().getApplicationContext());
         recyclerView.setAdapter(adapter);
@@ -121,7 +122,10 @@ public class ExamUpcomingFragment extends Fragment {
 
         return view;
     }
-
+    public long getRemainingTime(long ntime, long ctime){
+        long rem = ntime - ctime;
+        return rem;
+    }
     public void itemTouchHelper(final ExamRecyclerView adapter, final ArrayList<Integer> ids, final RecyclerView recyclerView, final Context cont) {
 
         final ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {

@@ -39,6 +39,10 @@ public class HomeworkRecyclerView extends RecyclerView.Adapter<HomeworkRecyclerV
 
     private Context mContext;
 
+    public HomeworkRecyclerView(){
+
+    }
+
     public HomeworkRecyclerView(ArrayList<Integer> Id,ArrayList<String> title, ArrayList<String> Sub,ArrayList<Integer>color ,ArrayList<String> due_date,ArrayList<String> time, Context mContext) {
         this.ids = Id;
         this.titles = title;
