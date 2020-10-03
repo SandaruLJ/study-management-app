@@ -54,7 +54,7 @@ public class ClassCalendarRecyclerView extends RecyclerView.Adapter<ClassCalenda
         public ViewHolder(View itemView){
             super(itemView);
             className = itemView.findViewById(R.id.className);
-            teacher = itemView.findViewById(R.id.teacher);
+//            teacher = itemView.findViewById(R.id.teacher);
             venue = itemView.findViewById(R.id.venue);
             sTime = itemView.findViewById(R.id.startTime);
             eTime = itemView.findViewById(R.id.endTime);
@@ -80,7 +80,7 @@ public class ClassCalendarRecyclerView extends RecyclerView.Adapter<ClassCalenda
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.className.setText(className.get(position));
-        holder.teacher.setText(teacher.get(position));
+//        holder.teacher.setText(teacher.get(position));
         holder.venue.setText(venue.get(position));
         holder.sTime.setText(sTime.get(position));
         holder.eTime.setText(eTime.get(position));

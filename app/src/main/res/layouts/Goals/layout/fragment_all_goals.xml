@@ -45,6 +45,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5dp"
+                android:id="@+id/calendarIcon"
                 android:layout_toLeftOf="@id/addIcon"
                 android:padding="10dp"
                 android:src="@drawable/today"

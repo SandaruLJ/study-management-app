@@ -86,33 +86,33 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginTop="5dp">
 
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="35dp"
-                        android:alpha="0.5"
-                        android:src="@drawable/teacher"
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView2"-->
+<!--                        android:layout_width="10dp"-->
+<!--                        android:layout_height="10dp"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:layout_marginTop="35dp"-->
+<!--                        android:alpha="0.5"-->
+<!--                        android:src="@drawable/teacher"-->
 
-                        android:tint="@color/grey"
+<!--                        android:tint="@color/grey"-->
 
 
-                        />
+<!--                        />-->
 
-                    <TextView
-                        android:id="@+id/teacher"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:paddingLeft="25dp"
-                        android:paddingTop="30dp"
-                        android:paddingRight="5dp"
-                        android:paddingBottom="5dp"
-                        android:text="@string/einstein"
-                        android:textColor="@color/darkblue"
+<!--                    <TextView-->
+<!--                        android:id="@+id/teacher"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="start"-->
+<!--                        android:paddingLeft="25dp"-->
+<!--                        android:paddingTop="30dp"-->
+<!--                        android:paddingRight="5dp"-->
+<!--                        android:paddingBottom="5dp"-->
+<!--                        android:text="@string/einstein"-->
+<!--                        android:textColor="@color/darkblue"-->
 
-                        android:textSize="14dp" />
+<!--                        android:textSize="14dp" />-->
 
                     <ImageView
                         android:id="@+id/classIcon"

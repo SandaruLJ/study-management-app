@@ -16,11 +16,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 import com.example.timetable.Database.DBHandler;
+import com.example.timetable.OptionsMenu;
 import com.example.timetable.R;
 
 import java.util.ArrayList;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,20 +46,12 @@ public class AllSubjectsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_subjects, container, false);
 
-
-        // Add Subject Button
-//        ImageView addSubjectBtn = view.findViewById(R.id.add_subject_btn);
-//
-//        addSubjectBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AddSubjectFragment fragment = new AddSubjectFragment();
-//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-//                activity.getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.fragment_container, fragment)
-//                        .addToBackStack(null).commit();
-//            }
-//        });
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
 
 
         // Subject List

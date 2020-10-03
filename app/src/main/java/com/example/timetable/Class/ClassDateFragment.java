@@ -19,7 +19,9 @@ import com.example.timetable.SelectTimeFragement;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +57,9 @@ public class ClassDateFragment extends Fragment {
 
             }
         });
+        final String today = new SimpleDateFormat("d/M/yyyy", Locale.US)
+                .format(Calendar.getInstance().getTime());
+        sdate.setText(today);
 
         //Start Time Picker
         stime = (TextView) view.findViewById(R.id.startTime);

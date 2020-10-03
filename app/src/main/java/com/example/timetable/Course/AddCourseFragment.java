@@ -24,15 +24,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.timetable.App;
 import com.example.timetable.ColorPicker;
 import com.example.timetable.Database.DBHandler;
+import com.example.timetable.OptionsMenu;
 import com.example.timetable.R;
 import com.example.timetable.ReminderBroadcast;
 import com.example.timetable.SelectDateFragment;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +65,13 @@ public class AddCourseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_course, container, false);
+
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
 
         Button btn = view.findViewById(R.id.addCourse);
         cname = (EditText) view.findViewById(R.id.course_name);
@@ -111,16 +122,23 @@ public class AddCourseFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-               boolean isInserted = db.addCourse(cname.getText().toString(),instituition.getText().toString(),description.getText().toString(), ((ColorDrawable) bgBtn.getBackground()).getColor(),start.getText().toString(),end.getText().toString());
+                if (cname.getText().toString().length() == 0) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please enter a course", Toast.LENGTH_LONG).show();
+                } else if (instituition.getText().toString().length() == 0) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please enter an Institute", Toast.LENGTH_LONG).show();
+                } else {
 
-                if(isInserted == true) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Course Added Successfully", Toast.LENGTH_LONG).show();
-                    DisplayCourseFragment fragment = new DisplayCourseFragment();
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                    boolean isInserted = db.addCourse(cname.getText().toString(), instituition.getText().toString(), description.getText().toString(), ((ColorDrawable) bgBtn.getBackground()).getColor(), start.getText().toString(), end.getText().toString());
 
-                }else
-                    Toast.makeText(getActivity().getApplicationContext(),"Insert Failed, Try again",Toast.LENGTH_LONG).show();
+                    if (isInserted == true) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Course Added Successfully", Toast.LENGTH_LONG).show();
+                        DisplayCourseFragment fragment = new DisplayCourseFragment();
+                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+
+                    } else
+                        Toast.makeText(getActivity().getApplicationContext(), "Insert Failed, Try again", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

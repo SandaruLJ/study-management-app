@@ -19,7 +19,9 @@ import com.example.timetable.SelectTimeFragement;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,6 +71,9 @@ public class ClassWeekFragment extends Fragment {
 
             }
         });
+        final String today = new SimpleDateFormat("d/M/yyyy", Locale.US)
+                .format(Calendar.getInstance().getTime());
+        start.setText(today);
         //End Date Picker
         end = (TextView) view.findViewById(R.id.endDate);
         LinearLayout pickDatebtn1 = (LinearLayout) view.findViewById(R.id.dateSelectorEnd);
@@ -81,6 +86,8 @@ public class ClassWeekFragment extends Fragment {
 
             }
         });
+
+        end.setText(today);
 
         //Start Time Picker
         stime = (TextView) view.findViewById(R.id.startTime);

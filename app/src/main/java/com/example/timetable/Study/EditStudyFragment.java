@@ -16,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,9 +32,12 @@ import androidx.fragment.app.Fragment;
 import com.example.timetable.ColorPicker;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.Database.SubjectMaster;
+import com.example.timetable.OptionsMenu;
 import com.example.timetable.R;
 import com.example.timetable.SelectDateFragment;
 import com.example.timetable.SelectTimeFragement;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,6 +67,13 @@ public class EditStudyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_study, container, false);
+
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
 
         studyId  = 0;
         Bundle bundle = this.getArguments();

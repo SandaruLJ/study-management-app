@@ -113,7 +113,7 @@ public class GoalsRecyclerViewAdapter extends RecyclerView.Adapter<GoalsRecycler
         holder.year.setText(String.valueOf(cal.get(Calendar.YEAR)));
 
         Calendar today = Calendar.getInstance();
-        long rem = ChronoUnit.DAYS.between(today.toInstant(), cal.toInstant()) + 1;
+        long rem = ChronoUnit.DAYS.between(today.toInstant(), cal.toInstant());
         if(rem>10){
             holder.remdays.setPadding(40,40,40,40);
         }else{

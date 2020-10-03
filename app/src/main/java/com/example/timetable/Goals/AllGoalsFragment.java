@@ -20,14 +20,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 
 import com.example.timetable.Course.DisplayCourseFragment;
 import com.example.timetable.Database.DBHandler;
+import com.example.timetable.OptionsMenu;
 import com.example.timetable.R;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,16 +57,12 @@ public class AllGoalsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_all_goals, null);
 
-        ImageView addBtn = (ImageView) view.findViewById(R.id.addIcon);
-
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createevents fragment = new createevents();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-            }
-        });
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
 
         final TabLayout tabLayout1 = (TabLayout) view.findViewById(R.id.goalsTab);
         tabLayout1.addTab(tabLayout1.newTab().setText("Upcoming "));

@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 import com.example.timetable.Class.EventDecorator;
 import com.example.timetable.Database.DBHandler;
@@ -36,6 +38,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,6 +62,13 @@ public class AllEventCalendar extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_all_event_calendar, container, false);
+
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
 
         final ArrayList<Integer> ids = new ArrayList<>();
         final ArrayList<String> event = new ArrayList<>();

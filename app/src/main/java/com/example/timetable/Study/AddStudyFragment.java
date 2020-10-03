@@ -23,6 +23,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ import android.widget.Toast;
 import com.example.timetable.ColorPicker;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.Database.SubjectMaster;
+import com.example.timetable.OptionsMenu;
 import com.example.timetable.R;
 import com.example.timetable.SelectDateFragment;
 import com.example.timetable.SelectTimeFragement;
@@ -38,6 +40,8 @@ import com.example.timetable.SelectTimeFragement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,6 +70,13 @@ public class AddStudyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_study, container, false);
 
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
+
         studyTitle = view.findViewById(R.id.study_title);
         subject = view.findViewById(R.id.subject);
         studyColour = view.findViewById(R.id.study_colour);
@@ -78,20 +89,6 @@ public class AddStudyFragment extends Fragment {
         reminder = view.findViewById(R.id.reminder);
         reminderTime = view.findViewById(R.id.reminder_time);
 
-
-//        // All Studies Button
-//        ImageView allStudiesBtn = view.findViewById(R.id.all_studies_btn);
-//
-//        allStudiesBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AllStudiesFragment fragment = new AllStudiesFragment();
-//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-//                activity.getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.fragment_container, fragment)
-//                        .addToBackStack(null).commit();
-//            }
-//        });
 
 
         // Subject Selector

@@ -85,12 +85,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="32dp"
                         android:src="@drawable/subject"
-                        android:tint="@color/white"
-
-
-
-
-                        />
+                        android:tint="@color/white"/>
                     <TextView
                         android:id="@+id/sub"
                         android:layout_width="wrap_content"
@@ -102,19 +97,38 @@
                         android:paddingRight="5dp"
                         android:text="@string/display_homework_subject"
                         android:textColor="@color/white"
-
                         android:textSize="14dp" />
+
+                    <ImageView
+                        android:id="@+id/timeIcon"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_toRightOf="@id/sub"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="32dp"
+                        android:src="@drawable/alarm"
+                        android:tint="@color/white" />
+                    <TextView
+                        android:id="@+id/homeworkTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/timeIcon"
+                        android:gravity="start"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="30dp"
+                        android:text="14:30"
+                        android:textColor="@color/white"
+                        android:textSize="13dp" />
 
                     <ImageView
                         android:id="@+id/classIcon"
                         android:layout_width="12dp"
                         android:layout_height="12dp"
-                        android:layout_toRightOf="@id/sub"
+                        android:layout_toRightOf="@id/homeworkTime"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="33dp"
                         android:src="@drawable/callender"
-                        android:tint="@color/white"
-                        />
+                        android:tint="@color/white" />
                     <TextView
                         android:id="@+id/homeworkDate"
                         android:layout_width="wrap_content"
@@ -125,10 +139,10 @@
                         android:layout_marginTop="30dp"
                         android:text="@string/display_homework_date"
                         android:textColor="@color/white"
-
                         android:textSize="13dp" />
 
                 </RelativeLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -143,6 +157,7 @@
                     android:textColor="#E33872"
                     android:layout_marginEnd="20dp"/>
                 <TextView
+                    android:id="@+id/dmore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rem_days"
@@ -155,10 +170,6 @@
                     android:layout_marginEnd="10dp"/>
 
             </RelativeLayout>
-
         </LinearLayout>
-
-
     </RelativeLayout>
-
 </FrameLayout>

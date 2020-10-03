@@ -80,7 +80,7 @@ public class ExamRecyclerView extends RecyclerView.Adapter<ExamRecyclerView.View
             year = itemView.findViewById(R.id.year);
             time = itemView.findViewById(R.id.time);
             remdays = itemView.findViewById(R.id.days);
-//            dayText = itemView.findViewById(R.id.daytext);
+            dayText = itemView.findViewById(R.id.daytext);
             examColour = (RelativeLayout) itemView.findViewById(R.id.examColour);
             viewBackground = (RelativeLayout) itemView.findViewById(R.id.view_background);
             examCard = (RelativeLayout) itemView.findViewById(R.id.examCard);
@@ -108,30 +108,63 @@ public class ExamRecyclerView extends RecyclerView.Adapter<ExamRecyclerView.View
         holder.location.setText(location.get(position));
         holder.time.setText(time.get(position));
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
         Calendar cal = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
         Date d1 = null;
+        Date d2 = null;
         try {
+
             d1 = dateFormat.parse(date.get(position));
+            d2 = timeFormat.parse(time.get(position));
+            cal.setTime(d1);
+            cal2.setTime(d2);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        cal.setTime(d1);
+
+
+        cal.set(Calendar.HOUR_OF_DAY,cal2.get(Calendar.HOUR_OF_DAY));
+        cal.set(Calendar.MINUTE,cal2.get(Calendar.MINUTE));
+
         holder.date.setText(String.valueOf(cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH )) + " " + String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
         holder.day.setText(String.valueOf(cal.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG,Locale.ENGLISH)));
         holder.year.setText(String.valueOf(cal.get(Calendar.YEAR)));
 
         Calendar today = Calendar.getInstance();
-        long rem = ChronoUnit.DAYS.between(today.toInstant(), cal.toInstant()) + 1;
+        long rem = ChronoUnit.DAYS.between(today.toInstant(), cal.toInstant()) ;
+
         if(rem>10){
             holder.remdays.setPadding(40,40,40,40);
-        }else{
-            holder.remdays.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ED2424")));
         }
-//        if(rem<=0){
-//            holder.remdays.setVisibility(View.INVISIBLE);
-//            holder.dayText.setVisibility(View.INVISIBLE);
-//        }
-        holder.remdays.setText(String.valueOf(rem));
+        if(rem == 0){
+
+            long diffHours = getRemainingtimeinHours(cal);
+
+            if(diffHours>10){
+                holder.remdays.setPadding(40,40,40,40);
+            }
+            holder.remdays.setText(String.valueOf(diffHours));
+            holder.dayText.setText("Hours more");
+            if(diffHours<0){
+                holder.remdays.setVisibility(View.INVISIBLE);
+                holder.dayText.setVisibility(View.INVISIBLE);
+
+            }if(diffHours== 0){
+                long diffMins =  getRemainingtimeinMinutes(cal);
+                if(diffMins>10){
+                    holder.remdays.setPadding(40,40,40,40);
+                }
+                holder.remdays.setText(String.valueOf(diffMins));
+                holder.dayText.setText("Minutes more");
+            }
+        }else if (rem>0){
+            holder.remdays.setText(String.valueOf(rem));
+        }else if(rem<0){
+            holder.remdays.setVisibility(View.INVISIBLE);
+            holder.dayText.setVisibility(View.INVISIBLE);
+        }
+
 
         holder.examCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +179,19 @@ public class ExamRecyclerView extends RecyclerView.Adapter<ExamRecyclerView.View
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, cFragment).addToBackStack(null).commit();
             }
         });
+    }
+    public long getRemainingtimeinHours(Calendar cal){
+        long diff = cal.getTime().getTime() - System.currentTimeMillis();
+        long diffHours = ((diff / (60 * 60 * 1000) )% 24);
+
+        return diffHours;
+    }
+
+    public long getRemainingtimeinMinutes(Calendar cal){
+        long diff = cal.getTime().getTime() - System.currentTimeMillis();
+        long diffMinutes = diff / (60 * 1000) % 60;
+
+        return diffMinutes;
     }
 
     @Override

@@ -20,13 +20,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 
 import com.example.timetable.Database.DBHandler;
+import com.example.timetable.OptionsMenu;
 import com.example.timetable.R;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,16 +52,13 @@ public class displayHomework extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_display_homework, null);
 
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
 
-        ImageView addBtn = (ImageView) view.findViewById(R.id.addIcon);
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddHomeworkFragment fragment = new AddHomeworkFragment();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-            }
-        });
 
         final TabLayout tabLayout1 = (TabLayout) view.findViewById(R.id.tabLayoutWeek);
         tabLayout1.addTab(tabLayout1.newTab().setText("Week"));

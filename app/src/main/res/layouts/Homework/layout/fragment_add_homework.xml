@@ -261,7 +261,7 @@
                 android:paddingTop="20dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="20dp"
-                android:text="@string/homeworktime_now"
+                android:text="20:00"
                 android:textSize="20dp" />
         </RelativeLayout>
 

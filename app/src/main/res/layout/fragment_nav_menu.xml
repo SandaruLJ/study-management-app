@@ -25,6 +25,30 @@
             android:textSize="24dp"
             android:textStyle="bold" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/addIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:src="@drawable/add"
+                android:tint="@color/white" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_toLeftOf="@id/addIcon"
+                android:padding="10dp"
+                android:id="@+id/calendarIconTop"
+                android:src="@drawable/today"
+                android:tint="@color/white" />
+        </RelativeLayout>
 
     </LinearLayout>
 

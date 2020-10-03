@@ -77,6 +77,7 @@ public class HomeworkWeekDayFragment extends Fragment {
         final ArrayList<String> titles = new ArrayList<>();
         final ArrayList<String> subjects = new ArrayList<>();
         final ArrayList<String> due_dates = new ArrayList<>();
+        final ArrayList<String> time = new ArrayList<>();
         final ArrayList<Integer> colors = new ArrayList<>();
         final ArrayList<Integer> ids = new ArrayList<>();
 
@@ -126,6 +127,7 @@ public class HomeworkWeekDayFragment extends Fragment {
                 }else{
                     subjects.add(c.getString(2));
                 }
+                time.add(c.getString(4));
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 
@@ -140,6 +142,7 @@ public class HomeworkWeekDayFragment extends Fragment {
                 }else{
                     subjects.add(c.getString(2));
                 }
+                time.add(c.getString(4));
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 
@@ -153,6 +156,7 @@ public class HomeworkWeekDayFragment extends Fragment {
                 }else{
                     subjects.add(c.getString(2));
                 }
+                time.add(c.getString(4));
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 
@@ -166,6 +170,7 @@ public class HomeworkWeekDayFragment extends Fragment {
                 }else{
                     subjects.add(c.getString(2));
                 }
+                time.add(c.getString(4));
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 
@@ -179,6 +184,7 @@ public class HomeworkWeekDayFragment extends Fragment {
                 }else{
                     subjects.add(c.getString(2));
                 }
+                time.add(c.getString(4));
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 
@@ -192,6 +198,7 @@ public class HomeworkWeekDayFragment extends Fragment {
                 }else{
                     subjects.add(c.getString(2));
                 }
+                time.add(c.getString(4));
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 
@@ -205,6 +212,7 @@ public class HomeworkWeekDayFragment extends Fragment {
                 }else{
                     subjects.add(c.getString(2));
                 }
+                time.add(c.getString(4));
                 due_dates.add(c.getString(3));
                 colors.add(c.getInt(6));
 
@@ -215,7 +223,7 @@ public class HomeworkWeekDayFragment extends Fragment {
         }
 
         RecyclerView recyclerView = view.findViewById(R.id.homework_recyler_view);
-        final HomeworkRecyclerView adapter1 = new HomeworkRecyclerView(ids,titles,subjects,colors,due_dates,getActivity());
+        final HomeworkRecyclerView adapter1 = new HomeworkRecyclerView(ids,titles,subjects,colors,due_dates,time,getActivity());
         recyclerView.setAdapter(adapter1);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         itemTouchHelper(adapter1,ids,recyclerView,getActivity().getApplicationContext());

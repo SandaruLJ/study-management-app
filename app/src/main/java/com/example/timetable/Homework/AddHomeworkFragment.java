@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 import com.example.timetable.ColorPicker;
 import com.example.timetable.Course.DisplayCourseFragment;
 import com.example.timetable.Database.DBHandler;
+import com.example.timetable.OptionsMenu;
 import com.example.timetable.R;
 import com.example.timetable.ReminderBroadcast;
 import com.example.timetable.SelectDateFragment;
@@ -39,6 +41,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,6 +71,12 @@ public class AddHomeworkFragment extends Fragment {
 
        View view = inflater.inflate(R.layout.fragment_add_homework, container, false);
 
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
 
         Button btn = view.findViewById(R.id.save);
         title = (EditText) view.findViewById(R.id.title);
@@ -120,6 +131,12 @@ public class AddHomeworkFragment extends Fragment {
 
             }
         });
+
+        final String today = new SimpleDateFormat("d/M/yyyy", Locale.US)
+                .format(Calendar.getInstance().getTime());
+        end.setText(today);
+
+
         //Start Time Picker
         stime = (TextView) view.findViewById(R.id.time);
 
@@ -138,79 +155,82 @@ public class AddHomeworkFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                if (title.getText().toString().length() == 0) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please enter a title", Toast.LENGTH_LONG).show();
+                } else {
+                    boolean isInserted = db.addHomework(title.getText().toString(), subject.getSelectedItem().toString(), end.getText().toString(), stime.getText().toString(), reminder.getSelectedItem().toString(), ((ColorDrawable) bgBtn.getBackground()).getColor(), note.getText().toString());
 
-                boolean isInserted = db.addHomework(title.getText().toString(),subject.getSelectedItem().toString(),end.getText().toString(),stime.getText().toString(),reminder.getSelectedItem().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),note.getText().toString());
+                    if (isInserted == true) {
 
-                if(isInserted == true) {
+                        Intent intent = new Intent(getActivity().getApplicationContext(), ReminderBroadcast.class);
+                        intent.putExtra("reminderType", "Homework Reminder");
+                        intent.putExtra("text", "You have to do your " + title.getText().toString() + " Homework at " + stime.getText().toString());
+                        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        String date = null;
+                        Date startTime = null;
+                        Date sdate = null;
+                        String sttime;
+                        String rtype;
+                        Calendar cald = Calendar.getInstance();
+                        Calendar calt = Calendar.getInstance();
+                        sttime = stime.getText().toString();
+                        date = end.getText().toString();
+                        rtype = reminder.getSelectedItem().toString();
 
-                    Intent intent = new Intent(getActivity().getApplicationContext(), ReminderBroadcast.class);
-                    intent.putExtra("reminderType", "Homework Reminder");
-                    intent.putExtra("text", "You have to do your " + title.getText().toString() + " Homework at " + stime.getText().toString() );
-                    DateFormat timeFormat = new SimpleDateFormat("HH:mm");
-                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                    String date = null;
-                    Date startTime = null;
-                    Date sdate = null;
-                    String sttime;
-                    String rtype;
-                    Calendar cald = Calendar.getInstance();
-                    Calendar calt = Calendar.getInstance();
-                    sttime = stime.getText().toString();
-                    date = end.getText().toString();
-                    rtype = reminder.getSelectedItem().toString();
+                        int min = 0;
 
-                    int min = 0;
+                        if (rtype.equals("5 minutes")) {
+                            min = -5;
+                        } else if (rtype.equals("10 minutes")) {
+                            min = -10;
+                        } else if (rtype.equals("15 minutes")) {
+                            min = -15;
+                        } else if (rtype.equals("30 minutes")) {
+                            min = -30;
+                        } else if (rtype.equals("1 hour")) {
+                            min = -60;
+                        } else if (rtype.equals("2 hours")) {
+                            min = -120;
+                        } else if (rtype.equals("6 hours")) {
+                            min = -360;
+                        } else if (rtype.equals("12 hours")) {
+                            min = -720;
+                        } else if (rtype.equals("1 day")) {
+                            min = 1440;
+                        }
 
-                    if(rtype.equals("5 minutes")){
-                        min = -5;
-                    }else  if(rtype.equals("10 minutes")){
-                        min = -10;
-                    } else  if(rtype.equals("15 minutes")){
-                        min = -15;
-                    } else  if(rtype.equals("30 minutes")){
-                        min = -30;
-                    } else  if(rtype.equals("1 hour")){
-                        min = -60;
-                    } else  if(rtype.equals("2 hours")){
-                        min = -120;
-                    } else  if(rtype.equals("6 hours")){
-                        min = -360;
-                    }else  if(rtype.equals("12 hours")){
-                        min = -720;
-                    }else  if(rtype.equals("1 day")){
-                        min = 1440;
-                    }
+                        try {
+                            startTime = timeFormat.parse(sttime);
+                            sdate = dateFormat.parse(date);
 
-                    try {
-                        startTime = timeFormat.parse(sttime);
-                        sdate = dateFormat.parse(date);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
 
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                        cald.setTime(sdate);
+                        calt.setTime(startTime);
 
-                    cald.setTime(sdate);
-                    calt.setTime(startTime);
+                        cald.add(Calendar.HOUR_OF_DAY, calt.get(Calendar.HOUR_OF_DAY));
+                        cald.add(Calendar.MINUTE, calt.get(Calendar.MINUTE));
+                        cald.add(Calendar.MINUTE, min);
 
-                    cald.add(Calendar.HOUR_OF_DAY,calt.get(Calendar.HOUR_OF_DAY));
-                    cald.add(Calendar.MINUTE,calt.get(Calendar.MINUTE));
-                    cald.add(Calendar.MINUTE,min);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(), db.getLastHomeworkIndex(), intent, 0);
+                        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+                        long timeAtButtonClick = cald.getTimeInMillis();
 
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),db.getLastHomeworkIndex(),intent,0);
-                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-                    long timeAtButtonClick = cald.getTimeInMillis();
+                        alarmManager.set(AlarmManager.RTC_WAKEUP,
+                                timeAtButtonClick,
+                                pendingIntent);
 
-                    alarmManager.set(AlarmManager.RTC_WAKEUP,
-                            timeAtButtonClick ,
-                            pendingIntent);
+                        Toast.makeText(getActivity().getApplicationContext(), "Homework Added Successfully", Toast.LENGTH_LONG).show();
+                        displayHomework fragment = new displayHomework();
+                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
 
-                    Toast.makeText(getActivity().getApplicationContext(), "Homework Added Successfully", Toast.LENGTH_LONG).show();
-                    displayHomework fragment = new displayHomework();
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-
-                }else
-                    Toast.makeText(getActivity().getApplicationContext(),"Insert Failed, Try again",Toast.LENGTH_LONG).show();
+                    } else
+                        Toast.makeText(getActivity().getApplicationContext(), "Insert Failed, Try again", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

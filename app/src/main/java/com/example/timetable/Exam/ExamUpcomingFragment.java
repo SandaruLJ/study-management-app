@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.timetable.Database.DBHandler;
 
@@ -69,22 +70,29 @@ public class ExamUpcomingFragment extends Fragment {
         final Cursor c = db.getAllExam();
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
         Calendar cal = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
         Date d1 = null;
-
-
-        Calendar today = Calendar.getInstance();
+        Date d2 = null;
 
         while (c.moveToNext()) {
             try {
                 d1 = dateFormat.parse(c.getString(4));
+                d2 = timeFormat.parse(c.getString(5));
+                cal.setTime(d1);
+                cal2.setTime(d2);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            cal.setTime(d1);
-            long rem = ChronoUnit.DAYS.between(today.toInstant(), cal.toInstant()) ;
-            if(rem>=0) {
+            cal.set(Calendar.HOUR_OF_DAY,cal2.get(Calendar.HOUR_OF_DAY));
+            cal.set(Calendar.MINUTE,cal2.get(Calendar.MINUTE));
 
+            long rem = cal.getTime().getTime() - System.currentTimeMillis();
+
+//            Toast.makeText(getActivity().getApplicationContext(), "Exam Added Successfully", Toast.LENGTH_LONG).show();
+
+            if(rem>=0) {
                 ids.add(c.getInt(0));
                 exam.add(c.getString(1));
                 colours.add(c.getInt(8));

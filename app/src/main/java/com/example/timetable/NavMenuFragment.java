@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import com.example.timetable.Class.ViewClassFragment;
 import com.example.timetable.Course.DisplayCourseFragment;
@@ -19,6 +21,8 @@ import com.example.timetable.Homework.displayHomework;
 import com.example.timetable.Study.AllStudiesFragment;
 import com.example.timetable.Study.StudyTimerFragment;
 import com.example.timetable.Subject.AllSubjectsFragment;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +37,14 @@ public class NavMenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nav_menu, container, false);
+
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIconTop);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
+
 
         LinearLayout allCourse = (LinearLayout) view.findViewById(R.id.coursebtn);
         allCourse.setOnClickListener(new View.OnClickListener() {

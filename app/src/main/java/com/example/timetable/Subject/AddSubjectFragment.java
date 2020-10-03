@@ -16,11 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.example.timetable.ColorPicker;
 import com.example.timetable.Database.DBHandler;
+import com.example.timetable.OptionsMenu;
 import com.example.timetable.R;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,21 +54,12 @@ public class AddSubjectFragment extends Fragment {
         subjectColour = view.findViewById(R.id.subject_colour);
         subjectDesc = view.findViewById(R.id.subject_desc);
 
-
-        // All Subjects Button
-//        ImageView allSubBtn = view.findViewById(R.id.all_subjects_btn);
-//
-//        allSubBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AllSubjectsFragment fragment = new AllSubjectsFragment();
-//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-//                activity.getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.fragment_container, fragment)
-//                        .addToBackStack(null).commit();
-//            }
-//        });
-
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
 
         // Colour Picker
         final Button colourBtn = view.findViewById(R.id.colorbtn);

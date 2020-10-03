@@ -291,7 +291,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
-                    android:text="@string/homeworktime_now"
+                    android:text="10:00"
                     android:layout_alignParentEnd="true"
                     android:paddingTop="20dp"
                     android:paddingLeft="0dp"
@@ -343,13 +343,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
-                    android:hint="20:30"
+                    android:text="12:00"
                     android:layout_alignParentEnd="true"
                     android:paddingTop="20dp"
                     android:paddingLeft="0dp"
                     android:paddingRight="20dp"
-                    android:paddingBottom="20dp"
-                    android:textStyle="bold"/>
+                    android:paddingBottom="20dp" />
             </RelativeLayout>
 
         </LinearLayout>

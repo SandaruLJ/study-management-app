@@ -22,7 +22,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +33,7 @@ import com.example.timetable.Class.editClass;
 import com.example.timetable.ColorPicker;
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.Homework.displayHomework;
+import com.example.timetable.OptionsMenu;
 import com.example.timetable.R;
 import com.example.timetable.ReminderBroadcast;
 import com.example.timetable.SelectDateFragment;
@@ -41,6 +44,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,6 +74,13 @@ public class editExam extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_edit_exam, container, false);
+
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
 
         id  = 0;
         Bundle bundle = this.getArguments();
@@ -160,6 +173,10 @@ public class editExam extends Fragment {
 
             }
         });
+
+        final String today = new SimpleDateFormat("d/M/yyyy", Locale.US)
+                .format(Calendar.getInstance().getTime());
+        end.setText(today);
         //Start Time Picker
 
         LinearLayout pickTimebtn1 = (LinearLayout) view.findViewById(R.id.timeSelectorStart);
@@ -189,83 +206,107 @@ public class editExam extends Fragment {
             @Override
             public void onClick(View view) {
 
+                DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                Date d1 = null;
+                Date d2 = null;
+                long rem = 0;
+                String sstime, estime;
 
-                boolean isUpdated = db.updateExam(id,title.getText().toString(),subject.getSelectedItem().toString(),location.getText().toString(),end.getText().toString(),stime.getText().toString(),etime.getText().toString(),reminder.getSelectedItem().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),note.getText().toString());
+                sstime = stime.getText().toString();
+                estime = etime.getText().toString();
 
-                if(isUpdated == true) {
-
-                    Intent intent = new Intent(getActivity().getApplicationContext(), ReminderBroadcast.class);
-                    intent.putExtra("reminderType", "Exam Reminder");
-                    intent.putExtra("text", "You have your " + title.getText().toString() + " Exam at " + stime.getText().toString() + " on " + end.getText().toString());
-                    DateFormat timeFormat = new SimpleDateFormat("HH:mm");
-                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                    String date = null;
-                    Date startTime = null;
-                    Date sdate = null;
-                    String sttime;
-                    String rtype;
-                    Calendar cald = Calendar.getInstance();
-                    Calendar calt = Calendar.getInstance();
-                    sttime = stime.getText().toString();
-                    date = end.getText().toString();
-                    rtype = reminder.getSelectedItem().toString();
-
-                    int min = 0;
-
-                    if(rtype.equals("5 minutes")){
-                        min = -5;
-                    }else  if(rtype.equals("10 minutes")){
-                        min = -10;
-                    } else  if(rtype.equals("15 minutes")){
-                        min = -15;
-                    } else  if(rtype.equals("30 minutes")){
-                        min = -30;
-                    } else  if(rtype.equals("1 hour")){
-                        min = -60;
-                    } else  if(rtype.equals("2 hours")){
-                        min = -120;
-                    } else  if(rtype.equals("6 hours")){
-                        min = -360;
-                    }else  if(rtype.equals("12 hours")){
-                        min = -720;
-                    }else  if(rtype.equals("1 day")){
-                        min = 1440;
-                    }
-
-                    try {
-                        startTime = timeFormat.parse(sttime);
-                        sdate = dateFormat.parse(date);
-
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-
-                    cald.setTime(sdate);
-                    calt.setTime(startTime);
-
-                    cald.add(Calendar.HOUR_OF_DAY,calt.get(Calendar.HOUR_OF_DAY));
-                    cald.add(Calendar.MINUTE,calt.get(Calendar.MINUTE));
-                    cald.add(Calendar.MINUTE,min);
-
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),id,intent,0);
-                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-                    long timeAtButtonClick = cald.getTimeInMillis();
-
-                    alarmManager.cancel(pendingIntent);
-
-                    alarmManager.set(AlarmManager.RTC_WAKEUP,
-                            timeAtButtonClick ,
-                            pendingIntent);
+                try {
+                    d1 = timeFormat.parse(sstime);
+                    d2 = timeFormat.parse(estime);
+                    rem = d2.getTime() - d1.getTime();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
 
+                if (title.getText().toString().length() == 0) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please enter a title", Toast.LENGTH_LONG).show();
+                } else if (location.getText().toString().length() == 0) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please enter a location", Toast.LENGTH_LONG).show();
+                } else if (rem <= 0) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please select a valid end time", Toast.LENGTH_LONG).show();
+                } else {
 
-                    Toast.makeText(getActivity().getApplicationContext(), "Exam Updated Successfully", Toast.LENGTH_LONG).show();
-                    displayExams fragment = new displayExams();
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                    boolean isUpdated = db.updateExam(id, title.getText().toString(), subject.getSelectedItem().toString(), location.getText().toString(), end.getText().toString(), stime.getText().toString(), etime.getText().toString(), reminder.getSelectedItem().toString(), ((ColorDrawable) bgBtn.getBackground()).getColor(), note.getText().toString());
 
-                }else
-                    Toast.makeText(getActivity().getApplicationContext(),"Update Failed, Try again",Toast.LENGTH_LONG).show();
+                    if (isUpdated == true) {
+
+                        Intent intent = new Intent(getActivity().getApplicationContext(), ReminderBroadcast.class);
+                        intent.putExtra("reminderType", "Exam Reminder");
+                        intent.putExtra("text", "You have your " + title.getText().toString() + " Exam at " + stime.getText().toString() + " on " + end.getText().toString());
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        String date = null;
+                        Date startTime = null;
+                        Date sdate = null;
+                        String sttime;
+                        String rtype;
+                        Calendar cald = Calendar.getInstance();
+                        Calendar calt = Calendar.getInstance();
+                        sttime = stime.getText().toString();
+                        date = end.getText().toString();
+                        rtype = reminder.getSelectedItem().toString();
+
+                        int min = 0;
+
+                        if (rtype.equals("5 minutes")) {
+                            min = -5;
+                        } else if (rtype.equals("10 minutes")) {
+                            min = -10;
+                        } else if (rtype.equals("15 minutes")) {
+                            min = -15;
+                        } else if (rtype.equals("30 minutes")) {
+                            min = -30;
+                        } else if (rtype.equals("1 hour")) {
+                            min = -60;
+                        } else if (rtype.equals("2 hours")) {
+                            min = -120;
+                        } else if (rtype.equals("6 hours")) {
+                            min = -360;
+                        } else if (rtype.equals("12 hours")) {
+                            min = -720;
+                        } else if (rtype.equals("1 day")) {
+                            min = 1440;
+                        }
+
+                        try {
+                            startTime = timeFormat.parse(sttime);
+                            sdate = dateFormat.parse(date);
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        cald.setTime(sdate);
+                        calt.setTime(startTime);
+
+                        cald.add(Calendar.HOUR_OF_DAY, calt.get(Calendar.HOUR_OF_DAY));
+                        cald.add(Calendar.MINUTE, calt.get(Calendar.MINUTE));
+                        cald.add(Calendar.MINUTE, min);
+
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(), id, intent, 0);
+                        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+                        long timeAtButtonClick = cald.getTimeInMillis();
+
+                        alarmManager.cancel(pendingIntent);
+
+                        alarmManager.set(AlarmManager.RTC_WAKEUP,
+                                timeAtButtonClick,
+                                pendingIntent);
+
+
+                        Toast.makeText(getActivity().getApplicationContext(), "Exam Updated Successfully", Toast.LENGTH_LONG).show();
+                        displayExams fragment = new displayExams();
+                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+
+                    } else
+                        Toast.makeText(getActivity().getApplicationContext(), "Update Failed, Try again", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

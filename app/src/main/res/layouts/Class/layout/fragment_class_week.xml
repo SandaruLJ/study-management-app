@@ -107,7 +107,7 @@
                     android:paddingTop="5dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"
-                    android:text="@string/start_time_val"
+                    android:text="08:00"
                     android:textFontWeight="600"
 
                     android:textSize="20dp" />
@@ -166,7 +166,7 @@
                     android:paddingTop="5dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"
-                    android:text="@string/start_time_val"
+                    android:text="10:00"
                     android:textFontWeight="600"
 
                     android:textSize="20dp" />

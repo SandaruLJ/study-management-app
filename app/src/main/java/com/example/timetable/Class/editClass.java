@@ -22,11 +22,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.timetable.ColorPicker;
 import com.example.timetable.Database.DBHandler;
+import com.example.timetable.OptionsMenu;
 import com.example.timetable.R;
 import com.example.timetable.ReminderBroadcast;
 import com.google.android.material.tabs.TabLayout;
@@ -36,6 +38,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,6 +66,14 @@ public class editClass extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_class, container, false);
+
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
+
          id  = 0;
         Bundle bundle = this.getArguments();
         if(bundle!=null){
@@ -157,16 +169,7 @@ public class editClass extends Fragment {
             bgBtn.setBackgroundColor(colourd);
             subjectSpinner.setSelection(subjectAdapter.getPosition(subjectd));
             courseSpinner.setSelection(courseAdapter.getPosition(coursed));
-            
-            ImageView add = (ImageView) view.findViewById(R.id.addIcon);
-            add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    addClass fragment = new addClass();
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-                }
-            });
+
 
             save.setOnClickListener(new View.OnClickListener() {
                 @Override

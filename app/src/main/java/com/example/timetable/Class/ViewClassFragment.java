@@ -20,9 +20,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 import com.example.timetable.Class.ClassRecyclerViewAdapter;
 import com.example.timetable.Database.DBHandler;
+import com.example.timetable.OptionsMenu;
 import com.example.timetable.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -30,6 +32,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,37 +56,15 @@ public class ViewClassFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_class,null);
-//
-//        final ArrayList<String> className = new ArrayList<>();
-//        final ArrayList<String> teacher = new ArrayList<>();
-//        final ArrayList<String> venue = new ArrayList<>();
-//        final ArrayList<String> sTime = new ArrayList<>();
-//        final ArrayList<String> eTime = new ArrayList<>();
-//        final ArrayList<Integer> ids = new ArrayList<>();
-//        final ArrayList<Integer> color = new ArrayList<>();
-//        final Cursor c = db.getAllClass();
-//
-//        while (c.moveToNext()){
-//            ids.add(c.getInt(0));
-//            className.add(c.getString(1));
-//            teacher.add(c.getString(5));
-//            venue.add(c.getString(6));
-//            sTime.add(c.getString(11));
-//            eTime.add(c.getString(12));
-//            color.add(c.getInt(8));
-//
-//        }
+
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
 
 
-        ImageView addc = (ImageView) view.findViewById(R.id.addIcon2);
-        addc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addClass fragment = new addClass();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-            }
-        });
         final TabLayout tabLayout1 = (TabLayout) view.findViewById(R.id.tabLayoutWeek);
         tabLayout1.addTab(tabLayout1.newTab().setText("Week"));
         tabLayout1.addTab(tabLayout1.newTab().setText("List"));

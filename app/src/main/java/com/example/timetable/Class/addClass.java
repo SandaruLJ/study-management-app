@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ import com.example.timetable.ColorPicker;
 import com.example.timetable.Course.AddCourseFragment;
 import com.example.timetable.Course.DisplayCourseFragment;
 import com.example.timetable.Database.DBHandler;
+import com.example.timetable.OptionsMenu;
 import com.example.timetable.R;
 import com.example.timetable.ReminderBroadcast;
 import com.example.timetable.SelectDateFragment;
@@ -52,6 +54,8 @@ import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 
 /**
@@ -81,6 +85,14 @@ public class addClass extends Fragment  {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_add_class, container, false);
+
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
+
         className = (EditText) view.findViewById(R.id.className);
         type = (EditText) view.findViewById(R.id.type);
         teacher = (EditText) view.findViewById(R.id.teacher);
@@ -133,166 +145,190 @@ public class addClass extends Fragment  {
         });
 
 
-        ImageView add = (ImageView) view.findViewById(R.id.addIcon);
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addClass fragment = new addClass();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-            }
-        });
 
 
         save.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-                boolean isInserted;
-
-                if(selectedTab == 0) {
-                    stab = "Weekly";
-                    isInserted = db.addClass(className.getText().toString(),course.getSelectedItem().toString(),subject.getSelectedItem().toString(),type.getText().toString(),teacher.getText().toString(),classRoom.getText().toString(),note.getText().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),stab,ClassWeekFragment.day.getSelectedItem().toString(),ClassWeekFragment.stime.getText().toString(),ClassWeekFragment.etime.getText().toString(),ClassWeekFragment.start.getText().toString(),ClassWeekFragment.end.getText().toString(),ClassWeekFragment.reminder.getSelectedItem().toString());
-                }else {
-                    stab = "Date";
-                    isInserted = db.addClass(className.getText().toString(),course.getSelectedItem().toString(),subject.getSelectedItem().toString(),type.getText().toString(),teacher.getText().toString(),classRoom.getText().toString(),note.getText().toString(),((ColorDrawable) bgBtn.getBackground()).getColor(),stab,"",ClassDateFragment.stime.getText().toString(),ClassDateFragment.etime.getText().toString(),ClassDateFragment.sdate.getText().toString(),"",ClassDateFragment.reminder.getSelectedItem().toString());
-                }
-                if(isInserted == true) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), ReminderBroadcast.class);
-                intent.putExtra("reminderType", "Class Reminder");
+                boolean isInserted = false;
 
                 DateFormat timeFormat = new SimpleDateFormat("HH:mm");
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                String date = null;
-                Date startTime = null;
-                Date sdate = null;
-                Date edate = null;
-                Date endTime = null;
-                String stime;
-                String etime = null;
-                String eDate = null;
-                String rtype;
-                String day = null;
-                int dayValue = 0;
-                Calendar cald = Calendar.getInstance();
-                Calendar calt = Calendar.getInstance();
+                Date d1 = null;
+                Date d2 = null;
+                Date d3 = null;
+                Date d4 = null;
+                long remDate = 0;
+                String stime,etime,saDate = null,eaDate = null;
 
-                Calendar caled = Calendar.getInstance();
-                Calendar calet = Calendar.getInstance();
-                if(selectedTab == 0) {
-                    intent.putExtra("text", className.getText().toString() + " Class starts at " + ClassWeekFragment.stime.getText().toString() + " on " + ClassWeekFragment.day.getSelectedItem().toString());
-                    stime = ClassWeekFragment.stime.getText().toString();
-                    etime = ClassWeekFragment.etime.getText().toString();
-                    date = ClassWeekFragment.start.getText().toString();
-                    eDate = ClassWeekFragment.end.getText().toString();
-                    day = ClassWeekFragment.day.getSelectedItem().toString();
-                    rtype = ClassWeekFragment.reminder.getSelectedItem().toString();
+                if(selectedTab == 0){
+                   stime = ClassWeekFragment.stime.getText().toString();
+                   etime = ClassWeekFragment.etime.getText().toString();
+                   saDate =ClassWeekFragment.start.getText().toString();
+                   eaDate = ClassWeekFragment.end.getText().toString();
+
+                   try {
+                       d3 =dateFormat.parse(saDate);
+                       d4 = dateFormat.parse(eaDate);
+                       remDate = d4.getTime() - d3.getTime();
+                   }catch (ParseException e){
+                       e.printStackTrace();
+                   }
+
                 }else{
-                    intent.putExtra("text", className.getText().toString() + " Class starts at " + ClassDateFragment.stime.getText().toString() + " on " + ClassDateFragment.sdate.getText().toString());
                     stime = ClassDateFragment.stime.getText().toString();
-                    date = ClassDateFragment.sdate.getText().toString();
-                    rtype = ClassDateFragment.reminder.getSelectedItem().toString();
+                    etime = ClassDateFragment.etime.getText().toString();
                 }
 
-                int min = 0;
-
-                if(rtype.equals("5 minutes")){
-                    min = -5;
-                }else  if(rtype.equals("10 minutes")){
-                    min = -10;
-                } else  if(rtype.equals("15 minutes")){
-                    min = -15;
-                } else  if(rtype.equals("30 minutes")){
-                    min = -30;
-                } else  if(rtype.equals("1 hour")){
-                    min = -60;
-                } else  if(rtype.equals("2 hours")){
-                    min = -120;
-                } else  if(rtype.equals("6 hours")){
-                    min = -360;
-                }else  if(rtype.equals("12 hours")){
-                    min = -720;
-                }else  if(rtype.equals("1 day")){
-                    min = 1440;
-                }
                 try {
-                    startTime = timeFormat.parse(stime);
-                    sdate = dateFormat.parse(date);
-                    if(selectedTab == 0){
-                        edate = dateFormat.parse(eDate);
-                        endTime = timeFormat.parse(etime);
-                    }
-
+                    d1 = timeFormat.parse(stime);
+                    d2 = timeFormat.parse(etime);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
-                cald.setTime(sdate);
-                calt.setTime(startTime);
+                long rem = d2.getTime() - d1.getTime();
 
-
-                cald.add(Calendar.HOUR_OF_DAY,calt.get(Calendar.HOUR_OF_DAY));
-                cald.add(Calendar.MINUTE,calt.get(Calendar.MINUTE));
-                cald.add(Calendar.MINUTE,min);
-
-                if(selectedTab == 0){
-                    caled.setTime(edate);
-                    calet.setTime(endTime);
-
-                    caled.add(Calendar.HOUR_OF_DAY,calet.get(Calendar.HOUR_OF_DAY));
-                    caled.add(Calendar.MINUTE,calet.get(Calendar.MINUTE));
-                    caled.add(Calendar.MINUTE,min);
+                if (className.getText().toString().length() == 0) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please enter a Class Name", Toast.LENGTH_LONG).show();
+                }else if(rem <= 0){
+                    Toast.makeText(getActivity().getApplicationContext(), "Please select a valid end time", Toast.LENGTH_LONG).show();
+                }else if(selectedTab == 0 && remDate <= 0) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please select a valid end date", Toast.LENGTH_LONG).show();
+                }else if (selectedTab == 0) {
+                    stab = "Weekly";
+                    isInserted = db.addClass(className.getText().toString(), course.getSelectedItem().toString(), subject.getSelectedItem().toString(), type.getText().toString(), teacher.getText().toString(), classRoom.getText().toString(), note.getText().toString(), ((ColorDrawable) bgBtn.getBackground()).getColor(), stab, ClassWeekFragment.day.getSelectedItem().toString(), ClassWeekFragment.stime.getText().toString(), ClassWeekFragment.etime.getText().toString(), ClassWeekFragment.start.getText().toString(), ClassWeekFragment.end.getText().toString(), ClassWeekFragment.reminder.getSelectedItem().toString());
+                } else {
+                    stab = "Date";
+                    isInserted = db.addClass(className.getText().toString(), course.getSelectedItem().toString(), subject.getSelectedItem().toString(), type.getText().toString(), teacher.getText().toString(), classRoom.getText().toString(), note.getText().toString(), ((ColorDrawable) bgBtn.getBackground()).getColor(), stab, "", ClassDateFragment.stime.getText().toString(), ClassDateFragment.etime.getText().toString(), ClassDateFragment.sdate.getText().toString(), "", ClassDateFragment.reminder.getSelectedItem().toString());
                 }
 
+                if(isInserted == true) {
+
+                    Intent intent = new Intent(getActivity().getApplicationContext(), ReminderBroadcast.class);
+                    intent.putExtra("reminderType", "Class Reminder");
+
+                    String date = null;
+                    Date startTime = null;
+                    Date sdate = null;
+                    Date edate = null;
+                    Date endTime = null;
+                    String eDate = null;
+                    String rtype;
+                    String day = null;
+                    int dayValue = 0;
+                    Calendar cald = Calendar.getInstance();
+                    Calendar calt = Calendar.getInstance();
+
+                    Calendar caled = Calendar.getInstance();
+                    Calendar calet = Calendar.getInstance();
+                    if(selectedTab == 0) {
+                        intent.putExtra("text", className.getText().toString() + " Class starts at " + ClassWeekFragment.stime.getText().toString() + " on " + ClassWeekFragment.day.getSelectedItem().toString());
+                        stime = ClassWeekFragment.stime.getText().toString();
+                        etime = ClassWeekFragment.etime.getText().toString();
+                        date = ClassWeekFragment.start.getText().toString();
+                        eDate = ClassWeekFragment.end.getText().toString();
+                        day = ClassWeekFragment.day.getSelectedItem().toString();
+                        rtype = ClassWeekFragment.reminder.getSelectedItem().toString();
+                    }else{
+                        intent.putExtra("text", className.getText().toString() + " Class starts at " + ClassDateFragment.stime.getText().toString() + " on " + ClassDateFragment.sdate.getText().toString());
+                        stime = ClassDateFragment.stime.getText().toString();
+                        date = ClassDateFragment.sdate.getText().toString();
+                        rtype = ClassDateFragment.reminder.getSelectedItem().toString();
+                    }
+
+                    int min = 0;
+
+                    if(rtype.equals("5 minutes")){
+                        min = -5;
+                    }else  if(rtype.equals("10 minutes")){
+                        min = -10;
+                    } else  if(rtype.equals("15 minutes")){
+                        min = -15;
+                    } else  if(rtype.equals("30 minutes")){
+                        min = -30;
+                    } else  if(rtype.equals("1 hour")){
+                        min = -60;
+                    } else  if(rtype.equals("2 hours")){
+                        min = -120;
+                    } else  if(rtype.equals("6 hours")){
+                        min = -360;
+                    }else  if(rtype.equals("12 hours")){
+                        min = -720;
+                    }else  if(rtype.equals("1 day")){
+                        min = 1440;
+                    }
+                    try {
+                        startTime = timeFormat.parse(stime);
+                        sdate = dateFormat.parse(date);
+                        if(selectedTab == 0){
+                            edate = dateFormat.parse(eDate);
+                            endTime = timeFormat.parse(etime);
+                        }
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    cald.setTime(sdate);
+                    calt.setTime(startTime);
 
 
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),db.getLastClassIndex(),intent,0);
-                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-                long timeAtButtonClick = cald.getTimeInMillis();
+                    cald.add(Calendar.HOUR_OF_DAY,calt.get(Calendar.HOUR_OF_DAY));
+                    cald.add(Calendar.MINUTE,calt.get(Calendar.MINUTE));
+                    cald.add(Calendar.MINUTE,min);
 
-//
+                    if(selectedTab == 0){
+                        caled.setTime(edate);
+                        calet.setTime(endTime);
 
-
-                if(selectedTab==0){
-                    LocalDate slocalDate = sdate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    if(day.equals("Monday"))
-                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY));
-                    else if(day.equals("Tuesday"))
-                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.TUESDAY));
-                    else if(day.equals("Wednesday"))
-                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.WEDNESDAY));
-                    else if(day.equals("Thursday"))
-                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.THURSDAY));
-                    else if(day.equals("Friday"))
-                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.FRIDAY));
-                    else if(day.equals("Saturday"))
-                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY));
-                    else if(day.equals("Sunday"))
-                        slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
-
-                    calt.set(Calendar.DAY_OF_MONTH,slocalDate.getDayOfMonth());
-                    calt.set(Calendar.MONTH,slocalDate.getMonthValue()-1);
-                    calt.set(Calendar.YEAR,cald.get(Calendar.YEAR));
-                    calt.add(Calendar.MINUTE,min);
+                        caled.add(Calendar.HOUR_OF_DAY,calet.get(Calendar.HOUR_OF_DAY));
+                        caled.add(Calendar.MINUTE,calet.get(Calendar.MINUTE));
+                        caled.add(Calendar.MINUTE,min);
+                    }
 
 
 
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity().getApplicationContext(),db.getLastClassIndex(),intent,0);
+                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+                    long timeAtButtonClick = cald.getTimeInMillis();
 
-                    int weekInMillis = 7*24*60*60*1000;
-                    alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calt.getTimeInMillis(),weekInMillis,pendingIntent);
+                    if(selectedTab==0){
+                        LocalDate slocalDate = sdate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        if(day.equals("Monday"))
+                            slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY));
+                        else if(day.equals("Tuesday"))
+                            slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.TUESDAY));
+                        else if(day.equals("Wednesday"))
+                            slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.WEDNESDAY));
+                        else if(day.equals("Thursday"))
+                            slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.THURSDAY));
+                        else if(day.equals("Friday"))
+                            slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.FRIDAY));
+                        else if(day.equals("Saturday"))
+                            slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY));
+                        else if(day.equals("Sunday"))
+                            slocalDate = slocalDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
 
-                }else{
-                    alarmManager.set(AlarmManager.RTC_WAKEUP,
-                            timeAtButtonClick ,
-                            pendingIntent);
-                }
+                        calt.set(Calendar.DAY_OF_MONTH,slocalDate.getDayOfMonth());
+                        calt.set(Calendar.MONTH,slocalDate.getMonthValue()-1);
+                        calt.set(Calendar.YEAR,cald.get(Calendar.YEAR));
+                        calt.add(Calendar.MINUTE,min);
 
-//                alarmManager.cancel(pendingIntent);
-//
+                        int weekInMillis = 7*24*60*60*1000;
+                        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calt.getTimeInMillis(),weekInMillis,pendingIntent);
 
+                    }else{
+                        alarmManager.set(AlarmManager.RTC_WAKEUP,
+                                timeAtButtonClick ,
+                                pendingIntent);
+                    }
 
-
-                    Toast.makeText(getActivity().getApplicationContext(), "Class Added Successfully", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Class Added Successfully", Toast.LENGTH_LONG).show();
+                        ViewClassFragment fragment = new ViewClassFragment();
+                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                 }else
                     Toast.makeText(getActivity().getApplicationContext(),"Insert Failed, Try again",Toast.LENGTH_LONG).show();
             }

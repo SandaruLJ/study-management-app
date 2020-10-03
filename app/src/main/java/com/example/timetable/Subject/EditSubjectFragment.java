@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -21,7 +22,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.timetable.ColorPicker;
 import com.example.timetable.Database.DBHandler;
+import com.example.timetable.OptionsMenu;
 import com.example.timetable.R;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +50,13 @@ public class EditSubjectFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_subject, container, false);
+
+        final ImageView addIcon = view.findViewById(R.id.addIcon);
+        final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
+        LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
+        final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
 
         subjectId  = 0;
         Bundle bundle = this.getArguments();
@@ -84,34 +95,7 @@ public class EditSubjectFragment extends Fragment {
             colourBtn.setBackgroundTintList(ColorStateList.valueOf(subjectColourTemp));
 
 
-//            // All Subjects Button
-//            ImageView allSubBtn = view.findViewById(R.id.all_subjects_btn);
-//
-//            allSubBtn.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    AllSubjectsFragment fragment = new AllSubjectsFragment();
-//                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-//                    activity.getSupportFragmentManager().beginTransaction()
-//                            .replace(R.id.fragment_container, fragment)
-//                            .addToBackStack(null).commit();
-//                }
-//            });
-//
-//
-//            // Add Subjects Button
-//            ImageView addSubjectsBtn = view.findViewById(R.id.add_subject_btn);
-//
-//            addSubjectsBtn.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    AddSubjectFragment fragment = new AddSubjectFragment();
-//                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-//                    activity.getSupportFragmentManager().beginTransaction()
-//                            .replace(R.id.fragment_container, fragment)
-//                            .addToBackStack(null).commit();
-//                }
-//            });
+
 
 
             // Colour Button

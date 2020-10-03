@@ -65,22 +65,18 @@ public class upcoming extends Fragment {
         final ArrayList<Integer> ids = new ArrayList<>();
         final ArrayList<String> due = new ArrayList<>();
         final Cursor c = db.getAllGoals();
-
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Calendar cal = Calendar.getInstance();
         Date d1 = null;
 
-
-        Calendar today = Calendar.getInstance();
-
         while (c.moveToNext()) {
             try {
                 d1 = dateFormat.parse(c.getString(3));
+                cal.setTime(d1);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            cal.setTime(d1);
-            long rem = ChronoUnit.DAYS.between(today.toInstant(), cal.toInstant()) ;
+            long rem = cal.getTime().getTime() - System.currentTimeMillis();
             if(rem>=0) {
 
                 ids.add(c.getInt(0));

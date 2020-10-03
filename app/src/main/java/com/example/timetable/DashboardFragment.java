@@ -63,121 +63,10 @@ public class DashboardFragment extends Fragment {
 
         final ImageView addIcon = view.findViewById(R.id.addIcon);
         final  ImageView calendaricon = view.findViewById(R.id.calendarIcon);
-
         LayoutInflater layoutInflater= (LayoutInflater)getActivity().getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         final View popupView = layoutInflater.inflate(R.layout.list_popup, null);
         final PopupWindow popupWindow = new PopupWindow(popupView,450, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        calendaricon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AllEventCalendar fragment = new AllEventCalendar();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-                popupWindow.dismiss();
-            }
-        });
-
-
-
-        addIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (popupWindow.isShowing()){
-                    popupWindow.dismiss();
-            } else
-                    popupWindow.showAsDropDown(addIcon, 50, 0);
-            }
-        });
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                    popupWindow.dismiss();
-                }
-                return false;
-            }
-        });
-
-        TextView addCourse = popupView.findViewById(R.id.addCourse);
-        addCourse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddCourseFragment fragment = new AddCourseFragment();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-                popupWindow.dismiss();
-            }
-        });
-
-        TextView addClass = popupView.findViewById(R.id.addClass);
-        addClass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addClass fragment = new addClass();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-                popupWindow.dismiss();
-            }
-        });
-
-        TextView addExam = popupView.findViewById(R.id.addExam);
-        addExam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                exam fragment = new exam();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-                popupWindow.dismiss();
-            }
-        });
-
-        TextView addHomework = popupView.findViewById(R.id.addHomework);
-        addHomework.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddHomeworkFragment fragment = new AddHomeworkFragment();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-                popupWindow.dismiss();
-            }
-        });
-
-        TextView addSubject = popupView.findViewById(R.id.addSubject);
-        addSubject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddSubjectFragment fragment = new AddSubjectFragment();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-                popupWindow.dismiss();
-            }
-        });
-
-        TextView addStudy = popupView.findViewById(R.id.addStudy);
-        addStudy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddStudyFragment fragment = new AddStudyFragment();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-                popupWindow.dismiss();
-            }
-        });
-
-        TextView addGoal = popupView.findViewById(R.id.addGoal);
-        addGoal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createevents fragment = new createevents();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
-                popupWindow.dismiss();
-            }
-        });
-
-
+        OptionsMenu.displayMenu(calendaricon,addIcon,popupWindow,popupView);
 
 
 
@@ -198,40 +87,10 @@ public class DashboardFragment extends Fragment {
 
         Cursor c = db.getAllClass();
         int count = 0;
-        while (c.moveToNext()){
-            String date = c.getString(13);
-            if(date.equals(currentDate) || todayDay.equals(c.getString(10))){
-                count++;
 
-            }
-        }
-        classCount.setText(String.valueOf(count));
-
-        c = db.getAllHomework();
-        count = 0;
-        while (c.moveToNext()){
-            String date = c.getString(3);
-            if(date.equals(currentDate)){
-                count++;
-            }
-        }
-        homeworkCount.setText(String.valueOf(count));
-
-        c = db.getAllExam();
-        count = 0;
-        while (c.moveToNext()){
-            String date = c.getString(4);
-            if(date.equals(currentDate)){
-                count++;
-            }
-        }
-        examCount.setText(String.valueOf(count));
-
-
-
-
-
-
+        classCount.setText(String.valueOf( getTodayClassCount(currentDate,todayDay)));
+        homeworkCount.setText(String.valueOf(getTodayHomeworkCount(currentDate)));
+        examCount.setText(String.valueOf(getTodayExamCount(currentDate)));
 
 
         final TabLayout tabLayout1 = (TabLayout) view.findViewById(R.id.tabDashboard);
@@ -296,6 +155,44 @@ public class DashboardFragment extends Fragment {
         });
         return view;
     }
+    public int getTodayClassCount(String currentDate,String todayDay){
+        Cursor c = db.getAllClass();
+        int count = 0;
+        while (c.moveToNext()){
+            String date = c.getString(13);
+            if(date.equals(currentDate) || todayDay.equals(c.getString(10))){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int getTodayHomeworkCount(String currentDate){
+        Cursor c = db.getAllHomework();
+        int count = 0;
+        while (c.moveToNext()){
+            String date = c.getString(3);
+            if(date.equals(currentDate)){
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+    public int getTodayExamCount(String currentDate){
+
+        Cursor c = db.getAllExam();
+        int count = 0;
+        while (c.moveToNext()){
+            String date = c.getString(4);
+            if(date.equals(currentDate)){
+                count++;
+            }
+        }
+        return count;
+    }
+
 
 }
 class MyAdapter extends FragmentPagerAdapter {
