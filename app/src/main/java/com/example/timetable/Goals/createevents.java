@@ -187,7 +187,7 @@ public class createevents extends Fragment {
 
                             Intent intent = new Intent(getActivity().getApplicationContext(), ReminderBroadcast.class);
                             intent.putExtra("reminderType", "Goal Reminder");
-                            intent.putExtra("text", "You have to do " + gname.getText().toString() + " before " + end.getText().toString());
+                            intent.putExtra("text", "You have to " + gname.getText().toString() + " before " + end.getText().toString());
                             DateFormat timeFormat = new SimpleDateFormat("HH:mm");
                             Calendar cald = Calendar.getInstance();
                             Calendar cal = Calendar.getInstance();

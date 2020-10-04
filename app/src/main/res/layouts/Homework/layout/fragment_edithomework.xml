@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
-                android:text="@string/edit_Homework"
+                android:text="Edit Homework"
                 android:textColor="@color/white"
                 android:textSize="24dp"
                 android:textStyle="bold" />
@@ -46,10 +46,10 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:id="@+id/calendarIcon"
                     android:layout_marginTop="5dp"
                     android:layout_toLeftOf="@id/addIcon"
                     android:padding="10dp"
-                    android:id="@+id/calendarIcon"
                     android:src="@drawable/today"
                     android:tint="@color/white" />
             </RelativeLayout>
@@ -112,7 +112,7 @@
                         android:minHeight="60dp"
                         android:orientation="horizontal"
                         android:paddingLeft="20dp"
-                        android:paddingTop="15dp"
+                        android:paddingTop="10dp"
                         android:paddingRight="20dp"
                         android:paddingBottom="0dp">
 
@@ -130,8 +130,8 @@
                             android:id="@+id/subjectNameInput"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
                             android:hint="@string/subject_label"
+                            android:layout_marginTop="-5dp"
                             android:paddingRight="20dp"
                             android:textSize="20dp"
                             app:hintTextAppearance="@style/floatinglabel" />
@@ -145,10 +145,9 @@
                                 android:id="@+id/subjectSelect"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="-5dp"
                                 android:layout_alignParentEnd="true"
-                                android:layout_marginTop="0dp"
                                 android:layout_marginEnd="2dp"
-                                android:entries="@array/subjects"
                                 android:spinnerMode="dialog" />
                         </RelativeLayout>
                     </LinearLayout>
@@ -191,7 +190,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="@string/due_date"
-                            android:paddingLeft="10dp"
+
                             android:paddingTop="5dp"
                             android:paddingRight="20dp"
                             android:paddingBottom="20dp"
@@ -210,6 +209,7 @@
                             android:text="@string/_13_8_2020"
 
                             android:textFontWeight="600"
+
                             android:textSize="20dp" />
                     </RelativeLayout>
 
@@ -346,7 +346,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="@string/colour"
-                            android:paddingLeft="10dp"
+
                             android:paddingTop="20dp"
                             android:paddingRight="20dp"
                             android:paddingBottom="20dp"

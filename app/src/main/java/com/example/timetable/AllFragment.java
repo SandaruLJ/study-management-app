@@ -268,8 +268,10 @@ public class AllFragment extends Fragment {
                     ids.add(c.getInt(0));
                     event.add(c.getString(1));
                     while(c1.moveToNext()){
-                        if(c1.getInt(0) == c.getInt(0)){
+                        if(c1.getInt(0) == c.getInt(2)){
                             subject.add(c1.getString(1));
+                        }else {
+                            subject.add("");
                         }
                     }
                     location.add("");

@@ -93,7 +93,13 @@ public class ExamUpcomingFragment extends Fragment {
 
             if(rem>=0) {
                 ids.add(c.getInt(0));
-                exam.add(c.getString(1));
+
+                if (c.getString(1).length()> 16){
+                    String sub = c.getString(1);
+                    exam.add(sub.substring(0,16));
+                }else{
+                    exam.add(c.getString(1));
+                }
                 colours.add(c.getInt(8));
                 if (c.getString(2).length()> 22){
                     String sub = c.getString(2);
