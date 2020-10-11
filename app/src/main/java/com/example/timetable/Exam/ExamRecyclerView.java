@@ -102,6 +102,7 @@ public class ExamRecyclerView extends RecyclerView.Adapter<ExamRecyclerView.View
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+
         holder.exam.setText(exam.get(position));
         holder.subject.setText(subject.get(position));
         holder.examColour.setBackgroundTintList(ColorStateList.valueOf(colours.get(position)));
