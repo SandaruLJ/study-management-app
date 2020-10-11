@@ -261,6 +261,9 @@ public class editClass extends Fragment {
                     }
                     if (isUpdated == true) {
                         Toast.makeText(getActivity().getApplicationContext(), "Class Updated Successfully", Toast.LENGTH_LONG).show();
+                        ViewClassFragment fragment = new ViewClassFragment();
+                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                     } else
                         Toast.makeText(getActivity().getApplicationContext(), "Update Failed, Try again", Toast.LENGTH_LONG).show();
                 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Goals.upcoming_goals_fragment">
+    tools:context=".Goals.upcoming">
 
 
 
@@ -14,4 +14,5 @@
         android:scrollbars="vertical"
         android:layout_height="match_parent">
     </androidx.recyclerview.widget.RecyclerView>
+
 </FrameLayout>

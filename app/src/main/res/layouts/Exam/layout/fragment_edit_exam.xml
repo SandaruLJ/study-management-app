@@ -115,7 +115,7 @@
                         android:minHeight="60dp"
                         android:orientation="horizontal"
                         android:paddingLeft="20dp"
-                        android:paddingTop="15dp"
+                        android:paddingTop="10dp"
                         android:paddingRight="20dp"
                         android:paddingBottom="0dp">
 
@@ -133,7 +133,7 @@
                             android:id="@+id/subjectNameInput"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
+                            android:layout_marginTop="-5dp"
                             android:hint="@string/subject_label"
                             android:paddingRight="20dp"
                             android:textSize="20dp"
@@ -149,7 +149,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
-                                android:layout_marginTop="0dp"
+                                android:layout_marginTop="-5dp"
                                 android:entries="@array/subjects"
                                 android:spinnerMode="dialog" />
                         </RelativeLayout>

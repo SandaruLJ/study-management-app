@@ -112,7 +112,7 @@
             android:minHeight="60dp"
             android:orientation="horizontal"
             android:paddingLeft="20dp"
-            android:paddingTop="15dp"
+            android:paddingTop="10dp"
             android:paddingRight="20dp"
             android:paddingBottom="0dp">
 
@@ -130,8 +130,8 @@
                 android:id="@+id/subjectNameInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
                 android:hint="@string/subject_label"
+                android:layout_marginTop="-5dp"
                 android:paddingRight="20dp"
                 android:textSize="20dp"
                 app:hintTextAppearance="@style/floatinglabel" />
@@ -145,10 +145,9 @@
                     android:id="@+id/subjectSelect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="-5dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="3dp"
                     android:layout_marginEnd="2dp"
-                    android:entries="@array/subjects"
                     android:spinnerMode="dialog" />
             </RelativeLayout>
         </LinearLayout>
@@ -191,7 +190,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/due_date"
-                    android:paddingLeft="10dp"
+
                     android:paddingTop="5dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"
@@ -347,7 +346,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/colour"
-                    android:paddingLeft="10dp"
+
                     android:paddingTop="20dp"
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"

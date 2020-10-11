@@ -1,16 +1,21 @@
 package com.example.timetable;
 
+import android.app.Application;
 import android.content.Context;
 import android.database.Cursor;
-
-import androidx.room.Room;
 
 import com.example.timetable.Database.DBHandler;
 import com.example.timetable.Exam.ExamUpcomingFragment;
 import com.example.timetable.Homework.HomeworkRecyclerView;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.Calendar;
 
@@ -21,18 +26,24 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class DashboardUnitTest {
+
+public class UnitTest {
 
     private DashboardFragment dashboardFragment;
     private HomeworkRecyclerView hr;
     private ExamUpcomingFragment ex;
     private DBHandler db;
+    private MainActivity activity;
+
 
     @Before
     public void setup(){
+        dashboardFragment = new DashboardFragment();
         ex= new ExamUpcomingFragment();
         hr = new HomeworkRecyclerView();
     }
+
+
 
     @Test
     public void isRemainingTimeCorrect() throws Exception{
@@ -70,11 +81,13 @@ public class DashboardUnitTest {
         result = hr.getRemainingtimeinHours(cal);
         assertEquals(21,result);
     }
+
     @Test
     public void isRemainingTimeinminutesCorrect(){
 
         long result;
         Calendar cal = Calendar.getInstance();
+
         //Tested at 1:57 AM
         cal.set(Calendar.HOUR_OF_DAY,2);
         cal.set(Calendar.MINUTE,0);
@@ -92,7 +105,6 @@ public class DashboardUnitTest {
         cal.set(Calendar.MINUTE,59);
         result = hr.getRemainingtimeinMinutes(cal);
         assertEquals(58,result);
-
     }
 
 

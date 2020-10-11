@@ -117,6 +117,8 @@ public class HomeworkCalendarRecyclerView extends RecyclerView.Adapter<HomeworkC
         titles.remove(position);
         subject.remove(position);
         due_date.remove(position);
+        stime.remove(position);
+        ids.remove(position);
         color.remove(position);
         // notify the item removed by position
         // to perform recycler view delete animations

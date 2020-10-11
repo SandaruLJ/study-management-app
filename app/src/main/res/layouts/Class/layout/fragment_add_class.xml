@@ -131,7 +131,7 @@
                     android:id="@+id/subjectNameInput"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="-5dp"
                     android:hint="@string/course"
                     android:paddingRight="20dp"
                     android:textSize="20dp"
@@ -147,7 +147,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="-5dp"
                         android:entries="@array/courses"
                         android:spinnerMode="dialog" />
                 </RelativeLayout>
@@ -184,7 +184,7 @@
                     android:id="@+id/subjectNameInput"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="-5dp"
                     android:hint="@string/subject_label"
                     android:paddingRight="20dp"
                     android:textSize="20dp"
@@ -200,7 +200,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="-5dp"
                         android:entries="@array/subjects"
                         android:spinnerMode="dialog" />
                 </RelativeLayout>
